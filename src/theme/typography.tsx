@@ -29,7 +29,7 @@ background-color: ${props => props.$backgroundColor};
 border-radius: 8px;
 color: ${props => props.$textColor ?? colors.black};
 font-weight: 500;
-
+transition: background-color 700ms ease, color 700ms ease;
 `;
 
 

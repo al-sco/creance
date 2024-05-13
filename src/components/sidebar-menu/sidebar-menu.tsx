@@ -1,9 +1,9 @@
 import styled from "styled-components"
 import { MenuItemData } from "../../data/parameter-mock"
-import { StyledTitle } from "../../theme/typography"
-import { Box, Stack } from "@chakra-ui/react";
+import { Box, Stack, Image } from "@chakra-ui/react";
 import { useState } from "react";
 import MenuItem from "../menu-item/menu-item";
+import { logo } from "../../data/assets";
 
 
 const StyledSideBarMenu = styled.div`
@@ -11,6 +11,12 @@ const StyledSideBarMenu = styled.div`
   overflow-y: hidden;
 `;
 
+
+const StyledImage = styled.div`
+    margin:0 auto;
+    display: table;
+    place-items: center;
+`;
 
 
 
@@ -35,9 +41,9 @@ const SideBarMenu = (props: SideBarMenuProps) => {
 
     return (
         <StyledSideBarMenu>
-            <StyledTitle>
-                Menu
-            </StyledTitle>
+            <StyledImage>
+                <Image src={logo} w={100} />
+            </StyledImage>
             <Box h="48px" />
             <Stack direction="column">
                 {

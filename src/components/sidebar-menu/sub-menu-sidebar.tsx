@@ -7,15 +7,19 @@ import { useState } from "react";
 import colors from "../../theme/color";
 
 
-const StyledSideBarMenu = styled.div`
+const StyledSideBarMenu = styled.div<{ $isDisplay: boolean }>`
   padding:80px 18px;
   height: 100vh;
+  width: ${props => props.$isDisplay ? "100%" : 0};
   border-right: 2px solid ${colors.anotherGray};
+  transition: width 1s cubic-bezier(0.95, 0.05, 0.795, 0.035);
+
 `;
 
 
 interface SubMenuProps {
-    subMenus: Array<MenuItemData>
+    subMenus?: Array<MenuItemData>,
+    isDisplay: boolean
 }
 
 const SubSideBarMenu = (props: SubMenuProps) => {
@@ -26,7 +30,7 @@ const SubSideBarMenu = (props: SubMenuProps) => {
         setCurrentMenu((_) => menu.id);
 
     return (
-        <StyledSideBarMenu>
+        <StyledSideBarMenu $isDisplay={props.isDisplay}>
             <StyledSubTitle>
                 Parametres
             </StyledSubTitle>

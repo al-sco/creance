@@ -23,19 +23,17 @@ const BaseView = () => {
                 <SideBarMenu onMenuPressed={handleCurrentSideBarChange} subMenus={mainSideBarMenus} />
             </GridItem>
             <GridItem bg={colors.white}>
-                <Grid templateColumns={currentSideBarMenu.subMenus ? '15% 1fr' : '1fr'}>
+                <Grid
+                    templateColumns={currentSideBarMenu.subMenus ? '15% 1fr' : '1fr'}>
                     {
-                        currentSideBarMenu.subMenus ? (<>
+                        <>
                             <GridItem>
-                                <SubSideBarMenu subMenus={currentSideBarMenu.subMenus} />
+                                <SubSideBarMenu key="1" isDisplay={currentSideBarMenu.subMenus !== undefined} subMenus={currentSideBarMenu.subMenus} />
                             </GridItem>
                             <GridItem h="100vh">
                                 <BaseParameterView />
                             </GridItem>
                         </>
-                        ) : (<GridItem h="100vh">
-                            <BaseParameterView />
-                        </GridItem>)
                     }
 
                 </Grid>
