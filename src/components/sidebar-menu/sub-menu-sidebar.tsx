@@ -10,10 +10,8 @@ import colors from "../../theme/color";
 const StyledSideBarMenu = styled.div<{ $isDisplay: boolean }>`
   padding:80px 18px;
   height: 100vh;
-  width: ${props => props.$isDisplay ? "100%" : 0};
   border-right: 2px solid ${colors.anotherGray};
-  transition: width 1s cubic-bezier(0.95, 0.05, 0.795, 0.035);
-
+  transition: all 5s linear;
 `;
 
 
@@ -25,11 +23,11 @@ interface SubMenuProps {
 const SubSideBarMenu = (props: SubMenuProps) => {
 
     const [currentSubSideBarMenuId, setCurrentMenu] = useState<number>();
-
+    console.log("Rebuilding me ...")
     const onMenuItemSelect = (menu: MenuItemData) =>
         setCurrentMenu((_) => menu.id);
 
-    return (
+    return (props.isDisplay &&
         <StyledSideBarMenu $isDisplay={props.isDisplay}>
             <StyledSubTitle>
                 Parametres

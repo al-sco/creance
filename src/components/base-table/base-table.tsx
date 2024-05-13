@@ -1,7 +1,7 @@
 import { Table, TableContainer, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react"
 import styled from "styled-components"
 import colors from "../../theme/color";
-import { tableParametersMockData } from "../../data/parameter-mock";
+import { tableParametersMockData } from "../../data/parameter-data";
 
 
 const BaseStyledTable = styled.div`

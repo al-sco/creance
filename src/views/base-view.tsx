@@ -4,8 +4,7 @@ import SideBarMenu from "../components/sidebar-menu/sidebar-menu"
 import SubSideBarMenu from "../components/sidebar-menu/sub-menu-sidebar"
 import BaseParameterView from "../components/base-parameter-view/base-parameter-view"
 import { useState } from "react"
-import { mainSideBarMenus, MenuItemData } from "../data/parameter-mock"
-
+import { mainSideBarMenus, MenuItemData } from "../data/parameter-data"
 
 
 
@@ -15,7 +14,6 @@ const BaseView = () => {
     const handleCurrentSideBarChange = (menu: MenuItemData) => {
         setCurrentSideBarMenu((_) => menu);
     }
-
 
     return (
         <Grid templateColumns='15% 1fr'>

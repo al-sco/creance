@@ -13,6 +13,9 @@ export interface MenuItemData {
 }
 
 
+export const SettingsDisableIcon = SettingsDisable
+export const SettingsEnableIcon = SettingsEnable
+
 export interface BaseParameterTableData {
     code: string,
     libelle: string

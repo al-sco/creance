@@ -12,8 +12,8 @@ const StyledBaseParameterView = styled.div`
     height:100%;
     overflow-y: hidden;
     background-color: ${colors.white};
-
 `;
+
 const BaseParameterView = () => {
     return (
         <StyledBaseParameterView>
@@ -26,8 +26,8 @@ const BaseParameterView = () => {
             <Box h="48px" />
             <Stack spacing={8} direction="row" justifyContent="space-between">
                 <Stack direction="row">
-                    <Input placeholder='Code' width='auto' />
-                    <Input placeholder='Libellé' />
+                    <Input placeholder='Code' size='lg' width='auto' />
+                    <Input placeholder='Libellé' size='lg' />
                 </Stack>
                 <Button variant='outline' color={colors.green} size='lg' style={{ border: `1px solid ${colors.green}` }}>Ajouter</Button>
             </Stack>

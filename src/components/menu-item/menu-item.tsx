@@ -1,5 +1,5 @@
 import { Image, Stack } from '@chakra-ui/react'
-import { MenuItemData } from "../../data/parameter-mock"
+import { MenuItemData } from "../../data/parameter-data"
 import { StyledMenuItem } from "../../theme/typography"
 import colors from '../../theme/color'
 import { ChevronRightIcon } from '@chakra-ui/icons'
