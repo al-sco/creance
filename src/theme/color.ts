@@ -6,13 +6,15 @@ interface Colors {
     lightGray: string,
     thinGray: string,
     anotherGray: string
-    black: string
+    black: string,
+    tableBorder: string
 }
 
 
 const colors: Colors = {
     gray: '#EDF2F7',
     white: '#FFFFFF',
+    tableBorder: '#E2E8F0',
     green: '#28A325',
     lightGray: '#7B8AA4',
     thinGray: '#A0AEC0',
