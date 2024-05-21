@@ -4,7 +4,7 @@ import { Stack, Image, Box, Input, Button } from '@chakra-ui/react';
 import { StyledTitle } from '../../theme/typography';
 import MoreIcon from '../../assets/menu-button.svg'
 import BaseTable from '../base-table/base-table';
-
+ 
 
 
 const StyledBaseParameterView = styled.div`
