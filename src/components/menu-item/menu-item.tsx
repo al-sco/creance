@@ -1,57 +1,32 @@
 import { Image, Stack } from '@chakra-ui/react'
-import { MenuItemData } from "../../data/parameter-data"
-import { StyledMenuItem } from "../../theme/typography"
-import colors from '../../theme/color'
 import { ChevronRightIcon } from '@chakra-ui/icons'
+import { MenuItem } from '../../common/configs/ui/menus/menus.type'
+import { StyledMenuItem } from '../../common/theme/typography/typography'
+import colors from '../../common/theme/colors/colors'
+import { Link } from 'react-router-dom'
 
 
 interface MenuItemProps {
-    menu: MenuItemData
-    isActive: boolean
-    onPressed: (menu: MenuItemData) => void
+    menu: MenuItem
+    isSelected: boolean
 }
 
-const MenuItem = (props: MenuItemProps) => {
-    const menu = props.menu;
-    const isSubMenu = props.menu.isSubMenu;
-    const isActive = props.isActive;
+const MenuItemComponent = ({ menu, isSelected }: MenuItemProps) => {
 
-
-    const handleClick = (e: any) => {
-        e.preventDefault();
-
-        props.onPressed!(props.menu)
-    }
-
-    return isSubMenu ?
-        (
-            <StyledMenuItem $textColor={isActive ? colors.black : colors.lightGray} onClick={handleClick}>
-                <Stack direction='row' spacing={4} alignItems="center" >
-                    {isActive && <ChevronRightIcon />}
+    return (<Link to={menu.path}>
+        <StyledMenuItem $backgroundColor={isSelected ? colors.green : undefined} $textColor={isSelected ? colors.white : undefined}>
+            <Stack direction='row' spacing={4} alignItems="center" justifyContent="space-between">
+                <Stack direction="row">
+                    <Image src={menu.icon} alt={menu.name} />
                     <span>{menu.name}</span>
                 </Stack>
-            </StyledMenuItem>
-        ) :
-        (<StyledMenuItem $backgroundColor={isActive ? colors.green : undefined} $textColor={isActive ? colors.white : undefined} onClick={handleClick}>
-            {
-                menu.isSubMenu ?
-                    (<Stack direction='row' spacing={4} alignItems="center">
-                        {isActive && <ChevronRightIcon />}
-                        <span>{menu.name}</span>
-                    </Stack>) : (
-                        <Stack direction='row' spacing={4} alignItems="center" justifyContent="space-between">
-                            <Stack direction="row">
-                                <Image src={isActive ? menu.enabledIcon : menu.disabledIcon} alt={menu.name} />
-                                <span>{menu.name}</span>
-                            </Stack>
-                            {isActive && <ChevronRightIcon />}
-                        </Stack>
-                    )
-            }
-        </StyledMenuItem >)
+                {isSelected && <ChevronRightIcon />}
+            </Stack>
+        </StyledMenuItem >
+    </Link >)
 
 
 }
 
 
-export default MenuItem
+export default MenuItemComponent

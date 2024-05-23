@@ -1,9 +1,9 @@
 import styled from "styled-components"
-import { MenuItemData } from "../../data/parameter-mock"
 import { Box, Stack, Image } from "@chakra-ui/react";
 import { useState } from "react";
-import MenuItem from "../menu-item/menu-item";
 import { logo } from "../../data/assets";
+import MenuItemComponent from "../menu-item/menu-item";
+import { menuItems } from "../../common/configs/ui/menus/menu.data";
 
 
 const StyledSideBarMenu = styled.div`
@@ -21,22 +21,10 @@ const StyledImage = styled.div`
 
 
 
-interface SideBarMenuProps {
-    subMenus: Array<MenuItemData>
-    onMenuPressed: (menuItem: MenuItemData) => void
-}
 
+const SideBarMenu = () => {
 
-const SideBarMenu = (props: SideBarMenuProps) => {
-
-    const [currentSideBarMenuId, setCurrentMenu] = useState<number>();
-
-
-    const onMenuItemSelect = (menuItem: MenuItemData) => {
-        setCurrentMenu((_) => menuItem.id);
-
-        props.onMenuPressed(menuItem)
-    };
+    const [currentSideBarMenuId, _] = useState<number>();
 
 
     return (
@@ -47,7 +35,7 @@ const SideBarMenu = (props: SideBarMenuProps) => {
             <Box h="48px" />
             <Stack direction="column">
                 {
-                    props.subMenus.map((mItem) => (<MenuItem onPressed={onMenuItemSelect} menu={mItem} isActive={currentSideBarMenuId === mItem.id} key={mItem.id} />))
+                    menuItems.map((mItem) => (<MenuItemComponent menu={mItem} isSelected={currentSideBarMenuId === mItem.id} key={mItem.id} />))
                 }
             </Stack>
         </StyledSideBarMenu>
