@@ -47,15 +47,25 @@ const TableRow = ({ index, columns, onDeletePressed, onEditPressed }: NonEditabl
 }
 
 const TableRowEdit = ({ index, columns }: TableRowProps) => {
+
+    const handleSubmit = () => {
+        alert("CLicked");
+    }
+
     return (
-        <Tr bg={index % 2 == 0 ? undefined : colors.gray}>{
+
+
+
+        <Tr onSubmit={() => alert("Hello there")} bg={index % 2 == 0 ? undefined : colors.gray}>{
             columns.map((column, i) => (
-                <Td
-                    key={i}>
-                    <Input placeholder={column.label} size='lg' /></Td>
+                    <Td 
+                        key={i}>
+                        <Input  name={column.label} placeholder={column.label} size='lg' />
+                    </Td>
+                
             )
-            )
-        }</Tr>
+
+            )}  </Tr>
     )
 }
 
@@ -65,7 +75,11 @@ const TableRowEditable = ({ index, columns, baseStyle }: TableRowProps) => {
         setSetEditable(() => !isEditable)
     }
 
-    return (isEditable ? <TableRowEdit  {...baseStyle} columns={columns} index={index} /> : <TableRow onEditPressed={switchToEdit} onDeletePressed={switchToEdit} {...baseStyle} columns={columns} index={index} />)
+    return (
+        isEditable ?
+            <TableRowEdit  {...baseStyle} columns={columns} index={index} /> :
+            <TableRow onEditPressed={switchToEdit} onDeletePressed={switchToEdit} {...baseStyle} columns={columns} index={index} />
+    )
 }
 
 

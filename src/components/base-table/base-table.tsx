@@ -1,6 +1,5 @@
-import { Table, TableContainer, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react"
+import { Table, TableContainer, Tbody, Th, Thead, Tr } from "@chakra-ui/react"
 import styled from "styled-components"
-import { tableParametersMockData } from "../../data/parameter-data";
 import colors from "../../common/theme/colors/colors";
 import { ParameterColumnType } from "../parameter-main-content/parameter-main-content";
 import TableRowEditable from "./table-row";
@@ -24,6 +23,7 @@ const BaseTable = ({ columns }: ParameterTableProps) => {
     for (let index = 0; index < 100; index++) {
         nbres.push(index)
     }
+
     return (
         <BaseStyledTable>
             <TableContainer>
