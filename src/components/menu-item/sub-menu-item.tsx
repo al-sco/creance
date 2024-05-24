@@ -4,6 +4,7 @@ import { StyledMenuItem } from "../../common/theme/typography/typography"
 import { Stack } from "@chakra-ui/react"
 import { ChevronRightIcon } from "@chakra-ui/icons"
 import { SubMenuItem } from "../../common/configs/ui/menus/menus.type"
+import styled from "styled-components"
 
 
 type SubMenuItemProps = {
@@ -12,17 +13,25 @@ type SubMenuItemProps = {
     onPressed: (e: SubMenuItem) => void
 }
 
+const BorderedStyle = styled.div`
+overflow-x: hidden;
+padding-right: 1rem;
+`
+
 const SubMenuItemComponent = ({ subMenu, isSelected, onPressed }: SubMenuItemProps) => {
     return (
         (
 
             <Link to={subMenu.path.toString()} onClick={() => onPressed(subMenu)}>
-                <StyledMenuItem $textColor={isSelected ? colors.black : colors.lightGray}>
-                    <Stack direction='row' spacing={4} alignItems="center" >
-                        {isSelected && <ChevronRightIcon />}
-                        <span>{subMenu.name}</span>
-                    </Stack>
-                </StyledMenuItem>
+                <BorderedStyle>
+                    <StyledMenuItem $textColor={isSelected ? colors.black : colors.lightGray}>
+                        <Stack direction='row' spacing={4} justifyContent="start" alignItems="center" >
+                            {isSelected && <ChevronRightIcon />}
+                            <span>{subMenu.name}</span>
+                        </Stack>
+                    </StyledMenuItem>
+                </BorderedStyle>
+
             </Link>
         )
     )

@@ -1,3 +1,4 @@
+import { ParameterColumnType } from "../../../../components/parameter-main-content/parameter-main-content"
 
 export type MenuItem = {
     name: string
@@ -11,7 +12,8 @@ export type SubMenuItem = {
     name: string
     id: number
     isParameter: boolean
-    path: number
+    columns?: ParameterColumnType[]
+    path: string
 }
 
 

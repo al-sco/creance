@@ -41,7 +41,7 @@ const ParameterMainContent = ({ title, colums }: ParameterMainContentProps) => {
                 <Button variant='outline' color={colors.green} size='lg' style={{ border: `1px solid ${colors.green}` }}>Ajouter</Button>
             </Stack>
             <Box h="24px" />
-            <BaseTable />
+            <BaseTable columns={colums} />
         </StyledParameterMainContent>
     )
 }

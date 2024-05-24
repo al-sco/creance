@@ -8,26 +8,33 @@ import Operation from '../../../../assets/operation.svg';
 import Patrimoine from '../../../../assets/patrimoine.svg';
 import FollowClient from '../../../../assets/suiv-client.svg';
 import Recovery from '../../../../assets/recovery.svg';
-import Settings from '../../../../assets/settings-disable.svg';
+import Settings from '../../../../assets/settings-enable.svg';
 
 type MenuItemType = {
     name: string
     icon: string
     path: string
-    subMenu: string[]
+    subMenu?: string[]
 }
+
+
 
 const menuItemsData: Array<MenuItemType> = [
     {
+        name: "Overview",
+        path: "overview",
+        icon: Recovery,
+    },
+    {
         name: "Action",
-        path: "/action",
+        path: "action",
         icon: Account,
         subMenu: ["Connexion", "Déconnexion", "Comptabilité", "Utilisateur", "Habilitations", "Modifier mot de passe", "Initialisation du mot de passe", "Quitter"]
     },
     {
         name: "Paramètres",
         icon: Settings,
-        path: "/settings",
+        path: "settings",
         subMenu: [
             "Agence de banque",
             "Banque",
@@ -45,51 +52,43 @@ const menuItemsData: Array<MenuItemType> = [
     },
     {
         name: "Etude de Creance",
-        path: "/creances",
+        path: "creances",
         icon: Creance,
-        subMenu: []
     },
     {
         name: "Suivi Clientèle",
-        path: "/followClient",
+        path: "followClient",
         icon: FollowClient,
-        subMenu: []
     },
     {
         name: "Suivi Récouv.",
-        path: "/recovery",
+        path: "recovery",
         icon: Recovery,
-        subMenu: []
     },
     {
         name: "Contentieux",
-        path: "/contentieux",
+        path: "contentieux",
         icon: Contentieux,
-        subMenu: []
     },
     {
         name: "Patrimoine",
-        path: "/patrimoine",
+        path: "patrimoine",
         icon: Patrimoine,
-        subMenu: []
     },
     {
         name: "Opérations Div",
-        path: "/operations",
+        path: "operations",
         icon: Operation,
-        subMenu: []
     },
     {
         name: "Etats",
-        path: "/etats",
+        path: "etats",
         icon: Archivre,
-        subMenu: []
     },
     {
         name: "Aide",
         icon: Help,
-        path: "/aide",
-        subMenu: []
+        path: "aide",
     }
 ]
 export const menuItems: MenuItem[] = menuItemsData.map((menuItem, index) => ({
@@ -97,11 +96,13 @@ export const menuItems: MenuItem[] = menuItemsData.map((menuItem, index) => ({
     path: menuItem.path,
     icon: menuItem.icon,
     name: menuItem.name,
-    subMenus: menuItem.subMenu.map((subMenu, index): SubMenuItem => ({
+
+    subMenus: menuItem.subMenu?.map((subMenu, index): SubMenuItem => ({
         id: index,
         name: subMenu,
         isParameter: true,
-        path: index
+        columns: index % 2 === 0 ? [{ label: "Code" }, { label: "Libéllée" }] : [{ label: "Code" }, { label: "Libéllé" }, { label: "Adress" }],
+        path: index.toString()
     }))
 }));
 

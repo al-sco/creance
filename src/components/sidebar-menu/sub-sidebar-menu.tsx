@@ -3,12 +3,14 @@ import { Box, Stack } from "@chakra-ui/react";
 import { SubMenuItem } from "../../common/configs/ui/menus/menus.type";
 import { StyledSubTitle } from "../../common/theme/typography/typography";
 import SubMenuItemComponent from "../menu-item/sub-menu-item";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import colors from "../../common/theme/colors/colors";
 
 
 const StyledSideBarMenu = styled.div`
   padding:80px 18px;
   height: 100vh;
+  background-color: ${colors.gray};
   transition: all 5s linear;
 `;
 

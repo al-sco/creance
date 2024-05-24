@@ -21,10 +21,11 @@ export const StyledMenuItem = styled.button<{ $textColor?: string, $backgroundCo
 font-size: 20px;
 padding: 10px 17px;
 margin-bottom: 8px;
+width: 100%;
 max-lines: 1;
 text-overflow: ellipsis;
 white-space: nowrap;
-  overflow: hidden;
+overflow: hidden;
 background-color: ${props => props.$backgroundColor};
 border-radius: 8px;
 color: ${props => props.$textColor ?? colors.black};
