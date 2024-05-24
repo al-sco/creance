@@ -3,6 +3,7 @@ import styled from "styled-components"
 import { tableParametersMockData } from "../../data/parameter-data";
 import colors from "../../common/theme/colors/colors";
 import { ParameterColumnType } from "../parameter-main-content/parameter-main-content";
+import TableRowEditable from "./table-row";
 
 
 
@@ -38,14 +39,7 @@ const BaseTable = ({ columns }: ParameterTableProps) => {
                     <Tbody>
                         {
                             nbres.map((nbre, index) => (
-                                <Tr bg={index % 2 == 0 ? undefined : colors.gray}>{
-                                    columns.map((column, i) => (
-                                        <Td
-                                            key={i}>
-                                            {column.label} {nbre}</Td>
-                                    )
-                                    )
-                                }</Tr>
+                                <TableRowEditable columns={columns} index={index} bg={index % 2 == 0 ? undefined : colors.gray} />
                             ))
                         }
                     </Tbody>
