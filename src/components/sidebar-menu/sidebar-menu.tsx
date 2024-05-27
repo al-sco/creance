@@ -1,6 +1,6 @@
 import styled, { keyframes } from "styled-components"
 import { Box, Stack, Image } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { logo } from "../../data/assets";
 import MenuItemComponent from "../menu-item/menu-item";
 import { menuItems } from "../../common/configs/ui/menus/menu.data";
@@ -45,8 +45,15 @@ const StyledImage = styled.div`
 
 
 const SideBarMenu = () => {
-
+    
     const [currentSideBarMenuId, setCurrentItem] = useState<number>();
+
+    useEffect(()=>{
+        let currentMenu=menuItems.find((menuItem)=>window.location.pathname.startsWith(menuItem.path))        
+        if(currentMenu){
+            setCurrentItem(()=>currentMenu.id)
+        }
+    },[])
 
     const handleChangeCurrentItem = (menu: MenuItem) => {
         setCurrentItem((_) => menu.id)

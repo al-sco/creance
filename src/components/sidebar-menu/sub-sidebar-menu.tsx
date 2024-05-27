@@ -3,7 +3,7 @@ import { Box, Stack } from "@chakra-ui/react";
 import { SubMenuItem } from "../../common/configs/ui/menus/menus.type";
 import { StyledSubTitle } from "../../common/theme/typography/typography";
 import SubMenuItemComponent from "../menu-item/sub-menu-item";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import colors from "../../common/theme/colors/colors";
 
 
@@ -27,6 +27,14 @@ type SubSideBarMenuProps = {
 
 const SubSideBarMenu = ({ title, subMenuItems }: SubSideBarMenuProps) => {
     const [subMenuItem, setSubMenuItem] = useState<number>()
+
+    useEffect(()=>{
+        console.log(window.location.pathname)
+        let currentMenu=subMenuItems.find((subMenu)=>window.location.pathname.includes(encodeURI(subMenu.path)))        
+        if(currentMenu){
+            setSubMenuItem(()=>currentMenu.id)
+        }
+    },[])
 
     const handleMenuClick = (subMenu: SubMenuItem) => {
         setSubMenuItem((_) => subMenu.id)

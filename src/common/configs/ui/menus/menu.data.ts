@@ -210,10 +210,11 @@ function formatLabelToPath(path: string){
     
 
     let formattedPath=path.trim().replaceAll(' ','_').toLowerCase()
+    console.log(formattedPath)
     for(let key of letters.keys()){
-        formattedPath.replace(key,letters.get('key') as string)
+        formattedPath.replaceAll(key,letters.get(key)!.valueOf())
     }
-    
+
     return formattedPath
 }
 
