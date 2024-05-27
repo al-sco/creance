@@ -17,7 +17,7 @@ const router = createBrowserRouter([
                 element: <MainContent subMenus={menuItem.subMenus} title={menuItem.name} />,
                 children: menuItem.subMenus?.map((sb) => ({
                     path: sb.path,
-                    element: <ParameterMainContent title={sb.name} colums={sb.columns ?? []} />
+                    element: sb.viewName=='parameter'?(<ParameterMainContent title={sb.name} colums={sb.columns ?? []} />):null
                 }))
             }
         ))

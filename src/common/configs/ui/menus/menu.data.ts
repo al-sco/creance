@@ -18,6 +18,11 @@ type MenuItemType = {
 }
 
 
+const parametersViewsPaths=['/settings']
+const letters=new Map<string, string>([['é','e'],
+['à','a'],
+['\'','']
+])
 
 const menuItemsData: Array<MenuItemType> = [
     {
@@ -188,10 +193,27 @@ export const menuItems: MenuItem[] = menuItemsData.map((menuItem, index) => ({
     subMenus: menuItem.subMenu?.map((subMenu, index): SubMenuItem => ({
         id: index,
         name: subMenu,
-        isParameter: true,
+        viewName: getViewName(menuItem),
         columns: index % 2 === 0 ? [{ label: "Code" }, { label: "Libéllée" }] : [{ label: "Code" }, { label: "Libéllé" }, { label: "Adress" }],
-        path: index.toString()
+        path: formatLabelToPath(subMenu)
     }))
 }));
 
+
+function getViewName(menuItem: MenuItemType): "parameter" | undefined {
+    return parametersViewsPaths.findIndex((path) => path.toLowerCase() == menuItem.path.toLowerCase()) !== -1 ? 'parameter' : undefined;
+}
+
+
+
+function formatLabelToPath(path: string){
+    
+
+    let formattedPath=path.trim().replaceAll(' ','_').toLowerCase()
+    for(let key of letters.keys()){
+        formattedPath.replace(key,letters.get('key') as string)
+    }
+    
+    return formattedPath
+}
 

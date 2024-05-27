@@ -11,7 +11,7 @@ export type MenuItem = {
 export type SubMenuItem = {
     name: string
     id: number
-    isParameter: boolean
+    viewName: 'parameter' | undefined
     columns?: ParameterColumnType[]
     path: string
 }
