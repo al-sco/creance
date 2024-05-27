@@ -1,8 +1,8 @@
 import { Box, Button, ChakraStyledOptions, Grid, GridItem, Input, Stack, Td, Tr } from "@chakra-ui/react"
 import colors from "../../common/theme/colors/colors"
 import { ParameterColumnType } from "../parameter-main-content/parameter-main-content"
-import { useState } from "react"
-import { DeleteIcon, EditIcon } from "@chakra-ui/icons"
+import { useRef, useState } from "react"
+import { CloseIcon, DeleteIcon, EditIcon } from "@chakra-ui/icons"
 
 
 
@@ -17,6 +17,7 @@ type TableRowFuncType = {
     onDeletePressed: () => void
 }
 
+type TableEditProps=TableRowProps & {onEditPressed: () => void}
 
 type NonEditableTableRowProps = TableRowProps & TableRowFuncType
 
@@ -46,16 +47,41 @@ const TableRow = ({ index, columns, onDeletePressed, onEditPressed }: NonEditabl
     )
 }
 
-const TableRowEdit = ({ index, columns }: TableRowProps) => {
+const TableRowEdit = ({ index, columns,onEditPressed }: TableEditProps) => {
+    let inputsValuesStates=new Map<ParameterColumnType,[string, React.Dispatch<React.SetStateAction<string>>]>([
+        ...columns.map((col)=>[col,useState<string>('')])
+    ]);
+
+    let inputRefs=columns.map((_)=>useRef<HTMLInputElement>(null))
+
+
+
+    const handleSubmit=(e:React.KeyboardEvent<HTMLInputElement>,inputIndex:number)=>{
+            if(e.key=='Enter'){
+                if(inputIndex<inputRefs.length-1){
+                    let nextInput=inputRefs[inputIndex+1]
+                        nextInput.current?.focus()
+                }
+                else {
+                    columns.forEach((col)=>{
+                        const [value,_]=inputsValuesStates.get(col)!
+                        console.log(`${col.label} : ${value}`)
+                    })
+                    onEditPressed();
+                }
+            }
+    }
+    
 
     return (
-        <Tr onSubmit={() => alert("Hello there")} bg={index % 2 == 0 ? undefined : colors.gray}>{
-            columns.map((column, i) => (
+        <Tr bg={index % 2 == 0 ? undefined : colors.gray}>
+            {
+                columns.map((column, i) => (
                 <Td
                     key={i}>
-                    <Input name={column.label} placeholder={column.label} size='lg' />
+                    <Input w="90%" ref={inputRefs[i]} value={inputsValuesStates.get(column)?.[0]} onChange={()=>inputsValuesStates.get(column)?.[1](()=>inputRefs[i].current!.value)} onKeyDown={(e)=>handleSubmit(e,i)}  name={column.label} placeholder={column.label} size='lg' />
+                    {i==columns.length-1 && <Button style={{marginLeft:"3%"}} onClick={onEditPressed} children={<CloseIcon />} />}
                 </Td>
-
             )
             )}  </Tr>
     )
@@ -69,7 +95,7 @@ const TableRowEditable = ({ index, columns, baseStyle }: TableRowProps) => {
 
     return (
         isEditable ?
-            <TableRowEdit  {...baseStyle} columns={columns} index={index} /> :
+            <TableRowEdit onEditPressed={switchToEdit}  {...baseStyle} columns={columns} index={index} /> :
             <TableRow onEditPressed={switchToEdit} onDeletePressed={switchToEdit} {...baseStyle} columns={columns} index={index} />
     )
 }

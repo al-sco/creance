@@ -36,7 +36,7 @@ const ParameterMainContent = ({ title, colums }: ParameterMainContentProps) => {
             <Box h="48px" />
             <Stack spacing={8} direction="row" justifyContent="space-between">
                 <Stack direction="row">
-                    {colums.map((column) => <Input placeholder={column.label} size='lg' />)}
+                    {colums.map((column,index) => <Input key={index}  placeholder={column.label} size='lg' />)}
                 </Stack>
                 <Button variant='outline' color={colors.green} size='lg' style={{ border: `1px solid ${colors.green}` }}>Ajouter</Button>
             </Stack>

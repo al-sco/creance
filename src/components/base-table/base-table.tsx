@@ -38,8 +38,8 @@ const BaseTable = ({ columns }: ParameterTableProps) => {
                     </Thead>
                     <Tbody>
                         {
-                            nbres.map((nbre, index) => (
-                                <TableRowEditable columns={columns} index={index} bg={index % 2 == 0 ? undefined : colors.gray} />
+                            nbres.map((_, index) => (
+                                <TableRowEditable  key={index} columns={columns} index={index} bg={index % 2 == 0 ? undefined : colors.gray} />
                             ))
                         }
                     </Tbody>
