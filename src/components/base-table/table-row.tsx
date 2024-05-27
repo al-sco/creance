@@ -48,23 +48,15 @@ const TableRow = ({ index, columns, onDeletePressed, onEditPressed }: NonEditabl
 
 const TableRowEdit = ({ index, columns }: TableRowProps) => {
 
-    const handleSubmit = () => {
-        alert("CLicked");
-    }
-
     return (
-
-
-
         <Tr onSubmit={() => alert("Hello there")} bg={index % 2 == 0 ? undefined : colors.gray}>{
             columns.map((column, i) => (
-                    <Td 
-                        key={i}>
-                        <Input  name={column.label} placeholder={column.label} size='lg' />
-                    </Td>
-                
-            )
+                <Td
+                    key={i}>
+                    <Input name={column.label} placeholder={column.label} size='lg' />
+                </Td>
 
+            )
             )}  </Tr>
     )
 }

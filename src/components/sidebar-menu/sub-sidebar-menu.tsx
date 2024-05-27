@@ -14,6 +14,11 @@ const StyledSideBarMenu = styled.div`
   transition: all 5s linear;
 `;
 
+const StyledDiv=styled.div`
+    height: 100%;
+    overflow-y: scroll;
+`;
+
 
 type SubSideBarMenuProps = {
     title: string
@@ -32,12 +37,12 @@ const SubSideBarMenu = ({ title, subMenuItems }: SubSideBarMenuProps) => {
             {title}
         </StyledSubTitle>
         <Box h="37px" />
-        <Stack direction="column">
+        <StyledDiv>
             {
                 subMenuItems
                     .map((subMenu, index) => (<SubMenuItemComponent key={index} onPressed={handleMenuClick} isSelected={subMenuItem === subMenu.id} subMenu={subMenu} />))
             }
-        </Stack>
+        </StyledDiv>
     </StyledSideBarMenu>
 }
 

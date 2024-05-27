@@ -22,19 +22,19 @@ type MenuItemType = {
 const menuItemsData: Array<MenuItemType> = [
     {
         name: "Overview",
-        path: "overview",
+        path: "/overview",
         icon: Recovery,
     },
     {
         name: "Action",
-        path: "action",
+        path: "/action",
         icon: Account,
         subMenu: ["Connexion", "Déconnexion", "Comptabilité", "Utilisateur", "Habilitations", "Modifier mot de passe", "Initialisation du mot de passe", "Quitter"]
     },
     {
         name: "Paramètres",
         icon: Settings,
-        path: "settings",
+        path: "/settings",
         subMenu: [
             "Agence de banque",
             "Banque",
@@ -48,47 +48,135 @@ const menuItemsData: Array<MenuItemType> = [
             "Codes produits Sonareci",
             "Entité",
             "Etape",
+            "Etat de la demande de Localisation",
+            "Exercice",
+            "Fonction",
+            "Groupe Créance",
+            "Journal",
+            "Message",
+            "Mode d'Acquisition",
+            "Mode de Paiement",
+            "Nationalité",
+            "Objet créance",
+            "Opération",
+            "Périodicité",
+            "Paramètre Généraux",
+            "Poste Comptable",
+            "Profession",
+            "Quartier",
+            "Statut Créance",
+            "Staut Salarié",
+            "Type d'Acte",
+            "Type d'Auxiliaire",
+            "Type d'Echéancier",
+            "Type de Charge",
+            "Type de Compte",
+            "Type de Contrat",
+            "Type Débiteur",
+            "Type de Domiciliation",
+            "Type Effet",
+            "Type Employeur",
+            "Type de Frais",
+            "Type Garantie Réelle",
+            "Type Garantie Personnelle",
+            "Type Logement",
+            "Type Opération",
+            "Type OVP",
+            "Type Pièce",
+            "Type Régularisation",
+            "Type Saisie",
+            "Ville",
+            "Zone"
         ],
     },
     {
         name: "Etude de Creance",
-        path: "creances",
+        path: "/creances",
         icon: Creance,
+        subMenu: [
+            "Enregistrement",
+            "Mise à jour",
+            "Consultation"
+        ]
     },
     {
         name: "Suivi Clientèle",
-        path: "followClient",
+        path: "/followClient",
         icon: FollowClient,
+        subMenu: [
+            "Enregistrement",
+            "Mise à jour",
+            "Annulation",
+            "Consultation",
+            "Suivi des actes de Recouvrement"
+        ]
     },
     {
         name: "Suivi Récouv.",
-        path: "recovery",
+        path: "/recovery",
         icon: Recovery,
+        subMenu: [
+            "Enregistrement",
+        "Mise à jour",
+        "Consultation"]
     },
     {
         name: "Contentieux",
-        path: "contentieux",
+        path: "/contentieux",
         icon: Contentieux,
+        subMenu: [
+            "Enregistrement",
+            "Mise à jour",
+            "Consultation",
+            "Suivi des Actes de Recouvrement"
+        ]
     },
     {
         name: "Patrimoine",
-        path: "patrimoine",
+        path: "/patrimoine",
         icon: Patrimoine,
+        subMenu: [
+            "Enregistrement",
+        "Mise à jour",
+        "Consultation"]
     },
     {
         name: "Opérations Div",
-        path: "operations",
+        path: "/operations",
         icon: Operation,
+        subMenu: [
+            "Enregistrement",
+            "Mise à jour",
+            "Consultation",
+            "Budget",
+            "Remboursement des Créanciers",
+            "Gestion de Carnet",
+            "Tableau de Bord-Direction ACCC",
+            "Gestion des Stocks"
+        ]
     },
     {
         name: "Etats",
-        path: "etats",
+        path: "/etats",
         icon: Archivre,
+        subMenu: [
+            "Etude créance",
+            "Suivi Clientèle",
+            "Suivi Recouvrement",
+            "Contentieux",
+            "Patrimoine",
+            "Autres"
+        ]
     },
     {
         name: "Aide",
         icon: Help,
-        path: "aide",
+        path: "/aide",
+        subMenu: [
+            "Apropos",
+            "Manuel",
+            "Aide Oracle"
+        ]
     }
 ]
 export const menuItems: MenuItem[] = menuItemsData.map((menuItem, index) => ({
