@@ -40,9 +40,24 @@ const menuItemsData: Array<MenuItemType> = [
         name: "Action",
         path: "/action",
         icon: Account,
-        subMenu: [
-            
-        ]
+        subMenu: [{
+            name: "Connexion",
+        },{
+            name:"Déconnexion"
+        },{
+            name: "Comptabilité"
+        },{
+            name: "Utilisateur"
+        },{
+            name:"Habilitations"
+        },{
+            name:"Modifier mot de passe"
+        },{
+            name:"Initialisation du mot de passe"
+        },{
+            name: "Quitter"
+        }]
+
     },
     {
         name: "Paramètres",
