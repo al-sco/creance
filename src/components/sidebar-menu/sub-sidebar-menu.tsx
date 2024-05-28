@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { Box, Stack } from "@chakra-ui/react";
+import { Box} from "@chakra-ui/react";
 import { SubMenuItem } from "../../common/configs/ui/menus/menus.type";
 import { StyledSubTitle } from "../../common/theme/typography/typography";
 import SubMenuItemComponent from "../menu-item/sub-menu-item";

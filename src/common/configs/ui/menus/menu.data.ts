@@ -9,12 +9,18 @@ import Patrimoine from '../../../../assets/patrimoine.svg';
 import FollowClient from '../../../../assets/suiv-client.svg';
 import Recovery from '../../../../assets/recovery.svg';
 import Settings from '../../../../assets/settings-enable.svg';
+import { ParameterColumnType } from "../../../../components/parameter-main-content/parameter-main-content";
+
+type SubMenuType={
+    name:string
+    columns: ParameterColumnType[]
+}
 
 type MenuItemType = {
     name: string
     icon: string
     path: string
-    subMenu?: string[]
+    subMenu?: SubMenuType[]
 }
 
 
