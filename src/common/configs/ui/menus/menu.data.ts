@@ -20,7 +20,7 @@ type MenuItemType = {
     name: string
     icon: string
     path: string
-    subMenu?: SubMenuType[]
+    subMenu?: SubMenuType[] | string[]
 }
 
 
@@ -40,64 +40,695 @@ const menuItemsData: Array<MenuItemType> = [
         name: "Action",
         path: "/action",
         icon: Account,
-        subMenu: ["Connexion", "Déconnexion", "Comptabilité", "Utilisateur", "Habilitations", "Modifier mot de passe", "Initialisation du mot de passe", "Quitter"]
+        subMenu: [
+            
+        ]
     },
     {
         name: "Paramètres",
         icon: Settings,
         path: "/settings",
         subMenu: [
-            "Agence de banque",
-            "Banque",
-            "Catégorie de débiteur",
-            "Civilité",
-            "Classe",
-            "Cpte d'opération",
-            "Cpte comptable d'operation",
-            "Cpte comptable d'operation Sonar",
-            "Cpte comptable d'operation Sonar Modif",
-            "Codes produits Sonareci",
-            "Entité",
-            "Etape",
-            "Etat de la demande de Localisation",
-            "Exercice",
-            "Fonction",
-            "Groupe Créance",
-            "Journal",
-            "Message",
-            "Mode d'Acquisition",
-            "Mode de Paiement",
-            "Nationalité",
-            "Objet créance",
-            "Opération",
-            "Périodicité",
-            "Paramètre Généraux",
-            "Poste Comptable",
-            "Profession",
-            "Quartier",
-            "Statut Créance",
-            "Staut Salarié",
-            "Type d'Acte",
-            "Type d'Auxiliaire",
-            "Type d'Echéancier",
-            "Type de Charge",
-            "Type de Compte",
-            "Type de Contrat",
-            "Type Débiteur",
-            "Type de Domiciliation",
-            "Type Effet",
-            "Type Employeur",
-            "Type de Frais",
-            "Type Garantie Réelle",
-            "Type Garantie Personnelle",
-            "Type Logement",
-            "Type Opération",
-            "Type OVP",
-            "Type Pièce",
-            "Type Régularisation",
-            "Type Saisie",
-            "Ville",
-            "Zone"
+           {
+            name:"Agence de banque",
+            columns:[
+                {
+                    label:"Code",
+                },
+
+                {
+                    label: "Libellé"
+                }
+            ]
+           }
+            ,
+            {
+                name:"Banque",
+                columns:[
+                    {
+                        label:"Code"
+                    },
+                    {
+                        label:"Libelle"
+                    }, 
+                    {
+                        label:"Responsable"
+                    },
+                    {
+                        label:"Adresse"
+                    }
+                ]
+            },
+            {
+                name:"Catégorie de débiteur",
+                columns:[
+                    
+                        {
+                            label:"Code"
+                        },
+                        {
+                            label:"Libelle"
+                        }, 
+                ]
+            },
+            {
+                name:"Civilité",
+                columns:[
+                    
+                        {
+                            label:"Code"
+                        },
+                        {
+                            label:"Libelle"
+                        }, 
+                    
+                ]
+            },
+            
+            {
+                name:"Classe",
+                columns:[
+                    {
+                        label:"Code"
+                    },
+                    {
+                        label:"Libelle"
+                    }, 
+                ]
+            },
+
+            {
+                name:"Cpte d'opération",
+                columns:[
+                    {
+                        label:"Code"
+                    },
+                    {
+                        label:"Libelle"
+                    }, 
+                ]
+            },
+            {
+                name:"Compte d'operation",
+                columns:[
+                    {
+                     label:"N°Compte"
+                    }, 
+                    {
+                        label:"Code Banque Agence"
+                    },
+                    {
+                        label:"Code Groupe Créance"
+                    }
+                ]
+            },
+            {
+                name:"Cpte Comptable d'Opération",
+                columns:[
+                    {
+                        label:"Compte"
+                    },
+                    {
+                        label:"Libelle"
+                    },
+                    {
+                        label:"Sens"
+                    },
+                    {
+                        label:"Journal"
+                    }
+                ]
+            },
+            {
+                name:"Cpte comptable d'operation Sonar",
+                columns:[
+                    {
+                        label:"Compte"
+                    },
+                    {
+                        label:"Libelle"
+                    },
+                    {
+                        label:"Sens"
+                    },
+                    {
+                        label:"Journal"
+                    }
+                ]
+            },
+            {
+                name:"Cpte comptable d'operation Sonar Modif",
+                columns:[
+                    {
+                        label:"Compte"
+                    },
+                    {
+                        label:"Libelle"
+                    },
+                    {
+                        label:"Sens"
+                    },
+                    {
+                        label:"Journal"
+                    }
+                ]
+            },
+            {
+                name: "Codes produits Sonareci",
+                columns:[
+                    {
+                        label:"Code"
+                    },
+                    {
+                        label:"Intitulé de Comptes"
+                    },
+                    {
+                        label:"Anc.Cpte Unibol (Cpte de Regrpt)"
+                    },
+                    {
+                        label:"Cpte Regroupt"
+                    },
+                    {
+                        label:"Saari"
+                    },
+                    {
+                        label:"Libelle"
+                    },
+                    {
+                        label:"Observation"
+                    }
+                ]
+            },
+
+            {
+                name: "Entité",
+                columns:[
+                    {
+                            label:"Code"
+                        },
+                        {
+                            label:"Libelle"
+                        }, 
+                        {
+                            label:"Responsable ou Fondé de pourvoirs"
+                        },
+                        {
+                            label:"Libellé Long"
+                        }
+                    
+                ]
+            },
+            {
+                name:   "Etape",
+                columns:[
+                    {
+                        label:"Code"
+                    },
+                    {
+                        label:"Libelle"
+                    }, 
+                ]
+            },
+            {
+                name:  "Etat de la demande de Localisation",
+                columns:[
+                    {
+                        label:"Code"
+                    },
+                    {
+                        label:"Libelle"
+                    }, 
+                ]
+            },
+            {
+                name:"Exercice",
+                columns:[
+                    {
+                        label:"Code"
+                    },
+                    {
+                        label:"Libelle"
+                    }, 
+                    {
+                        label:"Date Adopt Bud"
+                    },
+                    {
+                        label:"Date Debut"
+                    },
+                    {
+                        label:"Date Fin"
+                    },
+                    {
+                        label:"Cloture"
+                    }
+                ]
+            },
+            {
+                name:"Fonction",
+                columns:[
+                    {
+                        label:"Code"
+                    },
+                    {
+                        label:"Libelle"
+                    }, 
+                ]
+            },
+            {
+                name:"Groupe Créance",
+                columns:[
+                    {
+                        label:"Code"
+                    },
+                    {
+                        label:"Libelle"
+                    }, 
+                    {
+                        label:"Libellé Long"
+                    }
+                ]
+            },
+            {
+                name:"Journal",
+                columns:[
+                    {
+                        label:"Code"
+                    },
+                    {
+                        label:"Libelle"
+                    }, 
+                ]
+            },
+            {
+                 name:"Message",
+                 columns:[
+                    {
+                        label:"Code"
+                    },
+                    {
+                        label:"Libelle"
+                    }, 
+                 ]
+            },
+            {
+                name:"Mode d'Acquisition",
+                columns:[
+                    {
+                        label:"Code"
+                    },
+                    {
+                        label:"Libelle"
+                    }, 
+                ]
+            },
+            {
+                name:"Mode de Paiement",
+                columns:[
+                    {
+                        label:"Code"
+                    },
+                    {
+                        label:"Libelle"
+                    }, 
+                ]
+            },
+            {
+                name:"Nationalité",
+                columns:[
+                    {
+                        label:"Code"
+                    },
+                    {
+                        label:"Libelle"
+                    }, 
+                ]
+            },
+            {
+                name:"Objet créance",
+                columns:[
+                    {
+                        label:"Code"
+                    },
+                    {
+                        label:"Libelle"
+                    }, 
+                ]
+            },
+            {
+                name:"Opération",
+                columns:[
+                    {
+                        label:"Code"
+                    },
+                    {
+                        label:"Libelle"
+                    }, 
+                ]
+            },
+            {
+                name:"Périodicité",
+                columns:[
+                    {
+                        label:"Code"
+                    },
+                    {
+                        label:"Libelle"
+                    }, 
+                ]
+            },
+            {
+                name:   "Paramètre Généraux",
+                columns:[
+                    {
+                        label:"Code"
+                    },
+                    {
+                        label:"Libelle"
+                    }, 
+                    {
+                        label:"Valeur"
+                    },
+                    {
+                        label:"Commentaire"
+                    }
+                ]
+            },
+            {
+                name: "Poste Comptable",
+                columns:[
+                    {
+                        label:"Code"
+                    },
+                    {
+                        label:"Poste Comptable"
+                    }, 
+                ]
+            },
+            {
+                name: "Profession",
+                columns:[
+                    {
+                        label:"Code"
+                    },
+                    {
+                        label:"Libelle"
+                    }, 
+                ]
+            },
+            {
+                name:"Quartier",
+                columns:[
+                    {
+                        label:"Code"
+                    },
+                    {
+                        label:"Libelle"
+                    }, 
+                    {
+                        label:"Ville"
+                    },
+                    {
+                        label:"Zone"
+                    }
+                ]
+            },
+            {
+                name: "Statut Créance",
+                columns:[
+                    {
+                        label:"Code"
+                    },
+                    {
+                        label:"Libelle"
+                    }, 
+                ]
+            },
+            {
+                name:"Staut Salarié",
+                columns:[
+                    {
+                        label:"Code"
+                    },
+                    {
+                        label:"Libelle"
+                    }, 
+                ]
+            },
+            {
+                name:"Type d'Acte",
+                columns:[
+                    {
+                        label:"Code"
+                    },
+                    {
+                        label:"Libelle"
+                    }, 
+                    {
+                        label:"Delai"
+                    }
+                ]
+            },
+            {
+                name:  "Type d'Auxiliaire",
+                columns:[
+                    {
+                        label:"Code"
+                    },
+                    {
+                        label:"Libelle"
+                    }, 
+                ]
+            },
+            {
+                name: "Type d'Echéancier",
+                columns:[
+                    {
+                        label:"Code"
+                    },
+                    {
+                        label:"Libelle"
+                    }, 
+                ]
+            },
+            {
+                name:"Type de Charge",
+                columns:[
+                    {
+                        label:"Code"
+                    },
+                    {
+                        label:"Libelle"
+                    }, 
+                    {
+                        label:"Sens"
+                    }
+                ]
+            },
+            {
+                name:"Type de Compte",
+                columns:[
+                    {
+                        label:"Code"
+                    },
+                    {
+                        label:"Libelle"
+                    }, 
+                ]
+            },
+            {
+                name: "Type de Contrat",
+                columns:[
+                    {
+                        label:"Code"
+                    },
+                    {
+                        label:"Libelle"
+                    }, 
+                ]
+            },
+            {
+                name: "Type Débiteur",
+                columns:[
+                    {
+                        label:"Code"
+                    },
+                    {
+                        label:"Libelle"
+                    }, 
+                ]
+            },
+            {
+                name: "Type de Domiciliation",
+                columns:[
+                    {
+                        label:"Code"
+                    },
+                    {
+                        label:"Libelle"
+                    }, 
+                ]
+            },
+            {
+                name:  "Type Effet",
+                columns:[
+                    {
+                        label:"Code"
+                    },
+                    {
+                        label:"Libelle"
+                    }, 
+                ]
+            },
+            {
+                name:"Type Employeur",
+                columns:[
+                    {
+                        label:"Code"
+                    },
+                    {
+                        label:"Libelle"
+                    }, 
+                ]
+            },
+            {
+                name:"Type de Frais",
+                columns:[
+                    {
+                        label:"Code"
+                    },
+                    {
+                        label:"Libelle"
+                    }, 
+                ]
+            },
+            {
+                name :"Type Garantie Réelle",
+                columns:[
+                    {
+                        label:"Code"
+                    },
+                    {
+                        label:"Libelle"
+                    }, 
+                ]
+            },
+            {
+                name:"Type Garantie Personnelle",
+                columns:[
+                    {
+                        label:"Code"
+                    },
+                    {
+                        label:"Libelle"
+                    }, 
+                ]
+            },
+            {
+                name:"Type Logement",
+                columns:[
+                    {
+                        label:"Code"
+                    },
+                    {
+                        label:"Libelle"
+                    }, 
+                ]
+            },
+            {
+                name:"Type Opération",
+                columns:[
+                    {
+                        label:"Code"
+                    },
+                    {
+                        label:"Libelle"
+                    }, 
+                    {
+                        label:"Mode"
+
+                    },
+                    {
+                        label:"Paie"
+                    },
+                    {
+                        label:"Type"
+                    },
+                    {
+                        label:"Paie"
+                    }
+                ]
+            },
+            {
+                name:"Type OVP",
+                columns:[
+                    {
+                        label:"Code"
+                    },
+                    {
+                        label:"Libelle"
+                    }, 
+                ]
+            },
+            {
+                name:"Type Pièce",
+                columns:[
+                    {
+                        label:"Code"
+                    },
+                    {
+                        label:"Libelle"
+                    }, 
+                ]
+            },
+            {
+                name:"Type Régularisation",
+                columns:[
+                    {
+                        label:"Code"
+                    },
+                    {
+                        label:"Libelle"
+                    }, 
+                ]
+            },
+            {
+                name:  "Type Saisie",
+                columns:[
+                    {
+                        label:"Code"
+                    },
+                    {
+                        label:"Libelle"
+                    }, 
+                ]
+            },
+            {
+                name:"Ville",
+                columns:[
+                    {
+                        label:"Code"
+                    },
+                    {
+                        label:"Libelle"
+                    }, 
+                ]
+            },
+            {
+                name:"Zone",
+                columns:[
+                    {
+                        label:"Code"
+                    },
+                    {
+                        label:"Libelle"
+                    }, 
+                    {
+                        label:"Description"
+                    }
+                ]
+            }
+            
+            
         ],
     },
     {
@@ -105,6 +736,7 @@ const menuItemsData: Array<MenuItemType> = [
         path: "/creances",
         icon: Creance,
         subMenu: [
+            
             "Enregistrement",
             "Mise à jour",
             "Consultation"
@@ -198,7 +830,7 @@ export const menuItems: MenuItem[] = menuItemsData.map((menuItem, index) => ({
 
     subMenus: menuItem.subMenu?.map((subMenu, index): SubMenuItem => ({
         id: index,
-        name: subMenu,
+        name: 
         viewName: getViewName(menuItem),
         columns: index % 2 === 0 ? [{ label: "Code" }, { label: "Libéllée" }] : [{ label: "Code" }, { label: "Libéllé" }, { label: "Adress" }],
         path: formatLabelToPath(subMenu)
