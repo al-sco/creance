@@ -13,14 +13,14 @@ import { ParameterColumnType } from "../../../../components/parameter-main-conte
 
 type SubMenuType={
     name:string
-    columns: ParameterColumnType[]
+    columns?: ParameterColumnType[]
 }
 
 type MenuItemType = {
     name: string
     icon: string
     path: string
-    subMenu?: SubMenuType[] | string[]
+    subMenu?: SubMenuType[]
 }
 
 
@@ -737,9 +737,16 @@ const menuItemsData: Array<MenuItemType> = [
         icon: Creance,
         subMenu: [
             
-            "Enregistrement",
-            "Mise à jour",
-            "Consultation"
+            {
+                name:"Enregistrement"
+            },
+
+            {
+                name:"Mise à jour"
+            },
+            {
+                name:"Consultation"
+            }
         ]
     },
     {
@@ -747,11 +754,21 @@ const menuItemsData: Array<MenuItemType> = [
         path: "/followClient",
         icon: FollowClient,
         subMenu: [
-            "Enregistrement",
-            "Mise à jour",
-            "Annulation",
-            "Consultation",
-            "Suivi des actes de Recouvrement"
+            {
+                name:"Enregistrement"
+            },
+            {
+                name:"Mise }à jour",
+            },
+            {
+                name:"Annulation"
+            },
+            {
+                name:"Consultation"
+            },
+            {
+                name:"Suivi }des actes de Recouvrement"
+            }
         ]
     },
     {
@@ -759,19 +776,19 @@ const menuItemsData: Array<MenuItemType> = [
         path: "/recovery",
         icon: Recovery,
         subMenu: [
-            "Enregistrement",
-        "Mise à jour",
-        "Consultation"]
+            {name :"Enregistrement"},
+        {name :"Mise à jour"},
+        {name :"Consultation"}]
     },
     {
         name: "Contentieux",
         path: "/contentieux",
         icon: Contentieux,
         subMenu: [
-            "Enregistrement",
-            "Mise à jour",
-            "Consultation",
-            "Suivi des Actes de Recouvrement"
+            {name :"Enregistrement"},
+            {name :"Mise à jour"},
+            {name :"Consultation"},
+            {name :"Suivi des Actes de Recouvrement"}
         ]
     },
     {
@@ -779,23 +796,23 @@ const menuItemsData: Array<MenuItemType> = [
         path: "/patrimoine",
         icon: Patrimoine,
         subMenu: [
-            "Enregistrement",
-        "Mise à jour",
-        "Consultation"]
+            {name :"Enregistrement"},
+        {name :"Mise à jour"},
+        {name :"Consultation"}]
     },
     {
         name: "Opérations Div",
         path: "/operations",
         icon: Operation,
         subMenu: [
-            "Enregistrement",
-            "Mise à jour",
-            "Consultation",
-            "Budget",
-            "Remboursement des Créanciers",
-            "Gestion de Carnet",
-            "Tableau de Bord-Direction ACCC",
-            "Gestion des Stocks"
+            {name :"Enregistrement"},
+            {name :"Mise à jour"},
+            {name :"Consultation"},
+            {name :"Budget"},
+            {name :"Remboursement des Créanciers"},
+            {name :"Gestion de Carnet"},
+            {name :"Tableau de Bord-Direction ACCC"},
+            {name :"Gestion des Stocks"}
         ]
     },
     {
@@ -803,12 +820,12 @@ const menuItemsData: Array<MenuItemType> = [
         path: "/etats",
         icon: Archivre,
         subMenu: [
-            "Etude créance",
-            "Suivi Clientèle",
-            "Suivi Recouvrement",
-            "Contentieux",
-            "Patrimoine",
-            "Autres"
+            {name :"Etude créance"},
+            {name :"Suivi Clientèle"},
+            {name :"Suivi Recouvrement"},
+            {name :"Contentieux"},
+            {name :"Patrimoine"},
+            {name :"Autres"}
         ]
     },
     {
@@ -816,9 +833,9 @@ const menuItemsData: Array<MenuItemType> = [
         icon: Help,
         path: "/aide",
         subMenu: [
-            "Apropos",
-            "Manuel",
-            "Aide Oracle"
+            {name :"Apropos"},
+            {name :"Manuel"},
+            {name :"Aide Oracle"}
         ]
     }
 ]
@@ -830,9 +847,9 @@ export const menuItems: MenuItem[] = menuItemsData.map((menuItem, index) => ({
 
     subMenus: menuItem.subMenu?.map((subMenu, index): SubMenuItem => ({
         id: index,
-        name: 
+        name: subMenu.name,
         viewName: getViewName(menuItem),
-        columns: index % 2 === 0 ? [{ label: "Code" }, { label: "Libéllée" }] : [{ label: "Code" }, { label: "Libéllé" }, { label: "Adress" }],
+        columns: subMenu.columns,
         path: formatLabelToPath(subMenu)
     }))
 }));
@@ -844,11 +861,10 @@ function getViewName(menuItem: MenuItemType): "parameter" | undefined {
 
 
 
-function formatLabelToPath(path: string){
+function formatLabelToPath(subMenu: SubMenuType){
     
 
-    let formattedPath=path.trim().replaceAll(' ','_').toLowerCase()
-    console.log(formattedPath)
+    let formattedPath=subMenu.name.trim().replaceAll(' ','_').toLowerCase()
     for(let key of letters.keys()){
         formattedPath.replaceAll(key,letters.get(key)!.valueOf())
     }
