@@ -3,10 +3,14 @@ import styled from "styled-components"
 import colors from "../../common/theme/colors/colors";
 import { ParameterColumnType } from "../parameter-main-content/parameter-main-content";
 import TableRowEditable from "./table-row";
+import { bankAgencyList } from "../../states/signals/parameter-providers/bank-agency.state";
+import { Signal } from "@preact/signals-react";
+import { SubMenuItem } from "../../common/configs/ui/menus/menus.type";
 
 
 
 type ParameterTableProps = {
+    subMenu:SubMenuItem,
     columns: ParameterColumnType[]
 }
 
@@ -18,12 +22,19 @@ border: 1px solid ${colors.tableBorder};
 overflow-y: scroll;
 `;
 
-const BaseTable = ({ columns }: ParameterTableProps) => {
-    const nbres: number[] = [];
-    for (let index = 0; index < 100; index++) {
-        nbres.push(index)
-    }
 
+export const buildTableContent=(signal:Signal<any>,columns:ParameterColumnType[])=>{
+    return (<>
+        {
+            signal.value.map((data:any, index:number) => (
+                <TableRowEditable data={data}  key={index} columns={columns} index={index} bg={index % 2 == 0 ? undefined : colors.gray} />
+            ))
+        }
+        </>
+    )
+}
+
+const BaseTable = ({ columns,subMenu }: ParameterTableProps) => {
     return (
         <BaseStyledTable>
             <TableContainer>
@@ -33,14 +44,11 @@ const BaseTable = ({ columns }: ParameterTableProps) => {
                             {
                                 columns.map((column, index) => (<Th key={index}>{column.label}</Th>))
                             }
-
                         </Tr>
                     </Thead>
                     <Tbody>
                         {
-                            nbres.map((_, index) => (
-                                <TableRowEditable  key={index} columns={columns} index={index} bg={index % 2 == 0 ? undefined : colors.gray} />
-                            ))
+                            subMenu.render && subMenu.render()
                         }
                     </Tbody>
                 </Table>

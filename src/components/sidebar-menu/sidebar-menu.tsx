@@ -1,7 +1,7 @@
 import styled, { keyframes } from "styled-components"
 import { Box, Stack, Image } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { logo } from "../../data/assets";
+import { logo } from "../../common/theme/assets";
 import MenuItemComponent from "../menu-item/menu-item";
 import { menuItems } from "../../common/configs/ui/menus/menu.data";
 import colors from "../../common/theme/colors/colors";

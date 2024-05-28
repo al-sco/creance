@@ -10,9 +10,19 @@ import FollowClient from '../../../../assets/suiv-client.svg';
 import Recovery from '../../../../assets/recovery.svg';
 import Settings from '../../../../assets/settings-enable.svg';
 import { ParameterColumnType } from "../../../../components/parameter-main-content/parameter-main-content";
+import { BankAgencyStateFuncs,bankAgencyList } from "../../../../states/signals/parameter-providers/bank-agency.state";
+import { Signal } from "@preact/signals-react";
+import { buildTableContent } from "../../../../components/base-table/base-table";
+import { bankList, BankStateFuncs } from "../../../../states/signals/parameter-providers/banks.state";
+
+
+
+
 
 type SubMenuType={
     name:string
+    loader?:(e:any)=>any,
+    dataProvider?:Signal,
     columns?: ParameterColumnType[]
 }
 
@@ -28,7 +38,7 @@ const parametersViewsPaths=['/settings']
 const letters=new Map<string, string>([['é','e'],
 ['à','a'],
 ['\'','']
-])
+]) 
 
 const menuItemsData: Array<MenuItemType> = [
     {
@@ -66,19 +76,23 @@ const menuItemsData: Array<MenuItemType> = [
         subMenu: [
            {
             name:"Agence de banque",
+            loader:BankAgencyStateFuncs.fetchBankAgency,
+            dataProvider:bankAgencyList,
             columns:[
                 {
                     label:"Code",
                 },
 
                 {
-                    label: "Libellé"
+                    label: "Libelle"
                 }
             ]
            }
             ,
             {
                 name:"Banque",
+                dataProvider:bankList,
+            loader:BankStateFuncs.fetchBanks,
                 columns:[
                     {
                         label:"Code"
@@ -87,11 +101,12 @@ const menuItemsData: Array<MenuItemType> = [
                         label:"Libelle"
                     }, 
                     {
-                        label:"Responsable"
+                        label:"Adresse"
                     },
                     {
-                        label:"Adresse"
-                    }
+                        label:"Responsabilite"
+                    },
+                    
                 ]
             },
             {
@@ -864,6 +879,8 @@ export const menuItems: MenuItem[] = menuItemsData.map((menuItem, index) => ({
         id: index,
         name: subMenu.name,
         viewName: getViewName(menuItem),
+        loader:subMenu.loader,
+        render:subMenu.dataProvider && subMenu.columns ? ()=>buildTableContent(subMenu.dataProvider!,subMenu.columns!):undefined,
         columns: subMenu.columns,
         path: formatLabelToPath(subMenu)
     }))

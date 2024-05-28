@@ -1,3 +1,4 @@
+import React from "react"
 import { ParameterColumnType } from "../../../../components/parameter-main-content/parameter-main-content"
 
 export type MenuItem = {
@@ -13,6 +14,8 @@ export type SubMenuItem = {
     id: number
     viewName: 'parameter' | undefined
     columns?: ParameterColumnType[]
+    loader?:(params:any)=>any[],
+    render?: ()=>JSX.Element,
     path: string
 }
 

@@ -9,6 +9,7 @@ import { CloseIcon, DeleteIcon, EditIcon } from "@chakra-ui/icons"
 
 type TableRowProps = {
     index: number
+    data:any,
     columns: ParameterColumnType[]
 } & ChakraStyledOptions
 
@@ -21,7 +22,7 @@ type TableEditProps=TableRowProps & {onEditPressed: () => void}
 
 type NonEditableTableRowProps = TableRowProps & TableRowFuncType
 
-const TableRow = ({ index, columns, onDeletePressed, onEditPressed }: NonEditableTableRowProps) => {
+const TableRow = ({ index, columns, onDeletePressed, onEditPressed,data }: NonEditableTableRowProps) => {
     return (
         <Tr bg={index % 2 == 0 ? undefined : colors.gray}>{
             columns.map((column, i) => (
@@ -30,7 +31,7 @@ const TableRow = ({ index, columns, onDeletePressed, onEditPressed }: NonEditabl
                     {i === columns.length - 1 ?
                         (<Grid templateColumns={"1fr 100px"}>
                             <GridItem>
-                                {column.label} {index}
+                                {data[column.label.toLowerCase()]}
                             </GridItem>
                             <GridItem>
                                 <Stack direction="row">
@@ -40,16 +41,16 @@ const TableRow = ({ index, columns, onDeletePressed, onEditPressed }: NonEditabl
                                 </Stack>
                             </GridItem>
                         </Grid>) :
-                        (<>{column.label} {index}</>)}  </Td>
+                        (<>{data[column.label.toLowerCase()]}</>)}</Td>
             )
             )
         }</Tr>
     )
 }
 
-const TableRowEdit = ({ index, columns,onEditPressed }: TableEditProps) => {
+const TableRowEdit = ({ index, columns,onEditPressed,data }: TableEditProps) => {
     let inputsValuesStates=new Map<ParameterColumnType,[string, React.Dispatch<React.SetStateAction<string>>]>([
-        ...columns.map((col)=>[col,useState<string>('')])
+        ...columns.map((col)=>[col,useState<string>(data[col.label.toLowerCase()])])
     ]);
 
     let inputRefs=columns.map((_)=>useRef<HTMLInputElement>(null))
@@ -87,7 +88,7 @@ const TableRowEdit = ({ index, columns,onEditPressed }: TableEditProps) => {
     )
 }
 
-const TableRowEditable = ({ index, columns, baseStyle }: TableRowProps) => {
+const TableRowEditable = ({ index, columns, baseStyle, data}: TableRowProps) => {
     const [isEditable, setSetEditable] = useState<boolean>()
     const switchToEdit = () => {
         setSetEditable(() => !isEditable)
@@ -95,8 +96,8 @@ const TableRowEditable = ({ index, columns, baseStyle }: TableRowProps) => {
 
     return (
         isEditable ?
-            <TableRowEdit onEditPressed={switchToEdit}  {...baseStyle} columns={columns} index={index} /> :
-            <TableRow onEditPressed={switchToEdit} onDeletePressed={switchToEdit} {...baseStyle} columns={columns} index={index} />
+            <TableRowEdit data={data} onEditPressed={switchToEdit}  {...baseStyle} columns={columns} index={index} /> :
+            <TableRow data={data} onEditPressed={switchToEdit} onDeletePressed={switchToEdit} {...baseStyle} columns={columns} index={index} />
     )
 }
 

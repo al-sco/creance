@@ -4,6 +4,7 @@ import MoreIcon from '../../assets/menu-button.svg'
 import BaseTable from '../base-table/base-table';
 import { StyledTitle } from '../../common/theme/typography/typography';
 import colors from '../../common/theme/colors/colors';
+import { SubMenuItem } from '../../common/configs/ui/menus/menus.type';
 
 
 
@@ -14,6 +15,7 @@ export type ParameterColumnType = {
 
 type ParameterMainContentProps = {
     title: string
+    subMenu:SubMenuItem
     colums: ParameterColumnType[]
 }
 
@@ -24,7 +26,7 @@ const StyledParameterMainContent = styled.div`
     background-color: ${colors.white};
 `;
 
-const ParameterMainContent = ({ title, colums }: ParameterMainContentProps) => {
+const ParameterMainContent = ({ title, colums,subMenu }: ParameterMainContentProps) => {
     return (
         <StyledParameterMainContent>
             <Stack direction="row" justifyContent="space-between">
@@ -41,7 +43,7 @@ const ParameterMainContent = ({ title, colums }: ParameterMainContentProps) => {
                 <Button variant='outline' color={colors.green} size='lg' style={{ border: `1px solid ${colors.green}` }}>Ajouter</Button>
             </Stack>
             <Box h="24px" />
-            <BaseTable columns={colums} />
+            <BaseTable subMenu={subMenu}  columns={colums} />
         </StyledParameterMainContent>
     )
 }

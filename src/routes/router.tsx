@@ -1,4 +1,4 @@
-import { createBrowserRouter, } from "react-router-dom"
+import { createBrowserRouter, RouteObject, } from "react-router-dom"
 import { menuItems } from "../common/configs/ui/menus/menu.data"
 import ErrorPage from "../pages/error/Error"
 import Root from "../pages/Root"
@@ -17,10 +17,11 @@ const router = createBrowserRouter([
                 element: <MainContent subMenus={menuItem.subMenus} title={menuItem.name} />,
                 children: menuItem.subMenus?.map((sb) => ({
                     path: sb.path,
-                    element: sb.viewName=='parameter'?(<ParameterMainContent title={sb.name} colums={sb.columns ?? []} />):null
+                    loader:sb.viewName=='parameter'?sb.loader:()=>console.log("Call me !!"),
+                    element: sb.viewName=='parameter'?(<ParameterMainContent subMenu={sb} title={sb.name} colums={sb.columns ?? []} />):null
                 }))
             }
-        ))
+        ) as RouteObject)
     }
 ])
 export default router
