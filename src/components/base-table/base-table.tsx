@@ -3,7 +3,6 @@ import styled from "styled-components"
 import colors from "../../common/theme/colors/colors";
 import { ParameterColumnType } from "../parameter-main-content/parameter-main-content";
 import TableRowEditable from "./table-row";
-import { bankAgencyList } from "../../states/signals/parameter-providers/bank-agency.state";
 import { Signal } from "@preact/signals-react";
 import { SubMenuItem } from "../../common/configs/ui/menus/menus.type";
 

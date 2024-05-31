@@ -10,7 +10,8 @@ import { SubMenuItem } from '../../common/configs/ui/menus/menus.type';
 
 
 export type ParameterColumnType = {
-    label: string
+    label: string;
+    key:string
 }
 
 type ParameterMainContentProps = {

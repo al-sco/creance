@@ -18,6 +18,12 @@ type TableRowFuncType = {
     onDeletePressed: () => void
 }
 
+function lettertoCamelCase(word:string){
+        
+    return word[0].toLowerCase()+word.substring(1)
+
+}
+
 type TableEditProps=TableRowProps & {onEditPressed: () => void}
 
 type NonEditableTableRowProps = TableRowProps & TableRowFuncType
@@ -31,7 +37,7 @@ const TableRow = ({ index, columns, onDeletePressed, onEditPressed,data }: NonEd
                     {i === columns.length - 1 ?
                         (<Grid templateColumns={"1fr 100px"}>
                             <GridItem>
-                                {data[column.label.toLowerCase()]}
+                                {data[lettertoCamelCase(column.key)]}
                             </GridItem>
                             <GridItem>
                                 <Stack direction="row">
@@ -41,7 +47,7 @@ const TableRow = ({ index, columns, onDeletePressed, onEditPressed,data }: NonEd
                                 </Stack>
                             </GridItem>
                         </Grid>) :
-                        (<>{data[column.label.toLowerCase()]}</>)}</Td>
+                        (<>{data[lettertoCamelCase(column.key)]}</>)}</Td>
             )
             )
         }</Tr>

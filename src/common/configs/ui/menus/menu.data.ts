@@ -14,6 +14,24 @@ import { BankAgencyStateFuncs,bankAgencyList } from "../../../../states/signals/
 import { Signal } from "@preact/signals-react";
 import { buildTableContent } from "../../../../components/base-table/base-table";
 import { bankList, BankStateFuncs } from "../../../../states/signals/parameter-providers/banks.state";
+import { CategoryDebtorStateFuncs, categroyList } from "../../../../states/signals/parameter-providers/category-debtor.state";
+import { CilivityStateFuncs, civilityList } from "../../../../states/signals/parameter-providers/civility.state";
+import { ClasseStateFuncs, classeList } from "../../../../states/signals/parameter-providers/classe.state";
+import { OperationAccountStateFuncs, operationList } from "../../../../states/signals/parameter-providers/operation-account.state";
+import { AccountingAccountOperationStateFuncs, compteComptableList } from "../../../../states/signals/parameter-providers/accounting-account-operation.state";
+import { AccountingAccountOperationSonareciStateFuncs, compteComptableSonareciList } from "../../../../states/signals/parameter-providers/accounting-account-operation-sonareci.state";
+import { CodeProduitSonareciStateFuncs, codeProduitsList } from "../../../../states/signals/parameter-providers/code-produits-sonareci";
+import { EntityStateFuncs, entiteList } from "../../../../states/signals/parameter-providers/entite.state";
+import { EtapeStateFuncs, etapeList } from "../../../../states/signals/parameter-providers/etape.state";
+import { FunctionStateFuncs, functionList } from "../../../../states/signals/parameter-providers/function.state";
+import { ObjetCreancesStateFuncs, creancesList } from "../../../../states/signals/parameter-providers/objet-creances.state";
+import { JournalStateFuncs, journalList } from "../../../../states/signals/parameter-providers/journal.state";
+import { MessagesStateFuncs, messagesList } from "../../../../states/signals/parameter-providers/messages.state";
+import { ModeAcquisitionStateFuncs, acquisitionList } from "../../../../states/signals/parameter-providers/mode-acquisition.state";
+import { ModePaiementStateFuncs, paiementList } from "../../../../states/signals/parameter-providers/mode-paiement.state";
+import { NationalityStateFuncs, nationalityList } from "../../../../states/signals/parameter-providers/nationality.state";
+import { PeriodicityStateFuncs, periodicityList } from "../../../../states/signals/parameter-providers/periodicity.state";
+import { SatusRequestLocationStateFuncs, locationList } from "../../../../states/signals/parameter-providers/status-request-location.state";
 
 
 
@@ -81,10 +99,12 @@ const menuItemsData: Array<MenuItemType> = [
             columns:[
                 {
                     label:"Code",
+                    key:"Code",
                 },
 
                 {
-                    label: "Libelle"
+                    label: "Libelle",
+                    key: "Libelle"
                 }
             ]
            }
@@ -95,41 +115,53 @@ const menuItemsData: Array<MenuItemType> = [
             loader:BankStateFuncs.fetchBanks,
                 columns:[
                     {
-                        label:"Code"
+                        label:"Code",
+                        key:"Code"
                     },
                     {
-                        label:"Libelle"
+                        label:"Libelle",
+                        key:"Libelle"
                     }, 
                     {
-                        label:"Adresse"
+                        label:"Adresse",
+                        key:"Adresse"
                     },
                     {
-                        label:"Responsabilite"
+                        label:"Responsabilite",
+                        key:"Responsabilite"
                     },
                     
                 ]
             },
             {
                 name:"Catégorie de débiteur",
+                loader:CategoryDebtorStateFuncs.fetchCategories,
+                dataProvider: categroyList,
                 columns:[
                     
                         {
-                            label:"Code"
+                            label:"Code",
+                            key:"Code"
                         },
                         {
-                            label:"Libelle"
+                            label:"Libelle",
+                            key:"Libelle"
                         }, 
                 ]
             },
             {
                 name:"Civilité",
+                loader:CilivityStateFuncs.fetchCivility,
+                dataProvider:civilityList,
                 columns:[
                     
                         {
-                            label:"Code"
+                            label:"Code",
+                            key:"Code"
                         },
                         {
-                            label:"Libelle"
+                            label:"Libelle",
+                            key:"Libelle"
                         }, 
                     
                 ]
@@ -137,114 +169,145 @@ const menuItemsData: Array<MenuItemType> = [
             
             {
                 name:"Classe",
+                loader: ClasseStateFuncs.fetchClasse,
+                dataProvider:classeList,
                 columns:[
                     {
+                        key:"Code",
                         label:"Code"
                     },
                     {
-                        label:"Libelle"
-                    }, 
-                ]
-            },
-
-            {
-                name:"Cpte d'opération",
-                columns:[
-                    {
-                        label:"Code"
-                    },
-                    {
+                        key:"Libelle",
                         label:"Libelle"
                     }, 
                 ]
             },
             {
                 name:"Compte d'operation",
+                loader:OperationAccountStateFuncs.fetchOperationAccount,
+                dataProvider: operationList,
                 columns:[
                     {
+                    key:"numero",
                      label:"N°Compte"
                     }, 
                     {
+                        key:"codeBanqueAgence",
                         label:"Code Banque Agence"
                     },
                     {
+                        key:"codeGroupeCreance",
                         label:"Code Groupe Créance"
                     }
                 ]
             },
             {
                 name:"Cpte Comptable d'Opération",
+                loader: AccountingAccountOperationStateFuncs.fetchBanks,
+                dataProvider:compteComptableList,
                 columns:[
                     {
+                        key:"Compte",
                         label:"Compte"
                     },
                     {
+                        key:"Libelle",
                         label:"Libelle"
                     },
                     {
+                        key:"Sens",
                         label:"Sens"
                     },
                     {
+                        key:"Journal",
                         label:"Journal"
                     }
                 ]
             },
             {
                 name:"Cpte comptable d'operation Sonar",
+                loader: AccountingAccountOperationSonareciStateFuncs.fetchBanks,
+                dataProvider: compteComptableSonareciList,
                 columns:[
                     {
+                        key:"Compte",
                         label:"Compte"
                     },
                     {
+                        key:"Libelle",
                         label:"Libelle"
                     },
                     {
+                        key:"Sens",
                         label:"Sens"
                     },
                     {
+                        key:"Journal",
                         label:"Journal"
+                    },
+                    {
+                        key:"groupeSonareci",
+                        label:"groupe Sonareci"
                     }
                 ]
             },
             {
                 name:"Cpte comptable d'operation Sonar Modif",
+                loader: AccountingAccountOperationSonareciStateFuncs.fetchBanks,
+                dataProvider:compteComptableSonareciList,
                 columns:[
                     {
+                        key:"Compte",
                         label:"Compte"
                     },
                     {
+                        key:"Libelle",
                         label:"Libelle"
                     },
                     {
+                        key:"Sens",
                         label:"Sens"
                     },
                     {
+                        key:"Journal",
                         label:"Journal"
+                    },{
+                        key:"groupeSonareci",
+                        label:"groupe Sonareci"
                     }
                 ]
             },
             {
                 name: "Codes produits Sonareci",
+                loader: CodeProduitSonareciStateFuncs.fetchBanks,
+                dataProvider: codeProduitsList,
                 columns:[
                     {
+                        key:"Code",
                         label:"Code"
                     },
                     {
+                        key:"intituleComptes",
                         label:"Intitulé de Comptes"
                     },
                     {
+                        key:"ancienCompteunibol",
                         label:"Anc.Cpte Unibol (Cpte de Regrpt)"
                     },
                     {
+                        key:"compteRegroupeptSaari",
                         label:"Cpte Regroupt"
                     },
+                    // {
+                    //     key:"saari",
+                    //     label:"Saari"
+                    // },
                     {
-                        label:"Saari"
-                    },
-                    {
+                        key:"Libelle",
                         label:"Libelle"
                     },
                     {
+                        key:"observation",
                         label:"Observation"
                     }
                 ]
@@ -252,17 +315,23 @@ const menuItemsData: Array<MenuItemType> = [
 
             {
                 name: "Entité",
+                loader: EntityStateFuncs.fetchBanks,
+                dataProvider: entiteList,
                 columns:[
                     {
+                            key:"Code",
                             label:"Code"
                         },
                         {
+                            key:"Libelle",
                             label:"Libelle"
                         }, 
                         {
+                            key:"responsable",
                             label:"Responsable ou Fondé de pourvoirs"
                         },
                         {
+                            key:"libelleLong",
                             label:"Libellé Long"
                         }
                     
@@ -270,22 +339,30 @@ const menuItemsData: Array<MenuItemType> = [
             },
             {
                 name:   "Etape",
+                loader:EtapeStateFuncs.fetchBanks,
+                dataProvider:etapeList,
                 columns:[
                     {
+                        key:"Code",
                         label:"Code"
                     },
                     {
+                        key:"Libelle",
                         label:"Libelle"
                     }, 
                 ]
             },
             {
                 name:  "Etat de la demande de Localisation",
+                loader:SatusRequestLocationStateFuncs.fetchBanks,
+                dataProvider:locationList,
                 columns:[
                     {
+                        key:"Code",
                         label:"Code"
                     },
                     {
+                        key:"Libelle",
                         label:"Libelle"
                     }, 
                 ]
@@ -294,32 +371,42 @@ const menuItemsData: Array<MenuItemType> = [
                 name:"Exercice",
                 columns:[
                     {
+                        key:"Code",
                         label:"Code"
                     },
                     {
+                        key:"Libelle",
                         label:"Libelle"
                     }, 
                     {
+                        key:"dateAdoptionBud",
                         label:"Date Adopt Bud"
                     },
                     {
+                        key:"dateDebut",
                         label:"Date Debut"
                     },
                     {
+                        key:"dateFin",
                         label:"Date Fin"
                     },
                     {
+                        key:"cloture",
                         label:"Cloture"
                     }
                 ]
             },
             {
                 name:"Fonction",
+                loader: FunctionStateFuncs.fetchBanks,
+                dataProvider:functionList,
                 columns:[
                     {
+                        key:"Code",
                         label:"Code"
                     },
                     {
+                        key:"Libelle",
                         label:"Libelle"
                     }, 
                 ]
@@ -328,78 +415,105 @@ const menuItemsData: Array<MenuItemType> = [
                 name:"Groupe Créance",
                 columns:[
                     {
+                        key:"Code",
                         label:"Code"
                     },
                     {
+                        key:"Libelle",
                         label:"Libelle"
                     }, 
                     {
+                        key:"Libellé Long",
                         label:"Libellé Long"
                     }
                 ]
             },
             {
-                name:"Journal",
+                name:"Journal", 
+                loader: JournalStateFuncs.fetchBanks,
+                dataProvider:journalList,
                 columns:[
                     {
+                        key:"Code",
                         label:"Code"
                     },
                     {
+                        key:"Libelle",
                         label:"Libelle"
                     }, 
                 ]
             },
             {
                  name:"Message",
+                 loader:MessagesStateFuncs.fetchBanks,
+                 dataProvider: messagesList,
                  columns:[
                     {
+                        key:"Code",
                         label:"Code"
                     },
                     {
+                        key:"Libelle",
                         label:"Libelle"
                     }, 
                  ]
             },
             {
                 name:"Mode d'Acquisition",
+                loader: ModeAcquisitionStateFuncs.fetchBanks,
+                dataProvider:acquisitionList,
                 columns:[
                     {
+                        key:"Code",
                         label:"Code"
                     },
                     {
+                        key:"Libelle",
                         label:"Libelle"
                     }, 
                 ]
             },
             {
                 name:"Mode de Paiement",
+                loader: ModePaiementStateFuncs.fetchBanks,
+                dataProvider:paiementList,
                 columns:[
                     {
+                        key:"Code",
                         label:"Code"
                     },
                     {
+                        key:"Libelle",
                         label:"Libelle"
                     }, 
                 ]
             },
             {
                 name:"Nationalité",
+                loader:NationalityStateFuncs.fetchBanks,
+                dataProvider:nationalityList,
                 columns:[
                     {
+                        key:"Code",
                         label:"Code"
                     },
                     {
+                        key:"Libelle",
                         label:"Libelle"
                     }, 
                 ]
             },
             {
                 name:"Objet créance",
+                loader: ObjetCreancesStateFuncs.fetchBanks,
+                dataProvider:creancesList,
                 columns:[
                     {
+                        key:"Code",
                         label:"Code"
                     },
                     {
+                        key:"Libelle",
                         label:"Libelle"
                     }, 
                 ]
@@ -408,21 +522,27 @@ const menuItemsData: Array<MenuItemType> = [
                 name:"Opération",
                 columns:[
                     {
+                        key:"Code",
                         label:"Code"
                     },
                     {
+                        key:"Libelle",
                         label:"Libelle"
                     }, 
                 ]
             },
             {
                 name:"Périodicité",
+                loader:PeriodicityStateFuncs.fetchBanks,
+                dataProvider:periodicityList,
                 columns:[
                     {
-                        label:"Code"
+                        label:"Code",
+                        key:"Code",
                     },
                     {
-                        label:"Libelle"
+                        label:"Libelle",
+                        key:"Libelle"
                     }, 
                 ]
             },
@@ -430,15 +550,19 @@ const menuItemsData: Array<MenuItemType> = [
                 name:   "Paramètre Généraux",
                 columns:[
                     {
+                        key:"Code",
                         label:"Code"
                     },
                     {
+                        key:"Libelle",
                         label:"Libelle"
                     }, 
                     {
+                        key:"Valeur",
                         label:"Valeur"
                     },
                     {
+                        key:"Commentaire",
                         label:"Commentaire"
                     }
                 ]
@@ -447,9 +571,11 @@ const menuItemsData: Array<MenuItemType> = [
                 name: "Poste Comptable",
                 columns:[
                     {
+                        key:"Code",
                         label:"Code"
                     },
                     {
+                        key:"posteComptable",
                         label:"Poste Comptable"
                     }, 
                 ]
@@ -458,9 +584,11 @@ const menuItemsData: Array<MenuItemType> = [
                 name: "Profession",
                 columns:[
                     {
+                        key:"Code",
                         label:"Code"
                     },
                     {
+                        key:"Libelle",
                         label:"Libelle"
                     }, 
                 ]
@@ -469,15 +597,19 @@ const menuItemsData: Array<MenuItemType> = [
                 name:"Quartier",
                 columns:[
                     {
+                        key:"Code",
                         label:"Code"
                     },
                     {
+                        key:"Libelle",
                         label:"Libelle"
                     }, 
                     {
+                        key:"Ville",
                         label:"Ville"
                     },
                     {
+                        key:"Zone",
                         label:"Zone"
                     }
                 ]
@@ -486,9 +618,11 @@ const menuItemsData: Array<MenuItemType> = [
                 name: "Statut Créance",
                 columns:[
                     {
+                        key:"Code",
                         label:"Code"
                     },
                     {
+                        key:"Libelle",
                         label:"Libelle"
                     }, 
                 ]
@@ -497,9 +631,11 @@ const menuItemsData: Array<MenuItemType> = [
                 name:"Staut Salarié",
                 columns:[
                     {
+                        key:"Code",
                         label:"Code"
                     },
                     {
+                        key:"Libelle",
                         label:"Libelle"
                     }, 
                 ]
@@ -508,12 +644,15 @@ const menuItemsData: Array<MenuItemType> = [
                 name:"Type d'Acte",
                 columns:[
                     {
+                        key:"Code",
                         label:"Code"
                     },
                     {
+                        key:"Libelle",
                         label:"Libelle"
                     }, 
                     {
+                        key:"Delai",
                         label:"Delai"
                     }
                 ]
@@ -522,9 +661,11 @@ const menuItemsData: Array<MenuItemType> = [
                 name:  "Type d'Auxiliaire",
                 columns:[
                     {
+                        key:"Code",
                         label:"Code"
                     },
                     {
+                        key:"Libelle",
                         label:"Libelle"
                     }, 
                 ]
@@ -533,9 +674,11 @@ const menuItemsData: Array<MenuItemType> = [
                 name: "Type d'Echéancier",
                 columns:[
                     {
+                        key:"Code",
                         label:"Code"
                     },
                     {
+                        key:"Libelle",
                         label:"Libelle"
                     }, 
                 ]
@@ -544,12 +687,15 @@ const menuItemsData: Array<MenuItemType> = [
                 name:"Type de Charge",
                 columns:[
                     {
+                        key:"Code",
                         label:"Code"
                     },
                     {
+                        key:"Libelle",
                         label:"Libelle"
                     }, 
                     {
+                        key:"Sens",
                         label:"Sens"
                     }
                 ]
@@ -558,9 +704,11 @@ const menuItemsData: Array<MenuItemType> = [
                 name:"Type de Compte",
                 columns:[
                     {
+                        key:"Code",
                         label:"Code"
                     },
                     {
+                        key:"Libelle",
                         label:"Libelle"
                     }, 
                 ]
@@ -569,9 +717,11 @@ const menuItemsData: Array<MenuItemType> = [
                 name: "Type de Contrat",
                 columns:[
                     {
+                        key:"Code",
                         label:"Code"
                     },
                     {
+                        key:"Libelle",
                         label:"Libelle"
                     }, 
                 ]
@@ -580,9 +730,11 @@ const menuItemsData: Array<MenuItemType> = [
                 name: "Type Débiteur",
                 columns:[
                     {
+                        key:"Code",
                         label:"Code"
                     },
                     {
+                        key:"Libelle",
                         label:"Libelle"
                     }, 
                 ]
@@ -591,9 +743,11 @@ const menuItemsData: Array<MenuItemType> = [
                 name: "Type de Domiciliation",
                 columns:[
                     {
+                        key:"Code",
                         label:"Code"
                     },
                     {
+                        key:"Libelle",
                         label:"Libelle"
                     }, 
                 ]
@@ -602,9 +756,11 @@ const menuItemsData: Array<MenuItemType> = [
                 name:  "Type Effet",
                 columns:[
                     {
+                        key:"Code",
                         label:"Code"
                     },
                     {
+                        key:"Libelle",
                         label:"Libelle"
                     }, 
                 ]
@@ -613,9 +769,11 @@ const menuItemsData: Array<MenuItemType> = [
                 name:"Type Employeur",
                 columns:[
                     {
+                        key:"Code",
                         label:"Code"
                     },
                     {
+                        key:"Libelle",
                         label:"Libelle"
                     }, 
                 ]
@@ -624,9 +782,11 @@ const menuItemsData: Array<MenuItemType> = [
                 name:"Type de Frais",
                 columns:[
                     {
+                        key:"Code",
                         label:"Code"
                     },
                     {
+                        key:"Libelle",
                         label:"Libelle"
                     }, 
                 ]
@@ -635,9 +795,11 @@ const menuItemsData: Array<MenuItemType> = [
                 name :"Type Garantie Réelle",
                 columns:[
                     {
+                        key:"Code",
                         label:"Code"
                     },
                     {
+                        key:"Libelle",
                         label:"Libelle"
                     }, 
                 ]
@@ -646,9 +808,11 @@ const menuItemsData: Array<MenuItemType> = [
                 name:"Type Garantie Personnelle",
                 columns:[
                     {
+                        key:"Code",
                         label:"Code"
                     },
                     {
+                        key:"Libelle",
                         label:"Libelle"
                     }, 
                 ]
@@ -657,9 +821,11 @@ const menuItemsData: Array<MenuItemType> = [
                 name:"Type Logement",
                 columns:[
                     {
+                        key:"Code",
                         label:"Code"
                     },
                     {
+                        key:"Libelle",
                         label:"Libelle"
                     }, 
                 ]
@@ -668,22 +834,28 @@ const menuItemsData: Array<MenuItemType> = [
                 name:"Type Opération",
                 columns:[
                     {
+                        key:"Code",
                         label:"Code"
                     },
                     {
+                        key:"Libelle",
                         label:"Libelle"
                     }, 
                     {
+                        key:"Mode",
                         label:"Mode"
 
                     },
                     {
+                        key:"Paie",
                         label:"Paie"
                     },
                     {
+                        key:"Type",
                         label:"Type"
                     },
                     {
+                        key:"Paie",
                         label:"Paie"
                     }
                 ]
@@ -692,9 +864,11 @@ const menuItemsData: Array<MenuItemType> = [
                 name:"Type OVP",
                 columns:[
                     {
+                        key:"Code",
                         label:"Code"
                     },
                     {
+                        key:"Libelle",
                         label:"Libelle"
                     }, 
                 ]
@@ -703,9 +877,11 @@ const menuItemsData: Array<MenuItemType> = [
                 name:"Type Pièce",
                 columns:[
                     {
+                        key:"Code",
                         label:"Code"
                     },
                     {
+                        key:"Libelle",
                         label:"Libelle"
                     }, 
                 ]
@@ -714,9 +890,11 @@ const menuItemsData: Array<MenuItemType> = [
                 name:"Type Régularisation",
                 columns:[
                     {
+                        key:"Code",
                         label:"Code"
                     },
                     {
+                        key:"Libelle",
                         label:"Libelle"
                     }, 
                 ]
@@ -725,9 +903,11 @@ const menuItemsData: Array<MenuItemType> = [
                 name:  "Type Saisie",
                 columns:[
                     {
+                        key:"Code",
                         label:"Code"
                     },
                     {
+                        key:"Libelle",
                         label:"Libelle"
                     }, 
                 ]
@@ -736,9 +916,11 @@ const menuItemsData: Array<MenuItemType> = [
                 name:"Ville",
                 columns:[
                     {
+                        key:"Code",
                         label:"Code"
                     },
                     {
+                        key:"Libelle",
                         label:"Libelle"
                     }, 
                 ]
@@ -747,12 +929,15 @@ const menuItemsData: Array<MenuItemType> = [
                 name:"Zone",
                 columns:[
                     {
+                        key:"Code",
                         label:"Code"
                     },
                     {
+                        key:"Libelle",
                         label:"Libelle"
                     }, 
                     {
+                        key:"Description",
                         label:"Description"
                     }
                 ]

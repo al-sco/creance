@@ -32,7 +32,7 @@ type CompteComptableOperationSonareci = CompteComptableOperation & {
   groupeSonareci: string;
 };
 
-type CodeProduitSonareci = {
+type  CodeProduitSonareci = {
   id: string;
   code: string;
   intituleComptes: string;
