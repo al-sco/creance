@@ -8,7 +8,8 @@ import colors from "../../common/theme/colors/colors";
 
 
 const StyledSideBarMenu = styled.div`
-  padding:80px 18px;
+  resize: horizontal;
+  padding: 35px 5px 80px 5px;
   height: 100vh;
   background-color: ${colors.gray};
   transition: all 5s linear;

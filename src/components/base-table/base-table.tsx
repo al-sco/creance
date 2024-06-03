@@ -15,6 +15,7 @@ import TableRowEditable from "./table-row";
 import { Signal } from "@preact/signals-react";
 import { SubMenuItem } from "../../common/configs/ui/menus/menus.type";
 import { logo } from "../../common/theme/assets";
+import { color } from "framer-motion";
 
 type ParameterTableProps = {
   subMenu: SubMenuItem;
@@ -32,16 +33,18 @@ const BaseStyledTable = styled.div`
 `;
 
 const StyledTitle = styled.h1`
+  margin: 0 0 1% 0;
   font-size: 30px;
   font-weight: bold;
   align-content: start;
 `;
 
-const StyledEmptyTableContent = styled.div`
-    display: flex;
-    justify-content: center;
-    align-content: center;
-`;
+const thStyle = {
+  fontWeight: '700',
+  fontSize: '15px',
+  color: colors.black,
+};
+
 
 export const buildTableContent = (
   signal: Signal<any>,
@@ -50,7 +53,7 @@ export const buildTableContent = (
   return (
     <>
       {signal.value.map((data: any, index: number) => (
-        <TableRowEditable
+        <TableRowEditable        
           data={data}
           key={index}
           columns={columns}
@@ -74,7 +77,7 @@ const BaseTable = ({ columns, subMenu }: ParameterTableProps) => {
                 <Thead>
                   <Tr>
                     {columns.map((column, index) => (
-                      <Th key={index}>{column.label}</Th>
+                      <Th style={thStyle} key={index}>{column.label}</Th>
                     ))}
                   </Tr>
                 </Thead>

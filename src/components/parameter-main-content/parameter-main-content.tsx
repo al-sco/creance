@@ -21,7 +21,7 @@ type ParameterMainContentProps = {
 }
 
 const StyledParameterMainContent = styled.div`
-    padding: 3.5%;
+    padding: 2% 3.5% 3.5% 3.5%;
     height:100vh;
     overflow-y: hidden;
     background-color: ${colors.white};
@@ -36,13 +36,13 @@ const ParameterMainContent = ({colums,subMenu }: ParameterMainContentProps) => {
                     {subMenu.nameHeader}
                 </StyledTitle>
             </Stack>
-            <Box h="48px" />
+            <Box h="20px" />
             <Stack spacing={8} direction="row" justifyContent="space-between">
                 <Stack direction="row">
                     {subMenu.headers!.map((header,index) => <Input border={`1px solid ${colors.lightGray}`} variant={"outline"} key={index}  placeholder={header.label} size='lg' />)}
                 </Stack>
             </Stack>
-            <Box h="24px" />
+            <Box h="40px" />
             <BaseTable subMenu={subMenu}  columns={colums} />
         </StyledParameterMainContent>
     )

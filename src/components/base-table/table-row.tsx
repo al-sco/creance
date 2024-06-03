@@ -36,14 +36,16 @@ const TableRow = ({ index, columns, onDeletePressed, onEditPressed,data }: NonEd
                     key={i}>
                     {i === columns.length - 1 ?
                         (<Grid templateColumns={"1fr 100px"}>
-                            <GridItem>
-                                {data[lettertoCamelCase(column.key)]}
+                            <GridItem style={{overflow: 'hidden', maxWidth:'90%'}}>
+                                <span style={{whiteSpace: 'wrap'}}>
+                                    {data[lettertoCamelCase(column.key)]}
+                                </span>
                             </GridItem>
                             <GridItem>
                                 <Stack direction="row">
-                                    <Button onClick={onEditPressed} children={<EditIcon />} />
+                                    <Button backgroundColor={"transparent"} border={`0.5px solid ${colors.bleu}`} onClick={onEditPressed} children={<EditIcon color={colors.bleu} />} />
                                     <Box w={10} />
-                                    <Button onClick={onDeletePressed} children={<DeleteIcon />} />
+                                    <Button backgroundColor={"transparent"} border={`0.5px solid ${colors.red}`} onClick={onDeletePressed} children={<DeleteIcon color={colors.red} />} />
                                 </Stack>
                             </GridItem>
                         </Grid>) :
