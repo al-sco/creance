@@ -17,8 +17,10 @@ const BaseStyledTable = styled.div`
 padding : 12px;
 border-radius: 12px;
 height: 80%;
+width: 80%;
 border: 1px solid ${colors.tableBorder};
 overflow-y: scroll;
+overflow-x: scroll;
 `;
 
 
