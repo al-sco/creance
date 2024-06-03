@@ -10,9 +10,12 @@ export type MenuItem = {
 
 export type SubMenuItem = {
     name: string
+    nameHeader?: string
+    nameColumn?: string
     id: number
     viewName: 'parameter' | undefined
     columns?: ParameterColumnType[]
+    headers?:ParameterColumnType[]
     loader?:(params:any)=>any[],
     render?: ()=>JSX.Element,
     path: string

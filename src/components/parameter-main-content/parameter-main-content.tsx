@@ -8,40 +8,39 @@ import { SubMenuItem } from '../../common/configs/ui/menus/menus.type';
 
 
 
-
 export type ParameterColumnType = {
     label: string;
     key:string
+
 }
 
 type ParameterMainContentProps = {
     title: string
     subMenu:SubMenuItem
-    colums: ParameterColumnType[]
+    colums: ParameterColumnType[] 
 }
 
 const StyledParameterMainContent = styled.div`
-    padding: 71px 92px;
-    height:100%;
+    padding: 3.5%;
+    height:100vh;
     overflow-y: hidden;
     background-color: ${colors.white};
 `;
 
-const ParameterMainContent = ({ title, colums,subMenu }: ParameterMainContentProps) => {
+const ParameterMainContent = ({colums,subMenu }: ParameterMainContentProps) => {
+    console.log(subMenu)
     return (
         <StyledParameterMainContent>
             <Stack direction="row" justifyContent="space-between">
                 <StyledTitle>
-                    {title}
+                    {subMenu.nameHeader}
                 </StyledTitle>
-                <Image src={MoreIcon} />
             </Stack>
             <Box h="48px" />
             <Stack spacing={8} direction="row" justifyContent="space-between">
                 <Stack direction="row">
-                    {colums.map((column,index) => <Input key={index}  placeholder={column.label} size='lg' />)}
+                    {subMenu.headers!.map((header,index) => <Input border={`1px solid ${colors.lightGray}`} variant={"outline"} key={index}  placeholder={header.label} size='lg' />)}
                 </Stack>
-                <Button variant='outline' color={colors.green} size='lg' style={{ border: `1px solid ${colors.green}` }}>Ajouter</Button>
             </Stack>
             <Box h="24px" />
             <BaseTable subMenu={subMenu}  columns={colums} />

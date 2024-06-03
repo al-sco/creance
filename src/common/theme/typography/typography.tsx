@@ -4,7 +4,7 @@ import colors from "../colors/colors";
 
 
 export const StyledTitle = styled.h1<{ $textColor?: string }>`
-font-size: 36px;
+font-size: 30px;
 color: ${props => props.$textColor ?? colors.black};
 font-family: "Ubuntu", sans-serif;
 font-weight: bold;

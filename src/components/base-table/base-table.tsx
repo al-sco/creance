@@ -1,61 +1,91 @@
-import { Table, TableContainer, Tbody, Th, Thead, Tr } from "@chakra-ui/react"
-import styled from "styled-components"
+import {
+    Image,
+  Table,
+  TableCaption,
+  TableContainer,
+  Tbody,
+  Th,
+  Thead,
+  Tr,
+} from "@chakra-ui/react";
+import styled from "styled-components";
 import colors from "../../common/theme/colors/colors";
 import { ParameterColumnType } from "../parameter-main-content/parameter-main-content";
 import TableRowEditable from "./table-row";
 import { Signal } from "@preact/signals-react";
 import { SubMenuItem } from "../../common/configs/ui/menus/menus.type";
-
-
+import { logo } from "../../common/theme/assets";
 
 type ParameterTableProps = {
-    subMenu:SubMenuItem,
-    columns: ParameterColumnType[]
-}
+  subMenu: SubMenuItem;
+  columns: ParameterColumnType[];
+};
 
 const BaseStyledTable = styled.div`
-padding : 12px;
-border-radius: 12px;
-height: 80%;
-width: 80%;
-border: 1px solid ${colors.tableBorder};
-overflow-y: scroll;
-overflow-x: scroll;
+  padding: 12px;
+  border-radius: 12px;
+  height: 80%;
+  width: 100%;
+  border: 1px solid ${colors.tableBorder};
+  overflow-y: scroll;
+  overflow-x: scroll;
 `;
 
+const StyledTitle = styled.h1`
+  font-size: 30px;
+  font-weight: bold;
+  align-content: start;
+`;
 
-export const buildTableContent=(signal:Signal<any>,columns:ParameterColumnType[])=>{
-    return (<>
-        {
-            signal.value.map((data:any, index:number) => (
-                <TableRowEditable data={data}  key={index} columns={columns} index={index} bg={index % 2 == 0 ? undefined : colors.gray} />
-            ))
-        }
-        </>
-    )
-}
+const StyledEmptyTableContent = styled.div`
+    display: flex;
+    justify-content: center;
+    align-content: center;
+`;
 
-const BaseTable = ({ columns,subMenu }: ParameterTableProps) => {
-    return (
-        <BaseStyledTable>
+export const buildTableContent = (
+  signal: Signal<any>,
+  columns: ParameterColumnType[]
+) => {
+  return (
+    <>
+      {signal.value.map((data: any, index: number) => (
+        <TableRowEditable
+          data={data}
+          key={index}
+          columns={columns}
+          index={index}
+          bg={index % 2 == 0 ? undefined : colors.gray}
+        />
+      ))}
+    </>
+  );
+};
+
+const BaseTable = ({ columns, subMenu }: ParameterTableProps) => {
+  return (
+    <>
+      {columns.length != 0 &&(
+        <>
+          <StyledTitle>{subMenu.nameColumn}</StyledTitle>
+          <BaseStyledTable>
             <TableContainer>
-                <Table>
-                    <Thead>
-                        <Tr>
-                            {
-                                columns.map((column, index) => (<Th key={index}>{column.label}</Th>))
-                            }
-                        </Tr>
-                    </Thead>
-                    <Tbody>
-                        {
-                            subMenu.render && subMenu.render()
-                        }
-                    </Tbody>
-                </Table>
+              <Table>
+                <Thead>
+                  <Tr>
+                    {columns.map((column, index) => (
+                      <Th key={index}>{column.label}</Th>
+                    ))}
+                  </Tr>
+                </Thead>
+                <Tbody>{subMenu.render && subMenu.render()}</Tbody>
+              </Table>
             </TableContainer>
-        </BaseStyledTable>
-    )
-}
+          </BaseStyledTable>
+        </>
+      )}
+    </>
+  );
+};
 
-export default BaseTable
+export default BaseTable;
