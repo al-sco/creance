@@ -1,4 +1,3 @@
-import React from "react"
 import { ParameterColumnType } from "../../../../components/parameter-main-content/parameter-main-content"
 
 export type MenuItem = {
