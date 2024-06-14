@@ -12,7 +12,11 @@ export const bankAgencyList:Signal<ParameterBaseData[]>=signal([])
 export class BankAgencyStateFuncs{
     static fetchBankAgency=async():Promise<AgenceBanque[]>=>{
         console.log("Calling ...")
-        let {data,status}=await axios.get(getUrl('/agences'))
+        let {data,status}=await axios.get(getUrl('/agences'),{
+            headers:{
+                'ngrok-skip-browser-warning':true
+            }
+        })
         if(status==200){
             bankAgencyList.value=data.map((e:any)=>({
                 id:e["id"],
