@@ -41,6 +41,7 @@ const ParameterMainContent = ({colums,subMenu }: ParameterMainContentProps) => {
                 <Stack direction="row">
                     {subMenu.headers!.map((header,index) => <Input border={`1px solid ${colors.lightGray}`} variant={"outline"} key={index}  placeholder={header.label} size='lg' />)}
                 </Stack>
+                <Button _active={colors.green} size="lg" color={colors.green} bg={colors.white} border={`1.5px solid ${colors.green}`} >Ajouter</Button>
             </Stack>
             <Box h="40px" />
             <BaseTable subMenu={subMenu}  columns={colums} />
