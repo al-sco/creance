@@ -15,7 +15,7 @@ const SvgIcon = (props: {
 
     return (
         <StyledSvg $color={props.color}>
-            <svg ></svg>
+            <svg></svg>
             <Image src={props.icon} alt={props.name} />
         </StyledSvg>
     )

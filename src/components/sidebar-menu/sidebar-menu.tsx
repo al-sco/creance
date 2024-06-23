@@ -1,43 +1,63 @@
-import styled from "styled-components"
-import { MenuItemData } from "../../data/parameter-mock"
+import styled, { keyframes } from "styled-components"
 import { Box, Stack, Image } from "@chakra-ui/react";
-import { useState } from "react";
-import MenuItem from "../menu-item/menu-item";
-import { logo } from "../../data/assets";
+import { useEffect, useState } from "react";
+import { logo } from "../../common/theme/assets";
+import MenuItemComponent from "../menu-item/menu-item";
+import { menuItems } from "../../common/configs/ui/menus/menu.data";
+import colors from "../../common/theme/colors/colors";
+import { MenuItem } from "../../common/configs/ui/menus/menus.type";
 
 
 const StyledSideBarMenu = styled.div`
   padding:50px 18px;
+  height: 100vh;
+  background-color: ${colors.darkGreen};
   overflow-y: hidden;
 `;
 
+
+
+const scaleLogo = keyframes`
+    0% {
+        transition: scale(1);
+        rotate: 0deg;
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    60%{
+        rotate: 10deg;
+    }
+    100%{
+        rotate: 0deg;
+        transition: scale(1);
+    }
+`
 
 const StyledImage = styled.div`
     margin:0 auto;
     display: table;
     place-items: center;
+    transform: scale(1);
+    animation: ${scaleLogo} 5s infinite  ease-in;
 `;
 
 
 
+const SideBarMenu = () => {
+    
+    const [currentSideBarMenuId, setCurrentItem] = useState<number>();
 
-interface SideBarMenuProps {
-    subMenus: Array<MenuItemData>
-    onMenuPressed: (menuItem: MenuItemData) => void
-}
+    useEffect(()=>{
+        let currentMenu=menuItems.find((menuItem)=>window.location.pathname.startsWith(menuItem.path))        
+        if(currentMenu){
+            setCurrentItem(()=>currentMenu.id)
+        }
+    },[])
 
-
-const SideBarMenu = (props: SideBarMenuProps) => {
-
-    const [currentSideBarMenuId, setCurrentMenu] = useState<number>();
-
-
-    const onMenuItemSelect = (menuItem: MenuItemData) => {
-        setCurrentMenu((_) => menuItem.id);
-
-        props.onMenuPressed(menuItem)
-    };
-
+    const handleChangeCurrentItem = (menu: MenuItem) => {
+        setCurrentItem((_) => menu.id)
+    }
 
     return (
         <StyledSideBarMenu>
@@ -47,7 +67,7 @@ const SideBarMenu = (props: SideBarMenuProps) => {
             <Box h="48px" />
             <Stack direction="column">
                 {
-                    props.subMenus.map((mItem) => (<MenuItem onPressed={onMenuItemSelect} menu={mItem} isActive={currentSideBarMenuId === mItem.id} key={mItem.id} />))
+                    menuItems.map((mItem) => (<MenuItemComponent onPressed={handleChangeCurrentItem} menu={mItem} isSelected={currentSideBarMenuId === mItem.id} key={mItem.id} />))
                 }
             </Stack>
         </StyledSideBarMenu>

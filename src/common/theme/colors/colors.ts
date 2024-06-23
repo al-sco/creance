@@ -7,7 +7,10 @@ interface Colors {
     thinGray: string,
     anotherGray: string
     black: string,
-    tableBorder: string
+    bleu: string,
+    red: string,
+    darkGreen: string
+    tableBorder: string    
 }
 
 
@@ -16,10 +19,13 @@ const colors: Colors = {
     white: '#FFFFFF',
     tableBorder: '#E2E8F0',
     green: '#28A325',
+    darkGreen: '#032211',
     lightGray: '#7B8AA4',
     thinGray: '#A0AEC0',
     anotherGray: '#D9D9D9',
-    black: '#000000'
+    black: '#000000',
+    bleu: '#3182CE',
+    red: '#E53E3E',
 }
 
 export default colors;

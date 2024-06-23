@@ -1,16 +1,17 @@
 import styled from "styled-components";
-import colors from "./color";
+import colors from "../colors/colors";
 
 
 
 export const StyledTitle = styled.h1<{ $textColor?: string }>`
-font-size: 36px;
+font-size: 30px;
 color: ${props => props.$textColor ?? colors.black};
 font-family: "Ubuntu", sans-serif;
 font-weight: bold;
 `;
 
 export const StyledSubTitle = styled.h1<{ $textColor?: string }>`
+padding: 0 0 0 10px;
 font-size: 24px;
 color: ${props => props.$textColor ?? colors.black};
 font-family: "Ubuntu", sans-serif;
@@ -21,10 +22,11 @@ export const StyledMenuItem = styled.button<{ $textColor?: string, $backgroundCo
 font-size: 20px;
 padding: 10px 17px;
 margin-bottom: 8px;
+width: 100%;
 max-lines: 1;
 text-overflow: ellipsis;
 white-space: nowrap;
-  overflow: hidden;
+overflow: hidden;
 background-color: ${props => props.$backgroundColor};
 border-radius: 8px;
 color: ${props => props.$textColor ?? colors.black};
