@@ -1,6 +1,5 @@
 import styled from 'styled-components'
-import { Stack, Image, Box, Input, Button } from '@chakra-ui/react';
-import MoreIcon from '../../assets/menu-button.svg'
+import { Stack, Box, Input, Button } from '@chakra-ui/react';
 import BaseTable from '../base-table/base-table';
 import { StyledTitle } from '../../common/theme/typography/typography';
 import colors from '../../common/theme/colors/colors';

@@ -1,7 +1,5 @@
 import {
-  Image,
   Table,
-  TableCaption,
   TableContainer,
   Tbody,
   Th,
@@ -12,11 +10,8 @@ import styled from "styled-components";
 import colors from "../../common/theme/colors/colors";
 import { ParameterColumnType } from "../parameter-main-content/parameter-main-content";
 import TableRowEditable from "./table-row";
-import { Signal, effect } from "@preact/signals-react";
+import { Signal } from "@preact/signals-react";
 import { SubMenuItem } from "../../common/configs/ui/menus/menus.type";
-import { logo } from "../../common/theme/assets";
-import { color } from "framer-motion";
-import { FunctionComponent, useEffect, useState } from "react";
 import { useSignals } from "@preact/signals-react/runtime";
 
 type ParameterTableProps = {

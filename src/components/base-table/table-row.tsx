@@ -3,7 +3,7 @@ import colors from "../../common/theme/colors/colors"
 import { ParameterColumnType } from "../parameter-main-content/parameter-main-content"
 import { useRef, useState } from "react"
 import { CloseIcon, DeleteIcon, EditIcon } from "@chakra-ui/icons"
-import { BankAgencyStateFuncs, bankAgencyList } from "../../states/signals/parameter-providers/bank-agency.state"
+import { BankAgencyStateFuncs } from "../../states/signals/parameter-providers/bank-agency.state"
 
 
 

@@ -30,7 +30,7 @@ export class BankAgencyStateFuncs{
 
     static updateBankAgency=async(bankAgency:AgenceBanque)=>{
         console.log('Updating ...');
-        let {data, status}=await axios.patch(getUrl('/agences'),{
+        let {status}=await axios.patch(getUrl('/agences'),{
             headers:{
                 'ngrok-skip-browser-warning':true
             }, body: {  
