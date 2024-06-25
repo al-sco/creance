@@ -94,6 +94,7 @@ import {
 } from "../../../../states/signals/parameter-providers/etatLocalisation.state";
 import { key } from "localforage";
 import { groupeCreanceList, GroupeCreanceStateFuncs } from "../../../../states/signals/parameter-providers/groupeCreance.state";
+import { ExercicesService, exerciceServiceList } from "../../../../states/signals/parameter-providers/exercice.state";
 
 type SubMenuType = {
   name: string;
@@ -277,7 +278,16 @@ const menuItemsData: Array<MenuItemType> = [
         nameColumn:"",
         loader: OperationAccountStateFuncs.fetchOperationAccount,
         dataProvider: operationList,
-        columns: [],
+        columns: [
+          {
+            key: "codeBanqueAgence",
+            label: "Code",
+          },
+          {
+            key: "codeGroupeCreance",
+            label: "Libelle",
+          },
+        ],
         headers: [
           {
             key: "numero",
@@ -297,7 +307,7 @@ const menuItemsData: Array<MenuItemType> = [
         name: "Cpte Comptable d'Opération",
         nameHeader:"Groupe Creance / Type Opération",
         nameColumn:"Compte Ecriture",
-        loader: AccountingAccountOperationStateFuncs.fetchBanks,
+        loader: AccountingAccountOperationStateFuncs.fetchAccountOperation,
         dataProvider: compteComptableList,
         headers: [
           {
@@ -311,19 +321,19 @@ const menuItemsData: Array<MenuItemType> = [
         ],
         columns: [
           {
-            key: "Compte",
+            key: "cptoperCode",
             label: "Compte",
           },
           {
-            key: "Libelle",
+            key: "cptoperCode",
             label: "Libelle",
           },
           {
-            key: "Sens",
+            key: "bqagCode",
             label: "Sens",
           },
           {
-            key: "Journal",
+            key: "grpCreanCode",
             label: "Journal",
           },
         ],
@@ -507,16 +517,18 @@ headers:[{
       },
       {
         name: "Exercice",
-        nameHeader:"",
+        nameHeader:"",   
+        loader: ExercicesService.fetchExercice,
+        dataProvider: exerciceServiceList,
         nameColumn:"Gestion des Exercices",
         headers:[],
         columns: [
           {
-            key: "Annee",
+            key: "annee",
             label: "Annee",
           },
           {
-            key: "Libelle",
+            key: "libelle",
             label: "Libelle",
           },
           {
@@ -528,7 +540,7 @@ headers:[{
             label: "Date Debut",
           },
           {
-            key: "dateFin",
+            key: "exoDatefin",
             label: "Date Fin",
           },
           {
@@ -698,6 +710,7 @@ headers:[{
       {
         name: "Opération",
         nameHeader:"Ville",
+        headers: [],
         nameColumn:"Quartier + Opération à revoir",
         columns: [
           {
@@ -1280,7 +1293,7 @@ headers:[{
   {
     name: "Opérations Div",
     path: "/operations",
-    icon: Operation,
+    icon: Operation,    
     subMenu: [
       { name: "Enregistrement" },
       { name: "Mise à jour" },

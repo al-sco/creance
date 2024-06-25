@@ -10,7 +10,7 @@ export const compteComptableList:Signal<CompteComptableOperation[]>=signal([])
 
 
 export class AccountingAccountOperationStateFuncs{
-    static fetchBanks=async():Promise<CompteComptableOperation[]>=>{
+    static fetchAccountOperation=async():Promise<CompteComptableOperation[]>=>{
         let {data,status}=await axios.get(getUrl('/compte-oper'))
         if(status==200){
             compteComptableList.value=data.map((e:any)=>({

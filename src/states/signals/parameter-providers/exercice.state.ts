@@ -3,18 +3,22 @@ import axios from "axios";
 import { getUrl } from "../../../common/configs/api/api_configs";
 import { Signal } from "@preact/signals-react";
 
-export const parametresGenerauxList: Signal<ParametresGeneraux[]> = signal([]);
+export const exerciceServiceList: Signal<Exercice[]> = signal([]);
 
-export class ParamGenerauxService {
-    static fetchParamGeneraux = async (): Promise<ParametresGeneraux[]> => {
-        let { data, status } = await axios.get(getUrl('/param-generaux'));
+export class ExercicesService {
+    static fetchExercice = async (): Promise<Exercice[]> => {
+        let { data, status } = await axios.get(getUrl('/exercice'));
         if (status === 200) {
-            parametresGenerauxList.value = data.map((e: any) => ({
-                id: e["paramId"],
-                code: e["paramCode"],
-                libelle: e["paramLib"]
+            exerciceServiceList.value = data.map((e: any) => ({
+                id: e["id"],
+                annee: e["exoLib"],
+                libelle: e["exoLib"],                
+                dateAdoptionBud: e["dateAdoptionBud"],
+                dateDebut: e["exoDatedeb"],
+                exoDatefin: e["exoDatefin"],
+                cloture: e["exoClos"],
             }));
         }
-        return parametresGenerauxList.value;
+        return exerciceServiceList.value;
     }
 }

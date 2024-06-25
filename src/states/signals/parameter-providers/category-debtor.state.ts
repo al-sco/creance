@@ -11,7 +11,7 @@ export const categroyList:Signal<CategorieDebiteur[]>=signal([])
 
 export class CategoryDebtorStateFuncs{
     static fetchCategories=async():Promise<CategorieDebiteur[]>=>{
-        let {data,status}=await axios.get(getUrl('/categorieDebiteur'))
+        let {data,status}=await axios.get(getUrl('/categorie-debiteur'))
         if(status==200){
             categroyList.value=data.map((e:any)=>({
                 id:e["categDebCode"],
