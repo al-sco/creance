@@ -5,13 +5,13 @@ import { Signal } from "@preact/signals-react";
 
 
 
-export const bankAgencyList:Signal<ParameterBaseData[]>=signal([])
+export const bankAgencyList:Signal<ParameterBaseData[]>=signal<ParameterBaseData[]>([])
 
 
 
 export class BankAgencyStateFuncs{
     static fetchBankAgency=async():Promise<AgenceBanque[]>=>{
-        console.log("Calling ...")
+        console.log("Fetching ...")
         let {data,status}=await axios.get(getUrl('/agences'),{
             headers:{
                 'ngrok-skip-browser-warning':true
@@ -28,16 +28,32 @@ export class BankAgencyStateFuncs{
         return bankAgencyList.value
     }
 
-    static addBankAgency=(bankAgency:AgenceBanque)=>{
-
+    static updateBankAgency=async(bankAgency:AgenceBanque)=>{
+        console.log('Updating ...');
+        let {data, status}=await axios.patch(getUrl('/agences'),{
+            headers:{
+                'ngrok-skip-browser-warning':true
+            }, body: {  
+                id: bankAgency.id,                                             
+                code: bankAgency.code,
+                libelle: bankAgency.libelle,
+            }
+        });
+        if(status==200){
+            this.fetchBankAgency()
+        }
     }
+            
     
-    static updateBankAgency=(updatedBankAgency:AgenceBanque)=>{
-    
-    }
-    
-    static deleteBankAgency=(bankAgency:AgenceBanque)=>{
-        
+    static deleteBankAgency= async(bankAgency:AgenceBanque)=>{
+        let {status}=await axios.delete(getUrl(`/agences/${bankAgency.id}`),{
+            headers:{
+                'ngrok-skip-browser-warning':true
+            }, 
+        });
+        if (status==200) {
+            await this.fetchBankAgency()            
+        }
     }    
 }
 
