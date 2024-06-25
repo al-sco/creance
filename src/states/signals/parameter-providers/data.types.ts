@@ -18,14 +18,26 @@ type CompteOperation = {
 };
 
 
+
+type AcCpteClientSonar=
+{
+  id: String
+  cpteCliCode: String
+  cpteCliLib: String
+  cpteCliSaari: String
+  cpteCliUnibol: String
+  cpteCliObserv: String
+  planCptaNum: String
+};
+
+
+
 type CompteComptableOperation = {
   id: string;
-  groupeCreance: string;
-  typeOperation: string;
-  compte: string;
-  libelle: string;
-  sens: string;
-  journal: string;
+  cptoperCode: string;
+  bqagCode: string;
+  grpCreanCode: string;
+  
 };
 
 type CompteComptableOperationSonareci = CompteComptableOperation & {
@@ -41,10 +53,11 @@ type  CodeProduitSonareci = {
   libelle: string;
   observation: string;
 };
-
+ 
 type Entite = ParameterBaseData & {
   responsable: string;
   libelleLong: string;
+  entiteAssign: string
 };
 
 type Etape = ParameterBaseData;

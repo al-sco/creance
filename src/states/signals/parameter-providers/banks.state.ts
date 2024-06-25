@@ -11,7 +11,7 @@ export const bankList:Signal<Banque[]>=signal([])
 
 export class BankStateFuncs{
     static fetchBanks=async():Promise<Banque[]>=>{
-        let {data,status}=await axios.get(getUrl('/banques'))
+        let {data,status}=await axios.get(getUrl('/banque'))
         if(status==200){
             bankList.value=data.map((e:any)=>({
                 id:e["id"],

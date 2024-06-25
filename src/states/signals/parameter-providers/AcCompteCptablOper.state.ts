@@ -11,16 +11,13 @@ export const compteComptableList:Signal<CompteComptableOperation[]>=signal([])
 
 export class AccountingAccountOperationStateFuncs{
     static fetchBanks=async():Promise<CompteComptableOperation[]>=>{
-        let {data,status}=await axios.get(getUrl('/code_comptable_operation'))
+        let {data,status}=await axios.get(getUrl('/compte-oper'))
         if(status==200){
             compteComptableList.value=data.map((e:any)=>({
                 id:e["id"],
-                groupeCreance:e["groupeCreance"],
-                typeOperation:e["typeOperation"],
-                compte:e["compte"],
-                journal:e["journal"],
-                libelle:e["libelle"],
-                sens:e["sens"],
+                cptoperCode:e["cptoperCode"],
+                bqagCode:e["bqagCode"],
+                grpCreanCode:e["grpCreanCode"],
                 
             }))
         }

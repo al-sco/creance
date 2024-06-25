@@ -14,11 +14,12 @@ export class EntityStateFuncs{
         let {data,status}=await axios.get(getUrl('/entite'))
         if(status==200){
             entiteList.value=data.map((e:any)=>({
-                id:e["id"],
-                code:e["code"],
-                libelle:e["libelle"],
-                libelleLong:e["libelleLong"],
-                responsable:e["responsable"]
+                id:e["entiteCode"],
+                code:e["entiteCode"],
+                libelle:e["entiteLib"],
+                libelleLong:e["entiteLibLong"],
+                responsable:e["entiteResp"],
+                entiteAssign:e["entiteAssign"]
             }))
         }
         return entiteList.value

@@ -15,8 +15,8 @@ export class ClasseStateFuncs{
         if(status==200){
             classeList.value=data.map((e:any)=>({
                 id:e["id"],
-                code:e["code"],
-                libelle:e["libelle"],
+                code:e["clasCode"],
+                libelle:e["clasLib"],
                 
             }))
         }

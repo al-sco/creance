@@ -14,9 +14,9 @@ export class CilivityStateFuncs{
         let {data,status}=await axios.get(getUrl('/civilite'))
         if(status==200){
             civilityList.value=data.map((e:any)=>({
-                id:e["id"],
-                code:e["code"],
-                libelle:e["libelle"],
+                id:e["civCode"],
+                code:e["civCode"],
+                libelle:e["civLib"]
                 
             }))
         }

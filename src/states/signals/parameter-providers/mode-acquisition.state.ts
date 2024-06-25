@@ -11,12 +11,12 @@ export const acquisitionList:Signal<ModeAcquisition[]>=signal([])
 
 export class ModeAcquisitionStateFuncs{
     static fetchBanks=async():Promise<ModeAcquisition[]>=>{
-        let {data,status}=await axios.get(getUrl('/mode_acquisition'))
+        let {data,status}=await axios.get(getUrl('/mode-aquisition'))
         if(status==200){
             acquisitionList.value=data.map((e:any)=>({
-                id:e["id"],
-                code:e["code"],
-                libelle:e["libelle"],
+                id:e["modacCode"],
+                code:e["modacCode"],
+                libelle:e["modacLib"],
                 
             }))
         }

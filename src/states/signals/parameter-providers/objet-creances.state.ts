@@ -11,12 +11,12 @@ export const creancesList:Signal<ObjetCreances[]>=signal([])
 
 export class ObjetCreancesStateFuncs{
     static fetchBanks=async():Promise<ObjetCreances[]>=>{
-        let {data,status}=await axios.get(getUrl('/objet_creances'))
+        let {data,status}=await axios.get(getUrl('/objet-creance'))
         if(status==200){
             creancesList.value=data.map((e:any)=>({
-                id:e["id"],
-                code:e["code"],
-                libelle:e["libelle"],
+                id:e["objCreanCode"],
+                code:e["objCreanCode"],
+                libelle:e["objCreanLib"],
                 
             }))
         }

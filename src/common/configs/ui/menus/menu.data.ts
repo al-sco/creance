@@ -39,7 +39,7 @@ import {
 import {
   AccountingAccountOperationStateFuncs,
   compteComptableList,
-} from "../../../../states/signals/parameter-providers/accounting-account-operation.state";
+} from "../../../../states/signals/parameter-providers/AcCompteCptablOper.state";
 import {
   AccountingAccountOperationSonareciStateFuncs,
   compteComptableSonareciList,
@@ -91,8 +91,9 @@ import {
 import {
   SatusRequestLocationStateFuncs,
   locationList,
-} from "../../../../states/signals/parameter-providers/status-request-location.state";
+} from "../../../../states/signals/parameter-providers/etatLocalisation.state";
 import { key } from "localforage";
+import { groupeCreanceList, GroupeCreanceStateFuncs } from "../../../../states/signals/parameter-providers/groupeCreance.state";
 
 type SubMenuType = {
   name: string;
@@ -555,8 +556,10 @@ headers:[{
         ],
       },
       {
-        name: "Groupe Créance",
+        name: "Groupe Créance",     
         nameColumn:"Gestion des Groupes de Creance",
+        loader: GroupeCreanceStateFuncs.fetchGroupeCreances,
+        dataProvider: groupeCreanceList,
         nameHeader:"Gestion des Entités ACCC",
         headers:[
             {

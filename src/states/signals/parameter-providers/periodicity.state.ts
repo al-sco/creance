@@ -11,12 +11,12 @@ export const periodicityList:Signal<Periodicite[]>=signal([])
 
 export class PeriodicityStateFuncs{
     static fetchBanks=async():Promise<Periodicite[]>=>{
-        let {data,status}=await axios.get(getUrl('/periodicites'))
+        let {data,status}=await axios.get(getUrl('/periodicite'))
         if(status==200){
             periodicityList.value=data.map((e:any)=>({
-                id:e["id"],
-                code:e["code"],
-                libelle:e["libelle"],
+                id:e["periodCode"],
+                code:e["periodCode"],
+                libelle:e["periodLib"],
                 
             }))
         }

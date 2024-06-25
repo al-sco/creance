@@ -14,9 +14,9 @@ export class CategoryDebtorStateFuncs{
         let {data,status}=await axios.get(getUrl('/categorieDebiteur'))
         if(status==200){
             categroyList.value=data.map((e:any)=>({
-                id:e["id"],
-                code:e["code"],
-                libelle:e["libelle"],
+                id:e["categDebCode"],
+                code:e["categDebCode"],
+                libelle:e["categDebLib"],
                 
             }))
         }

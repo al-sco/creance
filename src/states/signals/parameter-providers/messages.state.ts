@@ -11,12 +11,12 @@ export const messagesList:Signal<Messages[]>=signal([])
 
 export class MessagesStateFuncs{
     static fetchBanks=async():Promise<Messages[]>=>{
-        let {data,status}=await axios.get(getUrl('/messages'))
+        let {data,status}=await axios.get(getUrl('/message'))
         if(status==200){
             messagesList.value=data.map((e:any)=>({
                 id:e["id"],
-                code:e["code"],
-                libelle:e["libelle"],
+                code:e["id"],
+                libelle:e["libelleMessage"],
                 
             }))
         }

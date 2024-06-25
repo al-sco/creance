@@ -15,8 +15,8 @@ export class FunctionStateFuncs{
         if(status==200){
             functionList.value=data.map((e:any)=>({
                 id:e["id"],
-                code:e["code"],
-                libelle:e["libelle"],
+                code:e["fonctCode"],
+                libelle:e["fonctLib"],
                 
             }))
         }

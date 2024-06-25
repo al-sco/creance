@@ -15,8 +15,8 @@ export class EtapeStateFuncs{
         if(status==200){
             etapeList.value=data.map((e:any)=>({
                 id:e["id"],
-                code:e["code"],
-                libelle:e["libelle"],
+                code:e["etapCode"],
+                libelle:e["etapLib"],
                 
             }))
         }

@@ -15,8 +15,8 @@ export class JournalStateFuncs{
         if(status==200){
             journalList.value=data.map((e:any)=>({
                 id:e["id"],
-                code:e["code"],
-                libelle:e["libelle"],
+                code:e["id"],
+                libelle:e["libJournal"],
                 
             }))
         }

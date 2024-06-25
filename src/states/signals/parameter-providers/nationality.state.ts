@@ -14,9 +14,9 @@ export class NationalityStateFuncs{
         let {data,status}=await axios.get(getUrl('/nationalite'))
         if(status==200){
             nationalityList.value=data.map((e:any)=>({
-                id:e["id"],
-                code:e["code"],
-                libelle:e["libelle"],
+                id:e["natCode"],
+                code:e["natCode"],
+                libelle:e["natLib"],
                 
             }))
         }

@@ -11,13 +11,13 @@ export const operationList:Signal<CompteOperation[]>=signal([])
 
 export class OperationAccountStateFuncs{
     static fetchOperationAccount=async():Promise<CompteOperation[]>=>{
-        let {data,status}=await axios.get(getUrl('/compte_operation'))
+        let {data,status}=await axios.get(getUrl('/compte-oper'))
         if(status==200){
             operationList.value=data.map((e:any)=>({
-                id:e["id"],
-                numero:e["numero"],
-                codeBanqueAgence:e["codeBanqueAgence"],
-                codeGroupeCreance:e["codeGroupeCreance"],
+                id:e["cptoperCode"],
+                numero:e["cptoperCode"],
+                codeBanqueAgence:e["bqagCode"],
+                codeGroupeCreance:e["grpCreanCode"],
                 
             }))
         }
