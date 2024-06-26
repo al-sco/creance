@@ -9,7 +9,7 @@ export const categroyList:Signal<CategorieDebiteur[]>=signal([])
 
 
 
-export class CategoryDebtorStateFuncs{
+export class AcCategoryDebtorStateFuncs{
     static fetchCategories=async():Promise<CategorieDebiteur[]>=>{
         let {data,status}=await axios.get(getUrl('/categorie-debiteur'))
         if(status==200){

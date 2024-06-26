@@ -9,8 +9,8 @@ export const messagesList:Signal<Messages[]>=signal([])
 
 
 
-export class MessagesStateFuncs{
-    static fetchBanks=async():Promise<Messages[]>=>{
+export class AcMessagesStateFuncs{
+    static fetchMessages=async():Promise<Messages[]>=>{
         let {data,status}=await axios.get(getUrl('/message'))
         if(status==200){
             messagesList.value=data.map((e:any)=>({

@@ -9,8 +9,8 @@ export const entiteList:Signal<Entite[]>=signal([])
 
 
 
-export class EntityStateFuncs{
-    static fetchBanks=async():Promise<Entite[]>=>{
+export class AcEntityStateFuncs{
+    static fetchEntities=async():Promise<Entite[]>=>{
         let {data,status}=await axios.get(getUrl('/entite'))
         if(status==200){
             entiteList.value=data.map((e:any)=>({

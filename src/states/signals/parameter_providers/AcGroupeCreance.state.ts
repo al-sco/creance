@@ -5,7 +5,7 @@ import { Signal } from "@preact/signals-react";
 
 export const groupeCreanceList: Signal<GroupeCreance[]> = signal([]);
 
-export class GroupeCreanceStateFuncs {
+export class AcGroupeCreanceStateFuncs {
     static fetchGroupeCreances = async (): Promise<GroupeCreance[]> => {
         let { data, status } = await axios.get(getUrl('/groupe-creance'));
         if (status == 200) {

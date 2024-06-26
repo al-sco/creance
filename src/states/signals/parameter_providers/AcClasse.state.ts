@@ -9,8 +9,8 @@ export const classeList:Signal<Classe[]>=signal([])
 
 
 
-export class ClasseStateFuncs{
-    static fetchClasse=async():Promise<Classe[]>=>{
+export class AcClasseStateFuncs{
+    static fetchClasses=async():Promise<Classe[]>=>{
         let {data,status}=await axios.get(getUrl('/classe'))
         if(status==200){
             classeList.value=data.map((e:any)=>({

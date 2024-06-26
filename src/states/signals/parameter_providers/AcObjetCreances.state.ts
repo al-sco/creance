@@ -9,8 +9,8 @@ export const creancesList:Signal<ObjetCreances[]>=signal([])
 
 
 
-export class ObjetCreancesStateFuncs{
-    static fetchBanks=async():Promise<ObjetCreances[]>=>{
+export class AcObjetCreancesStateFuncs{
+    static fetchCreancesObjects=async():Promise<ObjetCreances[]>=>{
         let {data,status}=await axios.get(getUrl('/objet-creance'))
         if(status==200){
             creancesList.value=data.map((e:any)=>({

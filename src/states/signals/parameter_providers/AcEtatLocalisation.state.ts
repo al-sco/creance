@@ -9,8 +9,8 @@ export const locationList:Signal<EtatDemandelocalisation[]>=signal([])
 
 
 
-export class SatusRequestLocationStateFuncs{
-    static fetchBanks=async():Promise<EtatDemandelocalisation[]>=>{
+export class AcSatusRequestLocationStateFuncs{
+    static fetchStatusLocations=async():Promise<EtatDemandelocalisation[]>=>{
         let {data,status}=await axios.get(getUrl('/etat-localisation'))
         if(status==200){
             locationList.value=data.map((e:any)=>({

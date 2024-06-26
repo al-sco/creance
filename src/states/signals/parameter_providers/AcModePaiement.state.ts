@@ -9,8 +9,8 @@ export const paiementList:Signal<ModePaiement[]>=signal([])
 
 
 
-export class ModePaiementStateFuncs{
-    static fetchBanks=async():Promise<ModePaiement[]>=>{
+export class AcModePaiementStateFuncs{
+    static fetchPaimentModes=async():Promise<ModePaiement[]>=>{
         let {data,status}=await axios.get(getUrl('/mode-paiement'))
         if(status==200){
             paiementList.value=data.map((e:any)=>({

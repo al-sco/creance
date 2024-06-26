@@ -9,8 +9,8 @@ export const operationList:Signal<CompteOperation[]>=signal([])
 
 
 
-export class OperationAccountStateFuncs{
-    static fetchOperationAccount=async():Promise<CompteOperation[]>=>{
+export class AcOperationAccountStateFuncs{
+    static fetchAccountOperations=async():Promise<CompteOperation[]>=>{
         let {data,status}=await axios.get(getUrl('/compte-oper'))
         console.log(data)
         if(status==200){

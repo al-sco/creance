@@ -9,8 +9,8 @@ export const civilityList:Signal<Civilite[]>=signal([])
 
 
 
-export class CilivityStateFuncs{
-    static fetchCivility=async():Promise<Civilite[]>=>{
+export class AcCilivityStateFuncs{
+    static fetchCivilities=async():Promise<Civilite[]>=>{
         let {data,status}=await axios.get(getUrl('/civilite'))
         if(status==200){
             civilityList.value=data.map((e:any)=>({

@@ -9,8 +9,8 @@ export const bankAgencyList:Signal<ParameterBaseData[]>=signal<ParameterBaseData
 
 
 
-export class BankAgencyStateFuncs{
-    static fetchBankAgency=async():Promise<AgenceBanque[]>=>{
+export class AcBankAgencyStateFuncs{
+    static fetchBankAgencies=async():Promise<AgenceBanque[]>=>{
         console.log("Fetching ...")
         let {data,status}=await axios.get(getUrl('/agences'),{
             headers:{
@@ -40,7 +40,7 @@ export class BankAgencyStateFuncs{
             }
         });
         if(status==200){
-            this.fetchBankAgency()
+            this.fetchBankAgencies()
         }
     }
             
@@ -52,7 +52,7 @@ export class BankAgencyStateFuncs{
             }, 
         });
         if (status==200) {
-            await this.fetchBankAgency()            
+            await this.fetchBankAgencies()            
         }
     }    
 }

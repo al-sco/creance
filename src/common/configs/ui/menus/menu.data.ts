@@ -1,100 +1,39 @@
-import { MenuItem, SubMenuItem } from "./menus.type";
+import Recovery from "../../../../assets/recovery.svg"
+import Settings from "../../../../assets/settings-enable.svg"
+import FollowClient from "../../../../assets/suiv-client.svg"
+import Patrimoine from "../../../../assets/patrimoine.svg"
 import Account from "../../../../assets/account.svg";
+import Operation from "../../../../assets/operation.svg";
 import Archivre from "../../../../assets/archive.svg";
 import Contentieux from "../../../../assets/contentieux.svg";
 import Creance from "../../../../assets/creance.svg";
 import Help from "../../../../assets/help.svg";
-import Operation from "../../../../assets/operation.svg";
-import Patrimoine from "../../../../assets/patrimoine.svg";
-import FollowClient from "../../../../assets/suiv-client.svg";
-import Recovery from "../../../../assets/recovery.svg";
-import Settings from "../../../../assets/settings-enable.svg";
-import { ParameterColumnType } from "../../../../components/parameter-main-content/parameter-main-content";
-import {
-  BankAgencyStateFuncs,
-  bankAgencyList,
-} from "../../../../states/signals/parameter-providers/bank-agency.state";
+import { MenuItem, SubMenuItem } from "./menus.type";
+import { AcOperationAccountStateFuncs, operationList } from "../../../../states/signals/parameter_providers/AcOperationAccount.state";
+import { AcPeriodicityStateFuncs, periodicityList } from "../../../../states/signals/parameter_providers/AcPeriodicity.state";
 import { Signal } from "@preact/signals-react";
+import { ParameterColumnType } from "../../../../components/parameter-main-content/parameter-main-content";
+import { AcBankAgencyStateFuncs, bankAgencyList } from "../../../../states/signals/parameter_providers/AcBankAgency.state";
 import { buildTableContent } from "../../../../components/base-table/base-table";
-import {
-  bankList,
-  BankStateFuncs,
-} from "../../../../states/signals/parameter-providers/banks.state";
-import {
-  CategoryDebtorStateFuncs,
-  categroyList,
-} from "../../../../states/signals/parameter-providers/category-debtor.state";
-import {
-  CilivityStateFuncs,
-  civilityList,
-} from "../../../../states/signals/parameter-providers/civility.state";
-import {
-  ClasseStateFuncs,
-  classeList,
-} from "../../../../states/signals/parameter-providers/classe.state";
-import {
-  OperationAccountStateFuncs,
-  operationList,
-} from "../../../../states/signals/parameter-providers/operation-account.state";
-import {
-  AccountingAccountOperationStateFuncs,
-  compteComptableList,
-} from "../../../../states/signals/parameter-providers/AcCompteCptablOper.state";
-import {
-  AccountingAccountOperationSonareciStateFuncs,
-  compteComptableSonareciList,
-} from "../../../../states/signals/parameter-providers/accounting-account-operation-sonareci.state";
-import {
-  CodeProduitSonareciStateFuncs,
-  codeProduitsList,
-} from "../../../../states/signals/parameter-providers/code-produits-sonareci";
-import {
-  EntityStateFuncs,
-  entiteList,
-} from "../../../../states/signals/parameter-providers/entite.state";
-import {
-  EtapeStateFuncs,
-  etapeList,
-} from "../../../../states/signals/parameter-providers/etape.state";
-import {
-  FunctionStateFuncs,
-  functionList,
-} from "../../../../states/signals/parameter-providers/function.state";
-import {
-  ObjetCreancesStateFuncs,
-  creancesList,
-} from "../../../../states/signals/parameter-providers/objet-creances.state";
-import {
-  JournalStateFuncs,
-  journalList,
-} from "../../../../states/signals/parameter-providers/journal.state";
-import {
-  MessagesStateFuncs,
-  messagesList,
-} from "../../../../states/signals/parameter-providers/messages.state";
-import {
-  ModeAcquisitionStateFuncs,
-  acquisitionList,
-} from "../../../../states/signals/parameter-providers/mode-acquisition.state";
-import {
-  ModePaiementStateFuncs,
-  paiementList,
-} from "../../../../states/signals/parameter-providers/mode-paiement.state";
-import {
-  NationalityStateFuncs,
-  nationalityList,
-} from "../../../../states/signals/parameter-providers/nationality.state";
-import {
-  PeriodicityStateFuncs,
-  periodicityList,
-} from "../../../../states/signals/parameter-providers/periodicity.state";
-import {
-  SatusRequestLocationStateFuncs,
-  locationList,
-} from "../../../../states/signals/parameter-providers/etatLocalisation.state";
-import { key } from "localforage";
-import { groupeCreanceList, GroupeCreanceStateFuncs } from "../../../../states/signals/parameter-providers/groupeCreance.state";
-import { ExercicesService, exerciceServiceList } from "../../../../states/signals/parameter-providers/exercice.state";
+import { bankList, AcBankStateFuncs } from "../../../../states/signals/parameter_providers/AcBanks.state";
+import { AcCategoryDebtorStateFuncs, categroyList } from "../../../../states/signals/parameter_providers/AcCategoryDebtor.state";
+import { AcCilivityStateFuncs, civilityList } from "../../../../states/signals/parameter_providers/AcCivility.state";
+import { AcClasseStateFuncs, classeList } from "../../../../states/signals/parameter_providers/AcClasse.state";
+import { AcCodeProduitSonareciStateFuncs, codeProduitsList } from "../../../../states/signals/parameter_providers/AcCodeProduitsSonareci";
+import { AcComptableAccountOperationSonareciStateFuncs, compteComptableSonareciList } from "../../../../states/signals/parameter_providers/AcComptableAccountOperationSonareci.state";
+import { AcComptableAccountOperationStateFuncs, compteComptableList } from "../../../../states/signals/parameter_providers/AcCompteCptablOper.state";
+import { AcEntityStateFuncs, entiteList } from "../../../../states/signals/parameter_providers/AcEntite.state";
+import { AcEtapeStateFuncs, etapeList } from "../../../../states/signals/parameter_providers/AcEtape.state";
+import { AcSatusRequestLocationStateFuncs, locationList } from "../../../../states/signals/parameter_providers/AcEtatLocalisation.state";
+import { AcExercicesService, exerciceServiceList } from "../../../../states/signals/parameter_providers/AcExercice.state";
+import { AcFunctionStateFuncs, functionList } from "../../../../states/signals/parameter_providers/AcFunction.state";
+import { AcGroupeCreanceStateFuncs, groupeCreanceList } from "../../../../states/signals/parameter_providers/AcGroupeCreance.state";
+import { AcJournalStateFuncs, journalList } from "../../../../states/signals/parameter_providers/AcJournal.state";
+import { AcMessagesStateFuncs, messagesList } from "../../../../states/signals/parameter_providers/AcMessages.state";
+import { AcModeAcquisitionStateFuncs, acquisitionList } from "../../../../states/signals/parameter_providers/AcModeAcquisition.state";
+import { AcModePaiementStateFuncs, paiementList } from "../../../../states/signals/parameter_providers/AcModePaiement.state";
+import { AcNationalityStateFuncs, nationalityList } from "../../../../states/signals/parameter_providers/AcNationality.state";
+import { AcObjetCreancesStateFuncs, creancesList } from "../../../../states/signals/parameter_providers/AcObjetCreances.state";
 
 type SubMenuType = {
   name: string;
@@ -164,7 +103,7 @@ const menuItemsData: Array<MenuItemType> = [
     subMenu: [
       {
         name: "Agence de banque",
-        loader: BankAgencyStateFuncs.fetchBankAgency,
+        loader: AcBankAgencyStateFuncs.fetchBankAgencies,
         dataProvider: bankAgencyList,
         nameHeader:"Banque",
         nameColumn:"Agence",
@@ -196,7 +135,7 @@ const menuItemsData: Array<MenuItemType> = [
         nameColumn:"Saisie des Banques",
         nameHeader:"",
         dataProvider: bankList,
-        loader: BankStateFuncs.fetchBanks,
+        loader: AcBankStateFuncs.fetchBanks,
         headers: [],
         columns: [
           {
@@ -221,7 +160,7 @@ const menuItemsData: Array<MenuItemType> = [
         name: "Catégorie de débiteur",
         nameColumn:"Gestion des Catégories de Debiteur",
         nameHeader:"",
-        loader: CategoryDebtorStateFuncs.fetchCategories,
+        loader: AcCategoryDebtorStateFuncs.fetchCategories,
         dataProvider: categroyList,
         headers: [],
         columns: [
@@ -239,7 +178,7 @@ const menuItemsData: Array<MenuItemType> = [
         name: "Civilité",
         nameColumn:"Civilité",
         nameHeader:"",
-        loader: CilivityStateFuncs.fetchCivility,
+        loader: AcCilivityStateFuncs.fetchCivilities,
         dataProvider: civilityList,
         headers: [],
         columns: [
@@ -258,7 +197,7 @@ const menuItemsData: Array<MenuItemType> = [
         name: "Classe",
         nameColumn:"Gestion des Classes",
         nameHeader:"",
-        loader: ClasseStateFuncs.fetchClasse,
+        loader: AcClasseStateFuncs.fetchClasses,
         dataProvider: classeList,
         headers: [],
         columns: [
@@ -276,7 +215,7 @@ const menuItemsData: Array<MenuItemType> = [
         name: "Compte d'operation",
         nameHeader:"Saisie Compte Opération",
         nameColumn:"",
-        loader: OperationAccountStateFuncs.fetchOperationAccount,
+        loader: AcOperationAccountStateFuncs.fetchAccountOperations,
         dataProvider: operationList,
         columns: [
           {
@@ -307,7 +246,7 @@ const menuItemsData: Array<MenuItemType> = [
         name: "Cpte Comptable d'Opération",
         nameHeader:"Groupe Creance / Type Opération",
         nameColumn:"Compte Ecriture",
-        loader: AccountingAccountOperationStateFuncs.fetchAccountOperation,
+        loader: AcComptableAccountOperationStateFuncs.fetchAccountOperations,
         dataProvider: compteComptableList,
         headers: [
           {
@@ -342,7 +281,7 @@ const menuItemsData: Array<MenuItemType> = [
         name: "Cpte comptable d'operation Sonar",
         nameHeader:"Groupe Creance / Type Opération",
         nameColumn:"Compte Ecriture",
-        loader: AccountingAccountOperationSonareciStateFuncs.fetchBanks,
+        loader: AcComptableAccountOperationSonareciStateFuncs.fetchComptableAccountOperations,
         dataProvider: compteComptableSonareciList,
         headers: [
             {
@@ -375,14 +314,14 @@ const menuItemsData: Array<MenuItemType> = [
             key: "Journal",
             label: "Journal",
           },
-          
+
         ],
       },
       {
         name: "Cpte comptable d'operation Sonar Modif",
         nameHeader:"Groupe Creance / Type Opération",
         nameColumn:"Compte Ecriture",
-        loader: AccountingAccountOperationSonareciStateFuncs.fetchBanks,
+        loader: AcComptableAccountOperationSonareciStateFuncs.fetchComptableAccountOperations,
         dataProvider: compteComptableSonareciList,
         headers: [
             {
@@ -421,7 +360,7 @@ const menuItemsData: Array<MenuItemType> = [
         name: "Codes produits Sonareci",
         nameHeader:"",
         nameColumn:"Code Produits (Cptes Clients)",
-        loader: CodeProduitSonareciStateFuncs.fetchBanks,
+        loader: AcCodeProduitSonareciStateFuncs.fetchProductsCodes,
         dataProvider: codeProduitsList,
         headers:[],
         columns: [
@@ -441,7 +380,7 @@ const menuItemsData: Array<MenuItemType> = [
             key: "compteRegroupeptSaari",
             label: "Cpte Regroupt",
           },
-          
+
           {
             key: "Libelle",
             label: "Libelle Saari",
@@ -457,7 +396,7 @@ const menuItemsData: Array<MenuItemType> = [
         name: "Entité",
         nameColumn:"Liste des Entités de l'ACCC",
         nameHeader:"",
-        loader: EntityStateFuncs.fetchBanks,
+        loader: AcEntityStateFuncs.fetchEntities,
         dataProvider: entiteList,
 headers:[{
     key: "responsable",
@@ -476,14 +415,14 @@ headers:[{
             key: "Libelle",
             label: "Libelle",
           },
-          
+
         ],
       },
       {
         name: "Etape",
         nameColumn:"Gestion des Etapes",
         nameHeader:"",
-        loader: EtapeStateFuncs.fetchBanks,
+        loader: AcEtapeStateFuncs.fetchEtapes,
         dataProvider: etapeList,
         headers:[],
         columns: [
@@ -501,7 +440,7 @@ headers:[{
         name: "Etat de la demande de Localisation",
         nameHeader:"",
         nameColumn:"Etat Localisation",
-        loader: SatusRequestLocationStateFuncs.fetchBanks,
+        loader: AcSatusRequestLocationStateFuncs.fetchStatusLocations,
         dataProvider: locationList,
         headers:[],
         columns: [
@@ -517,8 +456,8 @@ headers:[{
       },
       {
         name: "Exercice",
-        nameHeader:"",   
-        loader: ExercicesService.fetchExercice,
+        nameHeader:"",
+        loader: AcExercicesService.fetchExercices,
         dataProvider: exerciceServiceList,
         nameColumn:"Gestion des Exercices",
         headers:[],
@@ -553,7 +492,7 @@ headers:[{
         name: "Fonction",
         nameColumn:"Gestions des Fonctions",
         nameHeader:"",
-        loader: FunctionStateFuncs.fetchBanks,
+        loader: AcFunctionStateFuncs.fetchFuncions,
         dataProvider: functionList,
         headers:[],
         columns: [
@@ -568,9 +507,9 @@ headers:[{
         ],
       },
       {
-        name: "Groupe Créance",     
+        name: "Groupe Créance",
         nameColumn:"Gestion des Groupes de Creance",
-        loader: GroupeCreanceStateFuncs.fetchGroupeCreances,
+        loader: AcGroupeCreanceStateFuncs.fetchGroupeCreances,
         dataProvider: groupeCreanceList,
         nameHeader:"Gestion des Entités ACCC",
         headers:[
@@ -596,14 +535,14 @@ headers:[{
             key: "Libelle",
             label: "Libelle",
           },
-         
+
         ],
       },
       {
         name: "Journal",
         nameHeader:"",
         nameColumn:"Gestion des Journaux",
-        loader: JournalStateFuncs.fetchBanks,
+        loader: AcJournalStateFuncs.fetchJournals,
         dataProvider: journalList,
         headers:[],
         columns: [
@@ -622,7 +561,7 @@ headers:[{
         nameHeader:"",
         nameColumn:"Messages",
         headers:[],
-        loader: MessagesStateFuncs.fetchBanks,
+        loader: AcMessagesStateFuncs.fetchMessages,
         dataProvider: messagesList,
         columns: [
           {
@@ -640,7 +579,7 @@ headers:[{
         nameHeader:"",
         nameColumn:"Gestion des Modes d'Acquisition ",
         headers:[],
-        loader: ModeAcquisitionStateFuncs.fetchBanks,
+        loader: AcModeAcquisitionStateFuncs.fetchAcquisitionModes,
         dataProvider: acquisitionList,
         columns: [
           {
@@ -658,7 +597,7 @@ headers:[{
         nameColumn:"Gestion des Modes de Remboursement",
         nameHeader:"",
         headers:[],
-        loader: ModePaiementStateFuncs.fetchBanks,
+        loader: AcModePaiementStateFuncs.fetchPaimentModes,
         dataProvider: paiementList,
         columns: [
           {
@@ -676,7 +615,7 @@ headers:[{
         nameHeader:"",
         nameColumn:"Gestion des Nationalités",
         headers:[],
-        loader: NationalityStateFuncs.fetchBanks,
+        loader: AcNationalityStateFuncs.fetchNationalities,
         dataProvider: nationalityList,
         columns: [
           {
@@ -694,7 +633,7 @@ headers:[{
         nameColumn:"Gestion des Objets des Creances",
         nameHeader:"",
         headers:[],
-        loader: ObjetCreancesStateFuncs.fetchBanks,
+        loader: AcObjetCreancesStateFuncs.fetchCreancesObjects,
         dataProvider: creancesList,
         columns: [
           {
@@ -711,6 +650,8 @@ headers:[{
         name: "Opération",
         nameHeader:"Ville",
         headers: [],
+        loader: AcOperationAccountStateFuncs.fetchAccountOperations,
+        dataProvider: operationList,
         nameColumn:"Quartier + Opération à revoir",
         columns: [
           {
@@ -732,7 +673,7 @@ headers:[{
         nameColumn:"Périodicité",
         nameHeader:"",
         headers:[],
-        loader: PeriodicityStateFuncs.fetchBanks,
+        loader: AcPeriodicityStateFuncs.fetchPeriodicities,
         dataProvider: periodicityList,
         columns: [
           {
@@ -1115,7 +1056,7 @@ headers:[{
             key: "Type",
             label: "Type",
           },
-          
+
         ],
       },
       {
@@ -1293,7 +1234,7 @@ headers:[{
   {
     name: "Opérations Div",
     path: "/operations",
-    icon: Operation,    
+    icon: Operation,
     subMenu: [
       { name: "Enregistrement" },
       { name: "Mise à jour" },

@@ -5,8 +5,8 @@ import { Signal } from "@preact/signals-react";
 
 export const exerciceServiceList: Signal<Exercice[]> = signal([]);
 
-export class ExercicesService {
-    static fetchExercice = async (): Promise<Exercice[]> => {
+export class AcExercicesService {
+    static fetchExercices = async (): Promise<Exercice[]> => {
         let { data, status } = await axios.get(getUrl('/exercice'));
         if (status === 200) {
             exerciceServiceList.value = data.map((e: any) => ({
