@@ -97,10 +97,7 @@ type Operation = {
 
 type Periodicite = ParameterBaseData;
 type ParametresGeneraux = ParameterBaseData & { valeur: string; commentaire: string };
-type PosteComptable = {
-  code: string;
-  posteComptable: string;
-};
+type PosteComptable = ParameterBaseData;
 
 type Profession = ParameterBaseData;
 type Quartier = ParameterBaseData & {

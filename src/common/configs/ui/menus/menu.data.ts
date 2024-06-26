@@ -94,6 +94,9 @@ import {
 } from "../../../../states/signals/parameter-providers/etatLocalisation.state";
 import { key } from "localforage";
 import { groupeCreanceList, GroupeCreanceStateFuncs } from "../../../../states/signals/parameter-providers/groupeCreance.state";
+import { parametresGenerauxList, ParamGenerauxService } from "../../../../states/signals/parameter-providers/exercice.state";
+import { posteComptableList, PosteComptableStateFuncs } from "../../../../states/signals/parameter-providers/posteComptable.state";
+import { professionList, ProfessionStateFuncs } from "../../../../states/signals/parameter-providers/profession.state";
 
 type SubMenuType = {
   name: string;
@@ -698,6 +701,9 @@ headers:[{
       {
         name: "Opération",
         nameHeader:"Ville",
+        headers:[],
+        dataProvider: operationList,
+        loader: OperationAccountStateFuncs.fetchOperationAccount,
         nameColumn:"Quartier + Opération à revoir",
         columns: [
           {
@@ -737,6 +743,8 @@ headers:[{
         nameColumn:"Liste des Paramètres",
         nameHeader:"",
         headers:[],
+        dataProvider:parametresGenerauxList,
+        loader:ParamGenerauxService.fetchParamGeneraux,
         columns: [
           {
             key: "Code",
@@ -760,6 +768,8 @@ headers:[{
         name: "Poste Comptable",
         nameColumn:"Postes Comptables",
         nameHeader:"",
+        dataProvider:posteComptableList,
+        loader:PosteComptableStateFuncs.fetchPosteComptable,
         headers:[],
         columns: [
           {
@@ -776,6 +786,8 @@ headers:[{
         name: "Profession",
         nameColumn:"Gestion des Professions",
         nameHeader:"",
+        dataProvider: professionList,
+        loader:ProfessionStateFuncs.fetchProfessions,
         headers:[],
         columns: [
           {

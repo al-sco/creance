@@ -3,10 +3,7 @@ import axios from "axios";
 import {  getUrl } from "../../../common/configs/api/api_configs";
 import { Signal } from "@preact/signals-react";
 
-
-
 export const civilityList:Signal<Civilite[]>=signal([])
-
 
 
 export class CilivityStateFuncs{
