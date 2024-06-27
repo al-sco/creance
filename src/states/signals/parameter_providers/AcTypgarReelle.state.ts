@@ -11,5 +11,5 @@ class AcTypgarReelleStateProvider extends ICrudStateProvider<AcTypgarReelle> {
     }
 }
 
-const acTypgarReelleProvider = new AcTypgarReelleStateProvider('typgar-reelle');
+const acTypgarReelleProvider = new AcTypgarReelleStateProvider('/typgar-reelle');
 export default acTypgarReelleProvider;
