@@ -21,11 +21,14 @@ export const TableRowEdit = ({ index, columns, onEditPressed, data }: TableEditP
                 nextInput.current?.focus()
             }
             else {
+                let obj={}
                 columns.forEach((col) => {
                     const [value, _] = inputsValuesStates.get(col)!
                     console.log(`${col.label} : ${value}`)
+                    Object.defineProperty(obj,col.label,{value:value,writable:false})
                 })
                 
+                console.log(obj)
                 onEditPressed();
             }
         }
