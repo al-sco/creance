@@ -34,7 +34,6 @@ import { AcModeAcquisitionStateFuncs, acquisitionList } from "../../../../states
 import { AcModePaiementStateFuncs, paiementList } from "../../../../states/signals/parameter_providers/AcModePaiement.state";
 import { AcNationalityStateFuncs, nationalityList } from "../../../../states/signals/parameter_providers/AcNationality.state";
 import { AcObjetCreancesStateFuncs, creancesList } from "../../../../states/signals/parameter_providers/AcObjetCreances.state";
-import { AcParamGenerauxStateFuncs, paramGenerauxList } from "../../../../states/signals/parameter_providers/AcParamGeneraux.state";
 import { posteComptableList, PosteComptableStateFuncs } from "../../../../states/signals/parameter_providers/posteComptable.state";
 import { professionList, ProfessionStateFuncs } from "../../../../states/signals/parameter_providers/profession.state";
 import { AcZoneStateFuncs, zoneList } from "../../../../states/signals/parameter_providers/AcZone.state";
