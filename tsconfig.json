@@ -20,6 +20,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src", "src/states/signals/parameter-providers/.state.ts"],
+  "include": ["src", "src/states/signals/parameter_providers/.state.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

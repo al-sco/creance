@@ -9,8 +9,8 @@ export const codeProduitsList:Signal<CodeProduitSonareci[]>=signal([])
 
 
 
-export class CodeProduitSonareciStateFuncs{
-    static fetchBanks=async():Promise<CodeProduitSonareci[]>=>{
+export class AcCodeProduitSonareciStateFuncs{
+    static fetchProductsCodes=async():Promise<CodeProduitSonareci[]>=>{
         let {data,status}=await axios.get(getUrl('/code_produit_sonareci'))
         if(status==200){
             codeProduitsList.value=data.map((e:any)=>({

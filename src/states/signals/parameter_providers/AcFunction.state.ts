@@ -9,8 +9,8 @@ export const functionList:Signal<Function[]>=signal([])
 
 
 
-export class FunctionStateFuncs{
-    static fetchBanks=async():Promise<Function[]>=>{
+export class AcFunctionStateFuncs{
+    static fetchFuncions=async():Promise<Function[]>=>{
         let {data,status}=await axios.get(getUrl('/fonction'))
         if(status==200){
             functionList.value=data.map((e:any)=>({

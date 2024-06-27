@@ -9,8 +9,8 @@ export const periodicityList:Signal<Periodicite[]>=signal([])
 
 
 
-export class PeriodicityStateFuncs{
-    static fetchBanks=async():Promise<Periodicite[]>=>{
+export class AcPeriodicityStateFuncs{
+    static fetchPeriodicities=async():Promise<Periodicite[]>=>{
         let {data,status}=await axios.get(getUrl('/periodicite'))
         if(status==200){
             periodicityList.value=data.map((e:any)=>({

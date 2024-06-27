@@ -1,7 +1,5 @@
 import {
-    Image,
   Table,
-  TableCaption,
   TableContainer,
   Tbody,
   Th,
@@ -14,8 +12,7 @@ import { ParameterColumnType } from "../parameter-main-content/parameter-main-co
 import TableRowEditable from "./table-row";
 import { Signal } from "@preact/signals-react";
 import { SubMenuItem } from "../../common/configs/ui/menus/menus.type";
-import { logo } from "../../common/theme/assets";
-import { color } from "framer-motion";
+import { useSignals } from "@preact/signals-react/runtime";
 
 type ParameterTableProps = {
   subMenu: SubMenuItem;
@@ -45,30 +42,42 @@ const thStyle = {
   color: colors.black,
 };
 
-
-export const buildTableContent = (
-  signal: Signal<any>,
+type  TableRenderProps = {
+  signal: Signal<ParameterBaseData[]>,
   columns: ParameterColumnType[]
-) => {
+};
+
+const TableContentRender = ({ signal, columns} : TableRenderProps) => {
+  useSignals()
   return (
     <>
-      {signal.value.map((data: any, index: number) => (
-        <TableRowEditable        
+      {signal.value.map((data: ParameterBaseData, index: number) => (
+        <TableRowEditable
           data={data}
           key={index}
           columns={columns}
           index={index}
           bg={index % 2 == 0 ? undefined : colors.gray}
         />
-      ))}
+      ))
+      }
     </>
-  );
+  )
+}
+
+
+export const buildTableContent = (
+  signal: Signal<ParameterBaseData[]>,
+  columns: ParameterColumnType[]
+) => {
+  console.log('Building tables ...')
+  return <TableContentRender signal={signal} columns={columns} />
 };
 
 const BaseTable = ({ columns, subMenu }: ParameterTableProps) => {
   return (
     <>
-      {columns.length != 0 &&(
+      {columns.length != 0 && (
         <>
           <StyledTitle>{subMenu.nameColumn}</StyledTitle>
           <BaseStyledTable>

@@ -9,8 +9,8 @@ export const etapeList:Signal<Etape[]>=signal([])
 
 
 
-export class EtapeStateFuncs{
-    static fetchBanks=async():Promise<Etape[]>=>{
+export class AcEtapeStateFuncs{
+    static fetchEtapes=async():Promise<Etape[]>=>{
         let {data,status}=await axios.get(getUrl('/etape'))
         if(status==200){
             etapeList.value=data.map((e:any)=>({

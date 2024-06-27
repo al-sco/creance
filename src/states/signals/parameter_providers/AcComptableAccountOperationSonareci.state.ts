@@ -9,8 +9,8 @@ export const compteComptableSonareciList:Signal<CompteComptableOperationSonareci
 
 
 
-export class AccountingAccountOperationSonareciStateFuncs{
-    static fetchBanks=async():Promise<CompteComptableOperationSonareci[]>=>{
+export class AcComptableAccountOperationSonareciStateFuncs{
+    static fetchComptableAccountOperations=async():Promise<CompteComptableOperationSonareci[]>=>{
         let {data,status}=await axios.get(getUrl('/compte_comptable_operation_sonareci'))
         if(status==200){
             compteComptableSonareciList.value=data.map((e:any)=>({

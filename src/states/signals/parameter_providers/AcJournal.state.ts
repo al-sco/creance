@@ -9,8 +9,8 @@ export const journalList:Signal<Journal[]>=signal([])
 
 
 
-export class JournalStateFuncs{
-    static fetchBanks=async():Promise<Journal[]>=>{
+export class AcJournalStateFuncs{
+    static fetchJournals=async():Promise<Journal[]>=>{
         let {data,status}=await axios.get(getUrl('/journal'))
         if(status==200){
             journalList.value=data.map((e:any)=>({

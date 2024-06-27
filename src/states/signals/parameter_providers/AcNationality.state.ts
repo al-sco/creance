@@ -9,8 +9,8 @@ export const nationalityList:Signal<Nationalite[]>=signal([])
 
 
 
-export class NationalityStateFuncs{
-    static fetchBanks=async():Promise<Nationalite[]>=>{
+export class AcNationalityStateFuncs{
+    static fetchNationalities=async():Promise<Nationalite[]>=>{
         let {data,status}=await axios.get(getUrl('/nationalite'))
         if(status==200){
             nationalityList.value=data.map((e:any)=>({
