@@ -1,20 +1,15 @@
-import { signal } from "@preact/signals-core";
-import axios from "axios";
-import { getUrl } from "../../../common/configs/api/api_configs";
-import { Signal } from "@preact/signals-react";
+import { AcProfession } from "../../AcData.types";
+import ICrudStateProvider from "./ICrudStateProvider";
 
-export const professionList: Signal<AcProfession[]> = signal([]);
-
-export class ProfessionStateFuncs {
-    static fetchProfessions = async (): Promise<AcProfession[]> => {
-        let { data, status } = await axios.get(getUrl('/profession'));
-        if (status == 200) {
-            professionList.value = data.map((e: any) => ({
-                id: e["profesCode"],
-                code: e["profesCode"],
-                libelle: e["profesLib"],
-            }));
-        }
-        return professionList.value;
+class AcProfessionStateProvider extends ICrudStateProvider<AcProfession> {
+    mapEntitieFrom(json: any): AcProfession {
+      return {
+        id: json["profesCode"],
+        code: json["profesCode"],
+        libelle: json["profesLib"],
+      };
     }
-}
+  }
+  
+  const acProfessionProvider = new AcProfessionStateProvider("/profession");
+  export default acProfessionProvider;

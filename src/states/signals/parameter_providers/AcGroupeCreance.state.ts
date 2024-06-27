@@ -1,21 +1,18 @@
-import { signal } from "@preact/signals-core";
-import axios from "axios";
-import { getUrl } from "../../../common/configs/api/api_configs";
-import { Signal } from "@preact/signals-react";
+import { AcGroupeCreance } from "../../AcData.types";
+import ICrudStateProvider from "./ICrudStateProvider";
 
-export const groupeCreanceList: Signal<AcGroupeCreance[]> = signal([]);
-
-export class AcGroupeCreanceStateFuncs {
-    static fetchGroupeCreances = async (): Promise<AcGroupeCreance[]> => {
-        let { data, status } = await axios.get(getUrl('/groupe-creance'));
-        if (status == 200) {
-            groupeCreanceList.value = data.map((e: any) => ({
-                id: e["grpCreanCode"],
-                code: e["grpCreanCode"],
-                libelle: e["grpCreanLib"],
-                libelleLong: e["grpCreanLibLong"]
-            }));
-        }
-        return groupeCreanceList.value;
-    }
+class AcGroupeCreanceStateProvider extends ICrudStateProvider<AcGroupeCreance> {
+  mapEntitieFrom(json: any): AcGroupeCreance {
+    return {
+      id: json["grpCreanCode"],
+      code: json["grpCreanCode"],
+      libelle: json["grpCreanLib"],
+      libelleLong: json["grpCreanLibLong"],
+    };
+  }
 }
+
+const acGroupeCreanceProvider = new AcGroupeCreanceStateProvider(
+  "/groupe-creance"
+);
+export default acGroupeCreanceProvider;

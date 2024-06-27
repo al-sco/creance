@@ -1,29 +1,17 @@
-import { signal } from "@preact/signals-core";
-import axios from "axios";
-import {  getUrl } from "../../../common/configs/api/api_configs";
-import { Signal } from "@preact/signals-react";
+import { AcCategorieDebiteur } from "../../AcData.types";
+import ICrudStateProvider from "./ICrudStateProvider";
 
-
-
-export const categroyList:Signal<AcCategorieDebiteur[]>=signal([])
-
-
-
-export class AcCategoryDebtorStateFuncs{
-    static fetchCategories=async():Promise<AcCategorieDebiteur[]>=>{
-        let {data,status}=await axios.get(getUrl('/categorie-debiteur'))
-        if(status==200){
-            categroyList.value=data.map((e:any)=>({
-                id:e["categDebCode"],
-                code:e["categDebCode"],
-                libelle:e["categDebLib"],
-                
-            }))
-        }
-        return categroyList.value
-    }
-
-
+class AcCategoryDebtorStateProvider extends ICrudStateProvider<AcCategorieDebiteur> {
+  mapEntitieFrom(json: any): AcCategorieDebiteur {
+    return {
+      id: json["categDebCode"],
+      code: json["categDebCode"],
+      libelle: json["categDebLib"],
+    };
+  }
 }
 
-
+const acCategoryDebtorProvider = new AcCategoryDebtorStateProvider(
+  "/categorie-debiteur"
+);
+export default acCategoryDebtorProvider;

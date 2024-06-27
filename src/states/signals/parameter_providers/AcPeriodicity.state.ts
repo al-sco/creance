@@ -1,29 +1,16 @@
-import { signal } from "@preact/signals-core";
-import axios from "axios";
-import {  getUrl } from "../../../common/configs/api/api_configs";
-import { Signal } from "@preact/signals-react";
+import { AcPeriodicite } from "../../AcData.types";
+import ICrudStateProvider from "./ICrudStateProvider";
 
 
-
-export const periodicityList:Signal<AcPeriodicite[]>=signal([])
-
-
-
-export class AcPeriodicityStateFuncs{
-    static fetchPeriodicities=async():Promise<AcPeriodicite[]>=>{
-        let {data,status}=await axios.get(getUrl('/periodicite'))
-        if(status==200){
-            periodicityList.value=data.map((e:any)=>({
-                id:e["periodCode"],
-                code:e["periodCode"],
-                libelle:e["periodLib"],
-                
-            }))
-        }
-        return periodicityList.value
+class AcPeriodicityStateProvider extends ICrudStateProvider<AcPeriodicite> {
+    mapEntitieFrom(json: any): AcPeriodicite {
+      return {
+        id: json["periodCode"],
+        code: json["periodCode"],
+        libelle: json["periodLib"],
+      };
     }
-
-
-}
-
-
+  }
+  
+  const acPeriodicityProvider = new AcPeriodicityStateProvider("/periodicite");
+  export default acPeriodicityProvider;

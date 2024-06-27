@@ -1,29 +1,16 @@
-import { signal } from "@preact/signals-core";
-import axios from "axios";
-import {  getUrl } from "../../../common/configs/api/api_configs";
-import { Signal } from "@preact/signals-react";
+import { TMessage } from "../../AcData.types";
+import ICrudStateProvider from "./ICrudStateProvider";
 
 
-
-export const messagesList:Signal<TMessage[]>=signal([])
-
-
-
-export class AcMessagesStateFuncs{
-    static fetchMessages=async():Promise<TMessage[]>=>{
-        let {data,status}=await axios.get(getUrl('/message'))
-        if(status==200){
-            messagesList.value=data.map((e:any)=>({
-                id:e["id"],
-                code:e["id"],
-                libelle:e["libelleMessage"],
-                
-            }))
-        }
-        return messagesList.value
-    }
-
-
+class AcMessagesStateProvider extends ICrudStateProvider<TMessage> {
+  mapEntitieFrom(json: any): TMessage {
+    return {
+      id: json["id"],
+      code: json["id"],
+      libelle: json["libelleMessage"],
+    };
+  }
 }
 
-
+const acMessagesProvider = new AcMessagesStateProvider("/message");
+export default acMessagesProvider;

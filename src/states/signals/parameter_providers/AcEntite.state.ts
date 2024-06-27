@@ -1,31 +1,18 @@
-import { signal } from "@preact/signals-core";
-import axios from "axios";
-import {  getUrl } from "../../../common/configs/api/api_configs";
-import { Signal } from "@preact/signals-react";
+import { AcEntite } from "../../AcData.types";
+import ICrudStateProvider from "./ICrudStateProvider";
 
-
-
-export const entiteList:Signal<AcEntite[]>=signal([])
-
-
-
-export class AcEntityStateFuncs{
-    static fetchEntities=async():Promise<AcEntite[]>=>{
-        let {data,status}=await axios.get(getUrl('/entite'))
-        if(status==200){
-            entiteList.value=data.map((e:any)=>({
-                id:e["entiteCode"],
-                code:e["entiteCode"],
-                libelle:e["entiteLib"],
-                libelleLong:e["entiteLibLong"],
-                responsable:e["entiteResp"],
-                entiteAssign:e["entiteAssign"]
-            }))
-        }
-        return entiteList.value
-    }
-
-
+class AcEntityStateProvider extends ICrudStateProvider<AcEntite> {
+  mapEntitieFrom(json: any): AcEntite {
+    return {
+      id: json["entiteCode"],
+      code: json["entiteCode"],
+      libelle: json["entiteLib"],
+      libelleLong: json["entiteLibLong"],
+      responsable: json["entiteResp"],
+      entiteAssign: json["entiteAssign"],
+    };
+  }
 }
 
-
+const acEntityProvider = new AcEntityStateProvider("/entite");
+export default acEntityProvider;

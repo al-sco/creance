@@ -1,29 +1,16 @@
-import { signal } from "@preact/signals-core";
-import axios from "axios";
-import {  getUrl } from "../../../common/configs/api/api_configs";
-import { Signal } from "@preact/signals-react";
+import { AcClasse } from "../../AcData.types";
+import ICrudStateProvider from "./ICrudStateProvider";
 
 
-
-export const classeList:Signal<AcClasse[]>=signal([])
-
-
-
-export class AcClasseStateFuncs{
-    static fetchClasses=async():Promise<AcClasse[]>=>{
-        let {data,status}=await axios.get(getUrl('/classe'))
-        if(status==200){
-            classeList.value=data.map((e:any)=>({
-                id:e["id"],
-                code:e["clasCode"],
-                libelle:e["clasLib"],
-                
-            }))
-        }
-        return classeList.value
+class AcClasseStateProvider extends ICrudStateProvider<AcClasse> {
+    mapEntitieFrom(json: any): AcClasse {
+      return {
+        id: json["id"],
+        code: json["clasCode"],
+        libelle: json["clasLib"],
+      };
     }
-
-
-}
-
-
+  }
+  
+  const acClasseProvider = new AcClasseStateProvider('/classe');
+  export default acClasseProvider;

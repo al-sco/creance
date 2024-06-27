@@ -1,29 +1,15 @@
-import { signal } from "@preact/signals-core";
-import axios from "axios";
-import {  getUrl } from "../../../common/configs/api/api_configs";
-import { Signal } from "@preact/signals-react";
+import { AcJournal } from "../../AcData.types";
+import ICrudStateProvider from "./ICrudStateProvider";
 
-
-
-export const journalList:Signal<AcJournal[]>=signal([])
-
-
-
-export class AcJournalStateFuncs{
-    static fetchJournals=async():Promise<AcJournal[]>=>{
-        let {data,status}=await axios.get(getUrl('/journal'))
-        if(status==200){
-            journalList.value=data.map((e:any)=>({
-                id:e["id"],
-                code:e["id"],
-                libelle:e["libJournal"],
-                
-            }))
-        }
-        return journalList.value
-    }
-
-
+class AcJournalStateProvider extends ICrudStateProvider<AcJournal> {
+  mapEntitieFrom(json: any): AcJournal {
+    return {
+      id: json["id"],
+      code: json["id"],
+      libelle: json["libJournal"],
+    };
+  }
 }
 
-
+const acJournalProvider = new AcJournalStateProvider("/journal");
+export default acJournalProvider;

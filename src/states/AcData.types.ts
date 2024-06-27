@@ -1,13 +1,16 @@
-export  type Identifiable={
-  id:any,
-}
-export  type ParameterBaseData =Identifiable & {
+export type Identifiable = {
+  id: any;
+};
+export type ParameterBaseData = Identifiable & {
   code: string;
   libelle: string;
 };
 
 export type AcBanqueAgence = ParameterBaseData;
-export type AcBanque = ParameterBaseData & { responsabilite: string; adresse: string };
+export type AcBanque = ParameterBaseData & {
+  responsabilite: string;
+  adresse: string;
+};
 export type AcCategorieDebiteur = ParameterBaseData;
 export type AcCivilite = ParameterBaseData;
 export type AcClasse = ParameterBaseData;
@@ -19,19 +22,15 @@ export type AcCptOperation = {
   codeGroupeCreance: string;
 };
 
-
-export type AcCpteClientSonar=
-{
-  id: String
-  cpteCliCode: String
-  cpteCliLib: String
-  cpteCliSaari: String
-  cpteCliUnibol: String
-  cpteCliObserv: String
-  planCptaNum: String
+export type AcCpteClientSonar = {
+  id: String;
+  cpteCliCode: String;
+  cpteCliLib: String;
+  cpteCliSaari: String;
+  cpteCliUnibol: String;
+  cpteCliObserv: String;
+  planCptaNum: String;
 };
-
-
 
 export type AcCompteOper = {
   id: string;
@@ -40,8 +39,18 @@ export type AcCompteOper = {
   grpCreanCode: string;
 };
 
+export type AcCompteComptableOperationSonareci = {
+  id: string;
+  groupeCreance: string;
+  typeOperation: string;
+  compte: string;
+  journal: string;
+  libelle: string;
+  sens: string;
+  groupeSonareci: string;
+};
 
-export type  CodeProduitSonareci = {
+export type CodeProduitSonareci = {
   id: string;
   code: string;
   intituleComptes: string;
@@ -50,11 +59,11 @@ export type  CodeProduitSonareci = {
   libelle: string;
   observation: string;
 };
- 
+
 export type AcEntite = ParameterBaseData & {
   responsable: string;
   libelleLong: string;
-  entiteAssign: string
+  entiteAssign: string;
 };
 
 export type AcEtape = ParameterBaseData;
@@ -67,6 +76,7 @@ export type Cloture = {
 };
 
 export type AcExercice = {
+  id: string;
   annee: string;
   libelle: string;
   dateAdoptionBud: string;
@@ -95,7 +105,10 @@ export type AcOperation = {
 };
 
 export type AcPeriodicite = ParameterBaseData;
-export type AcParam = ParameterBaseData & { valeur: string; commentaire: string };
+export type AcParam = ParameterBaseData & {
+  valeur: string;
+  commentaire: string;
+};
 export type AcPosteComptable = ParameterBaseData;
 
 export type AcProfession = ParameterBaseData;
@@ -120,7 +133,10 @@ export type AcTypeFrai = ParameterBaseData;
 export type AcTypgarReelle = ParameterBaseData;
 export type AcTypgarPhy = ParameterBaseData;
 export type AcTypeLogement = ParameterBaseData;
-export type AcTypeOperation = ParameterBaseData & { modePaie: string; typePaie: string };
+export type AcTypeOperation = ParameterBaseData & {
+  modePaie: string;
+  typePaie: string;
+};
 export type AcTypeOvp = ParameterBaseData;
 export type AcTypePiece = ParameterBaseData;
 export type AcTypeRegul = ParameterBaseData;

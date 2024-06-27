@@ -1,29 +1,16 @@
-import { signal } from "@preact/signals-core";
-import axios from "axios";
-import {  getUrl } from "../../../common/configs/api/api_configs";
-import { Signal } from "@preact/signals-react";
+import { AcModePaiement } from "../../AcData.types";
+import ICrudStateProvider from "./ICrudStateProvider";
 
 
-
-export const paiementList:Signal<AcModePaiement[]>=signal([])
-
-
-
-export class AcModePaiementStateFuncs{
-    static fetchPaimentModes=async():Promise<AcModePaiement[]>=>{
-        let {data,status}=await axios.get(getUrl('/mode-paiement'))
-        if(status==200){
-            paiementList.value=data.map((e:any)=>({
-                id:e["modePaieCode"],
-                code:e["modePaieCode"],
-                libelle:e["modePaieLib"],
-                
-            }))
-        }
-        return paiementList.value
+class AcModePaiementStateProvider extends ICrudStateProvider<AcModePaiement> {
+    mapEntitieFrom(json: any): AcModePaiement {
+      return {
+        id: json["modePaieCode"],
+        code: json["modePaieCode"],
+        libelle: json["modePaieLib"],
+      };
     }
-
-
-}
-
-
+  }
+  
+  const acModePaiementProvider = new AcModePaiementStateProvider("/mode-paiement");
+  export default acModePaiementProvider;

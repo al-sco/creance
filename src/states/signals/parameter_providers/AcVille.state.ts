@@ -1,20 +1,16 @@
-import { signal } from "@preact/signals-core";
-import axios from "axios";
-import { getUrl } from "../../../common/configs/api/api_configs";
-import { Signal } from "@preact/signals-react";
+import { AcVille } from "../../AcData.types";
+import ICrudStateProvider from "./ICrudStateProvider";
 
-export const villeList: Signal<AcVille[]> = signal([]);
 
-export class AcVilleStateFuncs {
-    static fetchVilles = async (): Promise<AcVille[]> => {
-        let { data, status } = await axios.get(getUrl('/ville'));
-        if (status === 200) {
-            villeList.value = data.map((e: any) => ({
-                id: e["villeId"],
-                code: e["villeCode"],
-                libelle: e["villeLib"]
-            }));
-        }
-        return villeList.value;
+class AcVilleStateProvider extends ICrudStateProvider<AcVille> {
+    mapEntitieFrom(json: any): AcVille {
+      return {
+        id: json["villeId"],
+        code: json["villeCode"],
+        libelle: json["villeLib"],
+      };
     }
-}
+  }
+  
+  const acVilleProvider = new AcVilleStateProvider("/ville");
+  export default acVilleProvider;

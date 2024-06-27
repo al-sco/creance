@@ -1,29 +1,16 @@
-import { signal } from "@preact/signals-core";
-import axios from "axios";
-import {  getUrl } from "../../../common/configs/api/api_configs";
-import { Signal } from "@preact/signals-react";
+import { AcNationalite } from "../../AcData.types";
+import ICrudStateProvider from "./ICrudStateProvider";
 
-
-
-export const nationalityList:Signal<AcNationalite[]>=signal([])
-
-
-
-export class AcNationalityStateFuncs{
-    static fetchNationalities=async():Promise<AcNationalite[]>=>{
-        let {data,status}=await axios.get(getUrl('/nationalite'))
-        if(status==200){
-            nationalityList.value=data.map((e:any)=>({
-                id:e["natCode"],
-                code:e["natCode"],
-                libelle:e["natLib"],
-                
-            }))
-        }
-        return nationalityList.value
+class AcNationalityStateProvider extends ICrudStateProvider<AcNationalite> {
+    mapEntitieFrom(json: any): AcNationalite {
+      return {
+        id: json["natCode"],
+        code: json["natCode"],
+        libelle: json["natLib"],
+      };
     }
-
-
-}
-
+  }
+  
+  const acNationalityProvider = new AcNationalityStateProvider("/nationalite");
+  export default acNationalityProvider;
 

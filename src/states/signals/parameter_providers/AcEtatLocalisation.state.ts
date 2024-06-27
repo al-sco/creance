@@ -1,29 +1,16 @@
-import { signal } from "@preact/signals-core";
-import axios from "axios";
-import {  getUrl } from "../../../common/configs/api/api_configs";
-import { Signal } from "@preact/signals-react";
+import { AcEtatLocalisation } from "../../AcData.types";
+import ICrudStateProvider from "./ICrudStateProvider";
 
 
-
-export const locationList:Signal<AcEtatLocalisation[]>=signal([])
-
-
-
-export class AcSatusRequestLocationStateFuncs{
-    static fetchStatusLocations=async():Promise<AcEtatLocalisation[]>=>{
-        let {data,status}=await axios.get(getUrl('/etat-localisation'))
-        if(status==200){
-            locationList.value=data.map((e:any)=>({
-                id:e["etatCode"],
-                code:e["etatCode"],
-                libelle:e["etatLib"],
-                
-            }))
-        }
-        return locationList.value
+class AcSatusRequestLocationStateProvider extends ICrudStateProvider<AcEtatLocalisation> {
+    mapEntitieFrom(json: any): AcEtatLocalisation {
+      return {
+        id: json["etatCode"],
+        code: json["etatCode"],
+        libelle: json["etatLib"],
+      };
     }
-
-
-}
-
-
+  }
+  
+  const acSatusRequestLocationProvider = new AcSatusRequestLocationStateProvider("/etat-localisation");
+  export default acSatusRequestLocationProvider;
