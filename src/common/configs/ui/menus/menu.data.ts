@@ -40,6 +40,17 @@ import acParamGenerauxProvider from "../../../../states/signals/parameter_provid
 import acBanqueAgenceProvider from "../../../../states/signals/parameter_providers/AcBanqueAgence.state";
 import acBanqueProvider from "../../../../states/signals/parameter_providers/AcBanque.state";
 import { buildTableContent } from "../../../../components/base-table/table-render";
+import acTypeOVPProvider from "../../../../states/signals/parameter_providers/AcTypeOVP.state";
+import acTypeOperationProvider from "../../../../states/signals/parameter_providers/AcTypeOperation.state";
+import acTypeLogementProvider from "../../../../states/signals/parameter_providers/AcTypeLogement.state";
+import acTypgarPhyProvider from "../../../../states/signals/parameter_providers/AcTypgarPhy.state";
+import acTypgarReelleProvider from "../../../../states/signals/parameter_providers/AcTypgarReelle.state";
+import acTypeFraiProvider from "../../../../states/signals/parameter_providers/AcTypeFrai.state";
+import acTypeEmployeurProvider from "../../../../states/signals/parameter_providers/AcTypeEmployeur.state";
+import acTypeEffetProvider from "../../../../states/signals/parameter_providers/AcTypeEffet.state";
+import acTypeDomicilProvider from "../../../../states/signals/parameter_providers/AcTypeDomicil.state";
+import acTypeDebiteurProvider from "../../../../states/signals/parameter_providers/AcTypeDebiteur.state";
+import acTypeContratProvider from "../../../../states/signals/parameter_providers/AcTypeContrat.state";
 
 export type SubMenuType = {
   name: string;
@@ -992,8 +1003,11 @@ headers:[{
         nameColumn:"Gestion des Types de Contrat",
         nameHeader:"",
         headers:[],
-        //TODO
-
+        dataProvider: acTypeContratProvider.getState(),
+loader: acTypeContratProvider.find,
+create: acTypeContratProvider.create,
+handleDelete: acTypeContratProvider.delete,
+handleEdit: acTypeContratProvider.update,
         columns: [
           {
             key: "Code",
@@ -1009,7 +1023,12 @@ headers:[{
         name: "Type Débiteur",
         nameColumn:"Gestion des Types de Debiteur",
         headers:[],
-        //TODO
+        dataProvider: acTypeDebiteurProvider.getState(),
+loader: acTypeDebiteurProvider.find,
+create: acTypeDebiteurProvider.create,
+handleDelete: acTypeDebiteurProvider.delete,
+handleEdit: acTypeDebiteurProvider.update,
+
         nameHeader:"",
         columns: [
           {
@@ -1026,7 +1045,12 @@ headers:[{
         name: "Type de Domiciliation",
         nameColumn:"Type Domiciliation",
         headers:[],
-        //TODO
+        dataProvider: acTypeDomicilProvider.getState(),
+loader: acTypeDomicilProvider.find,
+create: acTypeDomicilProvider.create,
+handleDelete: acTypeDomicilProvider.delete,
+handleEdit: acTypeDomicilProvider.update,
+
         nameHeader:"",
         columns: [
           {
@@ -1043,7 +1067,12 @@ headers:[{
         name: "Type Effet",
         nameColumn:"Gestion Type Effet",
         nameHeader:"",
-        //TODO
+        dataProvider: acTypeEffetProvider.getState(),
+loader: acTypeEffetProvider.find,
+create: acTypeEffetProvider.create,
+handleDelete: acTypeEffetProvider.delete,
+handleEdit: acTypeEffetProvider.update,
+
         headers:[],
         columns: [
           {
@@ -1061,7 +1090,12 @@ headers:[{
         nameColumn:"Saisiede Types Employeur",
         headers:[],
         nameHeader:"",
-        //TODO
+        dataProvider: acTypeEmployeurProvider.getState(),
+loader: acTypeEmployeurProvider.find,
+create: acTypeEmployeurProvider.create,
+handleDelete: acTypeEmployeurProvider.delete,
+handleEdit: acTypeEmployeurProvider.update,
+
         columns: [
           {
             key: "Code",
@@ -1077,7 +1111,12 @@ headers:[{
         name: "Type de Frais",
         nameColumn:"Type Frais",
         nameHeader: "",
-        //TODO
+        dataProvider: acTypeFraiProvider.getState(),
+loader: acTypeFraiProvider.find,
+create: acTypeFraiProvider.create,
+handleDelete: acTypeFraiProvider.delete,
+handleEdit: acTypeFraiProvider.update,
+
 
         headers:[],
         columns: [
@@ -1095,7 +1134,12 @@ headers:[{
         name: "Type Garantie Réelle",
         nameColumn:"Type de Garantie Réelle",
         headers:[],
-        //TODO
+        dataProvider: acTypgarReelleProvider.getState(),
+loader: acTypgarReelleProvider.find,
+create: acTypgarReelleProvider.create,
+handleDelete: acTypgarReelleProvider.delete,
+handleEdit: acTypgarReelleProvider.update,
+
 
         nameHeader:"",
         columns: [
@@ -1113,7 +1157,12 @@ headers:[{
         name: "Type Garantie Personnelle",
         nameColumn:"Type Garantie Personnelle",
         headers:[],
-        //TODO
+        dataProvider: acTypgarPhyProvider.getState(),
+        loader: acTypgarPhyProvider.find,
+        create: acTypgarPhyProvider.create,
+        handleDelete: acTypgarPhyProvider.delete,
+        handleEdit: acTypgarPhyProvider.update,
+        
         nameHeader:"",
         columns: [
           {
@@ -1130,7 +1179,12 @@ headers:[{
         name: "Type Logement",
         nameColumn:"Type Logement",
         headers:[],
-        //TODO
+        dataProvider: acTypeLogementProvider.getState(),
+loader: acTypeLogementProvider.find,
+create: acTypeLogementProvider.create,
+handleDelete: acTypeLogementProvider.delete,
+handleEdit: acTypeLogementProvider.update,
+
         nameHeader:"",
         columns: [
           {
@@ -1147,7 +1201,11 @@ headers:[{
         name: "Type Opération",
         nameColumn:"Type Opération",
         headers:[],
-        //TODO
+        dataProvider: acTypeOperationProvider.getState(),
+loader: acTypeOperationProvider.find,
+create: acTypeOperationProvider.create,
+handleDelete: acTypeOperationProvider.delete,
+handleEdit: acTypeOperationProvider.update,
         nameHeader:"",
         columns: [
           {
@@ -1176,9 +1234,15 @@ headers:[{
       {
         name: "Type OVP",
         nameColumn:"Type OVP",
+       
         nameHeader:"",
         headers:[],
-        //TODO
+        dataProvider:acTypeOVPProvider.getState(),
+        loader:acTypeOVPProvider.find,
+        create:acTypeOVPProvider.create,
+        handleDelete:acTypeOVPProvider.delete,
+        handleEdit: acTypeOVPProvider.update,
+
         columns: [
           {
             key: "Code",
