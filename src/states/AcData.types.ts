@@ -1,16 +1,18 @@
-type ParameterBaseData = {
-  id: string;
+export  type Identifiable={
+  id:any,
+}
+export  type ParameterBaseData =Identifiable & {
   code: string;
   libelle: string;
 };
 
-type AcBanqueAgence = ParameterBaseData;
-type AcBanque = ParameterBaseData & { responsabilite: string; adresse: string };
-type AcCategorieDebiteur = ParameterBaseData;
-type AcCivilite = ParameterBaseData;
-type AcClasse = ParameterBaseData;
+export type AcBanqueAgence = ParameterBaseData;
+export type AcBanque = ParameterBaseData & { responsabilite: string; adresse: string };
+export type AcCategorieDebiteur = ParameterBaseData;
+export type AcCivilite = ParameterBaseData;
+export type AcClasse = ParameterBaseData;
 
-type AcCptOperation = {
+export type AcCptOperation = {
   id: string;
   numero: string;
   codeBanqueAgence: string;
@@ -18,7 +20,7 @@ type AcCptOperation = {
 };
 
 
-type AcCpteClientSonar=
+export type AcCpteClientSonar=
 {
   id: String
   cpteCliCode: String
@@ -31,7 +33,7 @@ type AcCpteClientSonar=
 
 
 
-type AcCompteOper = {
+export type AcCompteOper = {
   id: string;
   cptoperCode: string;
   bqagCode: string;
@@ -39,7 +41,7 @@ type AcCompteOper = {
 };
 
 
-type  CodeProduitSonareci = {
+export type  CodeProduitSonareci = {
   id: string;
   code: string;
   intituleComptes: string;
@@ -49,22 +51,22 @@ type  CodeProduitSonareci = {
   observation: string;
 };
  
-type AcEntite = ParameterBaseData & {
+export type AcEntite = ParameterBaseData & {
   responsable: string;
   libelleLong: string;
   entiteAssign: string
 };
 
-type AcEtape = ParameterBaseData;
+export type AcEtape = ParameterBaseData;
 
-type AcEtatLocalisation = ParameterBaseData;
+export type AcEtatLocalisation = ParameterBaseData;
 
-type Cloture = {
+export type Cloture = {
   enCours: "EN COURS";
   cloture: "CLOTURE";
 };
 
-type AcExercice = {
+export type AcExercice = {
   annee: string;
   libelle: string;
   dateAdoptionBud: string;
@@ -73,55 +75,55 @@ type AcExercice = {
   cloture: Cloture;
 };
 
-type AcFonction = ParameterBaseData;
+export type AcFonction = ParameterBaseData;
 
-type AcGroupeCreance = ParameterBaseData & {
+export type AcGroupeCreance = ParameterBaseData & {
   libelleLong: string;
 };
 
-type AcJournal = ParameterBaseData;
-type TMessage = ParameterBaseData;
-type AcModeAcquisition = ParameterBaseData;
-type AcModePaiement = ParameterBaseData;
-type AcNationalite = ParameterBaseData;
-type AcObjetCreance = ParameterBaseData;
+export type AcJournal = ParameterBaseData;
+export type TMessage = ParameterBaseData;
+export type AcModeAcquisition = ParameterBaseData;
+export type AcModePaiement = ParameterBaseData;
+export type AcNationalite = ParameterBaseData;
+export type AcObjetCreance = ParameterBaseData;
 
-type AcOperation = {
+export type AcOperation = {
   ville: ParameterBaseData;
   quartier: Array<ParameterBaseData & { zone: string }>;
   operation: ParameterBaseData[];
 };
 
-type AcPeriodicite = ParameterBaseData;
-type AcParam = ParameterBaseData & { valeur: string; commentaire: string };
-type AcPosteComptable = ParameterBaseData;
+export type AcPeriodicite = ParameterBaseData;
+export type AcParam = ParameterBaseData & { valeur: string; commentaire: string };
+export type AcPosteComptable = ParameterBaseData;
 
-type AcProfession = ParameterBaseData;
-type AcQuartier = ParameterBaseData & {
+export type AcProfession = ParameterBaseData;
+export type AcQuartier = ParameterBaseData & {
   ville: string;
   zone: string;
 };
 
-type AcStatutCreance = ParameterBaseData;
-type AcStatutSalarie = ParameterBaseData;
-type AcTypeActe = ParameterBaseData & { delai: string };
-type AcTypeAuxil = ParameterBaseData;
-type AcTypeEcheancier = ParameterBaseData;
-type AcTypeCharge = ParameterBaseData & { sens: string };
-type AcTypeCpt = ParameterBaseData;
-type AcTypeContrat = ParameterBaseData;
-type AcTypeDebiteur = ParameterBaseData;
-type AcTypeDomicil = ParameterBaseData;
-type AcTypeEffet = ParameterBaseData;
-type AcTypeEmployeur = ParameterBaseData;
-type AcTypeFrai = ParameterBaseData;
-type AcTypgarReelle = ParameterBaseData;
-type AcTypgarPhy = ParameterBaseData;
-type AcTypeLogement = ParameterBaseData;
-type AcTypeOperation = ParameterBaseData & { modePaie: string; typePaie: string };
-type AcTypeOvp = ParameterBaseData;
-type AcTypePiece = ParameterBaseData;
-type AcTypeRegul = ParameterBaseData;
-type AcTypeSaisie = ParameterBaseData;
-type AcVille = ParameterBaseData;
-type AcZone = ParameterBaseData & { description: string };
+export type AcStatutCreance = ParameterBaseData;
+export type AcStatutSalarie = ParameterBaseData;
+export type AcTypeActe = ParameterBaseData & { delai: string };
+export type AcTypeAuxil = ParameterBaseData;
+export type AcTypeEcheancier = ParameterBaseData;
+export type AcTypeCharge = ParameterBaseData & { sens: string };
+export type AcTypeCpt = ParameterBaseData;
+export type AcTypeContrat = ParameterBaseData;
+export type AcTypeDebiteur = ParameterBaseData;
+export type AcTypeDomicil = ParameterBaseData;
+export type AcTypeEffet = ParameterBaseData;
+export type AcTypeEmployeur = ParameterBaseData;
+export type AcTypeFrai = ParameterBaseData;
+export type AcTypgarReelle = ParameterBaseData;
+export type AcTypgarPhy = ParameterBaseData;
+export type AcTypeLogement = ParameterBaseData;
+export type AcTypeOperation = ParameterBaseData & { modePaie: string; typePaie: string };
+export type AcTypeOvp = ParameterBaseData;
+export type AcTypePiece = ParameterBaseData;
+export type AcTypeRegul = ParameterBaseData;
+export type AcTypeSaisie = ParameterBaseData;
+export type AcVille = ParameterBaseData;
+export type AcZone = ParameterBaseData & { description: string };

@@ -3,7 +3,7 @@ import colors from "../../common/theme/colors/colors"
 import { ParameterColumnType } from "../parameter-main-content/parameter-main-content"
 import { useRef, useState } from "react"
 import { CloseIcon, DeleteIcon, EditIcon } from "@chakra-ui/icons"
-import { AcBankAgencyStateFuncs } from "../../states/signals/parameter_providers/AcBanqueAgence.state"
+import acBanqueAgenceProvider from "../../states/signals/parameter_providers/AcBanqueAgence.state"
 
 
 
@@ -105,7 +105,7 @@ const TableRowEditable = ({ index, columns, baseStyle, data }: TableRowProps) =>
     }
 
     const handleDelete = async () => {
-        await AcBankAgencyStateFuncs.deleteBankAgency(data);
+        await acBanqueAgenceProvider.delete(data);
         onClose();
     }
 
