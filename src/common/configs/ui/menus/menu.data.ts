@@ -127,7 +127,7 @@ const menuItemsData: Array<MenuItemType> = [
         nameHeader:"Banque",
         dataProvider: acBanqueAgenceProvider.getState(),
         handleDelete:acBanqueAgenceProvider.delete,
-        handleEdit:acBanqueAgenceProvider.delete,
+        handleEdit:acBanqueAgenceProvider.update,
         create:acBanqueAgenceProvider.create,
         nameColumn:"Agence",
         headers: [
