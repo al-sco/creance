@@ -8,10 +8,8 @@ import { Signal } from "@preact/signals-react";
 export const bankAgencyList:Signal<ParameterBaseData[]>=signal<ParameterBaseData[]>([])
 
 
-
-export class AcBankAgencyStateFuncs{
-    static fetchBankAgencies=async():Promise<AgenceBanque[]>=>{
-        console.log("Fetching ...")
+export class AcBanqueAgenceStateFuncs{
+    static fetchBankAgencies=async():Promise<AcBanqueAgence[]>=>{
         let {data,status}=await axios.get(getUrl('/agences'),{
             headers:{
                 'ngrok-skip-browser-warning':true
@@ -24,12 +22,10 @@ export class AcBankAgencyStateFuncs{
                 libelle:e["libelle"]
             }))
         }
-        console.log(bankAgencyList.value)
         return bankAgencyList.value
     }
 
-    static updateBankAgency=async(bankAgency:AgenceBanque)=>{
-        console.log('Updating ...');
+    static updateBankAgency=async(bankAgency:AcBanqueAgence)=>{
         let {status}=await axios.patch(getUrl('/agences'),{
             headers:{
                 'ngrok-skip-browser-warning':true
@@ -45,7 +41,7 @@ export class AcBankAgencyStateFuncs{
     }
             
     
-    static deleteBankAgency= async(bankAgency:AgenceBanque)=>{
+    static deleteBankAgency= async(bankAgency:AcBanqueAgence)=>{
         let {status}=await axios.delete(getUrl(`/agences/${bankAgency.id}`),{
             headers:{
                 'ngrok-skip-browser-warning':true

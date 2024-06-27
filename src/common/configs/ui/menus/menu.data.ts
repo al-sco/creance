@@ -13,9 +13,9 @@ import { AcOperationAccountStateFuncs, operationList } from "../../../../states/
 import { AcPeriodicityStateFuncs, periodicityList } from "../../../../states/signals/parameter_providers/AcPeriodicity.state";
 import { Signal } from "@preact/signals-react";
 import { ParameterColumnType } from "../../../../components/parameter-main-content/parameter-main-content";
-import { AcBankAgencyStateFuncs, bankAgencyList } from "../../../../states/signals/parameter_providers/AcBankAgency.state";
+import {  AcBanqueAgenceStateFuncs, bankAgencyList } from "../../../../states/signals/parameter_providers/AcBanqueAgence.state";
 import { buildTableContent } from "../../../../components/base-table/base-table";
-import { bankList, AcBankStateFuncs } from "../../../../states/signals/parameter_providers/AcBanks.state";
+import { bankList, AcBankStateFuncs } from "../../../../states/signals/parameter_providers/AcBanque.state";
 import { AcCategoryDebtorStateFuncs, categroyList } from "../../../../states/signals/parameter_providers/AcCategoryDebtor.state";
 import { AcCilivityStateFuncs, civilityList } from "../../../../states/signals/parameter_providers/AcCivility.state";
 import { AcClasseStateFuncs, classeList } from "../../../../states/signals/parameter_providers/AcClasse.state";
@@ -34,13 +34,14 @@ import { AcModeAcquisitionStateFuncs, acquisitionList } from "../../../../states
 import { AcModePaiementStateFuncs, paiementList } from "../../../../states/signals/parameter_providers/AcModePaiement.state";
 import { AcNationalityStateFuncs, nationalityList } from "../../../../states/signals/parameter_providers/AcNationality.state";
 import { AcObjetCreancesStateFuncs, creancesList } from "../../../../states/signals/parameter_providers/AcObjetCreances.state";
-import { posteComptableList, PosteComptableStateFuncs } from "../../../../states/signals/parameter_providers/posteComptable.state";
-import { professionList, ProfessionStateFuncs } from "../../../../states/signals/parameter_providers/profession.state";
+import { posteComptableList, PosteComptableStateFuncs } from "../../../../states/signals/parameter_providers/AcPosteComptable.state";
+import { professionList, ProfessionStateFuncs } from "../../../../states/signals/parameter_providers/AcProfession.state";
 import { AcZoneStateFuncs, zoneList } from "../../../../states/signals/parameter_providers/AcZone.state";
 import { AcVilleStateFuncs, villeList } from "../../../../states/signals/parameter_providers/AcVille.state";
 import { AcTypeSaisieStateFuncs, typeSaisieList } from "../../../../states/signals/parameter_providers/AcTypeSaisie.state";
 import { AcTypeRegulStateFuncs, typeRegulList } from "../../../../states/signals/parameter_providers/AcTypeRegul.state";
 import { AcTypePieceStateFuncs, typePieceList } from "../../../../states/signals/parameter_providers/AcTypePiece.state";
+import { AcParamGenerauxStateFuncs, paramGenerauxList } from "../../../../states/signals/parameter_providers/AcParamGeneraux.state";
 
 type SubMenuType = {
   name: string;
@@ -110,7 +111,7 @@ const menuItemsData: Array<MenuItemType> = [
     subMenu: [
       {
         name: "Agence de banque",
-        loader: AcBankAgencyStateFuncs.fetchBankAgencies,
+        loader: AcBanqueAgenceStateFuncs.fetchBankAgencies,
         dataProvider: bankAgencyList,
         nameHeader:"Banque",
         nameColumn:"Agence",

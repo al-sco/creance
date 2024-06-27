@@ -5,12 +5,12 @@ import { Signal } from "@preact/signals-react";
 
 
 
-export const periodicityList:Signal<Periodicite[]>=signal([])
+export const periodicityList:Signal<AcPeriodicite[]>=signal([])
 
 
 
 export class AcPeriodicityStateFuncs{
-    static fetchPeriodicities=async():Promise<Periodicite[]>=>{
+    static fetchPeriodicities=async():Promise<AcPeriodicite[]>=>{
         let {data,status}=await axios.get(getUrl('/periodicite'))
         if(status==200){
             periodicityList.value=data.map((e:any)=>({

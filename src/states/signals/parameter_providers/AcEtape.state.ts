@@ -5,12 +5,12 @@ import { Signal } from "@preact/signals-react";
 
 
 
-export const etapeList:Signal<Etape[]>=signal([])
+export const etapeList:Signal<AcEtape[]>=signal([])
 
 
 
 export class AcEtapeStateFuncs{
-    static fetchEtapes=async():Promise<Etape[]>=>{
+    static fetchEtapes=async():Promise<AcEtape[]>=>{
         let {data,status}=await axios.get(getUrl('/etape'))
         if(status==200){
             etapeList.value=data.map((e:any)=>({

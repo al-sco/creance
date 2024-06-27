@@ -5,12 +5,12 @@ import { Signal } from "@preact/signals-react";
 
 
 
-export const categroyList:Signal<CategorieDebiteur[]>=signal([])
+export const categroyList:Signal<AcCategorieDebiteur[]>=signal([])
 
 
 
 export class AcCategoryDebtorStateFuncs{
-    static fetchCategories=async():Promise<CategorieDebiteur[]>=>{
+    static fetchCategories=async():Promise<AcCategorieDebiteur[]>=>{
         let {data,status}=await axios.get(getUrl('/categorie-debiteur'))
         if(status==200){
             categroyList.value=data.map((e:any)=>({

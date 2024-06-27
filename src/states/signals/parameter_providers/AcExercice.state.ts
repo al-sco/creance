@@ -3,10 +3,10 @@ import axios from "axios";
 import { getUrl } from "../../../common/configs/api/api_configs";
 import { Signal } from "@preact/signals-react";
 
-export const exerciceServiceList: Signal<Exercice[]> = signal([]);
+export const exerciceServiceList: Signal<AcExercice[]> = signal([]);
 
 export class AcExercicesService {
-    static fetchExercices = async (): Promise<Exercice[]> => {
+    static fetchExercices = async (): Promise<AcExercice[]> => {
         let { data, status } = await axios.get(getUrl('/exercice'));
         if (status === 200) {
             exerciceServiceList.value = data.map((e: any) => ({

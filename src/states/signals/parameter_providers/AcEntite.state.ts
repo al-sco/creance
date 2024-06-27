@@ -5,12 +5,12 @@ import { Signal } from "@preact/signals-react";
 
 
 
-export const entiteList:Signal<Entite[]>=signal([])
+export const entiteList:Signal<AcEntite[]>=signal([])
 
 
 
 export class AcEntityStateFuncs{
-    static fetchEntities=async():Promise<Entite[]>=>{
+    static fetchEntities=async():Promise<AcEntite[]>=>{
         let {data,status}=await axios.get(getUrl('/entite'))
         if(status==200){
             entiteList.value=data.map((e:any)=>({

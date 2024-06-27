@@ -5,12 +5,12 @@ import { Signal } from "@preact/signals-react";
 
 
 
-export const functionList:Signal<Function[]>=signal([])
+export const functionList:Signal<AcFonction[]>=signal([])
 
 
 
 export class AcFunctionStateFuncs{
-    static fetchFuncions=async():Promise<Function[]>=>{
+    static fetchFuncions=async():Promise<AcFonction[]>=>{
         let {data,status}=await axios.get(getUrl('/fonction'))
         if(status==200){
             functionList.value=data.map((e:any)=>({

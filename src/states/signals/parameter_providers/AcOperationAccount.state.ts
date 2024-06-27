@@ -5,12 +5,12 @@ import { Signal } from "@preact/signals-react";
 
 
 
-export const operationList:Signal<CompteOperation[]>=signal([])
+export const operationList:Signal<AcCptOperation[]>=signal([])
 
 
 
 export class AcOperationAccountStateFuncs{
-    static fetchAccountOperations=async():Promise<CompteOperation[]>=>{
+    static fetchAccountOperations=async():Promise<AcCptOperation[]>=>{
         let {data,status}=await axios.get(getUrl('/compte-oper'))
         console.log(data)
         if(status==200){

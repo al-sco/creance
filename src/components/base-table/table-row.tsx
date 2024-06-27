@@ -3,7 +3,7 @@ import colors from "../../common/theme/colors/colors"
 import { ParameterColumnType } from "../parameter-main-content/parameter-main-content"
 import { useRef, useState } from "react"
 import { CloseIcon, DeleteIcon, EditIcon } from "@chakra-ui/icons"
-import { AcBankAgencyStateFuncs } from "../../states/signals/parameter_providers/AcBankAgency.state"
+import { AcBankAgencyStateFuncs } from "../../states/signals/parameter_providers/AcBanqueAgence.state"
 
 
 

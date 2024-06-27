@@ -5,12 +5,12 @@ import { Signal } from "@preact/signals-react";
 
 
 
-export const creancesList:Signal<ObjetCreances[]>=signal([])
+export const creancesList:Signal<AcObjetCreance[]>=signal([])
 
 
 
 export class AcObjetCreancesStateFuncs{
-    static fetchCreancesObjects=async():Promise<ObjetCreances[]>=>{
+    static fetchCreancesObjects=async():Promise<AcObjetCreance[]>=>{
         let {data,status}=await axios.get(getUrl('/objet-creance'))
         if(status==200){
             creancesList.value=data.map((e:any)=>({

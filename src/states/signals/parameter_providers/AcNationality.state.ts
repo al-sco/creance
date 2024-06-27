@@ -5,12 +5,12 @@ import { Signal } from "@preact/signals-react";
 
 
 
-export const nationalityList:Signal<Nationalite[]>=signal([])
+export const nationalityList:Signal<AcNationalite[]>=signal([])
 
 
 
 export class AcNationalityStateFuncs{
-    static fetchNationalities=async():Promise<Nationalite[]>=>{
+    static fetchNationalities=async():Promise<AcNationalite[]>=>{
         let {data,status}=await axios.get(getUrl('/nationalite'))
         if(status==200){
             nationalityList.value=data.map((e:any)=>({

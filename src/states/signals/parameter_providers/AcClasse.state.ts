@@ -5,12 +5,12 @@ import { Signal } from "@preact/signals-react";
 
 
 
-export const classeList:Signal<Classe[]>=signal([])
+export const classeList:Signal<AcClasse[]>=signal([])
 
 
 
 export class AcClasseStateFuncs{
-    static fetchClasses=async():Promise<Classe[]>=>{
+    static fetchClasses=async():Promise<AcClasse[]>=>{
         let {data,status}=await axios.get(getUrl('/classe'))
         if(status==200){
             classeList.value=data.map((e:any)=>({

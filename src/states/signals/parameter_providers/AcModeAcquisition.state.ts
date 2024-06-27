@@ -5,12 +5,12 @@ import { Signal } from "@preact/signals-react";
 
 
 
-export const acquisitionList:Signal<ModeAcquisition[]>=signal([])
+export const acquisitionList:Signal<AcModeAcquisition[]>=signal([])
 
 
 
 export class AcModeAcquisitionStateFuncs{
-    static fetchAcquisitionModes=async():Promise<ModeAcquisition[]>=>{
+    static fetchAcquisitionModes=async():Promise<AcModeAcquisition[]>=>{
         let {data,status}=await axios.get(getUrl('/mode-aquisition'))
         if(status==200){
             acquisitionList.value=data.map((e:any)=>({

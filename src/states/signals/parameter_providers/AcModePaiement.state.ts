@@ -5,12 +5,12 @@ import { Signal } from "@preact/signals-react";
 
 
 
-export const paiementList:Signal<ModePaiement[]>=signal([])
+export const paiementList:Signal<AcModePaiement[]>=signal([])
 
 
 
 export class AcModePaiementStateFuncs{
-    static fetchPaimentModes=async():Promise<ModePaiement[]>=>{
+    static fetchPaimentModes=async():Promise<AcModePaiement[]>=>{
         let {data,status}=await axios.get(getUrl('/mode-paiement'))
         if(status==200){
             paiementList.value=data.map((e:any)=>({

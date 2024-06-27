@@ -5,12 +5,12 @@ import { Signal } from "@preact/signals-react";
 
 
 
-export const locationList:Signal<EtatDemandelocalisation[]>=signal([])
+export const locationList:Signal<AcEtatLocalisation[]>=signal([])
 
 
 
 export class AcSatusRequestLocationStateFuncs{
-    static fetchStatusLocations=async():Promise<EtatDemandelocalisation[]>=>{
+    static fetchStatusLocations=async():Promise<AcEtatLocalisation[]>=>{
         let {data,status}=await axios.get(getUrl('/etat-localisation'))
         if(status==200){
             locationList.value=data.map((e:any)=>({

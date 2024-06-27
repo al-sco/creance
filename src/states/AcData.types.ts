@@ -80,7 +80,7 @@ type AcGroupeCreance = ParameterBaseData & {
 };
 
 type AcJournal = ParameterBaseData;
-type AcMessages = ParameterBaseData;
+type TMessage = ParameterBaseData;
 type AcModeAcquisition = ParameterBaseData;
 type AcModePaiement = ParameterBaseData;
 type AcNationalite = ParameterBaseData;

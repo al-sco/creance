@@ -5,12 +5,12 @@ import { Signal } from "@preact/signals-react";
 
 
 
-export const journalList:Signal<Journal[]>=signal([])
+export const journalList:Signal<AcJournal[]>=signal([])
 
 
 
 export class AcJournalStateFuncs{
-    static fetchJournals=async():Promise<Journal[]>=>{
+    static fetchJournals=async():Promise<AcJournal[]>=>{
         let {data,status}=await axios.get(getUrl('/journal'))
         if(status==200){
             journalList.value=data.map((e:any)=>({

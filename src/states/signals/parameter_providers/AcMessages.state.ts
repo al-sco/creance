@@ -5,12 +5,12 @@ import { Signal } from "@preact/signals-react";
 
 
 
-export const messagesList:Signal<Messages[]>=signal([])
+export const messagesList:Signal<TMessage[]>=signal([])
 
 
 
 export class AcMessagesStateFuncs{
-    static fetchMessages=async():Promise<Messages[]>=>{
+    static fetchMessages=async():Promise<TMessage[]>=>{
         let {data,status}=await axios.get(getUrl('/message'))
         if(status==200){
             messagesList.value=data.map((e:any)=>({

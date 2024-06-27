@@ -5,12 +5,12 @@ import { Signal } from "@preact/signals-react";
 
 
 
-export const bankList:Signal<Banque[]>=signal([])
+export const bankList:Signal<AcBanque[]>=signal([])
 
 
 
 export class AcBankStateFuncs{
-    static fetchBanks=async():Promise<Banque[]>=>{
+    static fetchBanks=async():Promise<AcBanque[]>=>{
         let {data,status}=await axios.get(getUrl('/banque'))
         if(status==200){
             bankList.value=data.map((e:any)=>({
