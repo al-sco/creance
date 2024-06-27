@@ -9,36 +9,34 @@ import Contentieux from "../../../../assets/contentieux.svg";
 import Creance from "../../../../assets/creance.svg";
 import Help from "../../../../assets/help.svg";
 import { MenuItem, SubMenuItem } from "./menus.type";
-import { AcOperationAccountStateFuncs, operationList } from "../../../../states/signals/parameter_providers/AcOperationAccount.state";
-import { AcPeriodicityStateFuncs, periodicityList } from "../../../../states/signals/parameter_providers/AcPeriodicity.state";
+import acPeriodicityProvider from "../../../../states/signals/parameter_providers/AcPeriodicite.state";
 import { Signal } from "@preact/signals-react";
 import { ParameterColumnType } from "../../../../components/parameter-main-content/parameter-main-content";
-import { AcCategoryDebtorStateFuncs, categroyList } from "../../../../states/signals/parameter_providers/AcCategoryDebtor.state";
-import { AcCilivityStateFuncs, civilityList } from "../../../../states/signals/parameter_providers/AcCivility.state";
-import { AcClasseStateFuncs, classeList } from "../../../../states/signals/parameter_providers/AcClasse.state";
-import { AcCodeProduitSonareciStateFuncs, codeProduitsList } from "../../../../states/signals/parameter_providers/AcCodeProduitsSonareci";
-import { AcComptableAccountOperationSonareciStateFuncs, compteComptableSonareciList } from "../../../../states/signals/parameter_providers/AcComptableAccountOperationSonareci.state";
-import { AcComptableAccountOperationStateFuncs, compteComptableList } from "../../../../states/signals/parameter_providers/AcCompteCptablOper.state";
-import { AcEntityStateFuncs, entiteList } from "../../../../states/signals/parameter_providers/AcEntite.state";
-import { AcEtapeStateFuncs, etapeList } from "../../../../states/signals/parameter_providers/AcEtape.state";
-import { AcSatusRequestLocationStateFuncs, locationList } from "../../../../states/signals/parameter_providers/AcEtatLocalisation.state";
-import { AcExercicesService, exerciceServiceList } from "../../../../states/signals/parameter_providers/AcExercice.state";
-import { AcFunctionStateFuncs, functionList } from "../../../../states/signals/parameter_providers/AcFunction.state";
-import { AcGroupeCreanceStateFuncs, groupeCreanceList } from "../../../../states/signals/parameter_providers/AcGroupeCreance.state";
-import { AcJournalStateFuncs, journalList } from "../../../../states/signals/parameter_providers/AcJournal.state";
-import { AcMessagesStateFuncs, messagesList } from "../../../../states/signals/parameter_providers/AcMessages.state";
-import { AcModeAcquisitionStateFuncs, acquisitionList } from "../../../../states/signals/parameter_providers/AcModeAcquisition.state";
-import { AcModePaiementStateFuncs, paiementList } from "../../../../states/signals/parameter_providers/AcModePaiement.state";
-import { AcNationalityStateFuncs, nationalityList } from "../../../../states/signals/parameter_providers/AcNationality.state";
-import { AcObjetCreancesStateFuncs, creancesList } from "../../../../states/signals/parameter_providers/AcObjetCreances.state";
-import { posteComptableList, PosteComptableStateFuncs } from "../../../../states/signals/parameter_providers/AcPosteComptable.state";
-import { professionList, ProfessionStateFuncs } from "../../../../states/signals/parameter_providers/AcProfession.state";
-import { AcZoneStateFuncs, zoneList } from "../../../../states/signals/parameter_providers/AcZone.state";
-import { AcVilleStateFuncs, villeList } from "../../../../states/signals/parameter_providers/AcVille.state";
-import { AcTypeSaisieStateFuncs, typeSaisieList } from "../../../../states/signals/parameter_providers/AcTypeSaisie.state";
-import { AcTypeRegulStateFuncs, typeRegulList } from "../../../../states/signals/parameter_providers/AcTypeRegul.state";
-import { AcTypePieceStateFuncs, typePieceList } from "../../../../states/signals/parameter_providers/AcTypePiece.state";
-import { AcParamGenerauxStateFuncs, paramGenerauxList } from "../../../../states/signals/parameter_providers/AcParamGeneraux.state";
+import acCategoryDebtorProvider from "../../../../states/signals/parameter_providers/AcCategoryDebtor.state";
+import acCilivityProvider from "../../../../states/signals/parameter_providers/AcCivility.state";
+import acClasseProvider from "../../../../states/signals/parameter_providers/AcClasse.state";
+import acCodeProduitSonareciProvider from "../../../../states/signals/parameter_providers/AcCodeProduitsSonareci";
+import acComptableAccountOperationSonareciProvider from "../../../../states/signals/parameter_providers/AcComptableAccountOperationSonareci.state";
+import acEntityProvider from "../../../../states/signals/parameter_providers/AcEntite.state";
+import acEtapeProvider from "../../../../states/signals/parameter_providers/AcEtape.state";
+import acEtatLocalisationProvider from "../../../../states/signals/parameter_providers/AcEtatLocalisation.state";
+import acExercicesProvider from "../../../../states/signals/parameter_providers/AcExercice.state";
+import acFunctionProvider from "../../../../states/signals/parameter_providers/AcFunction.state";
+import acGroupeCreanceProvider from "../../../../states/signals/parameter_providers/AcGroupeCreance.state";
+import acJournalProvider from "../../../../states/signals/parameter_providers/AcJournal.state";
+import acMessagesProvider from "../../../../states/signals/parameter_providers/AcMessages.state";
+import acModeAcquisitionProvider from "../../../../states/signals/parameter_providers/AcModeAcquisition.state";
+import acModePaiementProvider from "../../../../states/signals/parameter_providers/AcModePaiement.state";
+import acNationaliteProvider from "../../../../states/signals/parameter_providers/AcNationality.state";
+import acObjetCreancesProvider from "../../../../states/signals/parameter_providers/AcObjetCreances.state";
+import acPostecomptableyProvider from "../../../../states/signals/parameter_providers/AcPosteComptable.state";
+import acProfessionProvider from "../../../../states/signals/parameter_providers/AcProfession.state";
+import acZoneProvider from "../../../../states/signals/parameter_providers/AcZone.state";
+import acVilleProvider from "../../../../states/signals/parameter_providers/AcVille.state";
+import acTypeSaisieProvider from "../../../../states/signals/parameter_providers/AcTypeSaisie.state";
+import acTypeRegulProvider from "../../../../states/signals/parameter_providers/AcTypeRegul.state";
+import acTypePieceProvider from "../../../../states/signals/parameter_providers/AcTypePiece.state";
+import acParamGenerauxProvider from "../../../../states/signals/parameter_providers/AcParamGeneraux.state";
 import acBanqueAgenceProvider from "../../../../states/signals/parameter_providers/AcBanqueAgence.state";
 import acBanqueProvider from "../../../../states/signals/parameter_providers/AcBanque.state";
 import { buildTableContent } from "../../../../components/base-table/table-render";
@@ -115,8 +113,8 @@ const menuItemsData: Array<MenuItemType> = [
       {
         name: "Agence de banque",
         loader: acBanqueAgenceProvider.find,
-        dataProvider: acBanqueAgenceProvider.getState(),
         nameHeader:"Banque",
+        dataProvider: acBanqueAgenceProvider.getState(),
         handleDelete:acBanqueAgenceProvider.delete,
         handleEdit:acBanqueAgenceProvider.delete,
         create:acBanqueAgenceProvider.create,
@@ -177,8 +175,11 @@ const menuItemsData: Array<MenuItemType> = [
         name: "Catégorie de débiteur",
         nameColumn:"Gestion des Catégories de Debiteur",
         nameHeader:"",
-        loader: AcCategoryDebtorStateFuncs.fetchCategories,
-        dataProvider: categroyList,
+        loader: acCategoryDebtorProvider.find,
+        dataProvider: acCategoryDebtorProvider.getState(),
+        create:acCategoryDebtorProvider.create,
+        handleDelete:acCategoryDebtorProvider.delete,
+        handleEdit:acCategoryDebtorProvider.update,
         headers: [],
         columns: [
           {
@@ -195,8 +196,11 @@ const menuItemsData: Array<MenuItemType> = [
         name: "Civilité",
         nameColumn:"Civilité",
         nameHeader:"",
-        loader: AcCilivityStateFuncs.fetchCivilities,
-        dataProvider: civilityList,
+        loader: acCilivityProvider.find,
+        dataProvider: acCilivityProvider.getState(),
+        create:acCilivityProvider.create,
+        handleDelete:acCilivityProvider.delete,
+        handleEdit:acCilivityProvider.update,
         headers: [],
         columns: [
           {
@@ -214,8 +218,10 @@ const menuItemsData: Array<MenuItemType> = [
         name: "Classe",
         nameColumn:"Gestion des Classes",
         nameHeader:"",
-        loader: AcClasseStateFuncs.fetchClasses,
-        dataProvider: classeList,
+        dataProvider: acClasseProvider.getState(),
+        create:acClasseProvider.create,
+        handleDelete:acClasseProvider.delete,
+        handleEdit:acClasseProvider.update,
         headers: [],
         columns: [
           {
@@ -232,8 +238,6 @@ const menuItemsData: Array<MenuItemType> = [
         name: "Compte d'operation",
         nameHeader:"Saisie Compte Opération",
         nameColumn:"",
-        loader: AcOperationAccountStateFuncs.fetchAccountOperations,
-        dataProvider: operationList,
         columns: [
           {
             key: "codeBanqueAgence",
@@ -263,8 +267,11 @@ const menuItemsData: Array<MenuItemType> = [
         name: "Cpte Comptable d'Opération",
         nameHeader:"Groupe Creance / Type Opération",
         nameColumn:"Compte Ecriture",
-        loader: AcComptableAccountOperationStateFuncs.fetchAccountOperations,
-        dataProvider: compteComptableList,
+        loader: acComptableAccountOperationSonareciProvider.find,
+        dataProvider: acComptableAccountOperationSonareciProvider.getState(),
+        create:acComptableAccountOperationSonareciProvider.create,
+        handleDelete:acComptableAccountOperationSonareciProvider.delete,
+        handleEdit:acComptableAccountOperationSonareciProvider.update,
         headers: [
           {
             key: "groupeCreance",
@@ -298,8 +305,11 @@ const menuItemsData: Array<MenuItemType> = [
         name: "Cpte comptable d'operation Sonar",
         nameHeader:"Groupe Creance / Type Opération",
         nameColumn:"Compte Ecriture",
-        loader: AcComptableAccountOperationSonareciStateFuncs.fetchComptableAccountOperations,
-        dataProvider: compteComptableSonareciList,
+        loader: acComptableAccountOperationSonareciProvider.find,
+        dataProvider: acComptableAccountOperationSonareciProvider.getState(),
+        create:acComptableAccountOperationSonareciProvider.create,
+        handleDelete:acComptableAccountOperationSonareciProvider.delete,
+        handleEdit:acComptableAccountOperationSonareciProvider.update,
         headers: [
             {
               key: "groupeCreance",
@@ -338,8 +348,11 @@ const menuItemsData: Array<MenuItemType> = [
         name: "Cpte comptable d'operation Sonar Modif",
         nameHeader:"Groupe Creance / Type Opération",
         nameColumn:"Compte Ecriture",
-        loader: AcComptableAccountOperationSonareciStateFuncs.fetchComptableAccountOperations,
-        dataProvider: compteComptableSonareciList,
+        loader: acComptableAccountOperationSonareciProvider.find,
+        dataProvider: acComptableAccountOperationSonareciProvider.getState(),
+        create:acComptableAccountOperationSonareciProvider.create,
+        handleDelete:acComptableAccountOperationSonareciProvider.delete,
+        handleEdit:acComptableAccountOperationSonareciProvider.update,
         headers: [
             {
               key: "groupeCreance",
@@ -377,8 +390,11 @@ const menuItemsData: Array<MenuItemType> = [
         name: "Codes produits Sonareci",
         nameHeader:"",
         nameColumn:"Code Produits (Cptes Clients)",
-        loader: AcCodeProduitSonareciStateFuncs.fetchProductsCodes,
-        dataProvider: codeProduitsList,
+        loader: acCodeProduitSonareciProvider.find,
+        dataProvider: acCodeProduitSonareciProvider.getState(),
+        create:acCodeProduitSonareciProvider.create,
+        handleDelete:acCodeProduitSonareciProvider.delete,
+        handleEdit:acCodeProduitSonareciProvider.update,
         headers:[],
         columns: [
           {
@@ -413,8 +429,11 @@ const menuItemsData: Array<MenuItemType> = [
         name: "Entité",
         nameColumn:"Liste des Entités de l'ACCC",
         nameHeader:"",
-        loader: AcEntityStateFuncs.fetchEntities,
-        dataProvider: entiteList,
+        loader: acEntityProvider.find,
+        dataProvider: acEntityProvider.getState(),
+        create:acEntityProvider.create,
+        handleDelete:acEntityProvider.delete,
+        handleEdit:acEntityProvider.update,
 headers:[{
     key: "responsable",
     label: "Responsable ou Fondé de pourvoirs",
@@ -439,8 +458,11 @@ headers:[{
         name: "Etape",
         nameColumn:"Gestion des Etapes",
         nameHeader:"",
-        loader: AcEtapeStateFuncs.fetchEtapes,
-        dataProvider: etapeList,
+        loader: acEtapeProvider.find,
+        dataProvider: acEtapeProvider.getState(),
+        create:acEtapeProvider.create,
+        handleDelete:acEtapeProvider.delete,
+        handleEdit:acEtapeProvider.update,
         headers:[],
         columns: [
           {
@@ -457,8 +479,11 @@ headers:[{
         name: "Etat de la demande de Localisation",
         nameHeader:"",
         nameColumn:"Etat Localisation",
-        loader: AcSatusRequestLocationStateFuncs.fetchStatusLocations,
-        dataProvider: locationList,
+        loader: acEtatLocalisationProvider.find,
+        dataProvider: acEtatLocalisationProvider.getState(),
+        create:acEtatLocalisationProvider.create,
+        handleDelete:acEtatLocalisationProvider.delete,
+        handleEdit:acEtatLocalisationProvider.update,
         headers:[],
         columns: [
           {
@@ -474,8 +499,11 @@ headers:[{
       {
         name: "Exercice",
         nameHeader:"",
-        loader: AcExercicesService.fetchExercices,
-        dataProvider: exerciceServiceList,
+        loader: acExercicesProvider.find,
+        dataProvider: acExercicesProvider.getState(),
+        create:acExercicesProvider.create,
+        handleDelete:acExercicesProvider.delete,
+        handleEdit:acExercicesProvider.update,
         nameColumn:"Gestion des Exercices",
         headers:[],
         columns: [
@@ -509,8 +537,11 @@ headers:[{
         name: "Fonction",
         nameColumn:"Gestions des Fonctions",
         nameHeader:"",
-        loader: AcFunctionStateFuncs.fetchFuncions,
-        dataProvider: functionList,
+        loader: acFunctionProvider.find,
+        dataProvider: acFunctionProvider.getState(),
+        create:acFunctionProvider.create,
+        handleDelete:acFunctionProvider.delete,
+        handleEdit:acFunctionProvider.update,
         headers:[],
         columns: [
           {
@@ -526,8 +557,11 @@ headers:[{
       {
         name: "Groupe Créance",
         nameColumn:"Gestion des Groupes de Creance",
-        loader: AcGroupeCreanceStateFuncs.fetchGroupeCreances,
-        dataProvider: groupeCreanceList,
+        dataProvider: acGroupeCreanceProvider.getState(),
+        loader: acGroupeCreanceProvider.find,
+        create:acGroupeCreanceProvider.create,
+        handleDelete:acGroupeCreanceProvider.delete,
+        handleEdit:acGroupeCreanceProvider.update,
         nameHeader:"Gestion des Entités ACCC",
         headers:[
             {
@@ -559,8 +593,11 @@ headers:[{
         name: "Journal",
         nameHeader:"",
         nameColumn:"Gestion des Journaux",
-        loader: AcJournalStateFuncs.fetchJournals,
-        dataProvider: journalList,
+        dataProvider: acJournalProvider.getState(),
+        loader: acJournalProvider.find,
+        create:acJournalProvider.create,
+        handleDelete:acJournalProvider.delete,
+        handleEdit:acJournalProvider.update,
         headers:[],
         columns: [
           {
@@ -578,8 +615,11 @@ headers:[{
         nameHeader:"",
         nameColumn:"Messages",
         headers:[],
-        loader: AcMessagesStateFuncs.fetchMessages,
-        dataProvider: messagesList,
+        dataProvider: acMessagesProvider.getState(),
+        loader: acMessagesProvider.find,
+        create:acMessagesProvider.create,
+        handleDelete:acMessagesProvider.delete,
+        handleEdit:acMessagesProvider.update,
         columns: [
           {
             key: "Code",
@@ -596,8 +636,11 @@ headers:[{
         nameHeader:"",
         nameColumn:"Gestion des Modes d'Acquisition ",
         headers:[],
-        loader: AcModeAcquisitionStateFuncs.fetchAcquisitionModes,
-        dataProvider: acquisitionList,
+        dataProvider: acModeAcquisitionProvider.getState(),
+        loader: acModeAcquisitionProvider.find,
+        create:acModeAcquisitionProvider.create,
+        handleDelete:acModeAcquisitionProvider.delete,
+        handleEdit:acModeAcquisitionProvider.update,
         columns: [
           {
             key: "Code",
@@ -614,8 +657,11 @@ headers:[{
         nameColumn:"Gestion des Modes de Remboursement",
         nameHeader:"",
         headers:[],
-        loader: AcModePaiementStateFuncs.fetchPaimentModes,
-        dataProvider: paiementList,
+        dataProvider: acModePaiementProvider.getState(),
+        loader: acModePaiementProvider.find,
+        create:acModePaiementProvider.create,
+        handleDelete:acModePaiementProvider.delete,
+        handleEdit:acModePaiementProvider.update,
         columns: [
           {
             key: "Code",
@@ -632,8 +678,11 @@ headers:[{
         nameHeader:"",
         nameColumn:"Gestion des Nationalités",
         headers:[],
-        loader: AcNationalityStateFuncs.fetchNationalities,
-        dataProvider: nationalityList,
+        dataProvider: acNationaliteProvider.getState(),
+        loader: acNationaliteProvider.find,
+        create:acNationaliteProvider.create,
+        handleDelete:acNationaliteProvider.delete,
+        handleEdit:acNationaliteProvider.update,
         columns: [
           {
             key: "Code",
@@ -650,8 +699,11 @@ headers:[{
         nameColumn:"Gestion des Objets des Creances",
         nameHeader:"",
         headers:[],
-        loader: AcObjetCreancesStateFuncs.fetchCreancesObjects,
-        dataProvider: creancesList,
+        dataProvider: acObjetCreancesProvider.getState(),
+        loader: acObjetCreancesProvider.find,
+        create:acObjetCreancesProvider.create,
+        handleDelete:acObjetCreancesProvider.delete,
+        handleEdit:acObjetCreancesProvider.update,
         columns: [
           {
             key: "Code",
@@ -667,8 +719,11 @@ headers:[{
         name: "Opération",
         nameHeader:"Ville",
         headers: [],
-        loader: AcOperationAccountStateFuncs.fetchAccountOperations,
-        dataProvider: operationList,
+        dataProvider: acZoneProvider.getState(),
+        loader: acZoneProvider.find,
+        create:acZoneProvider.create,
+        handleDelete:acZoneProvider.delete,
+        handleEdit:acZoneProvider.update,
         nameColumn:"Quartier + Opération à revoir",
         columns: [
           {
@@ -690,8 +745,11 @@ headers:[{
         nameColumn:"Périodicité",
         nameHeader:"",
         headers:[],
-        loader: AcPeriodicityStateFuncs.fetchPeriodicities,
-        dataProvider: periodicityList,
+        dataProvider: acPeriodicityProvider.getState(),
+        loader: acPeriodicityProvider.find,
+        create:acPeriodicityProvider.create,
+        handleDelete:acPeriodicityProvider.delete,
+        handleEdit:acPeriodicityProvider.update,
         columns: [
           {
             label: "Code",
@@ -708,8 +766,11 @@ headers:[{
         nameColumn:"Liste des Paramètres",
         nameHeader:"",
         headers:[],
-        dataProvider:paramGenerauxList,
-        loader:AcParamGenerauxStateFuncs.fetchParamGeneraux,
+        dataProvider: acParamGenerauxProvider.getState(),
+        loader: acParamGenerauxProvider.find,
+        create:acParamGenerauxProvider.create,
+        handleDelete:acParamGenerauxProvider.delete,
+        handleEdit:acParamGenerauxProvider.update,
         columns: [
           {
             key: "Code",
@@ -733,8 +794,11 @@ headers:[{
         name: "Poste Comptable",
         nameColumn:"Postes Comptables",
         nameHeader:"",
-        dataProvider:posteComptableList,
-        loader:PosteComptableStateFuncs.fetchPosteComptable,
+        dataProvider: acPostecomptableyProvider.getState(),
+        loader: acPostecomptableyProvider.find,
+        create:acPostecomptableyProvider.create,
+        handleDelete:acPostecomptableyProvider.delete,
+        handleEdit:acPostecomptableyProvider.update,
         headers:[],
         columns: [
           {
@@ -751,8 +815,11 @@ headers:[{
         name: "Profession",
         nameColumn:"Gestion des Professions",
         nameHeader:"",
-        dataProvider: professionList,
-        loader:ProfessionStateFuncs.fetchProfessions,
+        dataProvider: acProfessionProvider.getState(),
+        loader: acProfessionProvider.find,
+        create:acProfessionProvider.create,
+        handleDelete:acProfessionProvider.delete,
+        handleEdit:acProfessionProvider.update,
         headers:[],
         columns: [
           {
@@ -769,6 +836,7 @@ headers:[{
         name: "Quartier",
         nameColumn:"Quartier",
         nameHeader:"",
+      // TODO
         headers:[],
         columns: [
           {
@@ -794,6 +862,7 @@ headers:[{
         nameColumn:"Gestion des Statuts des Creances",
         nameHeader:"",
         headers:[],
+        // TODO
         columns: [
           {
             key: "Code",
@@ -806,9 +875,10 @@ headers:[{
         ],
       },
       {
-        name: "Staut Salarié",
+        name: "Statut Salarié",
         nameColumn:"Gestion des Statuts des Salaries",
         nameHeader:"",
+        //TODO
         headers:[],
         columns: [
           {
@@ -825,6 +895,7 @@ headers:[{
         name: "Type d'Acte",
         nameColumn:"Acte",
         nameHeader:"",
+        //TODO
         headers:[],
         columns: [
           {
@@ -846,6 +917,7 @@ headers:[{
         nameColumn:"Type Auxiliaire",
         nameHeader:"",
         headers:[],
+        //TODO
         columns: [
           {
             key: "Code",
@@ -862,6 +934,8 @@ headers:[{
         nameColumn:"Gestion des Types d'Echéancier",
         nameHeader:"",
         headers:[],
+        //TODO
+
         columns: [
           {
             key: "Code",
@@ -877,6 +951,8 @@ headers:[{
         name: "Type de Charge",
         nameColumn:"Gestion des Types de Charge",
         nameHeader:"",
+        //TODO
+
         headers:[],
         columns: [
           {
@@ -898,6 +974,8 @@ headers:[{
         nameColumn:"Gestion des Types de Compte",
         nameHeader:"",
         headers:[],
+        //TODO
+
         columns: [
           {
             key: "Code",
@@ -914,6 +992,8 @@ headers:[{
         nameColumn:"Gestion des Types de Contrat",
         nameHeader:"",
         headers:[],
+        //TODO
+
         columns: [
           {
             key: "Code",
@@ -929,6 +1009,7 @@ headers:[{
         name: "Type Débiteur",
         nameColumn:"Gestion des Types de Debiteur",
         headers:[],
+        //TODO
         nameHeader:"",
         columns: [
           {
@@ -945,6 +1026,7 @@ headers:[{
         name: "Type de Domiciliation",
         nameColumn:"Type Domiciliation",
         headers:[],
+        //TODO
         nameHeader:"",
         columns: [
           {
@@ -961,6 +1043,7 @@ headers:[{
         name: "Type Effet",
         nameColumn:"Gestion Type Effet",
         nameHeader:"",
+        //TODO
         headers:[],
         columns: [
           {
@@ -978,6 +1061,7 @@ headers:[{
         nameColumn:"Saisiede Types Employeur",
         headers:[],
         nameHeader:"",
+        //TODO
         columns: [
           {
             key: "Code",
@@ -993,6 +1077,8 @@ headers:[{
         name: "Type de Frais",
         nameColumn:"Type Frais",
         nameHeader: "",
+        //TODO
+
         headers:[],
         columns: [
           {
@@ -1009,6 +1095,8 @@ headers:[{
         name: "Type Garantie Réelle",
         nameColumn:"Type de Garantie Réelle",
         headers:[],
+        //TODO
+
         nameHeader:"",
         columns: [
           {
@@ -1025,6 +1113,7 @@ headers:[{
         name: "Type Garantie Personnelle",
         nameColumn:"Type Garantie Personnelle",
         headers:[],
+        //TODO
         nameHeader:"",
         columns: [
           {
@@ -1041,6 +1130,7 @@ headers:[{
         name: "Type Logement",
         nameColumn:"Type Logement",
         headers:[],
+        //TODO
         nameHeader:"",
         columns: [
           {
@@ -1057,6 +1147,7 @@ headers:[{
         name: "Type Opération",
         nameColumn:"Type Opération",
         headers:[],
+        //TODO
         nameHeader:"",
         columns: [
           {
@@ -1087,6 +1178,7 @@ headers:[{
         nameColumn:"Type OVP",
         nameHeader:"",
         headers:[],
+        //TODO
         columns: [
           {
             key: "Code",
@@ -1101,8 +1193,11 @@ headers:[{
       {
         name: "Type Pièce",
         nameColumn:"Gestion des Type de Pièce",
-        dataProvider:typePieceList,
-        loader:AcTypePieceStateFuncs.fetchTypePiece,
+        dataProvider: acTypePieceProvider.getState(),
+        loader: acTypePieceProvider.find,
+        create:acTypePieceProvider.create,
+        handleDelete:acTypePieceProvider.delete,
+        handleEdit:acTypePieceProvider.update,
         headers:[],
         nameHeader:"",
         columns: [
@@ -1119,8 +1214,11 @@ headers:[{
       {
         name: "Type Régularisation",
         nameColumn:" Type de Régularisation",
-        dataProvider:typeRegulList,
-        loader:AcTypeRegulStateFuncs.fetchTypeRegul,
+        dataProvider: acTypeRegulProvider.getState(),
+        loader: acTypeRegulProvider.find,
+        create:acTypeRegulProvider.create,
+        handleDelete:acTypeRegulProvider.delete,
+        handleEdit:acTypeRegulProvider.update,
         headers:[],
         nameHeader:"",
         columns: [
@@ -1137,9 +1235,12 @@ headers:[{
       {
         name: "Type Saisie",
         nameColumn:"Type de Saisie",
-        dataProvider:typeSaisieList,
-        loader:AcTypeSaisieStateFuncs.fetchTypeSaisie,
         headers:[],
+        dataProvider: acTypeSaisieProvider.getState(),
+        loader: acTypeSaisieProvider.find,
+        create:acTypeSaisieProvider.create,
+        handleDelete:acTypeSaisieProvider.delete,
+        handleEdit:acTypeSaisieProvider.update,
         nameHeader:"",
         columns: [
           {
@@ -1156,8 +1257,11 @@ headers:[{
         name: "Ville",
         nameColumn:"Gestion des Villes",
         headers:[],
-        dataProvider:villeList,
-        loader:AcVilleStateFuncs.fetchVilles,
+        dataProvider: acVilleProvider.getState(),
+        loader: acVilleProvider.find,
+        create:acVilleProvider.create,
+        handleDelete:acVilleProvider.delete,
+        handleEdit:acVilleProvider.update,
         nameHeader:"",
         columns: [
           {
@@ -1172,9 +1276,12 @@ headers:[{
       },
       {
         name: "Zone",
-        dataProvider:zoneList,
-        loader:AcZoneStateFuncs.fetchZones,
         nameColumn:"Gestion des Zones",
+        dataProvider: acZoneProvider.getState(),
+        loader: acZoneProvider.find,
+        create:acZoneProvider.create,
+        handleDelete:acZoneProvider.delete,
+        handleEdit:acZoneProvider.update,
         headers:[],
         nameHeader:"",
         columns: [

@@ -2,7 +2,7 @@ import { AcEtatLocalisation } from "../../AcData.types";
 import ICrudStateProvider from "./ICrudStateProvider";
 
 
-class AcSatusRequestLocationStateProvider extends ICrudStateProvider<AcEtatLocalisation> {
+class AcEtatLocalisationStateProvider extends ICrudStateProvider<AcEtatLocalisation> {
     mapEntitieFrom(json: any): AcEtatLocalisation {
       return {
         id: json["etatCode"],
@@ -12,5 +12,5 @@ class AcSatusRequestLocationStateProvider extends ICrudStateProvider<AcEtatLocal
     }
   }
   
-  const acSatusRequestLocationProvider = new AcSatusRequestLocationStateProvider("/etat-localisation");
-  export default acSatusRequestLocationProvider;
+  const acEtatLocalisationProvider = new AcEtatLocalisationStateProvider("/etat-localisation");
+  export default acEtatLocalisationProvider;

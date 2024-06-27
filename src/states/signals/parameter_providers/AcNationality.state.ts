@@ -11,6 +11,6 @@ class AcNationalityStateProvider extends ICrudStateProvider<AcNationalite> {
     }
   }
   
-  const acNationalityProvider = new AcNationalityStateProvider("/nationalite");
-  export default acNationalityProvider;
+  const acNationaliteProvider = new AcNationalityStateProvider("/nationalite");
+  export default acNationaliteProvider;
 
