@@ -4,7 +4,7 @@ type ParameterBaseData = {
   libelle: string;
 };
 
-type AcAgenceBanque = ParameterBaseData;
+type AcBanqueAgence = ParameterBaseData;
 type AcBanque = ParameterBaseData & { responsabilite: string; adresse: string };
 type AcCategorieDebiteur = ParameterBaseData;
 type AcCivilite = ParameterBaseData;
@@ -16,7 +16,6 @@ type AcCptOperation = {
   codeBanqueAgence: string;
   codeGroupeCreance: string;
 };
-
 
 
 type AcCpteClientSonar=
@@ -37,7 +36,6 @@ type AcCompteOper = {
   cptoperCode: string;
   bqagCode: string;
   grpCreanCode: string;
-  
 };
 
 
