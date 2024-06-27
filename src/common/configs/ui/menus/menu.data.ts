@@ -13,7 +13,6 @@ import { AcOperationAccountStateFuncs, operationList } from "../../../../states/
 import { AcPeriodicityStateFuncs, periodicityList } from "../../../../states/signals/parameter_providers/AcPeriodicity.state";
 import { Signal } from "@preact/signals-react";
 import { ParameterColumnType } from "../../../../components/parameter-main-content/parameter-main-content";
-import { buildTableContent } from "../../../../components/base-table/base-table";
 import { AcCategoryDebtorStateFuncs, categroyList } from "../../../../states/signals/parameter_providers/AcCategoryDebtor.state";
 import { AcCilivityStateFuncs, civilityList } from "../../../../states/signals/parameter_providers/AcCivility.state";
 import { AcClasseStateFuncs, classeList } from "../../../../states/signals/parameter_providers/AcClasse.state";
@@ -41,15 +40,20 @@ import { AcTypeRegulStateFuncs, typeRegulList } from "../../../../states/signals
 import { AcTypePieceStateFuncs, typePieceList } from "../../../../states/signals/parameter_providers/AcTypePiece.state";
 import { AcParamGenerauxStateFuncs, paramGenerauxList } from "../../../../states/signals/parameter_providers/AcParamGeneraux.state";
 import acBanqueAgenceProvider from "../../../../states/signals/parameter_providers/AcBanqueAgence.state";
+import acBanqueProvider from "../../../../states/signals/parameter_providers/AcBanque.state";
+import { buildTableContent } from "../../../../components/base-table/table-render";
 
-type SubMenuType = {
+export type SubMenuType = {
   name: string;
   nameHeader?:string
   nameColumn?:string
-  loader?: (e: any) => any;
-  dataProvider?: Signal<any>;
-  columns?: ParameterColumnType[];
-  headers?: ParameterColumnType[];
+  loader?: (e: any) => any
+  dataProvider?: Signal<any>
+  columns?: ParameterColumnType[]
+  headers?: ParameterColumnType[]
+  handleDelete?:(data:any)=>void,
+  handleEdit?:(data:any)=>void,
+  create?:(data:any)=>void
 };
 
 type MenuItemType = {
@@ -113,6 +117,9 @@ const menuItemsData: Array<MenuItemType> = [
         loader: acBanqueAgenceProvider.find,
         dataProvider: acBanqueAgenceProvider.getState(),
         nameHeader:"Banque",
+        handleDelete:acBanqueAgenceProvider.delete,
+        handleEdit:acBanqueAgenceProvider.delete,
+        create:acBanqueAgenceProvider.create,
         nameColumn:"Agence",
         headers: [
           {
@@ -141,7 +148,10 @@ const menuItemsData: Array<MenuItemType> = [
         name: "Banque",
         nameColumn:"Saisie des Banques",
         nameHeader:"",
-        dataProvider: acBanqueAgenceProvider.getState(),
+        dataProvider: acBanqueProvider.getState(),
+        create:acBanqueProvider.create,
+        handleDelete:acBanqueProvider.delete,
+        handleEdit:acBanqueProvider.update,
         loader: acBanqueAgenceProvider.find,
         headers: [],
         columns: [
@@ -1306,7 +1316,7 @@ export const menuItems: MenuItem[] = menuItemsData.map((menuItem, index) => ({
       loader: subMenu.loader,
       render:
         subMenu.dataProvider && subMenu.columns
-          ? () => buildTableContent(subMenu.dataProvider!, subMenu.columns!)
+          ? () => buildTableContent({columns:subMenu.columns!,signal:subMenu.dataProvider!,subMenu:subMenu})
           : undefined,
       columns: subMenu.columns,
       path: formatLabelToPath(subMenu),

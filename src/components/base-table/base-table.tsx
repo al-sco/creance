@@ -9,10 +9,8 @@ import {
 import styled from "styled-components";
 import colors from "../../common/theme/colors/colors";
 import { ParameterColumnType } from "../parameter-main-content/parameter-main-content";
-import TableRowEditable from "./table-row";
 import { Signal } from "@preact/signals-react";
 import { SubMenuItem } from "../../common/configs/ui/menus/menus.type";
-import { useSignals } from "@preact/signals-react/runtime";
 
 type ParameterTableProps = {
   subMenu: SubMenuItem;
@@ -42,37 +40,12 @@ const thStyle = {
   color: colors.black,
 };
 
-type  TableRenderProps = {
-  signal: Signal<ParameterBaseData[]>,
+export type  TableRenderProps = {
+  signal: Signal<any[]>,
   columns: ParameterColumnType[]
 };
 
-const TableContentRender = ({ signal, columns} : TableRenderProps) => {
-  useSignals()
-  return (
-    <>
-      {signal.value.map((data: ParameterBaseData, index: number) => (
-        <TableRowEditable
-          data={data}
-          key={index}
-          columns={columns}
-          index={index}
-          bg={index % 2 == 0 ? undefined : colors.gray}
-        />
-      ))
-      }
-    </>
-  )
-}
 
-
-export const buildTableContent = (
-  signal: Signal<ParameterBaseData[]>,
-  columns: ParameterColumnType[]
-) => {
-  console.log('Building tables ...')
-  return <TableContentRender signal={signal} columns={columns} />
-};
 
 const BaseTable = ({ columns, subMenu }: ParameterTableProps) => {
   return (
