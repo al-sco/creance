@@ -3,8 +3,6 @@ import { SubMenuItem } from '../../common/configs/ui/menus/menus.type'
 import SubSideBarMenu from '../../components/sidebar-menu/sub-sidebar-menu'
 import styled from 'styled-components'
 import { Grid, GridItem,Spinner } from '@chakra-ui/react'
-import { ToastContainer } from 'react-toastify'
-import colors from '../../common/theme/colors/colors'
 
 type MainContentProps = {
   title: string
