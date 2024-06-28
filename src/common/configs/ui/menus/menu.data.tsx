@@ -60,18 +60,20 @@ import acStatutSalarieProvider from "../../../../states/signals/parameter_provid
 import acStatutCreanceProvider from "../../../../states/signals/parameter_providers/AcStatutCreance.state";
 import acQuartierProvider from "../../../../states/signals/parameter_providers/AcQuartier.state";
 import acCompteOperProvider from "../../../../states/signals/parameter_providers/AcCompte.state";
+import ListableSearchableItemComponent from "../../../../components/listable-searchable-item/listable-searchable-item";
 
 export type SubMenuType = {
   name: string;
-  nameHeader?:string
-  nameColumn?:string
+  nameHeader?: string
+  nameColumn?: string
   loader?: (e: any) => any
   dataProvider?: Signal<any>
   columns?: ParameterColumnType[]
   headers?: ParameterColumnType[]
-  handleDelete?:(data:any)=>void,
-  handleEdit?:(data:any)=>Promise<void>,
-  create?:(data:any)=>Promise<void>
+  handleDelete?: (data: any) => void,
+  handleEdit?: (data: any) => Promise<void>,
+  create?: (data: any) => Promise<void>,
+  additionalHeaderRender?: () => JSX.Element,
 };
 
 type MenuItemType = {
@@ -133,12 +135,13 @@ const menuItemsData: Array<MenuItemType> = [
       {
         name: "Agence de banque",
         loader: acBanqueAgenceProvider.find,
-        nameHeader:"Agence",
+        nameHeader: "Agence",
         dataProvider: acBanqueAgenceProvider.getState(),
-        handleDelete:acBanqueAgenceProvider.delete,
-        handleEdit:acBanqueAgenceProvider.update,
-        create:acBanqueAgenceProvider.create,
-        nameColumn:"",
+        handleDelete: acBanqueAgenceProvider.delete,
+        additionalHeaderRender: ()=> <ListableSearchableItemComponent placeholder="Rechercher une banque" searchPlaceholder="Exemple: Ecobank" />,
+        handleEdit: acBanqueAgenceProvider.update,
+        create: acBanqueAgenceProvider.create,        
+        nameColumn: "",
         headers: [
           {
             label: "Code",
@@ -164,12 +167,12 @@ const menuItemsData: Array<MenuItemType> = [
       },
       {
         name: "Banque",
-        nameColumn:"Saisie des Banques",
-        nameHeader:"",
+        nameColumn: "Saisie des Banques",
+        nameHeader: "",
         dataProvider: acBanqueProvider.getState(),
-        create:acBanqueProvider.create,
-        handleDelete:acBanqueProvider.delete,
-        handleEdit:acBanqueProvider.update,
+        create: acBanqueProvider.create,
+        handleDelete: acBanqueProvider.delete,
+        handleEdit: acBanqueProvider.update,
         loader: acBanqueProvider.find,
         headers: [
           {
@@ -207,13 +210,13 @@ const menuItemsData: Array<MenuItemType> = [
       },
       {
         name: "Catégorie de débiteur",
-        nameColumn:"Gestion des Catégories de Debiteur",
-        nameHeader:"",
+        nameColumn: "Gestion des Catégories de Debiteur",
+        nameHeader: "",
         loader: acCategoryDebtorProvider.find,
         dataProvider: acCategoryDebtorProvider.getState(),
-        create:acCategoryDebtorProvider.create,
-        handleDelete:acCategoryDebtorProvider.delete,
-        handleEdit:acCategoryDebtorProvider.update,
+        create: acCategoryDebtorProvider.create,
+        handleDelete: acCategoryDebtorProvider.delete,
+        handleEdit: acCategoryDebtorProvider.update,
         headers: [
           {
             label: "Code",
@@ -237,13 +240,13 @@ const menuItemsData: Array<MenuItemType> = [
       },
       {
         name: "Civilité",
-        nameColumn:"Civilité",
-        nameHeader:"",
+        nameColumn: "Civilité",
+        nameHeader: "",
         loader: acCilivityProvider.find,
         dataProvider: acCilivityProvider.getState(),
-        create:acCilivityProvider.create,
-        handleDelete:acCilivityProvider.delete,
-        handleEdit:acCilivityProvider.update,
+        create: acCilivityProvider.create,
+        handleDelete: acCilivityProvider.delete,
+        handleEdit: acCilivityProvider.update,
         headers: [
           {
             label: "Code",
@@ -268,13 +271,13 @@ const menuItemsData: Array<MenuItemType> = [
 
       {
         name: "Classe",
-        nameColumn:"Gestion des Classes",
-        nameHeader:"",
-        loader:acClasseProvider.find,
+        nameColumn: "Gestion des Classes",
+        nameHeader: "",
+        loader: acClasseProvider.find,
         dataProvider: acClasseProvider.getState(),
-        create:acClasseProvider.create,
-        handleDelete:acClasseProvider.delete,
-        handleEdit:acClasseProvider.update,
+        create: acClasseProvider.create,
+        handleDelete: acClasseProvider.delete,
+        handleEdit: acClasseProvider.update,
         headers: [
           {
             label: "Code",
@@ -299,14 +302,14 @@ const menuItemsData: Array<MenuItemType> = [
       {
         name: "Compte d'operation",
         dataProvider: acCompteOperProvider.getState(),
-loader: acCompteOperProvider.find,
-create: acCompteOperProvider.create,
-handleDelete: acCompteOperProvider.delete,
-handleEdit: acCompteOperProvider.update,
+        loader: acCompteOperProvider.find,
+        create: acCompteOperProvider.create,
+        handleDelete: acCompteOperProvider.delete,
+        handleEdit: acCompteOperProvider.update,
 
 
-        nameHeader:"Saisie Compte Opération",
-        nameColumn:"",
+        nameHeader: "Saisie Compte Opération",
+        nameColumn: "",
         columns: [
           {
             key: "codeBanqueAgence",
@@ -334,13 +337,13 @@ handleEdit: acCompteOperProvider.update,
       },
       {
         name: "Cpte Comptable d'Opération",
-        nameHeader:"Groupe Creance / Type Opération",
-        nameColumn:"Compte Ecriture",
+        nameHeader: "Groupe Creance / Type Opération",
+        nameColumn: "Compte Ecriture",
         loader: acComptableAccountOperationSonareciProvider.find,
         dataProvider: acComptableAccountOperationSonareciProvider.getState(),
-        create:acComptableAccountOperationSonareciProvider.create,
-        handleDelete:acComptableAccountOperationSonareciProvider.delete,
-        handleEdit:acComptableAccountOperationSonareciProvider.update,
+        create: acComptableAccountOperationSonareciProvider.create,
+        handleDelete: acComptableAccountOperationSonareciProvider.delete,
+        handleEdit: acComptableAccountOperationSonareciProvider.update,
         headers: [
           {
             key: "groupeCreance",
@@ -372,27 +375,27 @@ handleEdit: acCompteOperProvider.update,
       },
       {
         name: "Cpte comptable d'operation Sonar",
-        nameHeader:"Groupe Creance / Type Opération",
-        nameColumn:"Compte Ecriture",
+        nameHeader: "Groupe Creance / Type Opération",
+        nameColumn: "Compte Ecriture",
         loader: acComptableAccountOperationSonareciProvider.find,
         dataProvider: acComptableAccountOperationSonareciProvider.getState(),
-        create:acComptableAccountOperationSonareciProvider.create,
-        handleDelete:acComptableAccountOperationSonareciProvider.delete,
-        handleEdit:acComptableAccountOperationSonareciProvider.update,
+        create: acComptableAccountOperationSonareciProvider.create,
+        handleDelete: acComptableAccountOperationSonareciProvider.delete,
+        handleEdit: acComptableAccountOperationSonareciProvider.update,
         headers: [
-            {
-              key: "groupeCreance",
-              label: "Groupe Creance",
-            },
-            {
-              key: "typeOperation",
-              label: "Type Operation",
-            },
-            {
-                key: "groupeSonareci",
-                label: "Groupe Sonareci",
-              },
-          ],
+          {
+            key: "groupeCreance",
+            label: "Groupe Creance",
+          },
+          {
+            key: "typeOperation",
+            label: "Type Operation",
+          },
+          {
+            key: "groupeSonareci",
+            label: "Groupe Sonareci",
+          },
+        ],
         columns: [
           {
             key: "Compte",
@@ -415,27 +418,27 @@ handleEdit: acCompteOperProvider.update,
       },
       {
         name: "Cpte comptable d'operation Sonar Modif",
-        nameHeader:"Groupe Creance / Type Opération",
-        nameColumn:"Compte Ecriture",
+        nameHeader: "Groupe Creance / Type Opération",
+        nameColumn: "Compte Ecriture",
         loader: acComptableAccountOperationSonareciProvider.find,
         dataProvider: acComptableAccountOperationSonareciProvider.getState(),
-        create:acComptableAccountOperationSonareciProvider.create,
-        handleDelete:acComptableAccountOperationSonareciProvider.delete,
-        handleEdit:acComptableAccountOperationSonareciProvider.update,
+        create: acComptableAccountOperationSonareciProvider.create,
+        handleDelete: acComptableAccountOperationSonareciProvider.delete,
+        handleEdit: acComptableAccountOperationSonareciProvider.update,
         headers: [
-            {
-              key: "groupeCreance",
-              label: "Groupe Creance",
-            },
-            {
-              key: "typeOperation",
-              label: "Type Operation",
-            },
-            {
-                key: "groupeSonareci",
-                label: "Groupe Sonareci",
-              },
-          ],
+          {
+            key: "groupeCreance",
+            label: "Groupe Creance",
+          },
+          {
+            key: "typeOperation",
+            label: "Type Operation",
+          },
+          {
+            key: "groupeSonareci",
+            label: "Groupe Sonareci",
+          },
+        ],
         columns: [
           {
             key: "Compte",
@@ -457,15 +460,15 @@ handleEdit: acCompteOperProvider.update,
       },
       {
         name: "Codes produits Sonareci",
-        nameHeader:"",
-        nameColumn:"Code Produits (Cptes Clients)",
+        nameHeader: "",
+        nameColumn: "Code Produits (Cptes Clients)",
         dataProvider: acCodeProduitSonareciProvider.getState(),
-loader: acCodeProduitSonareciProvider.find,
-create: acCodeProduitSonareciProvider.create,
-handleDelete: acCodeProduitSonareciProvider.delete,
-handleEdit: acCodeProduitSonareciProvider.update
-,
-        headers:[
+        loader: acCodeProduitSonareciProvider.find,
+        create: acCodeProduitSonareciProvider.create,
+        handleDelete: acCodeProduitSonareciProvider.delete,
+        handleEdit: acCodeProduitSonareciProvider.update
+        ,
+        headers: [
           {
             key: "Code",
             label: "Code",
@@ -523,21 +526,21 @@ handleEdit: acCodeProduitSonareciProvider.update
 
       {
         name: "Entité",
-        nameColumn:"Liste des Entités de l'ACCC",
-        nameHeader:"",
+        nameColumn: "Liste des Entités de l'ACCC",
+        nameHeader: "",
         loader: acEntityProvider.find,
         dataProvider: acEntityProvider.getState(),
-        create:acEntityProvider.create,
-        handleDelete:acEntityProvider.delete,
-        handleEdit:acEntityProvider.update,
-headers:[{
-    key: "responsable",
-    label: "Responsable ou Fondé de pourvoirs",
-  },
-  {
-    key: "libelleLong",
-    label: "Libellé Long",
-  },],
+        create: acEntityProvider.create,
+        handleDelete: acEntityProvider.delete,
+        handleEdit: acEntityProvider.update,
+        headers: [{
+          key: "responsable",
+          label: "Responsable ou Fondé de pourvoirs",
+        },
+        {
+          key: "libelleLong",
+          label: "Libellé Long",
+        },],
         columns: [
           {
             key: "Code",
@@ -552,14 +555,14 @@ headers:[{
       },
       {
         name: "Etape",
-        nameColumn:"Gestion des Etapes",
-        nameHeader:"",
+        nameColumn: "Gestion des Etapes",
+        nameHeader: "",
         loader: acEtapeProvider.find,
         dataProvider: acEtapeProvider.getState(),
-        create:acEtapeProvider.create,
-        handleDelete:acEtapeProvider.delete,
-        handleEdit:acEtapeProvider.update,
-        headers:[],
+        create: acEtapeProvider.create,
+        handleDelete: acEtapeProvider.delete,
+        handleEdit: acEtapeProvider.update,
+        headers: [],
         columns: [
           {
             key: "Code",
@@ -573,14 +576,14 @@ headers:[{
       },
       {
         name: "Etat de la demande de Localisation",
-        nameHeader:"",
-        nameColumn:"Etat Localisation",
+        nameHeader: "",
+        nameColumn: "Etat Localisation",
         loader: acEtatLocalisationProvider.find,
         dataProvider: acEtatLocalisationProvider.getState(),
-        create:acEtatLocalisationProvider.create,
-        handleDelete:acEtatLocalisationProvider.delete,
-        handleEdit:acEtatLocalisationProvider.update,
-        headers:[],
+        create: acEtatLocalisationProvider.create,
+        handleDelete: acEtatLocalisationProvider.delete,
+        handleEdit: acEtatLocalisationProvider.update,
+        headers: [],
         columns: [
           {
             key: "Code",
@@ -594,14 +597,14 @@ headers:[{
       },
       {
         name: "Exercice",
-        nameHeader:"",
+        nameHeader: "",
         loader: acExercicesProvider.find,
         dataProvider: acExercicesProvider.getState(),
-        create:acExercicesProvider.create,
-        handleDelete:acExercicesProvider.delete,
-        handleEdit:acExercicesProvider.update,
-        nameColumn:"Gestion des Exercices",
-        headers:[
+        create: acExercicesProvider.create,
+        handleDelete: acExercicesProvider.delete,
+        handleEdit: acExercicesProvider.update,
+        nameColumn: "Gestion des Exercices",
+        headers: [
           {
             key: "annee",
             label: "Annee",
@@ -656,14 +659,14 @@ headers:[{
       },
       {
         name: "Fonction",
-        nameColumn:"Gestions des Fonctions",
-        nameHeader:"",
+        nameColumn: "Gestions des Fonctions",
+        nameHeader: "",
         loader: acFunctionProvider.find,
         dataProvider: acFunctionProvider.getState(),
-        create:acFunctionProvider.create,
-        handleDelete:acFunctionProvider.delete,
-        handleEdit:acFunctionProvider.update,
-        headers:[
+        create: acFunctionProvider.create,
+        handleDelete: acFunctionProvider.delete,
+        handleEdit: acFunctionProvider.update,
+        headers: [
           {
             key: "Code",
             label: "Code",
@@ -686,26 +689,26 @@ headers:[{
       },
       {
         name: "Groupe Créance",
-        nameColumn:"Gestion des Groupes de Creance",
+        nameColumn: "Gestion des Groupes de Creance",
         dataProvider: acGroupeCreanceProvider.getState(),
         loader: acGroupeCreanceProvider.find,
-        create:acGroupeCreanceProvider.create,
-        handleDelete:acGroupeCreanceProvider.delete,
-        handleEdit:acGroupeCreanceProvider.update,
-        nameHeader:"Gestion des Entités ACCC",
-        headers:[
-            {
-                key: "Code",
-                label: "Code",
-              },
-              {
-                key: "Libelle",
-                label: "Libelle",
-              },
-              {
-                key: "Libellé Long",
-                label: "Libellé Long",
-              },
+        create: acGroupeCreanceProvider.create,
+        handleDelete: acGroupeCreanceProvider.delete,
+        handleEdit: acGroupeCreanceProvider.update,
+        nameHeader: "Gestion des Entités ACCC",
+        headers: [
+          {
+            key: "Code",
+            label: "Code",
+          },
+          {
+            key: "Libelle",
+            label: "Libelle",
+          },
+          {
+            key: "Libellé Long",
+            label: "Libellé Long",
+          },
         ],
         columns: [
           {
@@ -721,14 +724,14 @@ headers:[{
       },
       {
         name: "Journal",
-        nameHeader:"",
-        nameColumn:"Gestion des Journaux",
+        nameHeader: "",
+        nameColumn: "Gestion des Journaux",
         dataProvider: acJournalProvider.getState(),
         loader: acJournalProvider.find,
-        create:acJournalProvider.create,
-        handleDelete:acJournalProvider.delete,
-        handleEdit:acJournalProvider.update,
-        headers:[
+        create: acJournalProvider.create,
+        handleDelete: acJournalProvider.delete,
+        handleEdit: acJournalProvider.update,
+        headers: [
           {
             key: "Code",
             label: "Code",
@@ -751,9 +754,9 @@ headers:[{
       },
       {
         name: "Message",
-        nameHeader:"",
-        nameColumn:"Messages",
-        headers:[
+        nameHeader: "",
+        nameColumn: "Messages",
+        headers: [
           {
             key: "Code",
             label: "Code",
@@ -765,9 +768,9 @@ headers:[{
         ],
         dataProvider: acMessagesProvider.getState(),
         loader: acMessagesProvider.find,
-        create:acMessagesProvider.create,
-        handleDelete:acMessagesProvider.delete,
-        handleEdit:acMessagesProvider.update,
+        create: acMessagesProvider.create,
+        handleDelete: acMessagesProvider.delete,
+        handleEdit: acMessagesProvider.update,
         columns: [
           {
             key: "Code",
@@ -781,9 +784,9 @@ headers:[{
       },
       {
         name: "Mode d'Acquisition",
-        nameHeader:"",
-        nameColumn:"Gestion des Modes d'Acquisition ",
-        headers:[
+        nameHeader: "",
+        nameColumn: "Gestion des Modes d'Acquisition ",
+        headers: [
           {
             key: "Code",
             label: "Code",
@@ -795,9 +798,9 @@ headers:[{
         ],
         dataProvider: acModeAcquisitionProvider.getState(),
         loader: acModeAcquisitionProvider.find,
-        create:acModeAcquisitionProvider.create,
-        handleDelete:acModeAcquisitionProvider.delete,
-        handleEdit:acModeAcquisitionProvider.update,
+        create: acModeAcquisitionProvider.create,
+        handleDelete: acModeAcquisitionProvider.delete,
+        handleEdit: acModeAcquisitionProvider.update,
         columns: [
           {
             key: "Code",
@@ -811,9 +814,9 @@ headers:[{
       },
       {
         name: "Mode de Paiement",
-        nameColumn:"Gestion des Modes de Remboursement",
-        nameHeader:"",
-        headers:[
+        nameColumn: "Gestion des Modes de Remboursement",
+        nameHeader: "",
+        headers: [
           {
             key: "Code",
             label: "Code",
@@ -825,9 +828,9 @@ headers:[{
         ],
         dataProvider: acModePaiementProvider.getState(),
         loader: acModePaiementProvider.find,
-        create:acModePaiementProvider.create,
-        handleDelete:acModePaiementProvider.delete,
-        handleEdit:acModePaiementProvider.update,
+        create: acModePaiementProvider.create,
+        handleDelete: acModePaiementProvider.delete,
+        handleEdit: acModePaiementProvider.update,
         columns: [
           {
             key: "Code",
@@ -841,9 +844,9 @@ headers:[{
       },
       {
         name: "Nationalité",
-        nameHeader:"",
-        nameColumn:"Gestion des Nationalités",
-        headers:[
+        nameHeader: "",
+        nameColumn: "Gestion des Nationalités",
+        headers: [
           {
             key: "Code",
             label: "Code",
@@ -855,9 +858,9 @@ headers:[{
         ],
         dataProvider: acNationaliteProvider.getState(),
         loader: acNationaliteProvider.find,
-        create:acNationaliteProvider.create,
-        handleDelete:acNationaliteProvider.delete,
-        handleEdit:acNationaliteProvider.update,
+        create: acNationaliteProvider.create,
+        handleDelete: acNationaliteProvider.delete,
+        handleEdit: acNationaliteProvider.update,
         columns: [
           {
             key: "Code",
@@ -871,14 +874,14 @@ headers:[{
       },
       {
         name: "Objet créance",
-        nameColumn:"Gestion des Objets des Creances",
-        nameHeader:"",
-        headers:[],
+        nameColumn: "Gestion des Objets des Creances",
+        nameHeader: "",
+        headers: [],
         dataProvider: acObjetCreancesProvider.getState(),
         loader: acObjetCreancesProvider.find,
-        create:acObjetCreancesProvider.create,
-        handleDelete:acObjetCreancesProvider.delete,
-        handleEdit:acObjetCreancesProvider.update,
+        create: acObjetCreancesProvider.create,
+        handleDelete: acObjetCreancesProvider.delete,
+        handleEdit: acObjetCreancesProvider.update,
         columns: [
           {
             key: "Code",
@@ -892,7 +895,7 @@ headers:[{
       },
       {
         name: "Opération",
-        nameHeader:"Ville",
+        nameHeader: "Ville",
         headers: [
           {
             key: "zone",
@@ -909,10 +912,10 @@ headers:[{
         ],
         dataProvider: acZoneProvider.getState(),
         loader: acZoneProvider.find,
-        create:acZoneProvider.create,
-        handleDelete:acZoneProvider.delete,
-        handleEdit:acZoneProvider.update,
-        nameColumn:"Quartier + Opération à revoir",
+        create: acZoneProvider.create,
+        handleDelete: acZoneProvider.delete,
+        handleEdit: acZoneProvider.update,
+        nameColumn: "Quartier + Opération à revoir",
         columns: [
           {
             key: "zone",
@@ -930,9 +933,9 @@ headers:[{
       },
       {
         name: "Périodicité",
-        nameColumn:"Périodicité",
-        nameHeader:"",
-        headers:[
+        nameColumn: "Périodicité",
+        nameHeader: "",
+        headers: [
           {
             label: "Code",
             key: "Code",
@@ -944,9 +947,9 @@ headers:[{
         ],
         dataProvider: acPeriodicityProvider.getState(),
         loader: acPeriodicityProvider.find,
-        create:acPeriodicityProvider.create,
-        handleDelete:acPeriodicityProvider.delete,
-        handleEdit:acPeriodicityProvider.update,
+        create: acPeriodicityProvider.create,
+        handleDelete: acPeriodicityProvider.delete,
+        handleEdit: acPeriodicityProvider.update,
         columns: [
           {
             label: "Code",
@@ -960,9 +963,9 @@ headers:[{
       },
       {
         name: "Paramètre Généraux",
-        nameColumn:"Liste des Paramètres",
-        nameHeader:"",
-        headers:[
+        nameColumn: "Liste des Paramètres",
+        nameHeader: "",
+        headers: [
           {
             key: "Code",
             label: "Code",
@@ -982,9 +985,9 @@ headers:[{
         ],
         dataProvider: acParamGenerauxProvider.getState(),
         loader: acParamGenerauxProvider.find,
-        create:acParamGenerauxProvider.create,
-        handleDelete:acParamGenerauxProvider.delete,
-        handleEdit:acParamGenerauxProvider.update,
+        create: acParamGenerauxProvider.create,
+        handleDelete: acParamGenerauxProvider.delete,
+        handleEdit: acParamGenerauxProvider.update,
         columns: [
           {
             key: "Code",
@@ -1006,13 +1009,13 @@ headers:[{
       },
       {
         name: "Poste Comptable",
-        nameColumn:"Postes Comptables",
-        nameHeader:"",
+        nameColumn: "Postes Comptables",
+        nameHeader: "",
         dataProvider: acPostecomptableyProvider.getState(),
         loader: acPostecomptableyProvider.find,
-        create:acPostecomptableyProvider.create,
-        handleDelete:acPostecomptableyProvider.delete,
-        handleEdit:acPostecomptableyProvider.update,
+        create: acPostecomptableyProvider.create,
+        handleDelete: acPostecomptableyProvider.delete,
+        handleEdit: acPostecomptableyProvider.update,
         headers: [
           {
             key: "Code",
@@ -1036,14 +1039,14 @@ headers:[{
       },
       {
         name: "Profession",
-        nameColumn:"Gestion des Professions",
-        nameHeader:"",
+        nameColumn: "Gestion des Professions",
+        nameHeader: "",
         dataProvider: acProfessionProvider.getState(),
         loader: acProfessionProvider.find,
-        create:acProfessionProvider.create,
-        handleDelete:acProfessionProvider.delete,
-        handleEdit:acProfessionProvider.update,
-        headers:[
+        create: acProfessionProvider.create,
+        handleDelete: acProfessionProvider.delete,
+        handleEdit: acProfessionProvider.update,
+        headers: [
           {
             key: "Code",
             label: "Code",
@@ -1066,15 +1069,15 @@ headers:[{
       },
       {
         name: "Quartier",
-        nameColumn:"Quartier",
-        nameHeader:"",
+        nameColumn: "Quartier",
+        nameHeader: "",
         dataProvider: acQuartierProvider.getState(),
         loader: acQuartierProvider.find,
         create: acQuartierProvider.create,
         handleDelete: acQuartierProvider.delete,
         handleEdit: acQuartierProvider.update,
-        
-        headers:[
+
+        headers: [
           {
             key: "Code",
             label: "Code",
@@ -1113,9 +1116,9 @@ headers:[{
       },
       {
         name: "Statut Créance",
-        nameColumn:"Gestion des Statuts des Creances",
-        nameHeader:"",
-        headers:[
+        nameColumn: "Gestion des Statuts des Creances",
+        nameHeader: "",
+        headers: [
           {
             key: "Code",
             label: "Code",
@@ -1130,7 +1133,7 @@ headers:[{
         create: acStatutCreanceProvider.create,
         handleDelete: acStatutCreanceProvider.delete,
         handleEdit: acStatutCreanceProvider.update,
-        
+
         columns: [
           {
             key: "Code",
@@ -1144,15 +1147,15 @@ headers:[{
       },
       {
         name: "Statut Salarié",
-        nameColumn:"Gestion des Statuts des Salaries",
-        nameHeader:"",
+        nameColumn: "Gestion des Statuts des Salaries",
+        nameHeader: "",
         dataProvider: acStatutSalarieProvider.getState(),
-loader: acStatutSalarieProvider.find,
-create: acStatutSalarieProvider.create,
-handleDelete: acStatutSalarieProvider.delete,
-handleEdit: acStatutSalarieProvider.update,
+        loader: acStatutSalarieProvider.find,
+        create: acStatutSalarieProvider.create,
+        handleDelete: acStatutSalarieProvider.delete,
+        handleEdit: acStatutSalarieProvider.update,
 
-        headers:[
+        headers: [
           {
             key: "Code",
             label: "Code",
@@ -1175,15 +1178,15 @@ handleEdit: acStatutSalarieProvider.update,
       },
       {
         name: "Type d'Acte",
-        nameColumn:"Acte",
-        nameHeader:"",
+        nameColumn: "Acte",
+        nameHeader: "",
         dataProvider: acTypeActeProvider.getState(),
-loader: acTypeActeProvider.find,
-create: acTypeActeProvider.create,
-handleDelete: acTypeActeProvider.delete,
-handleEdit: acTypeActeProvider.update,
+        loader: acTypeActeProvider.find,
+        create: acTypeActeProvider.create,
+        handleDelete: acTypeActeProvider.delete,
+        handleEdit: acTypeActeProvider.update,
 
-        headers:[
+        headers: [
           {
             key: "Code",
             label: "Code",
@@ -1214,9 +1217,9 @@ handleEdit: acTypeActeProvider.update,
       },
       {
         name: "Type d'Auxiliaire",
-        nameColumn:"Type Auxiliaire",
-        nameHeader:"",
-        headers:[
+        nameColumn: "Type Auxiliaire",
+        nameHeader: "",
+        headers: [
           {
             key: "Code",
             label: "Code",
@@ -1227,10 +1230,10 @@ handleEdit: acTypeActeProvider.update,
           },
         ],
         dataProvider: acTypeAuxilProvider.getState(),
-loader: acTypeAuxilProvider.find,
-create: acTypeAuxilProvider.create,
-handleDelete: acTypeAuxilProvider.delete,
-handleEdit: acTypeAuxilProvider.update,
+        loader: acTypeAuxilProvider.find,
+        create: acTypeAuxilProvider.create,
+        handleDelete: acTypeAuxilProvider.delete,
+        handleEdit: acTypeAuxilProvider.update,
 
         columns: [
           {
@@ -1245,9 +1248,9 @@ handleEdit: acTypeAuxilProvider.update,
       },
       {
         name: "Type d'Echéancier",
-        nameColumn:"Gestion des Types d'Echéancier",
-        nameHeader:"",
-        headers:[
+        nameColumn: "Gestion des Types d'Echéancier",
+        nameHeader: "",
+        headers: [
           {
             key: "Code",
             label: "Code",
@@ -1258,10 +1261,10 @@ handleEdit: acTypeAuxilProvider.update,
           },
         ],
         dataProvider: acTypeEcheancierProvider.getState(),
-loader: acTypeEcheancierProvider.find,
-create: acTypeEcheancierProvider.create,
-handleDelete: acTypeEcheancierProvider.delete,
-handleEdit: acTypeEcheancierProvider.update,
+        loader: acTypeEcheancierProvider.find,
+        create: acTypeEcheancierProvider.create,
+        handleDelete: acTypeEcheancierProvider.delete,
+        handleEdit: acTypeEcheancierProvider.update,
 
 
         columns: [
@@ -1277,16 +1280,16 @@ handleEdit: acTypeEcheancierProvider.update,
       },
       {
         name: "Type de Charge",
-        nameColumn:"Gestion des Types de Charge",
-        nameHeader:"",
+        nameColumn: "Gestion des Types de Charge",
+        nameHeader: "",
         dataProvider: acTypeChargeProvider.getState(),
-loader: acTypeChargeProvider.find,
-create: acTypeChargeProvider.create,
-handleDelete: acTypeChargeProvider.delete,
-handleEdit: acTypeChargeProvider.update,
+        loader: acTypeChargeProvider.find,
+        create: acTypeChargeProvider.create,
+        handleDelete: acTypeChargeProvider.delete,
+        handleEdit: acTypeChargeProvider.update,
 
 
-        headers:[
+        headers: [
           {
             key: "Code",
             label: "Code",
@@ -1317,9 +1320,9 @@ handleEdit: acTypeChargeProvider.update,
       },
       {
         name: "Type de Compte",
-        nameColumn:"Gestion des Types de Compte",
-        nameHeader:"",
-        headers:[
+        nameColumn: "Gestion des Types de Compte",
+        nameHeader: "",
+        headers: [
           {
             key: "Code",
             label: "Code",
@@ -1334,7 +1337,7 @@ handleEdit: acTypeChargeProvider.update,
         create: acTypeCptProvider.create,
         handleDelete: acTypeCptProvider.delete,
         handleEdit: acTypeCptProvider.update,
-        
+
 
         columns: [
           {
@@ -1349,9 +1352,9 @@ handleEdit: acTypeChargeProvider.update,
       },
       {
         name: "Type de Contrat",
-        nameColumn:"Gestion des Types de Contrat",
-        nameHeader:"",
-        headers:[
+        nameColumn: "Gestion des Types de Contrat",
+        nameHeader: "",
+        headers: [
           {
             key: "Code",
             label: "Code",
@@ -1362,10 +1365,10 @@ handleEdit: acTypeChargeProvider.update,
           },
         ],
         dataProvider: acTypeContratProvider.getState(),
-loader: acTypeContratProvider.find,
-create: acTypeContratProvider.create,
-handleDelete: acTypeContratProvider.delete,
-handleEdit: acTypeContratProvider.update,
+        loader: acTypeContratProvider.find,
+        create: acTypeContratProvider.create,
+        handleDelete: acTypeContratProvider.delete,
+        handleEdit: acTypeContratProvider.update,
         columns: [
           {
             key: "Code",
@@ -1379,8 +1382,8 @@ handleEdit: acTypeContratProvider.update,
       },
       {
         name: "Type Débiteur",
-        nameColumn:"Gestion des Types de Debiteur",
-        headers:[
+        nameColumn: "Gestion des Types de Debiteur",
+        headers: [
           {
             key: "Code",
             label: "Code",
@@ -1391,12 +1394,12 @@ handleEdit: acTypeContratProvider.update,
           },
         ],
         dataProvider: acTypeDebiteurProvider.getState(),
-loader: acTypeDebiteurProvider.find,
-create: acTypeDebiteurProvider.create,
-handleDelete: acTypeDebiteurProvider.delete,
-handleEdit: acTypeDebiteurProvider.update,
+        loader: acTypeDebiteurProvider.find,
+        create: acTypeDebiteurProvider.create,
+        handleDelete: acTypeDebiteurProvider.delete,
+        handleEdit: acTypeDebiteurProvider.update,
 
-        nameHeader:"",
+        nameHeader: "",
         columns: [
           {
             key: "Code",
@@ -1410,8 +1413,8 @@ handleEdit: acTypeDebiteurProvider.update,
       },
       {
         name: "Type de Domiciliation",
-        nameColumn:"Type Domiciliation",
-        headers:[
+        nameColumn: "Type Domiciliation",
+        headers: [
           {
             key: "Code",
             label: "Code",
@@ -1422,12 +1425,12 @@ handleEdit: acTypeDebiteurProvider.update,
           },
         ],
         dataProvider: acTypeDomicilProvider.getState(),
-loader: acTypeDomicilProvider.find,
-create: acTypeDomicilProvider.create,
-handleDelete: acTypeDomicilProvider.delete,
-handleEdit: acTypeDomicilProvider.update,
+        loader: acTypeDomicilProvider.find,
+        create: acTypeDomicilProvider.create,
+        handleDelete: acTypeDomicilProvider.delete,
+        handleEdit: acTypeDomicilProvider.update,
 
-        nameHeader:"",
+        nameHeader: "",
         columns: [
           {
             key: "Code",
@@ -1441,15 +1444,15 @@ handleEdit: acTypeDomicilProvider.update,
       },
       {
         name: "Type Effet",
-        nameColumn:"Gestion Type Effet",
-        nameHeader:"",
+        nameColumn: "Gestion Type Effet",
+        nameHeader: "",
         dataProvider: acTypeEffetProvider.getState(),
-loader: acTypeEffetProvider.find,
-create: acTypeEffetProvider.create,
-handleDelete: acTypeEffetProvider.delete,
-handleEdit: acTypeEffetProvider.update,
+        loader: acTypeEffetProvider.find,
+        create: acTypeEffetProvider.create,
+        handleDelete: acTypeEffetProvider.delete,
+        handleEdit: acTypeEffetProvider.update,
 
-        headers:[
+        headers: [
           {
             key: "Code",
             label: "Code",
@@ -1472,8 +1475,8 @@ handleEdit: acTypeEffetProvider.update,
       },
       {
         name: "Type Employeur",
-        nameColumn:"Saisiede Types Employeur",
-        headers:[
+        nameColumn: "Saisiede Types Employeur",
+        headers: [
           {
             key: "Code",
             label: "Code",
@@ -1483,12 +1486,12 @@ handleEdit: acTypeEffetProvider.update,
             label: "Libelle",
           },
         ],
-        nameHeader:"",
+        nameHeader: "",
         dataProvider: acTypeEmployeurProvider.getState(),
-loader: acTypeEmployeurProvider.find,
-create: acTypeEmployeurProvider.create,
-handleDelete: acTypeEmployeurProvider.delete,
-handleEdit: acTypeEmployeurProvider.update,
+        loader: acTypeEmployeurProvider.find,
+        create: acTypeEmployeurProvider.create,
+        handleDelete: acTypeEmployeurProvider.delete,
+        handleEdit: acTypeEmployeurProvider.update,
 
         columns: [
           {
@@ -1503,16 +1506,16 @@ handleEdit: acTypeEmployeurProvider.update,
       },
       {
         name: "Type de Frais",
-        nameColumn:"Type Frais",
+        nameColumn: "Type Frais",
         nameHeader: "",
         dataProvider: acTypeFraiProvider.getState(),
-loader: acTypeFraiProvider.find,
-create: acTypeFraiProvider.create,
-handleDelete: acTypeFraiProvider.delete,
-handleEdit: acTypeFraiProvider.update,
+        loader: acTypeFraiProvider.find,
+        create: acTypeFraiProvider.create,
+        handleDelete: acTypeFraiProvider.delete,
+        handleEdit: acTypeFraiProvider.update,
 
 
-        headers:[
+        headers: [
           {
             key: "Code",
             label: "Code",
@@ -1535,8 +1538,8 @@ handleEdit: acTypeFraiProvider.update,
       },
       {
         name: "Type Garantie Réelle",
-        nameColumn:"Type de Garantie Réelle",
-        headers:[
+        nameColumn: "Type de Garantie Réelle",
+        headers: [
           {
             key: "Code",
             label: "Code",
@@ -1547,13 +1550,13 @@ handleEdit: acTypeFraiProvider.update,
           },
         ],
         dataProvider: acTypgarReelleProvider.getState(),
-loader: acTypgarReelleProvider.find,
-create: acTypgarReelleProvider.create,
-handleDelete: acTypgarReelleProvider.delete,
-handleEdit: acTypgarReelleProvider.update,
+        loader: acTypgarReelleProvider.find,
+        create: acTypgarReelleProvider.create,
+        handleDelete: acTypgarReelleProvider.delete,
+        handleEdit: acTypgarReelleProvider.update,
 
 
-        nameHeader:"",
+        nameHeader: "",
         columns: [
           {
             key: "Code",
@@ -1567,8 +1570,8 @@ handleEdit: acTypgarReelleProvider.update,
       },
       {
         name: "Type Garantie Personnelle",
-        nameColumn:"Type Garantie Personnelle",
-        headers:[
+        nameColumn: "Type Garantie Personnelle",
+        headers: [
           {
             key: "Code",
             label: "Code",
@@ -1583,8 +1586,8 @@ handleEdit: acTypgarReelleProvider.update,
         create: acTypgarPhyProvider.create,
         handleDelete: acTypgarPhyProvider.delete,
         handleEdit: acTypgarPhyProvider.update,
-        
-        nameHeader:"",
+
+        nameHeader: "",
         columns: [
           {
             key: "Code",
@@ -1598,8 +1601,8 @@ handleEdit: acTypgarReelleProvider.update,
       },
       {
         name: "Type Logement",
-        nameColumn:"Type Logement",
-        headers:[
+        nameColumn: "Type Logement",
+        headers: [
           {
             key: "Code",
             label: "Code",
@@ -1610,12 +1613,12 @@ handleEdit: acTypgarReelleProvider.update,
           },
         ],
         dataProvider: acTypeLogementProvider.getState(),
-loader: acTypeLogementProvider.find,
-create: acTypeLogementProvider.create,
-handleDelete: acTypeLogementProvider.delete,
-handleEdit: acTypeLogementProvider.update,
+        loader: acTypeLogementProvider.find,
+        create: acTypeLogementProvider.create,
+        handleDelete: acTypeLogementProvider.delete,
+        handleEdit: acTypeLogementProvider.update,
 
-        nameHeader:"",
+        nameHeader: "",
         columns: [
           {
             key: "Code",
@@ -1629,8 +1632,8 @@ handleEdit: acTypeLogementProvider.update,
       },
       {
         name: "Type Opération",
-        nameColumn:"Type Opération",
-        headers:[
+        nameColumn: "Type Opération",
+        headers: [
           {
             key: "Code",
             label: "Code",
@@ -1654,11 +1657,11 @@ handleEdit: acTypeLogementProvider.update,
 
         ],
         dataProvider: acTypeOperationProvider.getState(),
-loader: acTypeOperationProvider.find,
-create: acTypeOperationProvider.create,
-handleDelete: acTypeOperationProvider.delete,
-handleEdit: acTypeOperationProvider.update,
-        nameHeader:"",
+        loader: acTypeOperationProvider.find,
+        create: acTypeOperationProvider.create,
+        handleDelete: acTypeOperationProvider.delete,
+        handleEdit: acTypeOperationProvider.update,
+        nameHeader: "",
         columns: [
           {
             key: "Code",
@@ -1685,10 +1688,10 @@ handleEdit: acTypeOperationProvider.update,
       },
       {
         name: "Type OVP",
-        nameColumn:"Type OVP",
-       
-        nameHeader:"",
-        headers:[
+        nameColumn: "Type OVP",
+
+        nameHeader: "",
+        headers: [
           {
             key: "Code",
             label: "Code",
@@ -1698,10 +1701,10 @@ handleEdit: acTypeOperationProvider.update,
             label: "Libelle",
           },
         ],
-        dataProvider:acTypeOVPProvider.getState(),
-        loader:acTypeOVPProvider.find,
-        create:acTypeOVPProvider.create,
-        handleDelete:acTypeOVPProvider.delete,
+        dataProvider: acTypeOVPProvider.getState(),
+        loader: acTypeOVPProvider.find,
+        create: acTypeOVPProvider.create,
+        handleDelete: acTypeOVPProvider.delete,
         handleEdit: acTypeOVPProvider.update,
 
         columns: [
@@ -1717,13 +1720,13 @@ handleEdit: acTypeOperationProvider.update,
       },
       {
         name: "Type Pièce",
-        nameColumn:"Gestion des Type de Pièce",
+        nameColumn: "Gestion des Type de Pièce",
         dataProvider: acTypePieceProvider.getState(),
         loader: acTypePieceProvider.find,
-        create:acTypePieceProvider.create,
-        handleDelete:acTypePieceProvider.delete,
-        handleEdit:acTypePieceProvider.update,
-        headers:[
+        create: acTypePieceProvider.create,
+        handleDelete: acTypePieceProvider.delete,
+        handleEdit: acTypePieceProvider.update,
+        headers: [
           {
             key: "Code",
             label: "Code",
@@ -1733,7 +1736,7 @@ handleEdit: acTypeOperationProvider.update,
             label: "Libelle",
           },
         ],
-        nameHeader:"",
+        nameHeader: "",
         columns: [
           {
             key: "Code",
@@ -1747,13 +1750,13 @@ handleEdit: acTypeOperationProvider.update,
       },
       {
         name: "Type Régularisation",
-        nameColumn:" Type de Régularisation",
+        nameColumn: " Type de Régularisation",
         dataProvider: acTypeRegulProvider.getState(),
         loader: acTypeRegulProvider.find,
-        create:acTypeRegulProvider.create,
-        handleDelete:acTypeRegulProvider.delete,
-        handleEdit:acTypeRegulProvider.update,
-        headers:[
+        create: acTypeRegulProvider.create,
+        handleDelete: acTypeRegulProvider.delete,
+        handleEdit: acTypeRegulProvider.update,
+        headers: [
           {
             key: "Code",
             label: "Code",
@@ -1763,7 +1766,7 @@ handleEdit: acTypeOperationProvider.update,
             label: "Libelle",
           },
         ],
-        nameHeader:"",
+        nameHeader: "",
         columns: [
           {
             key: "Code",
@@ -1777,8 +1780,8 @@ handleEdit: acTypeOperationProvider.update,
       },
       {
         name: "Type Saisie",
-        nameColumn:"Type de Saisie",
-        headers:[
+        nameColumn: "Type de Saisie",
+        headers: [
           {
             key: "Code",
             label: "Code",
@@ -1790,10 +1793,10 @@ handleEdit: acTypeOperationProvider.update,
         ],
         dataProvider: acTypeSaisieProvider.getState(),
         loader: acTypeSaisieProvider.find,
-        create:acTypeSaisieProvider.create,
-        handleDelete:acTypeSaisieProvider.delete,
-        handleEdit:acTypeSaisieProvider.update,
-        nameHeader:"",
+        create: acTypeSaisieProvider.create,
+        handleDelete: acTypeSaisieProvider.delete,
+        handleEdit: acTypeSaisieProvider.update,
+        nameHeader: "",
         columns: [
           {
             key: "Code",
@@ -1807,8 +1810,8 @@ handleEdit: acTypeOperationProvider.update,
       },
       {
         name: "Ville",
-        nameColumn:"Gestion des Villes",
-        headers:[
+        nameColumn: "Gestion des Villes",
+        headers: [
           {
             key: "Code",
             label: "Code",
@@ -1820,10 +1823,10 @@ handleEdit: acTypeOperationProvider.update,
         ],
         dataProvider: acVilleProvider.getState(),
         loader: acVilleProvider.find,
-        create:acVilleProvider.create,
-        handleDelete:acVilleProvider.delete,
-        handleEdit:acVilleProvider.update,
-        nameHeader:"",
+        create: acVilleProvider.create,
+        handleDelete: acVilleProvider.delete,
+        handleEdit: acVilleProvider.update,
+        nameHeader: "",
         columns: [
           {
             key: "Code",
@@ -1837,13 +1840,13 @@ handleEdit: acTypeOperationProvider.update,
       },
       {
         name: "Zone",
-        nameColumn:"Gestion des Zones",
+        nameColumn: "Gestion des Zones",
         dataProvider: acZoneProvider.getState(),
         loader: acZoneProvider.find,
-        create:acZoneProvider.create,
-        handleDelete:acZoneProvider.delete,
-        handleEdit:acZoneProvider.update,
-        headers:[
+        create: acZoneProvider.create,
+        handleDelete: acZoneProvider.delete,
+        handleEdit: acZoneProvider.update,
+        headers: [
           {
             key: "Code",
             label: "Code",
@@ -1857,7 +1860,7 @@ handleEdit: acTypeOperationProvider.update,
             label: "Description",
           },
         ],
-        nameHeader:"",
+        nameHeader: "",
         columns: [
           {
             key: "Code",
@@ -1990,15 +1993,15 @@ export const menuItems: MenuItem[] = menuItemsData.map((menuItem, index) => ({
     (subMenu, index): SubMenuItem => ({
       id: index,
       name: subMenu.name,
-      nameColumn:subMenu.nameColumn,
-      nameHeader:subMenu.nameHeader,
-      headers:subMenu.headers,
-      subMenuType:subMenu,
+      nameColumn: subMenu.nameColumn,
+      nameHeader: subMenu.nameHeader,
+      headers: subMenu.headers,
+      subMenuType: subMenu,
       viewName: getViewName(menuItem),
       loader: subMenu.loader,
       render:
         subMenu.dataProvider && subMenu.columns
-          ? () => buildTableContent({columns:subMenu.columns!,signal:subMenu.dataProvider!,subMenu:subMenu})
+          ? () => buildTableContent({ columns: subMenu.columns!, signal: subMenu.dataProvider!, subMenu: subMenu })
           : undefined,
       columns: subMenu.columns,
       path: formatLabelToPath(subMenu),

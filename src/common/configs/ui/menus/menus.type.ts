@@ -13,13 +13,13 @@ export type SubMenuItem = {
     name: string
     nameHeader?: string
     nameColumn?: string
-    subMenuType?:SubMenuType
+    subMenuType?: SubMenuType
     id: number
     viewName: 'parameter' | undefined
     columns?: ParameterColumnType[]
-    headers?:ParameterColumnType[]
-    loader?:(params:any)=>any[],
-    render?: ()=>JSX.Element,
+    headers?: ParameterColumnType[]
+    loader?: (params: any) => any[],
+    render?: () => JSX.Element,
     path: string
 }
 

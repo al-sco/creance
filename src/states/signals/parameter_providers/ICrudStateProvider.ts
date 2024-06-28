@@ -22,9 +22,9 @@ export default abstract class ICrudStateProvider<T extends Identifiable> {
     find=async():Promise<T[]>=>{
         let {data,status}=await axios.get(getUrl(this.basePath),
     {
-        headers: {
-            'ngrok-skip-browser-warning':true
-        }
+        // headers: {
+        //     'ngrok-skip-browser-warning':true
+        // }
     })
         if(status==200){
             this.state.value=data.map(this.mapEntitieFrom)
@@ -37,7 +37,7 @@ export default abstract class ICrudStateProvider<T extends Identifiable> {
         let {status}=await axios.patch(getUrl(this.basePath),this.mapDataToJson(updatedData),{
             headers:{
                 'Content-Type':'application/json',
-                'ngrok-skip-browser-warning':true
+                // 'ngrok-skip-browser-warning':true
             }
         })
         if(status==200){
@@ -49,9 +49,9 @@ export default abstract class ICrudStateProvider<T extends Identifiable> {
     delete=async(data:T):Promise<void>=>{
         let {status}=await axios.delete(getUrl(`${this.basePath}/${data.id}`),
         {
-            headers: {
-                'ngrok-skip-browser-warning':true
-            }
+            // headers: {
+            //     'ngrok-skip-browser-warning':true
+            // }
         }    
     )
         if(status==200){
@@ -64,7 +64,7 @@ export default abstract class ICrudStateProvider<T extends Identifiable> {
         let {status}=await axios.post(getUrl(this.basePath),this.mapDataToJson(data),{
             headers:{
                 'Content-Type':'application/json',
-                'ngrok-skip-browser-warning':true
+                // 'ngrok-skip-browser-warning':true
             }
         })
         if(status==201){

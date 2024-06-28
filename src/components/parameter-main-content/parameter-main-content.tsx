@@ -1,11 +1,10 @@
 import styled from 'styled-components'
-import { Stack, Box, Button } from '@chakra-ui/react';
+import { Stack, Box } from '@chakra-ui/react';
 import BaseTable from '../base-table/base-table';
 import { StyledTitle } from '../../common/theme/typography/typography';
 import colors from '../../common/theme/colors/colors';
 import { SubMenuItem } from '../../common/configs/ui/menus/menus.type';
 import TableHeaderForm from '../base-table/table-header-form';
-import { useNavigation } from 'react-router-dom';
 
 
 
@@ -32,6 +31,8 @@ const ParameterMainContent = ({ colums, subMenu }: ParameterMainContentProps) =>
 
     return (
         <StyledParameterMainContent>
+            {subMenu && subMenu.subMenuType && subMenu.subMenuType.additionalHeaderRender && <>{subMenu.subMenuType.additionalHeaderRender()}</>}
+            <Box h="20px" />
             <Stack direction="row" justifyContent="space-between">
                 <StyledTitle>
                     {subMenu.nameHeader}
