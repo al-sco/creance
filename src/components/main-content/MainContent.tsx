@@ -1,8 +1,8 @@
-import { Outlet } from 'react-router-dom'
+import { Outlet, useNavigation } from 'react-router-dom'
 import { SubMenuItem } from '../../common/configs/ui/menus/menus.type'
 import SubSideBarMenu from '../../components/sidebar-menu/sub-sidebar-menu'
 import styled from 'styled-components'
-import { Grid, GridItem, Stack } from '@chakra-ui/react'
+import { Grid, GridItem,Spinner } from '@chakra-ui/react'
 
 type MainContentProps = {
   title: string
@@ -14,9 +14,17 @@ const StyledMainContent = styled.div`
   
 `;
 
+const StyledSpinnerDiv=styled.div`
+display: grid;
+height: 100%;
+width: 100%;
+place-items: center;
+`
+
 
 const MainContent = ({ subMenus, title }: MainContentProps) => {
-
+  const navigation = useNavigation()
+  
   return (
     <StyledMainContent>
       <Grid templateColumns='minmax(270px,10%) 1fr'>
@@ -26,7 +34,9 @@ const MainContent = ({ subMenus, title }: MainContentProps) => {
           }
         </GridItem>
         <GridItem>
-          <Outlet />
+          {
+            navigation.state==="loading"? <StyledSpinnerDiv><Spinner size='xl' /></StyledSpinnerDiv>:<Outlet />
+          }
         </GridItem>
       </Grid>
     </StyledMainContent >
