@@ -4,16 +4,16 @@ import ICrudStateProvider from './ICrudStateProvider'
 class AcTypgarReelleStateProvider extends ICrudStateProvider<AcTypgarReelle> {
     mapDataToJson(data: AcTypgarReelle): {} {
         return {
-            regulTypeCode: data["id"],
-          regulTypeLib: data["libelle"]
+            typgarReelCode: data["id"],
+            typgarReelLib: data["libelle"]
         }
     }
     
     mapEntitieFrom(json: any): AcTypgarReelle {
         return {
-            id: json["regulTypeCode"],
-            code: json["regulTypeCode"],
-            libelle: json["regulTypeLib"]
+            id: json["typgarReelCode"],
+            code: json["typgarReelCode"],
+            libelle: json["typgarReelLib"]
         }
     }
 }
