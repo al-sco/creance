@@ -15,7 +15,6 @@ const TableRowEditable = ({ index, columns, baseStyle, data,handleDelete,handleE
         switchToEdit()
         if(handleEdit){
             handleEdit(data)
-            console.log("called me")
         }
     }
 

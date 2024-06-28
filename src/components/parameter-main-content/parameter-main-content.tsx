@@ -27,7 +27,6 @@ const StyledParameterMainContent = styled.div`
 `;
 
 const ParameterMainContent = ({colums,subMenu }: ParameterMainContentProps) => {
-    console.log(subMenu)
     return (
         <StyledParameterMainContent>
             <Stack direction="row" justifyContent="space-between">
