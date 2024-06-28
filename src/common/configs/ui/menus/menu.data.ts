@@ -70,7 +70,7 @@ export type SubMenuType = {
   columns?: ParameterColumnType[]
   headers?: ParameterColumnType[]
   handleDelete?:(data:any)=>void,
-  handleEdit?:(data:any)=>void,
+  handleEdit?:(data:any)=>Promise<void>,
   create?:(data:any)=>void
 };
 

@@ -24,6 +24,7 @@
     "react-file-icon": "^1.4.0",
     "react-router-dom": "^6.23.1",
     "react-svg-color": "^2.3.0",
+    "react-toastify": "^10.0.5",
     "sort-by": "^1.2.0",
     "styled-components": "^6.1.11",
     "vite-plugin-svgr": "^4.2.0"

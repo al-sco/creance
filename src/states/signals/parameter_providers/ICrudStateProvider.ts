@@ -35,7 +35,7 @@ export default abstract class ICrudStateProvider<T extends Identifiable> {
             }
         })
         if(status==200){
-            this.find()
+            await this.find()
         }
     }
 
@@ -43,7 +43,7 @@ export default abstract class ICrudStateProvider<T extends Identifiable> {
     delete=async(data:T):Promise<void>=>{
         let {status}=await axios.delete(getUrl(`${this.basePath}/${data.id}`),)
         if(status==200){
-            this.find()
+           await this.find()
         }
     }
 
@@ -55,7 +55,7 @@ export default abstract class ICrudStateProvider<T extends Identifiable> {
             }
         })
         if(status==201){
-            this.find()
+           await this.find()
         }
     }
     

@@ -38,8 +38,8 @@ const StyledImage = styled.div`
     margin:0 auto;
     display: table;
     place-items: center;
-    transform: scale(1);
-    animation: ${scaleLogo} 5s infinite  ease-in;
+    transform: scale(1.3);
+    /* animation: ${scaleLogo} 5s infinite  ease-in; */
 `;
 
 

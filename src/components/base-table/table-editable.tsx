@@ -2,25 +2,31 @@ import { useState } from "react"
 import { Button, Modal, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure } from "@chakra-ui/react"
 import { TableRowEdit } from "./table-edit"
 import { TableRow, TableRowProps } from "./table-row"
+import { useToast } from '@chakra-ui/react'
+import { toastify } from "../../common/helper/toast_helper"
 
-const TableRowEditable = ({ index, columns, baseStyle, data,handleDelete,handleEdit }: TableRowProps) => {
+const TableRowEditable = ({ index, columns, baseStyle, data, handleDelete, handleEdit }: TableRowProps) => {
     const [isEditable, setSetEditable] = useState<boolean>()
     const { isOpen, onOpen, onClose } = useDisclosure()
+    const toast = useToast()
 
     const switchToEdit = () => {
         setSetEditable(() => !isEditable)
-    }
+    }    
 
-    const _handleEdit = (data:any) => {
+    const _handleEdit = async (data: any) => {
         switchToEdit()
-        if(handleEdit){
-            handleEdit(data)
+        if (handleEdit) {            
+            toastify(toast,handleEdit(data))
         }
     }
 
     const _handleDelete = async () => {
-        if(handleDelete){
-            handleDelete(data);
+        if (handleDelete) {
+            toastify(toast,handleDelete(data), {
+                title: "Suppression éffectuée",
+                description: ""
+            })
         }
         onClose();
     }

@@ -20,6 +20,7 @@ const colors: Colors = {
     tableBorder: '#E2E8F0',
     green: '#28A325',
     darkGreen: '#032211',
+    // darkGreen: '#05361C',
     lightGray: '#7B8AA4',
     thinGray: '#A0AEC0',
     anotherGray: '#D9D9D9',

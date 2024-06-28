@@ -3,6 +3,8 @@ import { SubMenuItem } from '../../common/configs/ui/menus/menus.type'
 import SubSideBarMenu from '../../components/sidebar-menu/sub-sidebar-menu'
 import styled from 'styled-components'
 import { Grid, GridItem,Spinner } from '@chakra-ui/react'
+import { ToastContainer } from 'react-toastify'
+import colors from '../../common/theme/colors/colors'
 
 type MainContentProps = {
   title: string
@@ -35,7 +37,7 @@ const MainContent = ({ subMenus, title }: MainContentProps) => {
         </GridItem>
         <GridItem>
           {
-            navigation.state==="loading"? <StyledSpinnerDiv><Spinner size='xl' /></StyledSpinnerDiv>:<Outlet />
+            navigation.state==="loading"? <StyledSpinnerDiv><Spinner size='xl' color="orange"  /></StyledSpinnerDiv>:<Outlet />
           }
         </GridItem>
       </Grid>

@@ -9,8 +9,8 @@ import {  DeleteIcon, EditIcon } from "@chakra-ui/icons"
 export type TableRowProps = {
     index: number
     data: any,
-    handleDelete:(data:any)=>void
-    handleEdit:(data:any)=>void
+    handleDelete:(data:any)=>Promise<void>
+    handleEdit:(data:any)=>Promise<void>
     columns: ParameterColumnType[]
 } & ChakraStyledOptions
 
@@ -29,13 +29,13 @@ type NonEditableTableRowProps = TableRowProps & TableRowFuncType
 
 export const TableRow = ({ index, columns, onDeletePressed, onEditPressed, data }: NonEditableTableRowProps) => {
     return (
-        <Tr bg={index % 2 == 0 ? undefined : colors.gray}>{
+        <Tr  bg={index % 2 == 0 ? undefined : colors.gray}>{
             columns.map((column, i) => (
-                <Td
+                <Td 
                     key={i}>
                     {i === columns.length - 1 ?
-                        (<Grid templateColumns={"1fr 100px"}>
-                            <GridItem style={{ overflow: 'hidden', maxWidth: '90%' }}>
+                        (<Grid templateColumns={"1fr 100px"} alignItems="center">
+                            <GridItem style={{ overflow: 'hidden', maxWidth: '90%'}}>
                                 <span style={{ whiteSpace: 'wrap' }}>
                                     {data[lettertoCamelCase(column.key)]}
                                 </span>
