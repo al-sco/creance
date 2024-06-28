@@ -29,7 +29,7 @@ export default abstract class ICrudStateProvider<T extends Identifiable> {
 
     // Update data 
     update=async(updatedData:T):Promise<void>=>{
-        let {status}=await axios.patch(getUrl(this.basePath),JSON.stringify(updatedData),{
+        let {status}=await axios.patch(getUrl(this.basePath),this.mapDataToJson(updatedData),{
             headers:{
                 'Content-Type':'application/json'
             }
@@ -49,7 +49,7 @@ export default abstract class ICrudStateProvider<T extends Identifiable> {
 
     // create a new entry 
     create=async(data:T):Promise<void>=>{
-        let {status}=await axios.post(getUrl(`${this.basePath}/${data.id}`),JSON.stringify(data),{
+        let {status}=await axios.post(getUrl(`${this.basePath}/${data.id}`),this.mapDataToJson(data),{
             headers:{
                 'Content-Type':'application/json'
             }

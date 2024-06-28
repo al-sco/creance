@@ -1,15 +1,22 @@
 import { AcTypeSaisie } from "../../AcData.types";
-import ICrudStateProvider from "./ICrudStateProvider";
+import ICrudStateProvider from './ICrudStateProvider'
 
 class AcTypeSaisieStateProvider extends ICrudStateProvider<AcTypeSaisie> {
-  mapEntitieFrom(json: any): AcTypeSaisie {
-    return {
-      id: json["typeSaisieId"],
-      code: json["typeSaisieCode"],
-      libelle: json["typeSaisieLib"],
-    };
-  }
+    mapDataToJson(data: AcTypeSaisie): {} {
+        return {
+          typsaisCode: data["id"],
+          typsaisLib: data["libelle"]
+        }
+    }
+    
+    mapEntitieFrom(json: any): AcTypeSaisie {
+        return {
+            id: json["typsaisCode"],
+            code: json["typsaisCode"],
+            libelle: json["typsaisLib"]
+        }
+    }
 }
 
-const acTypeSaisieProvider = new AcTypeSaisieStateProvider("/type-saisie");
+const acTypeSaisieProvider = new AcTypeSaisieStateProvider('/type-saisie');
 export default acTypeSaisieProvider;

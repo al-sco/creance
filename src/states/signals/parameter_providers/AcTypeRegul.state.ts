@@ -1,15 +1,22 @@
 import { AcTypeRegul } from "../../AcData.types";
-import ICrudStateProvider from "./ICrudStateProvider";
+import ICrudStateProvider from './ICrudStateProvider'
 
 class AcTypeRegulStateProvider extends ICrudStateProvider<AcTypeRegul> {
-    mapEntitieFrom(json: any): AcTypeRegul {
-      return {
-        id: json["regulTypeCode"],
-        code: json["regulTypeCode"],
-        libelle: json["regulTypeLib"],
-      };
+    mapDataToJson(data: AcTypeRegul): {} {
+        return {
+          contSolTypeCode: data["id"],
+          contSolTypeLib: data["libelle"]
+        }
     }
-  }
-  
-  const acTypeRegulProvider = new AcTypeRegulStateProvider("/type-regul");
-  export default acTypeRegulProvider;
+    
+    mapEntitieFrom(json: any): AcTypeRegul {
+        return {
+            id: json["contSolTypeCode"],
+            code: json["contSolTypeCode"],
+            libelle: json["contSolTypeLib"]
+        }
+    }
+}
+
+const acTypeRegulProvider = new AcTypeRegulStateProvider('/type-regul');
+export default acTypeRegulProvider;

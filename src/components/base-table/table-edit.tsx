@@ -24,7 +24,6 @@ export const TableRowEdit = ({ index, columns, onEditPressed, data,handleEdit }:
                 let obj={}
                 columns.forEach((col) => {
                     const [value, _] = inputsValuesStates.get(col)!
-                    console.log(`${col.key} : ${value}`)
                     Object.defineProperty(obj,col.label.toLowerCase(),{value:value,writable:false})
                     })
                     

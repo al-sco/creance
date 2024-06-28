@@ -1,15 +1,22 @@
 import { AcPosteComptable } from "../../AcData.types";
-import ICrudStateProvider from "./ICrudStateProvider";
+import ICrudStateProvider from './ICrudStateProvider'
 
 class AcPosteComptableStateProvider extends ICrudStateProvider<AcPosteComptable> {
-    mapEntitieFrom(json: any): AcPosteComptable {
-      return {
-        id: json["pcCode"],
-        code: json["pcCode"],
-        libelle: json["pcLib"],
-      };
+    mapDataToJson(data: AcPosteComptable): {} {
+        return {
+          periodCode: data["id"],
+            pcLib: data["libelle"],
+        };
     }
-  }
-  
-  const acPostecomptableyProvider = new AcPosteComptableStateProvider("/postecomptable");
-  export default acPostecomptableyProvider;
+    
+    mapEntitieFrom(json: any): AcPosteComptable {
+        return {
+            id: json["pcCode"],
+            code: json["pcCode"],
+            libelle: json["pcLib"],
+        };
+    }
+}
+
+const acPosteComptableProvider = new AcPosteComptableStateProvider('/postecomptable');
+export default acPosteComptableProvider;

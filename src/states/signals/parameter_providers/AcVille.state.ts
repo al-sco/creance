@@ -1,16 +1,22 @@
 import { AcVille } from "../../AcData.types";
-import ICrudStateProvider from "./ICrudStateProvider";
-
+import ICrudStateProvider from './ICrudStateProvider'
 
 class AcVilleStateProvider extends ICrudStateProvider<AcVille> {
-    mapEntitieFrom(json: any): AcVille {
-      return {
-        id: json["villeId"],
-        code: json["villeCode"],
-        libelle: json["villeLib"],
-      };
+    mapDataToJson(data: AcVille): {} {
+        return {
+          villeCode: data["id"],
+          villeLib: data["libelle"]
+        }
     }
-  }
-  
-  const acVilleProvider = new AcVilleStateProvider("/ville");
-  export default acVilleProvider;
+    
+    mapEntitieFrom(json: any): AcVille {
+        return {
+            id: json["villeCode"],
+            code: json["villeCode"],
+            libelle: json["villeLib"]
+        }
+    }
+}
+
+const acVilleProvider = new AcVilleStateProvider('/ville');
+export default acVilleProvider;

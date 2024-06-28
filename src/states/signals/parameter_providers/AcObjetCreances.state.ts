@@ -1,15 +1,22 @@
 import { AcObjetCreance } from "../../AcData.types";
-import ICrudStateProvider from "./ICrudStateProvider";
+import ICrudStateProvider from './ICrudStateProvider';
 
-class AcObjetCreancesStateProvider extends ICrudStateProvider<AcObjetCreance> {
-    mapEntitieFrom(json: any): AcObjetCreance {
-      return {
-        id: json["objCreanCode"],
-        code: json["objCreanCode"],
-        libelle: json["objCreanLib"],
-      };
+class AcObjetCreanceStateProvider extends ICrudStateProvider<AcObjetCreance> {
+    mapDataToJson(data: AcObjetCreance): {} {
+        return {
+          objCreanCode: data["id"],
+          objCreanLib: data["libelle"]
+        };
     }
-  }
-  
-  const acObjetCreancesProvider = new AcObjetCreancesStateProvider("/objet-creance");
-  export default acObjetCreancesProvider;
+    
+    mapEntitieFrom(json: any): AcObjetCreance {
+        return {
+            id: json["objCreanCode"],
+            code: json["objCreanCode"],
+            libelle: json["objCreanLib"]
+        };
+    }
+}
+
+const acObjetCreanceProvider = new AcObjetCreanceStateProvider('/objet-creance');
+export default acObjetCreanceProvider;

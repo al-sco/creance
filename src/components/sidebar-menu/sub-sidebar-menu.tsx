@@ -30,7 +30,6 @@ const SubSideBarMenu = ({ title, subMenuItems }: SubSideBarMenuProps) => {
     const [subMenuItem, setSubMenuItem] = useState<number>()
 
     useEffect(()=>{
-        console.log(window.location.pathname)
         let currentMenu=subMenuItems.find((subMenu)=>window.location.pathname.includes(encodeURI(subMenu.path)))        
         if(currentMenu){
             setSubMenuItem(()=>currentMenu.id)

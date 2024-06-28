@@ -1,16 +1,22 @@
 import { AcNationalite } from "../../AcData.types";
-import ICrudStateProvider from "./ICrudStateProvider";
+import ICrudStateProvider from './ICrudStateProvider';
 
-class AcNationalityStateProvider extends ICrudStateProvider<AcNationalite> {
-    mapEntitieFrom(json: any): AcNationalite {
-      return {
-        id: json["natCode"],
-        code: json["natCode"],
-        libelle: json["natLib"],
-      };
+class AcNationaliteStateProvider extends ICrudStateProvider<AcNationalite> {
+    mapDataToJson(data: AcNationalite): {} {
+        return {
+          natCode: data["id"],
+          natLib: data["libelle"]
+        };
     }
-  }
-  
-  const acNationaliteProvider = new AcNationalityStateProvider("/nationalite");
-  export default acNationaliteProvider;
+    
+    mapEntitieFrom(json: any): AcNationalite {
+        return {
+            id: json["natCode"],
+            code: json["natCode"],
+            libelle: json["natLib"]
+        };
+    }
+}
 
+const acNationaliteProvider = new AcNationaliteStateProvider('/nationalite');
+export default acNationaliteProvider;

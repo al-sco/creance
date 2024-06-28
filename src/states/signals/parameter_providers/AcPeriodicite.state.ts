@@ -1,16 +1,22 @@
 import { AcPeriodicite } from "../../AcData.types";
-import ICrudStateProvider from "./ICrudStateProvider";
+import ICrudStateProvider from './ICrudStateProvider';
 
-
-class AcPeriodicityStateProvider extends ICrudStateProvider<AcPeriodicite> {
-    mapEntitieFrom(json: any): AcPeriodicite {
-      return {
-        id: json["periodCode"],
-        code: json["periodCode"],
-        libelle: json["periodLib"],
-      };
+class AcPeriodiciteStateProvider extends ICrudStateProvider<AcPeriodicite> {
+    mapDataToJson(data: AcPeriodicite): {} {
+        return {
+          periodCode: data["id"],
+          periodLib: data["libelle"],
+        };
     }
-  }
-  
-  const acPeriodicityProvider = new AcPeriodicityStateProvider("/periodicite");
-  export default acPeriodicityProvider;
+    
+    mapEntitieFrom(json: any): AcPeriodicite {
+        return {
+            id: json["periodCode"],
+            code: json["periodCode"],
+            libelle: json["periodLib"],
+        };
+    }
+}
+
+const acPeriodiciteProvider = new AcPeriodiciteStateProvider('/periodicite');
+export default acPeriodiciteProvider;
