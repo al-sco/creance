@@ -133,12 +133,12 @@ const menuItemsData: Array<MenuItemType> = [
       {
         name: "Agence de banque",
         loader: acBanqueAgenceProvider.find,
-        nameHeader:"Banque",
+        nameHeader:"Agence",
         dataProvider: acBanqueAgenceProvider.getState(),
         handleDelete:acBanqueAgenceProvider.delete,
         handleEdit:acBanqueAgenceProvider.update,
         create:acBanqueAgenceProvider.create,
-        nameColumn:"Agence",
+        nameColumn:"",
         headers: [
           {
             label: "Code",
