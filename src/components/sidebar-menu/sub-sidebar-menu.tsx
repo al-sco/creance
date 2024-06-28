@@ -11,7 +11,7 @@ const StyledSideBarMenu = styled.div`
   resize: horizontal;
   padding: 35px 5px 80px 5px;
   height: 100vh;
-  background-color: ${colors.gray};
+  background-color: ${colors.lightGreen};
   transition: all 5s linear;
 `;
 

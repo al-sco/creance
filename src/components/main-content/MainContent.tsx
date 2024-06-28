@@ -27,7 +27,7 @@ const MainContent = ({ subMenus, title }: MainContentProps) => {
   
   return (
     <StyledMainContent>
-      <Grid templateColumns='minmax(270px,10%) 1fr'>
+      <Grid templateColumns='minmax(290px,10%) 1fr'>
         <GridItem>
           {
             subMenus && <SubSideBarMenu title={title} subMenuItems={subMenus} />

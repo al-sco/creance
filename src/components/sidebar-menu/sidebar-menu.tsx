@@ -38,7 +38,7 @@ const StyledImage = styled.div`
     margin:0 auto;
     display: table;
     place-items: center;
-    transform: scale(1.3);
+    transform: scale(1.5);
     /* animation: ${scaleLogo} 5s infinite  ease-in; */
 `;
 
