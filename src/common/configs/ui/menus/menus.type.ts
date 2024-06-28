@@ -1,4 +1,5 @@
 import { ParameterColumnType } from "../../../../components/parameter-main-content/parameter-main-content"
+import { SubMenuType } from "./menu.data"
 
 export type MenuItem = {
     name: string
@@ -12,6 +13,7 @@ export type SubMenuItem = {
     name: string
     nameHeader?: string
     nameColumn?: string
+    subMenuType?:SubMenuType
     id: number
     viewName: 'parameter' | undefined
     columns?: ParameterColumnType[]
