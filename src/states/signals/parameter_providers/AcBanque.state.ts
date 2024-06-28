@@ -9,10 +9,9 @@ class AcBanqueStateProvider extends ICrudStateProvider<AcBanque>{
     mapDataToJson(data: AcBanque): {} {
         return {
             id:data["id"],
-            code:data["code"],
             libelle:data["libelle"],
             adresse:data["adresse"],
-            responsabilite:data["responsabilite"]
+            responsable:data["responsabilite"]
         }
     }
     
@@ -22,7 +21,7 @@ class AcBanqueStateProvider extends ICrudStateProvider<AcBanque>{
             code:json["code"],
             libelle:json["libelle"],
             adresse:json["adresse"],
-            responsabilite:json["responsabilite"]
+            responsabilite:json["responsable"]
         }
     }
 }

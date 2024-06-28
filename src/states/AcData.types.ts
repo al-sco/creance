@@ -32,6 +32,11 @@ export type AcCpteClientSonar = {
   planCptaNum: String;
 };
 
+export type AvCompte={
+  id: string;
+
+}
+
 export type AcCompteOper = {
   id: string;
   cptoperCode: string;
@@ -50,7 +55,7 @@ export type AcCompteComptableOperationSonareci = {
   groupeSonareci: string;
 };
 
-export type CodeProduitSonareci = {
+export type AcCodeProduitSonareci = {
   id: string;
   code: string;
   intituleComptes: string;

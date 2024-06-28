@@ -59,6 +59,7 @@ import acTypeActeProvider from "../../../../states/signals/parameter_providers/A
 import acStatutSalarieProvider from "../../../../states/signals/parameter_providers/AcStatutSalarie.state";
 import acStatutCreanceProvider from "../../../../states/signals/parameter_providers/AcStatutCreance.state";
 import acQuartierProvider from "../../../../states/signals/parameter_providers/AcQuartier.state";
+import acCompteOperProvider from "../../../../states/signals/parameter_providers/AcCompte.state";
 
 export type SubMenuType = {
   name: string;
@@ -169,7 +170,7 @@ const menuItemsData: Array<MenuItemType> = [
         create:acBanqueProvider.create,
         handleDelete:acBanqueProvider.delete,
         handleEdit:acBanqueProvider.update,
-        loader: acBanqueAgenceProvider.find,
+        loader: acBanqueProvider.find,
         headers: [],
         columns: [
           {
@@ -237,6 +238,7 @@ const menuItemsData: Array<MenuItemType> = [
         name: "Classe",
         nameColumn:"Gestion des Classes",
         nameHeader:"",
+        loader:acClasseProvider.find,
         dataProvider: acClasseProvider.getState(),
         create:acClasseProvider.create,
         handleDelete:acClasseProvider.delete,
@@ -255,6 +257,13 @@ const menuItemsData: Array<MenuItemType> = [
       },
       {
         name: "Compte d'operation",
+        dataProvider: acCompteOperProvider.getState(),
+loader: acCompteOperProvider.find,
+create: acCompteOperProvider.create,
+handleDelete: acCompteOperProvider.delete,
+handleEdit: acCompteOperProvider.update,
+
+
         nameHeader:"Saisie Compte Opération",
         nameColumn:"",
         columns: [
@@ -409,11 +418,12 @@ const menuItemsData: Array<MenuItemType> = [
         name: "Codes produits Sonareci",
         nameHeader:"",
         nameColumn:"Code Produits (Cptes Clients)",
-        loader: acCodeProduitSonareciProvider.find,
         dataProvider: acCodeProduitSonareciProvider.getState(),
-        create:acCodeProduitSonareciProvider.create,
-        handleDelete:acCodeProduitSonareciProvider.delete,
-        handleEdit:acCodeProduitSonareciProvider.update,
+loader: acCodeProduitSonareciProvider.find,
+create: acCodeProduitSonareciProvider.create,
+handleDelete: acCodeProduitSonareciProvider.delete,
+handleEdit: acCodeProduitSonareciProvider.update
+,
         headers:[],
         columns: [
           {
