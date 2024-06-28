@@ -1,7 +1,13 @@
-import { AcCategorieDebiteur } from "../../AcData.types";
+import { AcCategorieDebiteur, ParameterBaseData } from "../../AcData.types";
 import ICrudStateProvider from "./ICrudStateProvider";
 
 class AcCategoryDebtorStateProvider extends ICrudStateProvider<AcCategorieDebiteur> {
+  mapDataToJson(data: ParameterBaseData): {} {
+    return {
+      categDebCode: data["id"],
+      categDebLib:data["libelle"],
+    }
+  }
   mapEntitieFrom(json: any): AcCategorieDebiteur {
     return {
       id: json["categDebCode"],

@@ -5,7 +5,7 @@ import colors from "../../common/theme/colors/colors";
 import { ParameterColumnType } from "../parameter-main-content/parameter-main-content";
 import { TableEditProps } from "./table-row";
 
-export const TableRowEdit = ({ index, columns, onEditPressed, data }: TableEditProps) => {
+export const TableRowEdit = ({ index, columns, onEditPressed, data,handleEdit }: TableEditProps) => {
     let inputsValuesStates = new Map<ParameterColumnType, [string, React.Dispatch<React.SetStateAction<string>>]>([
         ...columns.map((col) => [col, useState<string>(data[col.label.toLowerCase()])])
     ]);
@@ -21,12 +21,18 @@ export const TableRowEdit = ({ index, columns, onEditPressed, data }: TableEditP
                 nextInput.current?.focus()
             }
             else {
+                let obj={}
                 columns.forEach((col) => {
                     const [value, _] = inputsValuesStates.get(col)!
-                    console.log(`${col.label} : ${value}`)
-                })
+                    console.log(`${col.key} : ${value}`)
+                    Object.defineProperty(obj,col.label.toLowerCase(),{value:value,writable:false})
+                    })
+                    
+                Object.defineProperty(obj,'id'.toLowerCase(),{value:data.id,writable:false})
                 
-                onEditPressed();
+                if(handleEdit){
+                    handleEdit(obj)
+                }
             }
         }
     }

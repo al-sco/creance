@@ -29,7 +29,11 @@ export default abstract class ICrudStateProvider<T extends Identifiable> {
 
     // Update data 
     update=async(updatedData:T):Promise<void>=>{
-        let {status}=await axios.put(getUrl(this.basePath),JSON.stringify(updatedData))
+        let {status}=await axios.patch(getUrl(this.basePath),JSON.stringify(updatedData),{
+            headers:{
+                'Content-Type':'application/json'
+            }
+        })
         if(status==200){
             this.find()
         }
@@ -45,7 +49,11 @@ export default abstract class ICrudStateProvider<T extends Identifiable> {
 
     // create a new entry 
     create=async(data:T):Promise<void>=>{
-        let {status}=await axios.post(getUrl(`${this.basePath}/${data.id}`),JSON.stringify(data))
+        let {status}=await axios.post(getUrl(`${this.basePath}/${data.id}`),JSON.stringify(data),{
+            headers:{
+                'Content-Type':'application/json'
+            }
+        })
         if(status==200){
             this.find()
         }
@@ -53,6 +61,8 @@ export default abstract class ICrudStateProvider<T extends Identifiable> {
     
     // map Entitie from Json
     abstract mapEntitieFrom(json:any):T
+    // map entities to correspond to json key sent by server 
+    abstract mapDataToJson(data:T):{}
     
 }
 

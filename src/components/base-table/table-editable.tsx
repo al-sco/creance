@@ -6,8 +6,17 @@ import { TableRow, TableRowProps } from "./table-row"
 const TableRowEditable = ({ index, columns, baseStyle, data,handleDelete,handleEdit }: TableRowProps) => {
     const [isEditable, setSetEditable] = useState<boolean>()
     const { isOpen, onOpen, onClose } = useDisclosure()
+
     const switchToEdit = () => {
         setSetEditable(() => !isEditable)
+    }
+
+    const _handleEdit = (data:any) => {
+        switchToEdit()
+        if(handleEdit){
+            handleEdit(data)
+            console.log("called me")
+        }
     }
 
     const _handleDelete = async () => {
@@ -20,7 +29,7 @@ const TableRowEditable = ({ index, columns, baseStyle, data,handleDelete,handleE
 
     return (
         isEditable ?
-            <TableRowEdit handleDelete={handleDelete} handleEdit={handleEdit} data={data} onEditPressed={switchToEdit}  {...baseStyle} columns={columns} index={index} /> :
+            <TableRowEdit handleDelete={handleDelete} handleEdit={_handleEdit} data={data} onEditPressed={switchToEdit}  {...baseStyle} columns={columns} index={index} /> :
             <>
                 <TableRow handleEdit={handleEdit} handleDelete={_handleDelete} data={data} onEditPressed={switchToEdit} onDeletePressed={onOpen} {...baseStyle} columns={columns} index={index} />
                 <Modal isOpen={isOpen} onClose={onClose}>
