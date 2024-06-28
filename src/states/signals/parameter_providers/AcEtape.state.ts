@@ -1,15 +1,22 @@
 import { AcEtape } from "../../AcData.types";
-import ICrudStateProvider from "./ICrudStateProvider";
+import ICrudStateProvider from './ICrudStateProvider';
 
 class AcEtapeStateProvider extends ICrudStateProvider<AcEtape> {
-    mapEntitieFrom(json: any): AcEtape {
-      return {
-        id: json["civCode"],
-        code: json["civCode"],
-        libelle: json["civLib"],
-      };
+    mapDataToJson(data: AcEtape): {} {
+        return {
+          etapCode: data["id"],
+          etapLib: data["libelle"],
+        };
     }
-  }
-  
-  const acEtapeProvider = new AcEtapeStateProvider("/etape");
-  export default acEtapeProvider;
+    
+    mapEntitieFrom(json: any): AcEtape {
+        return {
+            id: json["etapCode"],
+            code: json["etapCode"],
+            libelle: json["etapLib"],
+        };
+    }
+}
+
+const acEtapeProvider = new AcEtapeStateProvider('/etape');
+export default acEtapeProvider;

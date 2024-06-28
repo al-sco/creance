@@ -1,18 +1,28 @@
 import { AcEntite } from "../../AcData.types";
-import ICrudStateProvider from "./ICrudStateProvider";
+import ICrudStateProvider from './ICrudStateProvider';
 
-class AcEntityStateProvider extends ICrudStateProvider<AcEntite> {
-  mapEntitieFrom(json: any): AcEntite {
-    return {
-      id: json["entiteCode"],
-      code: json["entiteCode"],
-      libelle: json["entiteLib"],
-      libelleLong: json["entiteLibLong"],
-      responsable: json["entiteResp"],
-      entiteAssign: json["entiteAssign"],
-    };
-  }
+class AcEntiteStateProvider extends ICrudStateProvider<AcEntite> {
+    mapDataToJson(data: AcEntite): {} {
+        return {
+          entiteCode: data["id"],
+          entiteLib: data["libelle"],
+          entiteResp: data["responsable"],
+          entiteLibLong: data["libelleLong"],
+          entiteAssign: data["entiteAssign"]
+        };
+    }
+    
+    mapEntitieFrom(json: any): AcEntite {
+        return {
+            id: json["entiteCode"],
+            code: json["entiteCode"],
+            libelle: json["entiteLib"],
+            responsable: json["entiteResp"],
+            libelleLong: json["entiteLibLong"],
+            entiteAssign: json["entiteAssign"]
+        };
+    }
 }
 
-const acEntityProvider = new AcEntityStateProvider("/entite");
-export default acEntityProvider;
+const acEntiteProvider = new AcEntiteStateProvider('/entite');
+export default acEntiteProvider;
