@@ -8,9 +8,9 @@ import ICrudStateProvider from './ICrudStateProvider'
 class AcBanqueAgenceStateProvider extends ICrudStateProvider<AcBanqueAgence>{
     mapDataToJson(data: ParameterBaseData): {} {
         return {
-            bqagCode:data["id"],
-            bqCode:data["code"],
-            bqagLib:data["libelle"],
+            id:data["id"],
+            code:data["code"],
+            libelle:data["libelle"],
         }
     }
 

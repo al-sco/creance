@@ -1531,6 +1531,7 @@ export const menuItems: MenuItem[] = menuItemsData.map((menuItem, index) => ({
       nameColumn:subMenu.nameColumn,
       nameHeader:subMenu.nameHeader,
       headers:subMenu.headers,
+      subMenuType:subMenu,
       viewName: getViewName(menuItem),
       loader: subMenu.loader,
       render:

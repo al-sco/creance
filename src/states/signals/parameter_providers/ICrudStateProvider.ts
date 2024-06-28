@@ -49,12 +49,12 @@ export default abstract class ICrudStateProvider<T extends Identifiable> {
 
     // create a new entry 
     create=async(data:T):Promise<void>=>{
-        let {status}=await axios.post(getUrl(`${this.basePath}/${data.id}`),this.mapDataToJson(data),{
+        let {status}=await axios.post(getUrl(this.basePath),this.mapDataToJson(data),{
             headers:{
                 'Content-Type':'application/json'
             }
         })
-        if(status==200){
+        if(status==201){
             this.find()
         }
     }
