@@ -1,10 +1,12 @@
-import { Button, Input, Stack } from "@chakra-ui/react"
+import { Button, Input, Stack, useToast } from "@chakra-ui/react"
 import { SubMenuItem } from "../../common/configs/ui/menus/menus.type"
 import colors from "../../common/theme/colors/colors"
 import { Form } from "react-router-dom"
 import React from "react"
+import { toastify } from "../../common/helper/toast_helper"
 
 const TableHeaderForm = ({ subMenu }: { subMenu: SubMenuItem }) => {
+  const toast=useToast()
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     let a = new FormData(e.currentTarget)
@@ -21,8 +23,16 @@ const TableHeaderForm = ({ subMenu }: { subMenu: SubMenuItem }) => {
     }
     
     if (subMenu.subMenuType && subMenu.subMenuType.create) {
-      subMenu.subMenuType.create(obj)
+      toastify(toast,submitData(obj),{
+        title: 'Donnée enregistrée'
+      })
       e.currentTarget.reset()
+    }
+  }
+
+  const submitData=async(data:{})=>{
+    if (subMenu.subMenuType && subMenu.subMenuType.create) {
+    await subMenu.subMenuType.create(data)
     }
   }
 
