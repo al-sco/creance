@@ -5,6 +5,7 @@ import { StyledTitle } from '../../common/theme/typography/typography';
 import colors from '../../common/theme/colors/colors';
 import { SubMenuItem } from '../../common/configs/ui/menus/menus.type';
 import TableHeaderForm from '../base-table/table-header-form';
+import { useNavigation } from 'react-router-dom';
 
 
 
@@ -28,6 +29,7 @@ const StyledParameterMainContent = styled.div`
 `;
 
 const ParameterMainContent = ({ colums, subMenu }: ParameterMainContentProps) => {
+
     return (
         <StyledParameterMainContent>
             <Stack direction="row" justifyContent="space-between">
