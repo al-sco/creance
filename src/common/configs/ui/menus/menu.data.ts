@@ -51,6 +51,14 @@ import acTypeEffetProvider from "../../../../states/signals/parameter_providers/
 import acTypeDomicilProvider from "../../../../states/signals/parameter_providers/AcTypeDomicil.state";
 import acTypeDebiteurProvider from "../../../../states/signals/parameter_providers/AcTypeDebiteur.state";
 import acTypeContratProvider from "../../../../states/signals/parameter_providers/AcTypeContrat.state";
+import acTypeCptProvider from "../../../../states/signals/parameter_providers/AcTypeCpt.state";
+import acTypeChargeProvider from "../../../../states/signals/parameter_providers/AcTypeCharge.state";
+import acTypeEcheancierProvider from "../../../../states/signals/parameter_providers/AcTypeEcheancier.state";
+import acTypeAuxilProvider from "../../../../states/signals/parameter_providers/AcTypeAuxil.state";
+import acTypeActeProvider from "../../../../states/signals/parameter_providers/AcTypeActe.state";
+import acStatutSalarieProvider from "../../../../states/signals/parameter_providers/AcStatutSalarie.state";
+import acStatutCreanceProvider from "../../../../states/signals/parameter_providers/AcStatutCreance.state";
+import acQuartierProvider from "../../../../states/signals/parameter_providers/AcQuartier.state";
 
 export type SubMenuType = {
   name: string;
@@ -847,7 +855,12 @@ headers:[{
         name: "Quartier",
         nameColumn:"Quartier",
         nameHeader:"",
-      // TODO
+        dataProvider: acQuartierProvider.getState(),
+        loader: acQuartierProvider.find,
+        create: acQuartierProvider.create,
+        handleDelete: acQuartierProvider.delete,
+        handleEdit: acQuartierProvider.update,
+        
         headers:[],
         columns: [
           {
@@ -873,7 +886,12 @@ headers:[{
         nameColumn:"Gestion des Statuts des Creances",
         nameHeader:"",
         headers:[],
-        // TODO
+        dataProvider: acStatutCreanceProvider.getState(),
+        loader: acStatutCreanceProvider.find,
+        create: acStatutCreanceProvider.create,
+        handleDelete: acStatutCreanceProvider.delete,
+        handleEdit: acStatutCreanceProvider.update,
+        
         columns: [
           {
             key: "Code",
@@ -889,7 +907,12 @@ headers:[{
         name: "Statut Salarié",
         nameColumn:"Gestion des Statuts des Salaries",
         nameHeader:"",
-        //TODO
+        dataProvider: acStatutSalarieProvider.getState(),
+loader: acStatutSalarieProvider.find,
+create: acStatutSalarieProvider.create,
+handleDelete: acStatutSalarieProvider.delete,
+handleEdit: acStatutSalarieProvider.update,
+
         headers:[],
         columns: [
           {
@@ -906,7 +929,12 @@ headers:[{
         name: "Type d'Acte",
         nameColumn:"Acte",
         nameHeader:"",
-        //TODO
+        dataProvider: acTypeActeProvider.getState(),
+loader: acTypeActeProvider.find,
+create: acTypeActeProvider.create,
+handleDelete: acTypeActeProvider.delete,
+handleEdit: acTypeActeProvider.update,
+
         headers:[],
         columns: [
           {
@@ -928,7 +956,12 @@ headers:[{
         nameColumn:"Type Auxiliaire",
         nameHeader:"",
         headers:[],
-        //TODO
+        dataProvider: acTypeAuxilProvider.getState(),
+loader: acTypeAuxilProvider.find,
+create: acTypeAuxilProvider.create,
+handleDelete: acTypeAuxilProvider.delete,
+handleEdit: acTypeAuxilProvider.update,
+
         columns: [
           {
             key: "Code",
@@ -945,7 +978,12 @@ headers:[{
         nameColumn:"Gestion des Types d'Echéancier",
         nameHeader:"",
         headers:[],
-        //TODO
+        dataProvider: acTypeEcheancierProvider.getState(),
+loader: acTypeEcheancierProvider.find,
+create: acTypeEcheancierProvider.create,
+handleDelete: acTypeEcheancierProvider.delete,
+handleEdit: acTypeEcheancierProvider.update,
+
 
         columns: [
           {
@@ -962,7 +1000,12 @@ headers:[{
         name: "Type de Charge",
         nameColumn:"Gestion des Types de Charge",
         nameHeader:"",
-        //TODO
+        dataProvider: acTypeChargeProvider.getState(),
+loader: acTypeChargeProvider.find,
+create: acTypeChargeProvider.create,
+handleDelete: acTypeChargeProvider.delete,
+handleEdit: acTypeChargeProvider.update,
+
 
         headers:[],
         columns: [
@@ -985,7 +1028,12 @@ headers:[{
         nameColumn:"Gestion des Types de Compte",
         nameHeader:"",
         headers:[],
-        //TODO
+        dataProvider: acTypeCptProvider.getState(),
+        loader: acTypeCptProvider.find,
+        create: acTypeCptProvider.create,
+        handleDelete: acTypeCptProvider.delete,
+        handleEdit: acTypeCptProvider.update,
+        
 
         columns: [
           {
