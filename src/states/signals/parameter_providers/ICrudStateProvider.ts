@@ -20,7 +20,12 @@ export default abstract class ICrudStateProvider<T extends Identifiable> {
     }
     // fetch data
     find=async():Promise<T[]>=>{
-        let {data,status}=await axios.get(getUrl(this.basePath))
+        let {data,status}=await axios.get(getUrl(this.basePath),
+    {
+        headers: {
+            'ngrok-skip-browser-warning':true
+        }
+    })
         if(status==200){
             this.state.value=data.map(this.mapEntitieFrom)
         }
@@ -31,7 +36,8 @@ export default abstract class ICrudStateProvider<T extends Identifiable> {
     update=async(updatedData:T):Promise<void>=>{
         let {status}=await axios.patch(getUrl(this.basePath),this.mapDataToJson(updatedData),{
             headers:{
-                'Content-Type':'application/json'
+                'Content-Type':'application/json',
+                'ngrok-skip-browser-warning':true
             }
         })
         if(status==200){
@@ -41,7 +47,13 @@ export default abstract class ICrudStateProvider<T extends Identifiable> {
 
     // delete data
     delete=async(data:T):Promise<void>=>{
-        let {status}=await axios.delete(getUrl(`${this.basePath}/${data.id}`),)
+        let {status}=await axios.delete(getUrl(`${this.basePath}/${data.id}`),
+        {
+            headers: {
+                'ngrok-skip-browser-warning':true
+            }
+        }    
+    )
         if(status==200){
            await this.find()
         }
@@ -51,7 +63,8 @@ export default abstract class ICrudStateProvider<T extends Identifiable> {
     create=async(data:T):Promise<void>=>{
         let {status}=await axios.post(getUrl(this.basePath),this.mapDataToJson(data),{
             headers:{
-                'Content-Type':'application/json'
+                'Content-Type':'application/json',
+                'ngrok-skip-browser-warning':true
             }
         })
         if(status==201){
