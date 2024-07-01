@@ -913,7 +913,16 @@ const menuItemsData: Array<MenuItemType> = [
         name: "Objet créance",
         nameColumn: "Gestion des Objets des Creances",
         nameHeader: "",
-        headers: [],
+        headers: [
+          {
+            key: "Code",
+            label: "Code",
+          },
+          {
+            key: "Libelle",
+            label: "Libelle",
+          }
+        ],
         dataProvider: acObjetCreancesProvider.getState(),
         loader: acObjetCreancesProvider.find,
         create: acObjetCreancesProvider.create,
