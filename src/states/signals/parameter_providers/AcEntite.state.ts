@@ -6,8 +6,8 @@ class AcEntiteStateProvider extends ICrudStateProvider<AcEntite> {
         return {
           entiteCode: data["id"],
           entiteLib: data["libelle"],
-          entiteResp: data["responsable"],
           entiteLibLong: data["libelleLong"],
+          entiteResp: data["responsable"],
           entiteAssign: data["entiteAssign"]
         };
     }
@@ -17,7 +17,7 @@ class AcEntiteStateProvider extends ICrudStateProvider<AcEntite> {
             id: json["entiteCode"],
             code: json["entiteCode"],
             libelle: json["entiteLib"],
-            responsable: json["entiteResp"],
+            responsable: json["entiteResp "],
             libelleLong: json["entiteLibLong"],
             entiteAssign: json["entiteAssign"]
         };
