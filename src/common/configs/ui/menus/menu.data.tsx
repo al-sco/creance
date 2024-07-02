@@ -17,7 +17,6 @@ import acCilivityProvider from "../../../../states/signals/parameter_providers/A
 import acClasseProvider from "../../../../states/signals/parameter_providers/AcClasse.state";
 import acCodeProduitSonareciProvider from "../../../../states/signals/parameter_providers/AcCodeProduitsSonareci";
 import acComptableAccountOperationSonareciProvider from "../../../../states/signals/parameter_providers/AcComptableAccountOperationSonareci.state";
-import acEntityProvider from "../../../../states/signals/parameter_providers/AcEntite.state";
 import acEtapeProvider from "../../../../states/signals/parameter_providers/AcEtape.state";
 import acEtatLocalisationProvider from "../../../../states/signals/parameter_providers/AcEtatLocalisation.state";
 import acExercicesProvider from "../../../../states/signals/parameter_providers/AcExercice.state";
@@ -192,6 +191,10 @@ const menuItemsData: Array<MenuItemType> = [
             label: "Adresse",
             key: "Adresse",
           },
+          {
+            label: "Responsabilité",
+            key: "responsabilite",
+          },
         ],
         columns: [
           {
@@ -310,31 +313,33 @@ const menuItemsData: Array<MenuItemType> = [
         create: acCompteOperProvider.create,
         handleDelete: acCompteOperProvider.delete,
         handleEdit: acCompteOperProvider.update,
-
-
         nameHeader: "Saisie Compte Opération",
         nameColumn: "",
         columns: [
           {
-            key: "codeBanqueAgence",
+            key: "cptoperCode",
             label: "Code",
           },
           {
-            key: "codeGroupeCreance",
+            key: "bqagCode",
             label: "Libelle",
+          },
+          {
+            key: "grpCreanCode",
+            label: "Groupe Creance",
           },
         ],
         headers: [
           {
-            key: "numero",
+            key: "cptoperCode",
             label: "N°Compte",
           },
           {
-            key: "codeBanqueAgence",
+            key: "bqagCode",
             label: "Code Banque Agence",
           },
           {
-            key: "codeGroupeCreance",
+            key: "grpCreanCode",
             label: "Code Groupe Créance",
           },
         ],

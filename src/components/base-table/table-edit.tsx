@@ -7,7 +7,7 @@ import { TableEditProps } from "./table-row";
 
 export const TableRowEdit = ({ index, columns, onEditPressed, data,handleEdit }: TableEditProps) => {
     let inputsValuesStates = new Map<ParameterColumnType, [string, React.Dispatch<React.SetStateAction<string>>]>([
-        ...columns.map((col) => [col, useState<string>(data[col.label.toLowerCase()])])
+        ...columns.map((col) => [col, useState<string>(data[col.key])])
     ]);
 
     let inputRefs = columns.map((_) => useRef<HTMLInputElement>(null))
@@ -15,6 +15,7 @@ export const TableRowEdit = ({ index, columns, onEditPressed, data,handleEdit }:
 
 
     const handleSubmit = (e: React.KeyboardEvent<HTMLInputElement>, inputIndex: number) => {
+        console.log('Message')
         if (e.key == 'Enter') {
             if (inputIndex < inputRefs.length - 1) {
                 let nextInput = inputRefs[inputIndex + 1]
@@ -24,11 +25,12 @@ export const TableRowEdit = ({ index, columns, onEditPressed, data,handleEdit }:
                 let obj={}
                 columns.forEach((col) => {
                     const [value, _] = inputsValuesStates.get(col)!
-                    Object.defineProperty(obj,col.label.toLowerCase(),{value:value,writable:false})
+                    Object.defineProperty(obj,col.key,{value:value,writable:false})
                     })
+
                     
-                Object.defineProperty(obj,'id'.toLowerCase(),{value:data.id,writable:false})
-                
+                    Object.defineProperty(obj,'id',{value:data.id,writable:false})
+                    
                 if(handleEdit){
                     handleEdit(obj)
                 }
@@ -43,7 +45,7 @@ export const TableRowEdit = ({ index, columns, onEditPressed, data,handleEdit }:
                 columns.map((column, i) => (
                     <Td
                         key={i}>
-                        <Input w="90%" ref={inputRefs[i]} value={inputsValuesStates.get(column)?.[0]} onChange={() => inputsValuesStates.get(column)?.[1](() => inputRefs[i].current!.value)} onKeyDown={(e) => handleSubmit(e, i)} name={column.label} placeholder={column.label} size='lg' />
+                        <Input w="90%" ref={inputRefs[i]} value={inputsValuesStates.get(column)?.[0]} onChange={() => inputsValuesStates.get(column)?.[1](() => inputRefs[i].current!.value)} onKeyDown={(e) => handleSubmit(e, i)} name={column.key} placeholder={column.label} size='lg' />
                         {i == columns.length - 1 && <Button style={{ marginLeft: "3%" }} onClick={onEditPressed} children={<CloseIcon />} />}
                     </Td>
                 )

@@ -7,9 +7,11 @@ import ICrudStateProvider from './ICrudStateProvider'
 
 class AcBanqueStateProvider extends ICrudStateProvider<AcBanque>{
     mapDataToJson(data: AcBanque): {} {
+        console.log(data)
         return {
             id:data["id"],
             libelle:data["libelle"],
+            code:data["code"],
             adresse:data["adresse"],
             responsable:data["responsabilite"]
         }
@@ -17,7 +19,7 @@ class AcBanqueStateProvider extends ICrudStateProvider<AcBanque>{
     
     mapEntitieFrom(json: any): AcBanque {
         return {
-            id:json["id"],
+            id:json["code"],
             code:json["code"],
             libelle:json["libelle"],
             adresse:json["adresse"],

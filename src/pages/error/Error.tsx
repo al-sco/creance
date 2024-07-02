@@ -1,4 +1,4 @@
-import { Box, Image, Img } from "@chakra-ui/react";
+import { Image} from "@chakra-ui/react";
 import { useRouteError } from "react-router-dom"
 import styled from "styled-components";
 import NetworkIssue from '../../assets/network_issue.svg'
@@ -21,7 +21,7 @@ const StyledP = styled.h1`
 
 const ErrorPage = () => {
     const error = useRouteError() as { statusText: string, message: string };
-
+    console.log(error)
     return (
         <StyledDiv>
             <Image src={NetworkIssue} />
