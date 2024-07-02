@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { Image } from '@chakra-ui/react'
-import colors from '../../theme/color'
+import colors from '../../common/theme/colors/colors'
 
 
 const StyledSvg = styled.svg<{ $color?: string }>`

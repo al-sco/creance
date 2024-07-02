@@ -11,6 +11,7 @@ import colors from "../../common/theme/colors/colors";
 import { ParameterColumnType } from "../parameter-main-content/parameter-main-content";
 import { Signal } from "@preact/signals-react";
 import { SubMenuItem } from "../../common/configs/ui/menus/menus.type";
+import { CreanceColumnType } from "../../common/configs/ui/creance/creance.type";
 
 type ParameterTableProps = {
   subMenu: SubMenuItem;
@@ -42,7 +43,7 @@ const thStyle = {
 
 export type  TableRenderProps = {
   signal: Signal<any[]>,
-  columns: ParameterColumnType[]
+  columns: ParameterColumnType[] | CreanceColumnType[]
 };
 
 
