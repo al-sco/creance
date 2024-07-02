@@ -651,8 +651,8 @@ const menuItemsData: Array<MenuItemType> = [
         nameColumn: "Gestion des Exercices",
         headers: [
           {
-            key: "annee",
-            label: "Annee",
+            key: "id",
+            label: "Numéro",
           },
           {
             key: "libelle",
@@ -667,7 +667,7 @@ const menuItemsData: Array<MenuItemType> = [
             label: "Date Debut",
           },
           {
-            key: "exoDatefin",
+            key: "dateFin",
             label: "Date Fin",
           },
           {
@@ -677,8 +677,8 @@ const menuItemsData: Array<MenuItemType> = [
         ],
         columns: [
           {
-            key: "annee",
-            label: "Annee",
+            key: "id",
+            label: "Numéro",
           },
           {
             key: "libelle",
@@ -693,7 +693,7 @@ const menuItemsData: Array<MenuItemType> = [
             label: "Date Debut",
           },
           {
-            key: "exoDatefin",
+            key: "dateFin",
             label: "Date Fin",
           },
           {

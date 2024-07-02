@@ -3,9 +3,10 @@ import ICrudStateProvider from './ICrudStateProvider';
 
 class AcExerciceStateProvider extends ICrudStateProvider<AcExercice> {
     mapDataToJson(data: AcExercice): {} {
+        console.log(data)
         return {
             id: data["id"],
-            exoLib: data["annee"],
+            exoLib: data["libelle"],
             dateAdoptionBud: data["dateAdoptionBud"],
             exoDatedeb:data["dateDebut"],
             exoDatefin:data["dateFin"],
@@ -17,8 +18,7 @@ class AcExerciceStateProvider extends ICrudStateProvider<AcExercice> {
     mapEntitieFrom(json: any): AcExercice {
         return {
             id: json["id"],
-            annee: json["exoLib"],
-            libelle: json["exerciceLib"],
+            libelle: json["exoLib"],
             dateAdoptionBud: json["dateAdoptionBud"],
             dateDebut:json["exoDatedeb"],
             dateFin:json["exoDatefin"],

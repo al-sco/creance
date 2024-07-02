@@ -81,8 +81,7 @@ export type Cloture = {
 };
 
 export type AcExercice = {
-  id: string;
-  annee: string;
+  id: number;
   libelle: string;
   dateAdoptionBud: string;
   dateDebut: string;

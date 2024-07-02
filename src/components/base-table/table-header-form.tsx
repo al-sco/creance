@@ -18,8 +18,7 @@ const TableHeaderForm = ({ subMenu }: { subMenu: SubMenuItem }) => {
     if (obj.code) {
       Object.defineProperty(obj, 'id', {
         value: obj.code,
-        writable: false
-      })
+        writable: false     })
     }
     
     if (subMenu.subMenuType && subMenu.subMenuType.create) {
@@ -35,10 +34,10 @@ const TableHeaderForm = ({ subMenu }: { subMenu: SubMenuItem }) => {
     await subMenu.subMenuType.create(data)
     }
   }
-
+  
   return (
     <Form onSubmit={handleSubmit}>
-      <Stack spacing={8} direction="row" justifyContent="space-between">
+      <Stack spacing={8 } direction="row" justifyContent="space-between">
         <Stack direction="row">
           {subMenu.headers!.map((header, index) => <Input border={`1px solid ${colors.lightGray}`} name={header.key} variant={"outline"} key={index} placeholder={header.label} size='lg' />)}
         </Stack>
