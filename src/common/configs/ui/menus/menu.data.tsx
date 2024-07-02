@@ -1102,21 +1102,21 @@ const menuItemsData: Array<MenuItemType> = [
         handleEdit: acProfessionProvider.update,
         headers: [
           {
-            key: "Code",
+            key: "code",
             label: "Code",
           },
           {
-            key: "Libelle",
+            key: "libelle",
             label: "Libelle",
           },
         ],
         columns: [
           {
-            key: "Code",
+            key: "code",
             label: "Code",
           },
           {
-            key: "Libelle",
+            key: "libelle",
             label: "Libelle",
           },
         ],
@@ -1130,40 +1130,39 @@ const menuItemsData: Array<MenuItemType> = [
         create: acQuartierProvider.create,
         handleDelete: acQuartierProvider.delete,
         handleEdit: acQuartierProvider.update,
-
         headers: [
           {
-            key: "Code",
+            key: "code",
             label: "Code",
           },
           {
-            key: "Libelle",
+            key: "libelle",
             label: "Libelle",
           },
           {
-            key: "Ville",
+            key: "ville",
             label: "Ville",
           },
           {
-            key: "Zone",
+            key: "zone",
             label: "Zone",
           },
         ],
         columns: [
           {
-            key: "Code",
+            key: "code",
             label: "Code",
           },
           {
-            key: "Libelle",
+            key: "libelle",
             label: "Libelle",
           },
           {
-            key: "Ville",
+            key: "ville",
             label: "Ville",
           },
           {
-            key: "Zone",
+            key: "zone",
             label: "Zone",
           },
         ],
@@ -1174,11 +1173,11 @@ const menuItemsData: Array<MenuItemType> = [
         nameHeader: "",
         headers: [
           {
-            key: "Code",
+            key: "code",
             label: "Code",
           },
           {
-            key: "Libelle",
+            key: "libelle",
             label: "Libelle",
           },
         ],
@@ -1187,14 +1186,13 @@ const menuItemsData: Array<MenuItemType> = [
         create: acStatutCreanceProvider.create,
         handleDelete: acStatutCreanceProvider.delete,
         handleEdit: acStatutCreanceProvider.update,
-
         columns: [
           {
-            key: "Code",
+            key: "code",
             label: "Code",
           },
           {
-            key: "Libelle",
+            key: "libelle",
             label: "Libelle",
           },
         ],
@@ -1208,24 +1206,23 @@ const menuItemsData: Array<MenuItemType> = [
         create: acStatutSalarieProvider.create,
         handleDelete: acStatutSalarieProvider.delete,
         handleEdit: acStatutSalarieProvider.update,
-
         headers: [
           {
-            key: "Code",
+            key: "code",
             label: "Code",
           },
           {
-            key: "Libelle",
+            key: "libelle",
             label: "Libelle",
           },
         ],
         columns: [
           {
-            key: "Code",
+            key: "code",
             label: "Code",
           },
           {
-            key: "Libelle",
+            key: "libelle",
             label: "Libelle",
           },
         ],
@@ -1239,32 +1236,31 @@ const menuItemsData: Array<MenuItemType> = [
         create: acTypeActeProvider.create,
         handleDelete: acTypeActeProvider.delete,
         handleEdit: acTypeActeProvider.update,
-
         headers: [
           {
-            key: "Code",
+            key: "code",
             label: "Code",
           },
           {
-            key: "Libelle",
+            key: "libelle",
             label: "Libelle",
           },
           {
-            key: "Delai",
+            key: "delai",
             label: "Delai",
           },
         ],
         columns: [
           {
-            key: "Code",
+            key: "code",
             label: "Code",
           },
           {
-            key: "Libelle",
+            key: "libelle",
             label: "Libelle",
           },
           {
-            key: "Delai",
+            key: "delai",
             label: "Delai",
           },
         ],
@@ -1275,11 +1271,11 @@ const menuItemsData: Array<MenuItemType> = [
         nameHeader: "",
         headers: [
           {
-            key: "Code",
+            key: "code",
             label: "Code",
           },
           {
-            key: "Libelle",
+            key: "libelle",
             label: "Libelle",
           },
         ],
@@ -1288,14 +1284,13 @@ const menuItemsData: Array<MenuItemType> = [
         create: acTypeAuxilProvider.create,
         handleDelete: acTypeAuxilProvider.delete,
         handleEdit: acTypeAuxilProvider.update,
-
         columns: [
           {
-            key: "Code",
+            key: "code",
             label: "Code",
           },
           {
-            key: "Libelle",
+            key: "libelle",
             label: "Libelle",
           },
         ],
@@ -1306,11 +1301,11 @@ const menuItemsData: Array<MenuItemType> = [
         nameHeader: "",
         headers: [
           {
-            key: "Code",
+            key: "code",
             label: "Code",
           },
           {
-            key: "Libelle",
+            key: "libelle",
             label: "Libelle",
           },
         ],
@@ -1319,15 +1314,13 @@ const menuItemsData: Array<MenuItemType> = [
         create: acTypeEcheancierProvider.create,
         handleDelete: acTypeEcheancierProvider.delete,
         handleEdit: acTypeEcheancierProvider.update,
-
-
         columns: [
           {
-            key: "Code",
+            key: "code",
             label: "Code",
           },
           {
-            key: "Libelle",
+            key: "libelle",
             label: "Libelle",
           },
         ],
@@ -1341,33 +1334,31 @@ const menuItemsData: Array<MenuItemType> = [
         create: acTypeChargeProvider.create,
         handleDelete: acTypeChargeProvider.delete,
         handleEdit: acTypeChargeProvider.update,
-
-
         headers: [
           {
-            key: "Code",
+            key: "code",
             label: "Code",
           },
           {
-            key: "Libelle",
+            key: "libelle",
             label: "Libelle",
           },
           {
-            key: "Sens",
+            key: "sens",
             label: "Sens",
           },
         ],
         columns: [
           {
-            key: "Code",
+            key: "code",
             label: "Code",
           },
           {
-            key: "Libelle",
+            key: "libelle",
             label: "Libelle",
           },
           {
-            key: "Sens",
+            key: "sens",
             label: "Sens",
           },
         ],
@@ -1378,11 +1369,11 @@ const menuItemsData: Array<MenuItemType> = [
         nameHeader: "",
         headers: [
           {
-            key: "Code",
+            key: "code",
             label: "Code",
           },
           {
-            key: "Libelle",
+            key: "libelle",
             label: "Libelle",
           },
         ],
@@ -1391,15 +1382,13 @@ const menuItemsData: Array<MenuItemType> = [
         create: acTypeCptProvider.create,
         handleDelete: acTypeCptProvider.delete,
         handleEdit: acTypeCptProvider.update,
-
-
         columns: [
           {
-            key: "Code",
+            key: "code",
             label: "Code",
           },
           {
-            key: "Libelle",
+            key: "libelle",
             label: "Libelle",
           },
         ],
@@ -1410,11 +1399,11 @@ const menuItemsData: Array<MenuItemType> = [
         nameHeader: "",
         headers: [
           {
-            key: "Code",
+            key: "code",
             label: "Code",
           },
           {
-            key: "Libelle",
+            key: "libelle",
             label: "Libelle",
           },
         ],
@@ -1425,11 +1414,11 @@ const menuItemsData: Array<MenuItemType> = [
         handleEdit: acTypeContratProvider.update,
         columns: [
           {
-            key: "Code",
+            key: "code",
             label: "Code",
           },
           {
-            key: "Libelle",
+            key: "libelle",
             label: "Libelle",
           },
         ],
@@ -1439,11 +1428,11 @@ const menuItemsData: Array<MenuItemType> = [
         nameColumn: "Gestion des Types de Debiteur",
         headers: [
           {
-            key: "Code",
+            key: "code",
             label: "Code",
           },
           {
-            key: "Libelle",
+            key: "libelle",
             label: "Libelle",
           },
         ],
@@ -1452,15 +1441,14 @@ const menuItemsData: Array<MenuItemType> = [
         create: acTypeDebiteurProvider.create,
         handleDelete: acTypeDebiteurProvider.delete,
         handleEdit: acTypeDebiteurProvider.update,
-
         nameHeader: "",
         columns: [
           {
-            key: "Code",
+            key: "code",
             label: "Code",
           },
           {
-            key: "Libelle",
+            key: "libelle",
             label: "Libelle",
           },
         ],
@@ -1470,11 +1458,11 @@ const menuItemsData: Array<MenuItemType> = [
         nameColumn: "Type Domiciliation",
         headers: [
           {
-            key: "Code",
+            key: "code",
             label: "Code",
           },
           {
-            key: "Libelle",
+            key: "libelle",
             label: "Libelle",
           },
         ],
@@ -1483,15 +1471,14 @@ const menuItemsData: Array<MenuItemType> = [
         create: acTypeDomicilProvider.create,
         handleDelete: acTypeDomicilProvider.delete,
         handleEdit: acTypeDomicilProvider.update,
-
         nameHeader: "",
         columns: [
           {
-            key: "Code",
+            key: "code",
             label: "Code",
           },
           {
-            key: "Libelle",
+            key: "libelle",
             label: "Libelle",
           },
         ],
@@ -1505,24 +1492,23 @@ const menuItemsData: Array<MenuItemType> = [
         create: acTypeEffetProvider.create,
         handleDelete: acTypeEffetProvider.delete,
         handleEdit: acTypeEffetProvider.update,
-
         headers: [
           {
-            key: "Code",
+            key: "code",
             label: "Code",
           },
           {
-            key: "Libelle",
+            key: "libelle",
             label: "Libelle",
           },
         ],
         columns: [
           {
-            key: "Code",
+            key: "code",
             label: "Code",
           },
           {
-            key: "Libelle",
+            key: "libelle",
             label: "Libelle",
           },
         ],
@@ -1532,11 +1518,11 @@ const menuItemsData: Array<MenuItemType> = [
         nameColumn: "Saisiede Types Employeur",
         headers: [
           {
-            key: "Code",
+            key: "code",
             label: "Code",
           },
           {
-            key: "Libelle",
+            key: "libelle",
             label: "Libelle",
           },
         ],
@@ -1546,14 +1532,13 @@ const menuItemsData: Array<MenuItemType> = [
         create: acTypeEmployeurProvider.create,
         handleDelete: acTypeEmployeurProvider.delete,
         handleEdit: acTypeEmployeurProvider.update,
-
         columns: [
           {
-            key: "Code",
+            key: "code",
             label: "Code",
           },
           {
-            key: "Libelle",
+            key: "libelle",
             label: "Libelle",
           },
         ],
@@ -1567,25 +1552,23 @@ const menuItemsData: Array<MenuItemType> = [
         create: acTypeFraiProvider.create,
         handleDelete: acTypeFraiProvider.delete,
         handleEdit: acTypeFraiProvider.update,
-
-
         headers: [
           {
-            key: "Code",
+            key: "code",
             label: "Code",
           },
           {
-            key: "Libelle",
+            key: "libelle",
             label: "Libelle",
           },
         ],
         columns: [
           {
-            key: "Code",
+            key: "code",
             label: "Code",
           },
           {
-            key: "Libelle",
+            key: "libelle",
             label: "Libelle",
           },
         ],
@@ -1595,11 +1578,11 @@ const menuItemsData: Array<MenuItemType> = [
         nameColumn: "Type de Garantie Réelle",
         headers: [
           {
-            key: "Code",
+            key: "code",
             label: "Code",
           },
           {
-            key: "Libelle",
+            key: "libelle",
             label: "Libelle",
           },
         ],
@@ -1613,11 +1596,11 @@ const menuItemsData: Array<MenuItemType> = [
         nameHeader: "",
         columns: [
           {
-            key: "Code",
+            key: "code",
             label: "Code",
           },
           {
-            key: "Libelle",
+            key: "libelle",
             label: "Libelle",
           },
         ],
@@ -1627,11 +1610,11 @@ const menuItemsData: Array<MenuItemType> = [
         nameColumn: "Type Garantie Personnelle",
         headers: [
           {
-            key: "Code",
+            key: "code",
             label: "Code",
           },
           {
-            key: "Libelle",
+            key: "libelle",
             label: "Libelle",
           },
         ],
@@ -1644,11 +1627,11 @@ const menuItemsData: Array<MenuItemType> = [
         nameHeader: "",
         columns: [
           {
-            key: "Code",
+            key: "code",
             label: "Code",
           },
           {
-            key: "Libelle",
+            key: "libelle",
             label: "Libelle",
           },
         ],
@@ -1658,11 +1641,11 @@ const menuItemsData: Array<MenuItemType> = [
         nameColumn: "Type Logement",
         headers: [
           {
-            key: "Code",
+            key: "code",
             label: "Code",
           },
           {
-            key: "Libelle",
+            key: "libelle",
             label: "Libelle",
           },
         ],
@@ -1675,11 +1658,11 @@ const menuItemsData: Array<MenuItemType> = [
         nameHeader: "",
         columns: [
           {
-            key: "Code",
+            key: "code",
             label: "Code",
           },
           {
-            key: "Libelle",
+            key: "libelle",
             label: "Libelle",
           },
         ],
@@ -1689,23 +1672,23 @@ const menuItemsData: Array<MenuItemType> = [
         nameColumn: "Type Opération",
         headers: [
           {
-            key: "Code",
+            key: "code",
             label: "Code",
           },
           {
-            key: "Libelle",
+            key: "libelle",
             label: "Libelle",
           },
           {
-            key: "Mode",
+            key: "mode",
             label: "Mode",
           },
           {
-            key: "Paie",
+            key: "paie",
             label: "Paie",
           },
           {
-            key: "Type",
+            key: "type",
             label: "Type",
           },
 
@@ -1718,23 +1701,23 @@ const menuItemsData: Array<MenuItemType> = [
         nameHeader: "",
         columns: [
           {
-            key: "Code",
+            key: "code",
             label: "Code",
           },
           {
-            key: "Libelle",
+            key: "libelle",
             label: "Libelle",
           },
           {
-            key: "Mode",
+            key: "mode",
             label: "Mode",
           },
           {
-            key: "Paie",
+            key: "paie",
             label: "Paie",
           },
           {
-            key: "Type",
+            key: "type",
             label: "Type",
           },
 
@@ -1747,11 +1730,11 @@ const menuItemsData: Array<MenuItemType> = [
         nameHeader: "",
         headers: [
           {
-            key: "Code",
+            key: "code",
             label: "Code",
           },
           {
-            key: "Libelle",
+            key: "libelle",
             label: "Libelle",
           },
         ],
@@ -1763,11 +1746,11 @@ const menuItemsData: Array<MenuItemType> = [
 
         columns: [
           {
-            key: "Code",
+            key: "code",
             label: "Code",
           },
           {
-            key: "Libelle",
+            key: "libelle",
             label: "Libelle",
           },
         ],
@@ -1782,22 +1765,22 @@ const menuItemsData: Array<MenuItemType> = [
         handleEdit: acTypePieceProvider.update,
         headers: [
           {
-            key: "Code",
+            key: "code",
             label: "Code",
           },
           {
-            key: "Libelle",
+            key: "libelle",
             label: "Libelle",
           },
         ],
         nameHeader: "",
         columns: [
           {
-            key: "Code",
+            key: "code",
             label: "Code",
           },
           {
-            key: "Libelle",
+            key: "libelle",
             label: "Libelle",
           },
         ],
@@ -1812,22 +1795,22 @@ const menuItemsData: Array<MenuItemType> = [
         handleEdit: acTypeRegulProvider.update,
         headers: [
           {
-            key: "Code",
+            key: "code",
             label: "Code",
           },
           {
-            key: "Libelle",
+            key: "libelle",
             label: "Libelle",
           },
         ],
         nameHeader: "",
         columns: [
           {
-            key: "Code",
+            key: "code",
             label: "Code",
           },
           {
-            key: "Libelle",
+            key: "libelle",
             label: "Libelle",
           },
         ],
@@ -1837,11 +1820,11 @@ const menuItemsData: Array<MenuItemType> = [
         nameColumn: "Type de Saisie",
         headers: [
           {
-            key: "Code",
+            key: "code",
             label: "Code",
           },
           {
-            key: "Libelle",
+            key: "libelle",
             label: "Libelle",
           },
         ],
@@ -1853,11 +1836,11 @@ const menuItemsData: Array<MenuItemType> = [
         nameHeader: "",
         columns: [
           {
-            key: "Code",
+            key: "code",
             label: "Code",
           },
           {
-            key: "Libelle",
+            key: "libelle",
             label: "Libelle",
           },
         ],
@@ -1867,11 +1850,11 @@ const menuItemsData: Array<MenuItemType> = [
         nameColumn: "Gestion des Villes",
         headers: [
           {
-            key: "Code",
+            key: "code",
             label: "Code",
           },
           {
-            key: "Libelle",
+            key: "libelle",
             label: "Libelle",
           },
         ],
@@ -1883,11 +1866,11 @@ const menuItemsData: Array<MenuItemType> = [
         nameHeader: "",
         columns: [
           {
-            key: "Code",
+            key: "code",
             label: "Code",
           },
           {
-            key: "Libelle",
+            key: "libelle",
             label: "Libelle",
           },
         ],
@@ -1902,30 +1885,30 @@ const menuItemsData: Array<MenuItemType> = [
         handleEdit: acZoneProvider.update,
         headers: [
           {
-            key: "Code",
+            key: "code",
             label: "Code",
           },
           {
-            key: "Libelle",
+            key: "libelle",
             label: "Libelle",
           },
           {
-            key: "Description",
+            key: "description",
             label: "Description",
           },
         ],
         nameHeader: "",
         columns: [
           {
-            key: "Code",
+            key: "code",
             label: "Code",
           },
           {
-            key: "Libelle",
+            key: "libelle",
             label: "Libelle",
           },
           {
-            key: "Description",
+            key: "description",
             label: "Description",
           },
         ],
