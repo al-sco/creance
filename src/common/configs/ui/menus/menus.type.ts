@@ -7,6 +7,7 @@ export type MenuItem = {
     path: string
     icon: string
     subMenus?: SubMenuItem[]
+    render?: () => JSX.Element,
 }
 
 export type SubMenuItem = {
@@ -15,7 +16,7 @@ export type SubMenuItem = {
     nameColumn?: string
     subMenuType?: SubMenuType
     id: number
-    viewName: 'parameter' | undefined
+    viewName?: 'parameter' | undefined
     columns?: ParameterColumnType[]
     headers?: ParameterColumnType[]
     loader?: (params: any) => any[],

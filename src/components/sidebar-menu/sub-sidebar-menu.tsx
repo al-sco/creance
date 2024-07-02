@@ -8,11 +8,11 @@ import colors from "../../common/theme/colors/colors";
 
 
 const StyledSideBarMenu = styled.div`
-  resize: horizontal;
+  resize: horyzontal;
   padding: 35px 5px 80px 5px;
   height: 100vh;
   background-color: ${colors.lightGreen};
-  transition: all 5s linear;
+  transition: all 1s linear;
 `;
 
 const StyledDiv=styled.div`

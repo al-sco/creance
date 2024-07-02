@@ -61,6 +61,8 @@ import acStatutCreanceProvider from "../../../../states/signals/parameter_provid
 import acQuartierProvider from "../../../../states/signals/parameter_providers/AcQuartier.state";
 import acCompteOperProvider from "../../../../states/signals/parameter_providers/AcCompte.state";
 import ListableSearchableItemComponent from "../../../../components/listable-searchable-item/listable-searchable-item";
+import CreanceMainContent from "../../../../components/creance/creance-main-content";
+import { creanceFields } from "../creance/creance.data";
 
 export type SubMenuType = {
   name: string;
@@ -70,7 +72,7 @@ export type SubMenuType = {
   dataProvider?: Signal<any>
   columns?: ParameterColumnType[]
   headers?: ParameterColumnType[]
-  handleDelete?: (data: any) => void,
+  handleDelete?: (data: any) => Promise<void>,
   handleEdit?: (data: any) => Promise<void>,
   create?: (data: any) => Promise<void>,
   additionalHeaderRender?: () => JSX.Element,
@@ -81,6 +83,7 @@ type MenuItemType = {
   icon: string;
   path: string;
   subMenu?: SubMenuType[];
+  render?: () => JSX.Element,
 };
 
 const parametersViewsPaths = ["/settings"];
@@ -138,9 +141,9 @@ const menuItemsData: Array<MenuItemType> = [
         nameHeader: "Agence",
         dataProvider: acBanqueAgenceProvider.getState(),
         handleDelete: acBanqueAgenceProvider.delete,
-        additionalHeaderRender: ()=> <ListableSearchableItemComponent placeholder="Rechercher une banque" searchPlaceholder="Exemple: Ecobank" />,
+        additionalHeaderRender: () => <ListableSearchableItemComponent placeholder="Rechercher une banque" searchPlaceholder="Exemple: Ecobank" />,
         handleEdit: acBanqueAgenceProvider.update,
-        create: acBanqueAgenceProvider.create,        
+        create: acBanqueAgenceProvider.create,
         nameColumn: "",
         headers: [
           {
@@ -1882,18 +1885,7 @@ const menuItemsData: Array<MenuItemType> = [
     name: "Etude de Creance",
     path: "/creances",
     icon: Creance,
-    subMenu: [
-      {
-        name: "Enregistrement",
-      },
-
-      {
-        name: "Mise à jour",
-      },
-      {
-        name: "Consultation",
-      },
-    ],
+    render: () => <CreanceMainContent creanceFields={creanceFields} />
   },
   {
     name: "Suivi Clientèle",
@@ -1988,7 +1980,7 @@ export const menuItems: MenuItem[] = menuItemsData.map((menuItem, index) => ({
   path: menuItem.path,
   icon: menuItem.icon,
   name: menuItem.name,
-
+  render: menuItem.render ? () => menuItem.render!() : undefined,
   subMenus: menuItem.subMenu?.map(
     (subMenu, index): SubMenuItem => ({
       id: index,

@@ -1,9 +1,9 @@
 import styled from 'styled-components'
-import colors from '../../theme/color';
 import { Stack, Image, Box, Input, Button } from '@chakra-ui/react';
-import { StyledTitle } from '../../theme/typography';
 import MoreIcon from '../../assets/menu-button.svg'
 import BaseTable from '../base-table/base-table';
+import colors from '../../common/theme/colors/colors';
+import { StyledTitle } from '../../common/theme/typography/typography';
  
 
 
@@ -32,7 +32,19 @@ const BaseParameterView = () => {
                 <Button variant='outline' color={colors.green} size='lg' style={{ border: `1px solid ${colors.green}` }}>Ajouter</Button>
             </Stack>
             <Box h="24px" />
-            <BaseTable />
+            <BaseTable subMenu={{
+                name: '',
+                nameHeader: undefined,
+                nameColumn: undefined,
+                subMenuType: undefined,
+                id: 0,
+                viewName: undefined,
+                columns: undefined,
+                headers: undefined,
+                loader: undefined,
+                render: undefined,
+                path: ''
+            }} columns={[]} />
         </StyledBaseParameterView>
     )
 }
