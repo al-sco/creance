@@ -63,6 +63,7 @@ import acCompteOperProvider from "../../../../states/signals/parameter_providers
 import ListableSearchableItemComponent from "../../../../components/listable-searchable-item/listable-searchable-item";
 import CreanceMainContent from "../../../../components/creance/creance-main-content";
 import { creanceFields } from "../creance/creance.data";
+import acEntiteProvider from "../../../../states/signals/parameter_providers/AcEntite.state";
 
 export type SubMenuType = {
   name: string;
@@ -531,19 +532,29 @@ const menuItemsData: Array<MenuItemType> = [
         name: "Entité",
         nameColumn: "Liste des Entités de l'ACCC",
         nameHeader: "",
-        loader: acEntityProvider.find,
-        dataProvider: acEntityProvider.getState(),
-        create: acEntityProvider.create,
-        handleDelete: acEntityProvider.delete,
-        handleEdit: acEntityProvider.update,
-        headers: [{
+        loader: acEntiteProvider.find,
+        dataProvider: acEntiteProvider.getState(),
+        create: acEntiteProvider.create,
+        handleDelete: acEntiteProvider.delete,
+        handleEdit: acEntiteProvider.update,
+        headers: [
+          
+          {
+            key: "Code",
+            label: "Code",
+          },
+          {
+            key: "libelle",
+            label: "Libelle",
+          },
+          {
           key: "responsable",
           label: "Responsable ou Fondé de pourvoirs",
         },
         {
           key: "libelleLong",
           label: "Libellé Long",
-        },],
+        }, ],
         columns: [
           {
             key: "Code",
@@ -552,6 +563,14 @@ const menuItemsData: Array<MenuItemType> = [
           {
             key: "Libelle",
             label: "Libelle",
+          },
+          {
+            key: "responsable",
+            label: "Responsable ou Fondé de pourvoirs",
+          },
+          {
+            key: "libelleLong",
+            label: "Libellé Long",
           },
 
         ],
@@ -565,7 +584,16 @@ const menuItemsData: Array<MenuItemType> = [
         create: acEtapeProvider.create,
         handleDelete: acEtapeProvider.delete,
         handleEdit: acEtapeProvider.update,
-        headers: [],
+        headers: [
+          {
+            key: "Code",
+            label: "Code",
+          },
+          {
+            key: "Libelle",
+            label: "Libelle",
+          },
+        ],
         columns: [
           {
             key: "Code",
@@ -586,7 +614,16 @@ const menuItemsData: Array<MenuItemType> = [
         create: acEtatLocalisationProvider.create,
         handleDelete: acEtatLocalisationProvider.delete,
         handleEdit: acEtatLocalisationProvider.update,
-        headers: [],
+        headers: [
+          {
+            key: "Code",
+            label: "Code",
+          },
+          {
+            key: "Libelle",
+            label: "Libelle",
+          },
+        ],
         columns: [
           {
             key: "Code",
@@ -879,7 +916,16 @@ const menuItemsData: Array<MenuItemType> = [
         name: "Objet créance",
         nameColumn: "Gestion des Objets des Creances",
         nameHeader: "",
-        headers: [],
+        headers: [
+          {
+            key: "Code",
+            label: "Code",
+          },
+          {
+            key: "Libelle",
+            label: "Libelle",
+          }
+        ],
         dataProvider: acObjetCreancesProvider.getState(),
         loader: acObjetCreancesProvider.find,
         create: acObjetCreancesProvider.create,

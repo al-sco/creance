@@ -60,7 +60,9 @@ export default abstract class ICrudStateProvider<T extends Identifiable> {
     }
 
     // create a new entry 
+    
     create=async(data:T):Promise<void>=>{
+        console.log(this.create)
         let {status}=await axios.post(getUrl(this.basePath),this.mapDataToJson(data),{
             headers:{
                 'Content-Type':'application/json',

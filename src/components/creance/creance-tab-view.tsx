@@ -53,7 +53,7 @@ const CreanceTabsView = ({ tabs }: CreanceTabsViewProps) => {
                         )}
                     </TabPanels>
                 </Tabs>
-            </GridItem>;
+            </GridItem>
         </>
     )
 }
