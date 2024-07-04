@@ -141,7 +141,7 @@ const menuItemsData: Array<MenuItemType> = [
         nameHeader: "Agence",
         dataProvider: acBanqueAgenceProvider.getState(),
         handleDelete: acBanqueAgenceProvider.delete,
-        additionalHeaderRender: () => <ListableSearchableItemComponent placeholder="Rechercher une banque" searchPlaceholder="Exemple: Ecobank" />,
+        additionalHeaderRender: () => <ListableSearchableItemComponent asSearchField={false} placeholder="Rechercher une banque" searchPlaceholder="Exemple: Ecobank" />,
         handleEdit: acBanqueAgenceProvider.update,
         create: acBanqueAgenceProvider.create,
         nameColumn: "",

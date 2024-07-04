@@ -5,6 +5,7 @@ import { StyledTitle } from '../../common/theme/typography/typography';
 import colors from '../../common/theme/colors/colors';
 import { SubMenuItem } from '../../common/configs/ui/menus/menus.type';
 import TableHeaderForm from '../base-table/table-header-form';
+import ListableSearchableItemComponent from '../listable-searchable-item/listable-searchable-item';
 
 
 
@@ -32,6 +33,7 @@ const ParameterMainContent = ({ colums, subMenu }: ParameterMainContentProps) =>
     return (
         <StyledParameterMainContent>
             {subMenu && subMenu.subMenuType && subMenu.subMenuType.additionalHeaderRender && <>{subMenu.subMenuType.additionalHeaderRender()}</>}
+            {subMenu && subMenu.subMenuType && subMenu.subMenuType.additionalHeaderRender===undefined  && <ListableSearchableItemComponent asSearchField signal={subMenu.subMenuType.dataProvider} placeholder={`Rechercher ${subMenu.nameColumn}`} searchPlaceholder="" />}
             <Box h="20px" />
             <Stack direction="row" justifyContent="space-between">
                 <StyledTitle>

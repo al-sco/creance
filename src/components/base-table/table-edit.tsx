@@ -15,7 +15,6 @@ export const TableRowEdit = ({ index, columns, onEditPressed, data,handleEdit }:
 
 
     const handleSubmit = (e: React.KeyboardEvent<HTMLInputElement>, inputIndex: number) => {
-        console.log('Message')
         if (e.key == 'Enter') {
             if (inputIndex < inputRefs.length - 1) {
                 let nextInput = inputRefs[inputIndex + 1]
