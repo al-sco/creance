@@ -7,11 +7,9 @@ import { SubMenuItem } from '../../common/configs/ui/menus/menus.type';
 import TableHeaderForm from '../base-table/table-header-form';
 
 
-
 export type ParameterColumnType = {
     label: string;
     key: string
-
 }
 
 type ParameterMainContentProps = {

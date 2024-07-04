@@ -1,6 +1,7 @@
 export enum InputType {
   text,
   number,
+  date
 }
 
 export type SelectItem = {
@@ -9,9 +10,9 @@ export type SelectItem = {
 };
 
 export type CreanceInputItem = {
-  isEditable: boolean;
+  isEditable?: boolean;
   placeholder?: string;
-  inputType: InputType;
+  inputType?: InputType;
 };
 
 export type CreanceFieldType = {

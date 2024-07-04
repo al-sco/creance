@@ -18,7 +18,7 @@ const MenuItemComponent = ({ menu, isSelected, onPressed }: MenuItemProps) => {
         <StyledMenuItem $backgroundColor={isSelected ? colors.green : undefined} $textColor={colors.white}>
             <Stack direction='row' spacing={4} alignItems="center" justifyContent="space-between">
                 <Stack direction="row">
-                    <Image src={menu.icon} alt={menu.name} />
+                    <Image src={menu.icon} alt={menu.name} />                    
                     <Box />
                     <span>{menu.name}</span>
                 </Stack>

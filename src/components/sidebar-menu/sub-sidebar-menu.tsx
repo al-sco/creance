@@ -1,47 +1,56 @@
 import styled from "styled-components"
-import { Box} from "@chakra-ui/react";
+import { Box, Button } from "@chakra-ui/react";
 import { SubMenuItem } from "../../common/configs/ui/menus/menus.type";
 import { StyledSubTitle } from "../../common/theme/typography/typography";
 import SubMenuItemComponent from "../menu-item/sub-menu-item";
 import { useEffect, useState } from "react";
 import colors from "../../common/theme/colors/colors";
+import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
+import { Signal } from "@preact/signals-react";
+import { useSignals } from "@preact/signals-react/runtime";
 
 
 const StyledSideBarMenu = styled.div`
-  resize: horyzontal;
-  padding: 35px 5px 80px 5px;
+  padding: 20px 20px 80px 0;
   height: 100vh;
   background-color: ${colors.lightGreen};
   transition: all 1s linear;
 `;
 
-const StyledDiv=styled.div`
+const StyledDiv = styled.div`
     height: 100%;
     overflow-y: scroll;
 `;
 
 
 type SubSideBarMenuProps = {
+    handleHidden: () => void,
+    isHidden: Signal<boolean>,
     title: string
     subMenuItems: Array<SubMenuItem>
 }
 
-const SubSideBarMenu = ({ title, subMenuItems }: SubSideBarMenuProps) => {
+const SubSideBarMenu = ({ title, subMenuItems, handleHidden, isHidden }: SubSideBarMenuProps) => {
     const [subMenuItem, setSubMenuItem] = useState<number>()
+    useSignals()
 
-    useEffect(()=>{
-        let currentMenu=subMenuItems.find((subMenu)=>window.location.pathname.includes(encodeURI(subMenu.path)))        
-        if(currentMenu){
-            setSubMenuItem(()=>currentMenu.id)
+    useEffect(() => {
+        let currentMenu = subMenuItems.find((subMenu) => window.location.pathname.includes(encodeURI(subMenu.path)))
+        if (currentMenu) {
+            setSubMenuItem(() => currentMenu.id)
         }
-    },[])
+    }, [])
+
 
     const handleMenuClick = (subMenu: SubMenuItem) => {
         setSubMenuItem((_) => subMenu.id)
     }
 
-    return <StyledSideBarMenu>
+    return !isHidden.value ? <StyledSideBarMenu>
         <StyledSubTitle>
+            <Button onClick={handleHidden} >
+                <ChevronLeftIcon />
+            </Button>
             {title}
         </StyledSubTitle>
         <Box h="37px" />
@@ -51,7 +60,11 @@ const SubSideBarMenu = ({ title, subMenuItems }: SubSideBarMenuProps) => {
                     .map((subMenu, index) => (<SubMenuItemComponent key={index} onPressed={handleMenuClick} isSelected={subMenuItem === subMenu.id} subMenu={subMenu} />))
             }
         </StyledDiv>
-    </StyledSideBarMenu>
+    </StyledSideBarMenu> : <Box height='100vh' >
+
+        <Button onClick={handleHidden} >
+            <ChevronRightIcon />
+        </Button></Box>
 }
 
 export default SubSideBarMenu
