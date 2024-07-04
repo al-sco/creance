@@ -5,7 +5,7 @@ class AcModePaiementStateProvider extends ICrudStateProvider<AcModePaiement> {
     mapDataToJson(data: AcModePaiement): {} {
         return {
           modePaieCode: data["id"],
-            mpLibelle: data["libelle"]
+          modePaieLib: data["libelle"]
         };
     }
     

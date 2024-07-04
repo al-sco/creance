@@ -3,13 +3,15 @@ import ICrudStateProvider from './ICrudStateProvider';
 
 class AcParamStateProvider extends ICrudStateProvider<AcParam> {
     mapDataToJson(data: AcParam): {} {
-        return {
-          id: data["id"],
-            paramCode: data["code"],
+        let i= {
+          id: data["code"],
             paramLib: data["libelle"],
             paramValeur: data["valeur"],
             paramComment:data["commentaire"]
         };
+        console.log(i);
+        
+        return i
     }
     
     mapEntitieFrom(json: any): AcParam {

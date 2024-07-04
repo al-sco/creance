@@ -4,7 +4,7 @@ import ICrudStateProvider from "./ICrudStateProvider";
 class AcTypeOperationStateProvider extends ICrudStateProvider<AcTypeOperation> {
     mapDataToJson(data: AcTypeOperation): {} {
         return {
-            typoperCode: data["id"],
+            typoperCode: data["code"],
             typoperLib: data["libelle"],
             modePaieCode: data["modePaie"],
             typaieCode: data["typePaie"]

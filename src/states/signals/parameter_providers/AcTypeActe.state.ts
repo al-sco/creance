@@ -14,7 +14,7 @@ class AcTypeActeStateProvider extends ICrudStateProvider<AcTypeActe> {
     mapEntitieFrom(json: any): AcTypeActe {
         return {
             id: json["typacteCode"],
-            code: json["typeActeCode"],
+            code: json["typacteCode"],
             libelle: json["typacteLib"],
             delai: json["typacteDelai"]
         };

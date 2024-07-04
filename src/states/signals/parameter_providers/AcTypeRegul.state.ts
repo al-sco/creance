@@ -4,16 +4,16 @@ import ICrudStateProvider from './ICrudStateProvider'
 class AcTypeRegulStateProvider extends ICrudStateProvider<AcTypeRegul> {
     mapDataToJson(data: AcTypeRegul): {} {
         return {
-          contSolTypeCode: data["id"],
-          contSolTypeLib: data["libelle"]
+            regulTypeCode: data["id"],
+          regulTypeLib: data["libelle"]
         }
     }
     
     mapEntitieFrom(json: any): AcTypeRegul {
         return {
-            id: json["contSolTypeCode"],
-            code: json["contSolTypeCode"],
-            libelle: json["contSolTypeLib"]
+            id: json["regulTypeCode"],
+            code: json["regulTypeCode"],
+            libelle: json["regulTypeLib"]
         }
     }
 }

@@ -13,6 +13,7 @@ type TableRenderProps= {
 
 const TableContentRender = ({ signal, columns,subMenu} : TableRenderProps) => {
     useSignals()
+
     return (
       <>
         {signal.value.map((data: any, index: number) => (

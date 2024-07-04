@@ -21,12 +21,15 @@ export default abstract class ICrudStateProvider<T extends Identifiable> {
     // fetch data
     find=async():Promise<T[]>=>{
         let {data,status}=await axios.get(getUrl(this.basePath),
-    {
+    { 
         headers: {
             'ngrok-skip-browser-warning':true
         }
     })
-        if(status==200){
+        if(status==200){ 
+            
+            console.log(data);
+        
             this.state.value=data.map(this.mapEntitieFrom)
         }
         return this.state.value

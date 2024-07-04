@@ -10,6 +10,7 @@ const TableRowEditable = ({ index, columns, baseStyle, data, handleDelete, handl
     const { isOpen, onOpen, onClose } = useDisclosure()
     const toast = useToast()
 
+
     const switchToEdit = () => {
         setSetEditable(() => !isEditable)
     }    

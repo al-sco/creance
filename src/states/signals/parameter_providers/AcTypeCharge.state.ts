@@ -4,8 +4,8 @@ import ICrudStateProvider from './ICrudStateProvider';
 class AcTypeChargeStateProvider extends ICrudStateProvider<AcTypeCharge> {
     mapDataToJson(data: AcTypeCharge): {} {
         return {
-            typeChargeCode: data["id"],
-            typeChargeLib: data["libelle"],
+            typchargCode: data["id"],
+            typchargLib: data["libelle"],
             typchargSens: data["sens"]
         };
     }

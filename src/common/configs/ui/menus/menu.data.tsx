@@ -751,9 +751,14 @@ const menuItemsData: Array<MenuItemType> = [
             label: "Libelle",
           },
           {
+            key: "entiteCode",
+            label: "Entité Code",
+          },
+          {
             key: "libelleLong",
             label: "Libellé Long",
           },
+
         ],
         columns: [
           {
@@ -764,6 +769,14 @@ const menuItemsData: Array<MenuItemType> = [
             key: "libelle",
             label: "Libelle",
           },
+          {
+            key: "entiteCode",
+            label: "Entité Code",
+          },
+          {
+            key: "libelleLong",
+            label: "Libellé Long",
+          }
 
         ],
       },
@@ -1076,7 +1089,7 @@ const menuItemsData: Array<MenuItemType> = [
             label: "Code",
           },
           {
-            key: "posteComptable",
+            key: "libelle",
             label: "Poste Comptable",
           },
         ],
@@ -1086,7 +1099,7 @@ const menuItemsData: Array<MenuItemType> = [
             label: "Code",
           },
           {
-            key: "posteComptable",
+            key: "libelle",
             label: "Poste Comptable",
           },
         ],
@@ -1680,17 +1693,15 @@ const menuItemsData: Array<MenuItemType> = [
             label: "Libelle",
           },
           {
-            key: "mode",
+            key: "modePaie",
             label: "Mode",
           },
           {
-            key: "paie",
+            key: "typePaie",
             label: "Paie",
           },
-          {
-            key: "type",
-            label: "Type",
-          },
+          
+         
 
         ],
         dataProvider: acTypeOperationProvider.getState(),
@@ -1709,17 +1720,14 @@ const menuItemsData: Array<MenuItemType> = [
             label: "Libelle",
           },
           {
-            key: "mode",
+            key: "modePaie",
             label: "Mode",
           },
           {
-            key: "paie",
+            key: "typePaie",
             label: "Paie",
           },
-          {
-            key: "type",
-            label: "Type",
-          },
+        
 
         ],
       },

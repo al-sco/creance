@@ -3,11 +3,13 @@ import ICrudStateProvider from './ICrudStateProvider';
 
 class AcJournalStateProvider extends ICrudStateProvider<AcJournal> {
     mapDataToJson(data: AcJournal): {} {
+        console.log(data);
+        
         return {
             id: data["id"],
             libJournal:data["libelle"]
         };
-    }
+    }   
     
     mapEntitieFrom(json: any): AcJournal {
         return {

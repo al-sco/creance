@@ -13,14 +13,15 @@ class AcEntiteStateProvider extends ICrudStateProvider<AcEntite> {
     }
     
     mapEntitieFrom(json: any): AcEntite {
-        return {
+        let o= {
             id: json["entiteCode"],
             code: json["entiteCode"],
             libelle: json["entiteLib"],
-            responsable: json["entiteResp "],
+            responsable: json["entiteResp"],
             libelleLong: json["entiteLibLong"],
             entiteAssign: json["entiteAssign"]
         };
+        return o
     }
 }
 

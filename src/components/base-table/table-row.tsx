@@ -19,9 +19,7 @@ export type TableRowFuncType = {
     onDeletePressed: () => void
 }
 
-function lettertoCamelCase(word: string) {
-    return word[0].toLowerCase() + word.substring(1)
-}
+
 
 export type TableEditProps = TableRowProps & { onEditPressed: () => void }
 
@@ -37,7 +35,7 @@ export const TableRow = ({ index, columns, onDeletePressed, onEditPressed, data 
                         (<Grid templateColumns={"1fr 100px"} alignItems="center">
                             <GridItem style={{ overflow: 'hidden', maxWidth: '90%'}}>
                                 <span style={{ whiteSpace: 'wrap' }}>
-                                    {data[lettertoCamelCase(column.key)]}
+                                    {data[column.key]}
                                 </span>
                             </GridItem>
                             <GridItem>
@@ -48,7 +46,7 @@ export const TableRow = ({ index, columns, onDeletePressed, onEditPressed, data 
                                 </Stack>
                             </GridItem>
                         </Grid>) :
-                        (<>{data[lettertoCamelCase(column.key)]}</>)}</Td>
+                        (<>{data[column.key]}</>)}</Td>
             )
             )
         }</Tr>

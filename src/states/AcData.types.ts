@@ -93,6 +93,7 @@ export type AcFonction = ParameterBaseData;
 
 export type AcGroupeCreance = ParameterBaseData & {
   libelleLong: string;
+  entiteCode: string;
 };
 
 export type AcJournal = ParameterBaseData;

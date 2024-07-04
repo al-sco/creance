@@ -10,11 +10,14 @@ const TableHeaderForm = ({ subMenu }: { subMenu: SubMenuItem }) => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     let a = new FormData(e.currentTarget)
+ 
+    
 
     let obj: any = {}
 
     a.forEach((e, key) => Object.defineProperty(obj, key, { value: e, writable: false }))
     // Add code as id
+    console.log(obj);
     if (obj.code) {
       Object.defineProperty(obj, 'id', {
         value: obj.code,
@@ -23,7 +26,8 @@ const TableHeaderForm = ({ subMenu }: { subMenu: SubMenuItem }) => {
     
     if (subMenu.subMenuType && subMenu.subMenuType.create) {
       toastify(toast,submitData(obj),{
-        title: 'Donnée enregistrée'
+        description: 'Donnée enregistrée',
+        title: ''
       })
       e.currentTarget.reset()
     }

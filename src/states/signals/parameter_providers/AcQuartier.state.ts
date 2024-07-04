@@ -5,7 +5,7 @@ class AcQuartierStateProvider extends ICrudStateProvider<AcQuartier> {
     mapDataToJson(data: AcQuartier): {} {
         return {
             quartCode: data["id"],
-            quartierLib: data["libelle"],
+            quartLib: data["libelle"],
             villeCode: data["ville"],
             zoneCode: data["zone"],
         };
@@ -15,7 +15,7 @@ class AcQuartierStateProvider extends ICrudStateProvider<AcQuartier> {
         return {
             id: json["quartCode"],
             code: json["quartCode"],
-            libelle: json["quartierLib"],
+            libelle: json["quartLib"],
             ville: json["villeCode"],
             zone: json["zoneCode"],
             

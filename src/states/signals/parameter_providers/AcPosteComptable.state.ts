@@ -4,7 +4,7 @@ import ICrudStateProvider from './ICrudStateProvider'
 class AcPosteComptableStateProvider extends ICrudStateProvider<AcPosteComptable> {
     mapDataToJson(data: AcPosteComptable): {} {
         return {
-          periodCode: data["id"],
+          pcCode: data["id"],
             pcLib: data["libelle"],
         };
     }

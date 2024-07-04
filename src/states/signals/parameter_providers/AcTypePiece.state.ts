@@ -4,9 +4,8 @@ import ICrudStateProvider from './ICrudStateProvider'
 class AcTypePieceStateProvider extends ICrudStateProvider<AcTypePiece> {
     mapDataToJson(data: AcTypePiece): {} {
         return {
-          id: data["id"],
-          clasCode: data["code"],
-          clasLib: data["libelle"]
+          typePieceCode: data["code"],
+          typePieceLib: data["libelle"]
         }
     }
     
