@@ -8,11 +8,9 @@ import TableHeaderForm from '../base-table/table-header-form';
 import ListableSearchableItemComponent from '../listable-searchable-item/listable-searchable-item';
 
 
-
 export type ParameterColumnType = {
     label: string;
     key: string
-
 }
 
 type ParameterMainContentProps = {

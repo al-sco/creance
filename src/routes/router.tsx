@@ -15,12 +15,12 @@ const router = createBrowserRouter([
             {
                 path: menuItem.path,
                 element: <MainContent subMenus={menuItem.subMenus} render={menuItem.render} title={menuItem.name} />,
-                errorElement:<ErrorPage />,
+                errorElement: <ErrorPage />,
                 children: menuItem.subMenus?.map((sb) => ({
                     path: sb.path,
-                    errorElement:<ErrorPage />,
-                    loader:sb.viewName=='parameter'?sb.loader:undefined,
-                    element: sb.viewName=='parameter'?(<ParameterMainContent subMenu={sb} title={sb.name} colums={sb.columns ?? []} />):null
+                    errorElement: <ErrorPage />,
+                    loader: sb.viewName == 'parameter' ? sb.loader : undefined,
+                    element: sb.viewName == 'parameter' ? (<ParameterMainContent subMenu={sb} title={sb.name} colums={sb.columns ?? []} />) : (sb.subMenuType?.render ? sb.subMenuType?.render() : undefined)
                 }))
             }
         ) as RouteObject)

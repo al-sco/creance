@@ -11,7 +11,9 @@ font-weight: bold;
 `;
 
 export const StyledSubTitle = styled.h1<{ $textColor?: string }>`
-padding: 0 0 0 10px;
+display: flex;
+justify-content:space-around;
+align-items: center;
 font-size: 24px;
 color: ${props => props.$textColor ?? colors.black};
 font-family: "Ubuntu", sans-serif;

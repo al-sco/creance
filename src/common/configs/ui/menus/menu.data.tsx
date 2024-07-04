@@ -76,6 +76,7 @@ export type SubMenuType = {
   handleEdit?: (data: any) => Promise<void>,
   create?: (data: any) => Promise<void>,
   additionalHeaderRender?: () => JSX.Element,
+  render?: () => JSX.Element,
 };
 
 type MenuItemType = {
@@ -83,7 +84,6 @@ type MenuItemType = {
   icon: string;
   path: string;
   subMenu?: SubMenuType[];
-  render?: () => JSX.Element,
 };
 
 const parametersViewsPaths = ["/settings"];
@@ -1925,9 +1925,22 @@ const menuItemsData: Array<MenuItemType> = [
   },
   {
     name: "Etude de Creance",
-    path: "/creances",
+    path: "/etude_creance",
     icon: Creance,
-    render: () => <CreanceMainContent creanceFields={creanceFields} />
+    subMenu: [
+      {
+        name: "Debiteur",
+        render: () => <>Debiteur</>
+      },
+      {
+        name: "Creance",      
+        render: () => <CreanceMainContent creanceFields={creanceFields} />
+      },
+      {
+        name: "Ordinateur",
+        render: () => <>Ordinateur</>
+      },
+    ]   
   },
   {
     name: "Suivi Clientèle",
@@ -2022,7 +2035,6 @@ export const menuItems: MenuItem[] = menuItemsData.map((menuItem, index) => ({
   path: menuItem.path,
   icon: menuItem.icon,
   name: menuItem.name,
-  render: menuItem.render ? () => menuItem.render!() : undefined,
   subMenus: menuItem.subMenu?.map(
     (subMenu, index): SubMenuItem => ({
       id: index,

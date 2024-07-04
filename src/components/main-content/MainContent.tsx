@@ -2,7 +2,11 @@ import { Outlet, useNavigation } from 'react-router-dom'
 import { SubMenuItem } from '../../common/configs/ui/menus/menus.type'
 import SubSideBarMenu from '../../components/sidebar-menu/sub-sidebar-menu'
 import styled from 'styled-components'
-import { Grid, GridItem, Spinner } from '@chakra-ui/react'
+import { Button, Grid, GridItem, Spinner } from '@chakra-ui/react'
+import { signal, useSignal } from '@preact/signals-react'
+import { useSignals } from '@preact/signals-react/runtime'
+import { useEffect } from 'react'
+import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons'
 
 type MainContentProps = {
   title: string
@@ -25,14 +29,20 @@ place-items: center;
 
 const MainContent = ({ subMenus, title, render }: MainContentProps) => {
   const navigation = useNavigation()
+  const isHidden = signal<boolean>(false)
+
+  const handleHidden = () => {
+    console.log(isHidden.value)
+    isHidden.value = !isHidden.value
+  }
 
   return (
     <StyledMainContent>
       {render && render()}
       <Grid templateColumns='minmax(290px,10%) 1fr'>
-        <GridItem>
+         <GridItem>
           {
-            subMenus && <SubSideBarMenu title={title} subMenuItems={subMenus} />
+            subMenus && <SubSideBarMenu isHidden={isHidden} handleHidden={handleHidden} title={title} subMenuItems={subMenus} />
           }
         </GridItem>
         <GridItem>
