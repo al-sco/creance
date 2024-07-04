@@ -39,7 +39,7 @@ const MainContent = ({ subMenus, title, render }: MainContentProps) => {
   return (
     <StyledMainContent>
       {render && render()}
-      <Grid display={!isHidden.value? 'flex' : 'grid'} templateColumns='minmax(290px,10%) 1fr'>
+      <Grid templateColumns='minmax(290px,10%) 1fr'>
          <GridItem>
           {
             subMenus && <SubSideBarMenu isHidden={isHidden} handleHidden={handleHidden} title={title} subMenuItems={subMenus} />
