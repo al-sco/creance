@@ -5,12 +5,10 @@ import { Outlet } from "react-router-dom"
 const Root = () => {
     return (
         <ChakraBaseProvider theme={theme}>
-            {/* Side bar menu */}
             <Grid templateColumns='15% 1fr'>
                 <GridItem>
                     <SideBarMenu />
                 </GridItem>
-                {/* Main content  */}
                 <GridItem>
                     <Outlet />
                 </GridItem>

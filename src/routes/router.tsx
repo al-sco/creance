@@ -14,7 +14,7 @@ const router = createBrowserRouter([
         children: menuItems.map((menuItem) => (
             {
                 path: menuItem.path,
-                element: <MainContent subMenus={menuItem.subMenus} render={menuItem.render} title={menuItem.name} />,
+                element: <MainContent subMenus={menuItem.subMenus} render={menuItem.render} title={menuItem.name} icon={menuItem.icon} />,
                 errorElement: <ErrorPage />,
                 children: menuItem.subMenus?.map((sb) => ({
                     path: sb.path,

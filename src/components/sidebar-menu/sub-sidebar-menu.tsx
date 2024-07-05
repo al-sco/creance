@@ -11,8 +11,9 @@ import { useSignals } from "@preact/signals-react/runtime";
 
 
 const StyledSideBarMenu = styled.div`
-  padding: 20px 20px 80px 0;
+  padding: 35px 20px 80px 0;
   height: 100vh;
+  width: 100%;
   background-color: ${colors.lightGreen};
   transition: all 1s linear;
 `;
@@ -32,7 +33,6 @@ type SubSideBarMenuProps = {
 
 const SubSideBarMenu = ({ title, subMenuItems, handleHidden, isHidden }: SubSideBarMenuProps) => {
     const [subMenuItem, setSubMenuItem] = useState<number>()
-    useSignals()
 
     useEffect(() => {
         let currentMenu = subMenuItems.find((subMenu) => window.location.pathname.includes(encodeURI(subMenu.path)))
@@ -46,25 +46,25 @@ const SubSideBarMenu = ({ title, subMenuItems, handleHidden, isHidden }: SubSide
         setSubMenuItem((_) => subMenu.id)
     }
 
-    return !isHidden.value ? <StyledSideBarMenu>
-        <StyledSubTitle>
-            <Button onClick={handleHidden} >
-                <ChevronLeftIcon />
-            </Button>
-            {title}
-        </StyledSubTitle>
-        <Box h="37px" />
-        <StyledDiv>
-            {
-                subMenuItems
-                    .map((subMenu, index) => (<SubMenuItemComponent key={index} onPressed={handleMenuClick} isSelected={subMenuItem === subMenu.id} subMenu={subMenu} />))
-            }
-        </StyledDiv>
-    </StyledSideBarMenu> : <Box height='100vh' >
-
-        <Button onClick={handleHidden} >
-            <ChevronRightIcon />
-        </Button></Box>
+    return (
+        <StyledSideBarMenu>
+            <StyledSubTitle>                
+                {title}
+            </StyledSubTitle>
+            <Box h="37px" />
+            <StyledDiv>
+                {
+                    subMenuItems
+                        .map((subMenu, index) => (<SubMenuItemComponent key={index} onPressed={handleMenuClick} isSelected={subMenuItem === subMenu.id} subMenu={subMenu} />))
+                }
+            </StyledDiv>
+            <Box style={{margin: '0 0 0 10px', position: 'fixed', bottom: '10px'}}>
+                <Button colorScheme='blue' onClick={handleHidden} >
+                    {isHidden.value? <ChevronRightIcon /> :  <ChevronLeftIcon />}
+                </Button>
+            </Box>
+        </StyledSideBarMenu>
+    )
 }
 
 export default SubSideBarMenu

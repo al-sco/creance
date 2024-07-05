@@ -15,8 +15,6 @@ const StyledSideBarMenu = styled.div`
   overflow-y: hidden;
 `;
 
-
-
 const scaleLogo = keyframes`
     0% {
         transition: scale(1);
@@ -41,8 +39,6 @@ const StyledImage = styled.div`
     transform: scale(1.5);
     /* animation: ${scaleLogo} 5s infinite  ease-in; */
 `;
-
-
 
 const SideBarMenu = () => {
     
