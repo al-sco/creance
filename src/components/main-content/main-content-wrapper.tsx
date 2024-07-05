@@ -1,4 +1,4 @@
-import { Grid, GridItem, Icon, Spinner } from "@chakra-ui/react"
+import { Grid, GridItem, Spinner } from "@chakra-ui/react"
 import { useSignals } from "@preact/signals-react/runtime"
 import SubSideBarMenu from "../sidebar-menu/sub-sidebar-menu"
 import { Outlet, useNavigation } from "react-router-dom"
@@ -25,7 +25,7 @@ const MainContentWrapper = ({ subMenus, isHidden, handleHidden, title }: MainCon
     useSignals()
 
     return (
-        <Grid templateColumns={isHidden.value ? 'minmax(100px, 10%) 5fr' : '1fr 5fr'}>
+        <Grid templateColumns={isHidden.value ? 'minmax(50px, 4.5%) 5fr' : '1fr 5fr'}>
             <GridItem>
                 {
                     subMenus && <SubSideBarMenu isHidden={isHidden} handleHidden={handleHidden} title={title} subMenuItems={subMenus} />

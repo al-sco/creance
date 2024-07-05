@@ -1951,7 +1951,7 @@ const menuItemsData: Array<MenuItemType> = [
         name: "Enregistrement",
       },
       {
-        name: "Mise }à jour",
+        name: "Mise à jour",
       },
       {
         name: "Annulation",
@@ -1960,7 +1960,7 @@ const menuItemsData: Array<MenuItemType> = [
         name: "Consultation",
       },
       {
-        name: "Suivi }des actes de Recouvrement",
+        name: "Suivi des actes de Recouvrement",
       },
     ],
   },

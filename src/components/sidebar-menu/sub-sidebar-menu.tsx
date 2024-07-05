@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { Box, Button } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import { SubMenuItem } from "../../common/configs/ui/menus/menus.type";
 import { StyledSubTitle } from "../../common/theme/typography/typography";
 import SubMenuItemComponent from "../menu-item/sub-menu-item";
@@ -7,15 +7,14 @@ import { useEffect, useState } from "react";
 import colors from "../../common/theme/colors/colors";
 import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
 import { Signal } from "@preact/signals-react";
-import { useSignals } from "@preact/signals-react/runtime";
 
 
 const StyledSideBarMenu = styled.div`
-  padding: 35px 20px 80px 0;
+  padding: 35px 0 80px 10px;
   height: 100vh;
   width: 100%;
   background-color: ${colors.lightGreen};
-  transition: all 1s linear;
+  transition: all 1s linear;  
 `;
 
 const StyledDiv = styled.div`
@@ -23,6 +22,11 @@ const StyledDiv = styled.div`
     overflow-y: scroll;
 `;
 
+const HideButtonStyled = styled.div`
+    padding: 10px 15px 10px 15px;
+    border-radius: 0 10% 10% 0;
+    background-color: ${colors.bleu};
+`;
 
 type SubSideBarMenuProps = {
     handleHidden: () => void,
@@ -47,23 +51,26 @@ const SubSideBarMenu = ({ title, subMenuItems, handleHidden, isHidden }: SubSide
     }
 
     return (
-        <StyledSideBarMenu>
-            <StyledSubTitle>                
-                {title}
-            </StyledSubTitle>
-            <Box h="37px" />
-            <StyledDiv>
-                {
-                    subMenuItems
-                        .map((subMenu, index) => (<SubMenuItemComponent key={index} onPressed={handleMenuClick} isSelected={subMenuItem === subMenu.id} subMenu={subMenu} />))
-                }
-            </StyledDiv>
-            <Box style={{margin: '0 0 0 10px', position: 'fixed', bottom: '10px'}}>
-                <Button colorScheme='blue' onClick={handleHidden} >
-                    {isHidden.value? <ChevronRightIcon /> :  <ChevronLeftIcon />}
-                </Button>
+        <>
+            {!isHidden.value &&                
+                <StyledSideBarMenu>
+                <StyledSubTitle>
+                    {title}
+                </StyledSubTitle>
+                <Box h="37px" />
+                <StyledDiv>
+                    {
+                        subMenuItems
+                            .map((subMenu, index) => (<SubMenuItemComponent key={index} onPressed={handleMenuClick} isSelected={subMenuItem === subMenu.id} subMenu={subMenu} />))
+                    }
+                </StyledDiv>
+            </StyledSideBarMenu>}
+            <Box style={{ margin: '0 0 0 0', position: 'fixed', bottom: '10px' }}>
+                <HideButtonStyled onClick={handleHidden} >
+                    {isHidden.value ? <ChevronRightIcon color={colors.white} /> : <ChevronLeftIcon color={colors.white} />}
+                </HideButtonStyled>
             </Box>
-        </StyledSideBarMenu>
+        </>
     )
 }
 
