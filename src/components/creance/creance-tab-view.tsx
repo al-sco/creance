@@ -1,4 +1,4 @@
-import { GridItem, Tab, TabList, TabPanel, TabPanels, Table, TableContainer, Tabs, Th, Thead, Tr } from "@chakra-ui/react"
+import { GridItem, Input, Tab, TabList, TabPanel, TabPanels, Table, TableContainer, Tabs, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react"
 import { creanceTabs } from "../../common/configs/ui/creance/creance.data"
 import { CreanceTabType } from "../../common/configs/ui/creance/creance.type"
 import colors from "../../common/theme/colors/colors"
@@ -34,7 +34,7 @@ const CreanceTabsView = ({ tabs }: CreanceTabsViewProps) => {
                         )}
                     </TabList>
                     <TabPanels>
-                        {tabs.map(({ headers }: CreanceTabType) => <TabPanel>
+                        {tabs.map(({ headers, tableContent }: CreanceTabType, index) => <TabPanel>
                             <BaseStyledTable>
                                 <TableContainer>
                                     <Table>
@@ -45,7 +45,17 @@ const CreanceTabsView = ({ tabs }: CreanceTabsViewProps) => {
                                                 ))}
                                             </Tr>
                                         </Thead>
-                                        {/* <Tbody>{tableContent}</Tbody> */}
+                                        <Tbody>
+                                            <Tr bg={ index  % 2 == 0 ? undefined : colors.gray}>
+                                                {
+                                                    tableContent.map((column, i) => (
+                                                        <Td
+                                                            key={i}>
+                                                            <Input w="90%" name={column.key} placeholder={column.label} size='lg' />                                                            
+                                                        </Td>
+                                                    )
+                                                    )}  </Tr>
+                                        </Tbody>
                                     </Table>
                                 </TableContainer>
                             </BaseStyledTable>
