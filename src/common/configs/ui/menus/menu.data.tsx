@@ -61,8 +61,8 @@ import acQuartierProvider from "../../../../states/signals/parameter_providers/A
 import acCompteOperProvider from "../../../../states/signals/parameter_providers/AcCompte.state";
 import ListableSearchableItemComponent from "../../../../components/listable-searchable-item/listable-searchable-item";
 import CreanceMainContent from "../../../../components/creance/creance-main-content";
-import { creanceFields } from "../creance/creance.data";
 import acEntiteProvider from "../../../../states/signals/parameter_providers/AcEntite.state";
+import { mainCreanceDatas } from "../creance/main-creance.data";
 
 export type SubMenuType = {
   name: string;
@@ -1928,18 +1928,14 @@ const menuItemsData: Array<MenuItemType> = [
     path: "/etude_creance",
     icon: Creance,
     subMenu: [
-      {
-        name: "Debiteur",
-        render: () => <>Debiteur</>
-      },
+      // {
+      //   name: "Debiteur",
+      //   render: () => <CreanceMainContent data={debiteursDatas} />
+      // },
       {
         name: "Creance",      
-        render: () => <CreanceMainContent creanceFields={creanceFields} />
-      },
-      {
-        name: "Ordinateur",
-        render: () => <>Ordinateur</>
-      },
+        render: () => <CreanceMainContent data={mainCreanceDatas} />
+      },    
     ]   
   },
   {

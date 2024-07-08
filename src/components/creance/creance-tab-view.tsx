@@ -1,5 +1,4 @@
 import { GridItem, Input, Tab, TabList, TabPanel, TabPanels, Table, TableContainer, Tabs, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react"
-import { creanceTabs } from "../../common/configs/ui/creance/creance.data"
 import { CreanceTabType } from "../../common/configs/ui/creance/creance.type"
 import colors from "../../common/theme/colors/colors"
 import styled from "styled-components"
@@ -30,7 +29,7 @@ const CreanceTabsView = ({ tabs }: CreanceTabsViewProps) => {
             <GridItem w='100%' h='10'>
                 <Tabs size='md' variant='enclosed'>
                     <TabList>
-                        {creanceTabs.map(({ tabName }: CreanceTabType) => <Tab>{tabName}</Tab>
+                        {tabs.map(({ tabName }: CreanceTabType) => <Tab>{tabName}</Tab>
                         )}
                     </TabList>
                     <TabPanels>

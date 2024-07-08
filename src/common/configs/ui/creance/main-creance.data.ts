@@ -1,6 +1,6 @@
-import { CreanceFieldType, CreanceTabType, InputType } from "./creance.type";
+import { CreanceDataType, CreanceFieldType, CreanceTabType, InputType } from "./creance.type";
 
-export const creanceFields: CreanceFieldType[] = [
+const creanceFields: CreanceFieldType[] = [
     {
         name: 'Débiteur',
         selectItems: [
@@ -35,7 +35,7 @@ export const creanceFields: CreanceFieldType[] = [
                 value: 'annuel'
             }
         ]
-    },   
+    },
     {
         name: 'Grpe Creance',
         inputItem: {
@@ -79,7 +79,7 @@ export const creanceFields: CreanceFieldType[] = [
                 value: 'option2'
             }
         ]
-    },       
+    },
     {
         name: 'Mont à Remb.',
         inputItem: {
@@ -95,7 +95,7 @@ export const creanceFields: CreanceFieldType[] = [
             inputType: InputType.number,
             placeholder: "capital initial",
         },
-    },    
+    },
     {
         name: 'Mont. Dû',
         inputItem: {
@@ -119,7 +119,7 @@ export const creanceFields: CreanceFieldType[] = [
             placeholder: "entité",
             inputType: InputType.text
         },
-    }, 
+    },
     {
         name: 'Mont. Décaissé',
         inputItem: {
@@ -210,7 +210,7 @@ export const creanceFields: CreanceFieldType[] = [
                 value: 'oui'
             }
         ]
-    },    
+    },
     {
         name: 'Mont Ass.',
         inputItem: {
@@ -232,7 +232,7 @@ export const creanceFields: CreanceFieldType[] = [
             placeholder: "encours",
             inputType: InputType.number
         },
-    },    
+    },
     {
         name: 'N° Précédent',
         inputItem: {
@@ -297,7 +297,7 @@ export const creanceFields: CreanceFieldType[] = [
     },
     {
         name: 'Crean Sold Avt Liq',
-        selectItems: [            
+        selectItems: [
             {
                 title: 'Option 1',
                 value: 'option1'
@@ -307,7 +307,7 @@ export const creanceFields: CreanceFieldType[] = [
                 value: 'option1'
             }
         ]
-    }, 
+    },
     {
         name: 'Class Créance',
         selectItems: [
@@ -324,10 +324,10 @@ export const creanceFields: CreanceFieldType[] = [
                 value: 'cranceNormal'
             }
         ]
-    },    
+    },
 ]
 
-export const creanceTabs: CreanceTabType[] = [
+const creanceTabs: CreanceTabType[] = [
     {
         tabName: 'Piece',
         headers: ['Type Piece', 'Reference', 'Libelle', 'Date reception', 'Date emission'],
@@ -381,3 +381,9 @@ export const creanceTabs: CreanceTabType[] = [
         ]
     }
 ]
+
+export const mainCreanceDatas: CreanceDataType = {
+    title: 'Etude créance',
+    fields: creanceFields,
+    tabs: creanceTabs
+}

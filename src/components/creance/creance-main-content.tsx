@@ -1,13 +1,12 @@
 import styled from "styled-components";
 import colors from "../../common/theme/colors/colors";
 import { Box, Grid } from "@chakra-ui/react";
-import { CreanceFieldType } from "../../common/configs/ui/creance/creance.type";
-import { creanceTabs } from "../../common/configs/ui/creance/creance.data";
+import { CreanceDataType } from "../../common/configs/ui/creance/creance.type";
 import CreanceInputsView from "./creance-inputs-view";
 import CreanceTabsView from "./creance-tab-view";
 
 type CreanceMainContentProps = {
-    creanceFields: CreanceFieldType[]
+    data: CreanceDataType
 }
 
 const StyledCreanceMainContent = styled.section`
@@ -26,17 +25,17 @@ const StyledTitle = styled.h1`
 
 
 
-const CreanceMainContent = ({ creanceFields }: CreanceMainContentProps): JSX.Element => {
+const CreanceMainContent = ({ data }: CreanceMainContentProps): JSX.Element => {
     return (
         <StyledCreanceMainContent>
             <StyledTitle>
-                Etude de Creance
+                {data.title}
             </StyledTitle>
             <Box h="20px" />
             <Grid templateColumns='repeat(1, 1fr)' gap={4}>
-                <CreanceInputsView fields={creanceFields} />
+                <CreanceInputsView fields={data.fields} />
                 <Box h="20px" />
-                <CreanceTabsView tabs={creanceTabs} />
+                {data.tabs && <CreanceTabsView tabs={data.tabs} />}
             </Grid>
         </StyledCreanceMainContent>
     );

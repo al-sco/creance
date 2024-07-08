@@ -1,7 +1,7 @@
 export enum InputType {
   text,
   number,
-  date
+  date,
 }
 
 export type SelectItem = {
@@ -19,6 +19,12 @@ export type CreanceFieldType = {
   name: string;
   inputItem?: CreanceInputItem;
   selectItems?: SelectItem[];
+};
+
+export type CreanceDataType = {
+  title: string,
+  fields: CreanceFieldType[];
+  tabs?: CreanceTabType[];
 };
 
 export type CreanceColumnType = {
