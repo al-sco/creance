@@ -238,3 +238,75 @@ export type AcDomicialition=ParameterBaseData &  {
   villeCode:string
   numBenef:number
 }
+
+export type AcOrdonnateur=ParameterBaseData & {
+  ordoAdr:string
+  ordoTel:string
+  ordoMinistTut:string
+  fonctCode:string
+}
+
+export type AcTypeTitreRecette=ParameterBaseData
+
+export type AcCreance=ParameterBaseData &  {
+  objCreanCode:string
+  creanCodeGlob:string
+  grpCreanCode:AcGroupeCreance
+  debCode:string
+  creanCapitInit:number
+  creanMontDu:number
+  creanDejRemb:number
+  creanPenalite:number
+  creanEncours:number
+  creanSoldeInit:number
+  creanMontImpaye:number
+  creanMontIc:number
+  creanMontIr:number
+  creanMontAss:number
+  creanMontDebloq:number
+  creanFrais:number
+  creanCommBanq:number
+  creanObjet:string
+  creanTauxic:string
+  creanTauxir:string
+  creanNbech:string
+  creanDateft:Date
+  creanDatech:Date
+  creanDuree:number
+  creanDatoctroi:Date
+  creanStatrecouv:string
+  creanDatrec:Date
+  creanDatecrea:Date
+  creanCommStecaut:number
+  creanCodePrec:string
+  creanCodeAnc:string
+  creanUserCode:string
+  ordoCode:AcOrdonnateur
+  creanDatfin:Date
+  creanMontIcPaye:number
+  creanMotifIrrecouv:string
+  creanValide:string
+  creanDateCtl:Date
+  creanCodeCharg:string
+  creanMajDate:Date
+  creanTropPercu:string
+  pcCode:string
+  categCode:string
+  creanMontAncInit:number
+  delegCode:string
+  typeTitreCode:AcTypeTitreRecette
+  creanRef:string
+  cpteCliNum:number
+  creanUserCpte:string
+  creanDateCpte:Date
+  cpteRegrp:string
+  cptoperCode:string
+  creanClasse:string
+  typoperCode:string
+  creanOp:string
+  creanIdentAgtresor:string
+  creanStab:string
+  creanSoldAvantLiq:string
+
+}
+
