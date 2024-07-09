@@ -15,6 +15,7 @@ type SubMenuItemProps = {
 
 const BorderedStyle = styled.div`
 overflow-x: hidden;
+max-width: 250px;
 padding-right: 1rem;
 `
 
