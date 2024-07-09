@@ -226,3 +226,15 @@ export type AcDebiteurPhysique=ParameterBaseData &  {
   debFonction:string
   regmatCode:string
 }
+
+
+export type AcDomicialition=ParameterBaseData &  {
+  bqagCode:string
+  typdomCode:string
+  garphysCode:number
+  debCode:number
+  domDateCtl:Date
+  ancAg:string
+  villeCode:string
+  numBenef:number
+}
