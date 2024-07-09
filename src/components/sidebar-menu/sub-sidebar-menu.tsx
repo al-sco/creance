@@ -65,7 +65,7 @@ const SubSideBarMenu = ({ title, subMenuItems, handleHidden, isHidden }: SubSide
                     }
                 </StyledDiv>
             </StyledSideBarMenu>}
-            <Box style={{ margin: '0 0 0 0', position: 'fixed', bottom: '10px' }}>
+            <Box style={{ margin: '0 0 0 0', position: 'fixed', bottom: '10px',cursor:'pointer' }}>
                 <HideButtonStyled onClick={handleHidden} >
                     {isHidden.value ? <ChevronRightIcon color={colors.white} /> : <ChevronLeftIcon color={colors.white} />}
                 </HideButtonStyled>
