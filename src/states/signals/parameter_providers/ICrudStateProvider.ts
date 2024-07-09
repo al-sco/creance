@@ -8,18 +8,18 @@ import { signal, Signal } from "@preact/signals-react";
 
 export default abstract class ICrudStateProvider<T extends Identifiable> {
     // State 
-    private state:Signal<T[]>
+    private state:Signal<T[]|{}>
     // REST API path on which to send request
     basePath:string
 
     getState=()=>this.state
 
-    constructor(basePath:string){
-        this.state=signal([])
+    constructor(basePath:string,initialState?:{}){
+        this.state=signal(initialState??[])
         this.basePath=basePath
     }
     // fetch data
-    find=async():Promise<T[]>=>{
+    find=async():Promise<T[]|{}>=>{
         let {data,status}=await axios.get(getUrl(this.basePath),
     { 
         headers: {

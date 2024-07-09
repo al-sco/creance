@@ -148,3 +148,81 @@ export type AcTypeRegul = ParameterBaseData;
 export type AcTypeSaisie = ParameterBaseData;
 export type AcVille = ParameterBaseData;
 export type AcZone = ParameterBaseData & { description: string };
+
+export type AcDebiteur=ParameterBaseData &  {
+  propCode:number
+  garphysCode:number
+  typdebCode:string
+  debAdrpost:string
+  debCel:string
+  debEmail:string
+  debTelbur:string
+  debFax:string
+  debDateCtl:Date
+  debCodeCharg:string
+  debCodeAnc:string
+  debTeldom:string
+}
+
+export type AcDebiteurMoral=ParameterBaseData &  {
+  debiteur:AcDebiteur
+  debRaisSociale:string
+  debRegistcom:string
+  debDatcreat:Date
+  debCapitsocial:number
+  debFormJurid:string
+  debDomActiv:string
+  debSiegSocial:string
+  debNomGerant:string
+  ancCiv:string
+  debCodeCharg:string
+  debCpteContrib:string
+  civGerant:string
+}
+
+export type AcDebiteurPhysique=ParameterBaseData &  {
+  debiteur:AcDebiteur
+  quartCode:string
+  profesCode:string
+  natCode:string
+  empCode:string
+  statsalCode:AcStatutSalarie
+  fonctCode:string
+  debNom:string
+  debPren:string
+  debDatnaiss:Date
+  debLieunaiss:string
+  debDatdec:Date
+  debTeldom:string
+  debNatpident:string
+  debNumpident:string
+  debDatetpident:Date
+  debLieuetpident:string
+  debSitmatri:string
+  debRue:string
+  debNmere:string
+  debPrmere:string
+  debNpere:string
+  debPrpere:string
+  debNbrEnf:string
+  debSexe:string
+  debMatric:string
+  civCode:AcCivilite
+  debCjNom:string
+  debCjPren:string
+  debCjDatnaiss:Date
+  debCjTel:string
+  debCjAdr:string
+  debCjNumpident:string
+  debDateCtl:Date
+  debEmployeur:string
+  debCodeAnc:string
+  ancCiv:string
+  debDatcreat:string
+  ancNat:string
+  debCodeCharg:string
+  debAncDatnaiss:Date
+  debAncSituat:string
+  debFonction:string
+  regmatCode:string
+}
