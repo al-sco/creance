@@ -17,6 +17,7 @@ export type CreanceInputItem = {
 
 export type CreanceFieldType = {
   name: string;
+  key:string
   inputItem?: CreanceInputItem;
   selectItems?: SelectItem[];
 };

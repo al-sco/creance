@@ -17,7 +17,7 @@ class AcDebiteurStateProvider extends ICrudStateProvider<AcCategorieDebiteur> {
   }
 }
 
-const acCategoryDebtorProvider = new AcDebiteurStateProvider(
+const acDebiteurProvider = new AcDebiteurStateProvider(
   "/debiteur",{}
 );
-export default acCategoryDebtorProvider;
+export default acDebiteurProvider;

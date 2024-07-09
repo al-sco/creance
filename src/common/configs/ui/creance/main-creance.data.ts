@@ -3,6 +3,7 @@ import { CreanceDataType, CreanceFieldType, CreanceTabType, InputType } from "./
 const creanceFields: CreanceFieldType[] = [
     {
         name: 'Débiteur',
+        key:'debiteur',
         inputItem:{
             inputType:InputType.text,
             isEditable:true,
@@ -21,6 +22,7 @@ const creanceFields: CreanceFieldType[] = [
     },
     {
         name: 'Périodicité',
+        key:'periodicite',
         inputItem: {
             isEditable: true,
             inputType: InputType.number,
@@ -43,6 +45,7 @@ const creanceFields: CreanceFieldType[] = [
     },
     {
         name: 'Grpe Creance',
+        key:'groupeCreance',
         inputItem: {
             isEditable: true,
             placeholder: "grpe creance",
@@ -61,6 +64,7 @@ const creanceFields: CreanceFieldType[] = [
     },
     {
         name: 'Objet Créance',
+     key:'objectCreance',   
         inputItem: {
             isEditable: true,
             inputType: InputType.text,
@@ -69,6 +73,7 @@ const creanceFields: CreanceFieldType[] = [
     },
     {
         name: "Type d'Objet",
+        key:'typeObject',
         inputItem: {
             isEditable: true,
             inputType: InputType.number,
@@ -87,6 +92,7 @@ const creanceFields: CreanceFieldType[] = [
     },
     {
         name: 'Mont à Remb.',
+        key:'montARemb',
         inputItem: {
             isEditable: false,
             inputType: InputType.text,
@@ -95,6 +101,7 @@ const creanceFields: CreanceFieldType[] = [
     },
     {
         name: 'Capital Initial',
+        key:'capitalInitial',
         inputItem: {
             isEditable: true,
             inputType: InputType.number,
@@ -103,6 +110,7 @@ const creanceFields: CreanceFieldType[] = [
     },
     {
         name: 'Mont. Dû',
+        key:'montantDu',
         inputItem: {
             isEditable: true,
             inputType: InputType.number,
@@ -111,6 +119,7 @@ const creanceFields: CreanceFieldType[] = [
     },
     {
         name: 'N°Créance',
+     key:'nCreance',   
         inputItem: {
             isEditable: false,
             placeholder: "numéro creance",
@@ -119,6 +128,7 @@ const creanceFields: CreanceFieldType[] = [
     },
     {
         name: 'Entité',
+        key:'entite',
         inputItem: {
             isEditable: false,
             placeholder: "entité",
@@ -127,6 +137,8 @@ const creanceFields: CreanceFieldType[] = [
     },
     {
         name: 'Mont. Décaissé',
+        key:'montDecaisse',
+        
         inputItem: {
             isEditable: true,
             inputType: InputType.number,
@@ -135,6 +147,7 @@ const creanceFields: CreanceFieldType[] = [
     },
     {
         name: 'Total Dû',
+        key:'totalDu',
         inputItem: {
             isEditable: true,
             inputType: InputType.number,
@@ -143,6 +156,7 @@ const creanceFields: CreanceFieldType[] = [
     },
     {
         name: 'Mont. Déja Remb.',
+        key:'montDejaRemb',
         inputItem: {
             isEditable: true,
             inputType: InputType.number,
@@ -151,6 +165,7 @@ const creanceFields: CreanceFieldType[] = [
     },
     {
         name: 'Nb. Ech',
+        key:'nbEch',
         inputItem: {
             isEditable: true,
             inputType: InputType.number,
@@ -159,6 +174,7 @@ const creanceFields: CreanceFieldType[] = [
     },
     {
         name: 'Mont. Impayé',
+        key:'montImpaye',
         inputItem: {
             isEditable: false,
             inputType: InputType.text,
@@ -167,6 +183,7 @@ const creanceFields: CreanceFieldType[] = [
     },
     {
         name: 'Sté Caution',
+        key:'steCaution',
         inputItem: {
             isEditable: true,
             inputType: InputType.number,
@@ -175,6 +192,7 @@ const creanceFields: CreanceFieldType[] = [
     },
     {
         name: 'Date Reconnais.',
+        key:'dateReconnais',
         inputItem: {
             isEditable: true,
             inputType: InputType.number,
@@ -183,6 +201,7 @@ const creanceFields: CreanceFieldType[] = [
     },
     {
         name: 'Commission',
+        key:'commission',
         inputItem: {
             isEditable: true,
             inputType: InputType.text,
@@ -191,6 +210,7 @@ const creanceFields: CreanceFieldType[] = [
     },
     {
         name: 'Divers Frais',
+        key:'diversFrais',
         inputItem: {
             isEditable: true,
             inputType: InputType.number,
@@ -199,12 +219,14 @@ const creanceFields: CreanceFieldType[] = [
     },
     {
         name: 'Date 1ere Ech.',
+        key:'date1ereEch',
         inputItem: {
             inputType: InputType.date
         },
     },
     {
         name: 'Stat Recouv.',
+        key:'statRecouv',
         selectItems: [
             {
                 title: 'Nom',
@@ -218,6 +240,7 @@ const creanceFields: CreanceFieldType[] = [
     },
     {
         name: 'Mont Ass.',
+        key:'montAss',
         inputItem: {
             isEditable: true,
             placeholder: "montant ass",
@@ -226,12 +249,14 @@ const creanceFields: CreanceFieldType[] = [
     },
     {
         name: 'Date Dern Ech',
+        key:'dateDernEch',
         inputItem: {
             inputType: InputType.date
         },
     },
     {
         name: 'Encours',
+        key:'enCours',
         inputItem: {
             isEditable: true,
             placeholder: "encours",
@@ -240,6 +265,7 @@ const creanceFields: CreanceFieldType[] = [
     },
     {
         name: 'N° Précédent',
+        key:'nPrecedent',
         inputItem: {
             isEditable: true,
             placeholder: "numéro précédent",
@@ -248,12 +274,14 @@ const creanceFields: CreanceFieldType[] = [
     },
     {
         name: "Date d'Octroie.",
+        key:'dateOctroie',
         inputItem: {
             inputType: InputType.date
         },
     },
     {
         name: 'N° Ancien',
+        key:'nAncien',
         inputItem: {
             isEditable: true,
             placeholder: "numéro ancien",
@@ -262,6 +290,7 @@ const creanceFields: CreanceFieldType[] = [
     },
     {
         name: 'Int. conv.',
+        key:'intConv',
         inputItem: {
             isEditable: true,
             placeholder: "int conv",
@@ -270,6 +299,7 @@ const creanceFields: CreanceFieldType[] = [
     },
     {
         name: 'Int. Ret.',
+        key:'intRet',
         inputItem: {
             isEditable: true,
             placeholder: "int ret",
@@ -278,6 +308,7 @@ const creanceFields: CreanceFieldType[] = [
     },
     {
         name: 'Mont. Inv Conv. Payé',
+        key:'montInvConvPaye',
         inputItem: {
             isEditable: true,
             placeholder: "montant int conv payé",
@@ -286,6 +317,7 @@ const creanceFields: CreanceFieldType[] = [
     },
     {
         name: 'Pénalité 1%',
+        key:'penalite1',
         inputItem: {
             isEditable: false,
             placeholder: "penalité 1%",
@@ -294,6 +326,7 @@ const creanceFields: CreanceFieldType[] = [
     },
     {
         name: 'Total à recouvrer',
+        key:'totalARecouv',
         inputItem: {
             isEditable: false,
             placeholder: "total a recouvrer",
@@ -302,6 +335,7 @@ const creanceFields: CreanceFieldType[] = [
     },
     {
         name: 'Crean Sold Avt Liq',
+        key:'cranSoldAvtLiq',
         selectItems: [
             {
                 title: 'Option 1',
@@ -315,6 +349,7 @@ const creanceFields: CreanceFieldType[] = [
     },
     {
         name: 'Class Créance',
+        key:'classCreance',
         selectItems: [
             {
                 title: 'Crance Normal',

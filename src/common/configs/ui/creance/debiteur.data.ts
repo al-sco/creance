@@ -8,6 +8,7 @@ import {
 const debiteurFields: CreanceFieldType[] = [
   {
     name: "Code",
+    key:'code',
     inputItem: {
       inputType: InputType.text,
       isEditable: false,
@@ -16,6 +17,7 @@ const debiteurFields: CreanceFieldType[] = [
   },
   {
     name: "Catégorie",
+    key:'categorie',
     selectItems: [
       {
         title: "Option 1",
@@ -34,6 +36,7 @@ const debiteurFields: CreanceFieldType[] = [
   },
   {
     name: "Tèl",
+    key:'tel',
     inputItem: {
       inputType: InputType.text,
       isEditable: true,
@@ -43,6 +46,7 @@ const debiteurFields: CreanceFieldType[] = [
 
   {
     name: "Adr. Postale",
+    key:'adressePostale',
     inputItem: {
       inputType: InputType.text,
       isEditable: true,
@@ -51,6 +55,7 @@ const debiteurFields: CreanceFieldType[] = [
   },
   {
     name: "Email",
+    key:'email',
     inputItem: {
       inputType: InputType.text,
       isEditable: true,
@@ -59,6 +64,7 @@ const debiteurFields: CreanceFieldType[] = [
   },
   {
     name: "Cel",
+    key:'cel',
     inputItem: {
       inputType: InputType.text,
       isEditable: true,
@@ -67,6 +73,7 @@ const debiteurFields: CreanceFieldType[] = [
   },
   {
     name: "Type",
+    key:'type',
     selectItems: [
       {
         title: "Moral",
@@ -85,6 +92,7 @@ const debiteurFields: CreanceFieldType[] = [
   },
   {
     name: "Fax",
+    key:'fax',
     inputItem: {
       inputType: InputType.text,
       isEditable: true,
@@ -100,6 +108,7 @@ const debiteurTabs: CreanceTabType[] = [
     fields: [
       {
         name: "Civilité",
+        key:'civilite',
         inputItem: {
           inputType: InputType.text,
           isEditable: true,
@@ -118,6 +127,7 @@ const debiteurTabs: CreanceTabType[] = [
       },
       {
         name: "Nom",
+        key:'nom',
         inputItem: {
           inputType: InputType.text,
           placeholder: "nom",
@@ -126,6 +136,7 @@ const debiteurTabs: CreanceTabType[] = [
       },
       {
         name: "Prénom",
+        key:'prenom',
         inputItem: {
           inputType: InputType.text,
           isEditable: true,
@@ -134,6 +145,7 @@ const debiteurTabs: CreanceTabType[] = [
       },
       {
         name: "Date de naissance",
+        key:'dateNaissance',
         inputItem: {
           inputType: InputType.date,
           isEditable: true,
@@ -141,6 +153,7 @@ const debiteurTabs: CreanceTabType[] = [
       },
       {
         name: "Lieu de Naiss.",
+        key:'lieuNaissance',
         inputItem: {
           inputType: InputType.text,
           isEditable: true,
@@ -149,6 +162,7 @@ const debiteurTabs: CreanceTabType[] = [
       },
       {
         name: "Quartier",
+        key:'quartier',
         inputItem: {
           inputType: InputType.text,
           isEditable: true,
@@ -167,6 +181,7 @@ const debiteurTabs: CreanceTabType[] = [
       },
       {
         name: "Nationalité",
+        key:'nationalite',
         inputItem: {
           inputType: InputType.text,
           isEditable: true,
@@ -185,6 +200,7 @@ const debiteurTabs: CreanceTabType[] = [
       },
       {
         name: "Fonction",
+        key:'fonction',
         inputItem: {
           inputType: InputType.text,
           isEditable: true,
@@ -203,6 +219,7 @@ const debiteurTabs: CreanceTabType[] = [
       },
       {
         name: "Profession",
+        key:'profession',
         inputItem: {
           inputType: InputType.text,
           isEditable: true,
@@ -221,6 +238,7 @@ const debiteurTabs: CreanceTabType[] = [
       },
       {
         name: "Employeur",
+        key:'employeur',
         inputItem: {
           inputType: InputType.text,
           isEditable: true,
@@ -239,6 +257,7 @@ const debiteurTabs: CreanceTabType[] = [
       },
       {
         name: "Statue salarié",
+        key:'statutSalarie',
         inputItem: {
           inputType: InputType.text,
           isEditable: true,
@@ -257,6 +276,7 @@ const debiteurTabs: CreanceTabType[] = [
       },
       {
         name: "Matricule",
+        key:'matricule',
         inputItem: {
           inputType: InputType.text,
           isEditable: true,
@@ -265,6 +285,7 @@ const debiteurTabs: CreanceTabType[] = [
       },
       {
         name: "Sexe",
+        key:'sexe',
         inputItem: {
           inputType: InputType.text,
           isEditable: true,
@@ -273,12 +294,15 @@ const debiteurTabs: CreanceTabType[] = [
       },
       {
         name: "Date de decès",
+        key:'dateDeces',
         inputItem: {
           inputType: InputType.date,
         },
       },
       {
         name: "Nat. pièce ident.",
+        key:'nationalitePieceIdentite',
+
         selectItems: [
           {
             title: "Option 1",
@@ -292,6 +316,7 @@ const debiteurTabs: CreanceTabType[] = [
       },
       {
         name: "Situation Matrimonnial",
+        key:'situationMatrimonnial',
         selectItems: [
           {
             title: "Option 1",
@@ -305,6 +330,7 @@ const debiteurTabs: CreanceTabType[] = [
       },
       {
         name: "Nombre d'enfant.",
+        key:'nombreEnfant',
         inputItem: {
           inputType: InputType.number,
           isEditable: true,
@@ -312,6 +338,7 @@ const debiteurTabs: CreanceTabType[] = [
       },
       {
         name: "Regime Mariage",
+        key:'regimeMariage',
         selectItems: [
           {
             title: "Option 1",
@@ -325,12 +352,14 @@ const debiteurTabs: CreanceTabType[] = [
       },
       {
         name: "Date établis.",
+        key:'dateEtablissement',
         inputItem: {
           inputType: InputType.date,
         },
       },
       {
         name: "N° pièce ident.",
+        key:'nPieceIdentite',
         inputItem: {
           inputType: InputType.text,
           isEditable: true,
@@ -339,6 +368,7 @@ const debiteurTabs: CreanceTabType[] = [
       },
       {
         name: "Lieu établis",
+        key:'lieuEtablissement',
         inputItem: {
           inputType: InputType.text,
           isEditable: true,
@@ -347,6 +377,7 @@ const debiteurTabs: CreanceTabType[] = [
       },
       {
         name: "Nom Conjoint",
+        key:'nomConjoint',
         inputItem: {
           inputType: InputType.text,
           isEditable: true,
@@ -355,6 +386,7 @@ const debiteurTabs: CreanceTabType[] = [
       },
       {
         name: "Prénoms Conjoint",
+        key:'prenomConjoint',
         inputItem: {
             inputType: InputType.text,
             isEditable: true,
@@ -363,6 +395,7 @@ const debiteurTabs: CreanceTabType[] = [
       },
       {
         name: "Addresse Conjoint",
+        key:'addresseConjoint',
         inputItem: {
             inputType: InputType.text,
             isEditable: true,
@@ -371,12 +404,14 @@ const debiteurTabs: CreanceTabType[] = [
       },
       {
         name: "Date naiss. Conjoint",
+        key:'dateNaissanceConjoint',
         inputItem: {
           inputType: InputType.date,
         },
       },
       {
         name: "Tel Conjoint",
+        key:'telConjoint',
         inputItem: {
             inputType: InputType.text,
             isEditable: true,
@@ -385,6 +420,7 @@ const debiteurTabs: CreanceTabType[] = [
       },
       {
         name: "N°pièce ident. Conjoint",
+        key:'nPieceIdentiteConjoint',
         inputItem: {
             inputType: InputType.number,
             isEditable: true,
@@ -392,6 +428,7 @@ const debiteurTabs: CreanceTabType[] = [
       },      
       {
         name: "Nom du père",
+        key:'nomPere',
         inputItem: {
             inputType: InputType.text,
             isEditable: true,
@@ -400,6 +437,7 @@ const debiteurTabs: CreanceTabType[] = [
       },
       {
         name: "Prénoms du père",
+        key:'prenomPere',
         inputItem: {
             inputType: InputType.text,
             isEditable: true,
@@ -408,6 +446,7 @@ const debiteurTabs: CreanceTabType[] = [
       },
       {
         name: "Nom de la mère",
+        key:'nomMere',
         inputItem: {
             inputType: InputType.text,
             isEditable: true,
@@ -416,6 +455,7 @@ const debiteurTabs: CreanceTabType[] = [
       },
       {
         name: "Prénoms de la mère",
+        key:'prenomMere',
         inputItem: {
             inputType: InputType.text,
             isEditable: true,
@@ -424,6 +464,7 @@ const debiteurTabs: CreanceTabType[] = [
       },
       {
         name: "Rue",
+        key:'rue',
         inputItem: {
             inputType: InputType.text,
             isEditable: true,
@@ -438,6 +479,7 @@ const debiteurTabs: CreanceTabType[] = [
     fields: [
       {
         name: "Registre de commerce",
+        key:'registreCommerce',
         inputItem: {
           inputType: InputType.text,
           isEditable: true,
@@ -446,6 +488,7 @@ const debiteurTabs: CreanceTabType[] = [
       },
       {
         name: "Raison social",
+        key:'raisonSocial',
         inputItem: {
           inputType: InputType.text,
           placeholder: "raison social",
@@ -454,6 +497,7 @@ const debiteurTabs: CreanceTabType[] = [
       },
       {
         name: "Capital social",
+        key:'capitalSocial',
         inputItem: {
           inputType: InputType.text,
           isEditable: true,
@@ -462,6 +506,7 @@ const debiteurTabs: CreanceTabType[] = [
       },
       {
         name: "Forme Juridique",
+        key:'formeJuridique',
         inputItem: {
           inputType: InputType.text,
           isEditable: true,
@@ -470,6 +515,7 @@ const debiteurTabs: CreanceTabType[] = [
       },
       {
         name: "Domaine d'activité",
+        key:'domaineActivite',
         inputItem: {
           inputType: InputType.text,
           isEditable: true,
@@ -478,6 +524,7 @@ const debiteurTabs: CreanceTabType[] = [
       },
       {
         name: "Siège social",
+        key:'siegeSocial',
         inputItem: {
           inputType: InputType.text,
           isEditable: true,
@@ -486,6 +533,7 @@ const debiteurTabs: CreanceTabType[] = [
       },
       {
         name: "Nom Gérant",
+        key:'nomGerant',
         inputItem: {
           inputType: InputType.text,
           isEditable: true,
@@ -500,6 +548,7 @@ const debiteurTabs: CreanceTabType[] = [
     tableContent: [
       {
         name: "Type",
+        key:'type',
         inputItem: {
           inputType: InputType.text,
           isEditable: true,
@@ -518,6 +567,7 @@ const debiteurTabs: CreanceTabType[] = [
       },
       {
         name: "N°Compte",
+        key:'nCompte',
         inputItem: {
           inputType: InputType.number,
           isEditable: true,
@@ -526,6 +576,7 @@ const debiteurTabs: CreanceTabType[] = [
       },
       {
         name: "Libellé",
+        key:'libelle',
         inputItem: {
           inputType: InputType.text,
           isEditable: true,
@@ -534,6 +585,7 @@ const debiteurTabs: CreanceTabType[] = [
       },
       {
         name: "Banque Agence",
+        key:'banqueAgence',
         inputItem: {
           inputType: InputType.text,
           isEditable: true,
@@ -552,6 +604,7 @@ const debiteurTabs: CreanceTabType[] = [
       },
       {
         name: "Banque",
+        key:'banque',
         inputItem: {
           inputType: InputType.text,
           isEditable: false,
