@@ -330,7 +330,7 @@ const creanceFields: CreanceFieldType[] = [
 const creanceTabs: CreanceTabType[] = [
     {
         tabName: 'Piece',
-        headers: ['Type Piece', 'Reference', 'Libelle', 'Date reception', 'Date emission'],
+        tableHeaders: ['Type Piece', 'Reference', 'Libelle', 'Date reception', 'Date emission'],
         tableContent: [
             {
                 label: "Type Piece",
@@ -356,7 +356,32 @@ const creanceTabs: CreanceTabType[] = [
     },
     {
         tabName: 'Garantie Personnelle',
-        headers: ['Garantie Personnelle'],
+        tableHeaders: ['Type Piece', 'Reference', 'Libelle', 'Date reception', 'Date emission'],
+        tableContent: [
+            {
+                label: "Type Piece",
+                key: "TypePiece",
+            },
+            {
+                label: "Reference",
+                key: "Reference",
+            },
+            {
+                label: "Libelle",
+                key: "Libelle",
+            },
+            {
+                label: "Date reception",
+                key: "DateReception",
+            },
+            {
+                label: "Date emission",
+                key: "DateEmission",
+            },
+        ]
+    },
+    {
+        tabName: 'Référence',
         tableContent: [
             {
                 label: "Type Piece",

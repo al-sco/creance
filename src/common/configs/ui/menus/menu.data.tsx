@@ -63,6 +63,7 @@ import ListableSearchableItemComponent from "../../../../components/listable-sea
 import CreanceMainContent from "../../../../components/creance/creance-main-content";
 import acEntiteProvider from "../../../../states/signals/parameter_providers/AcEntite.state";
 import { mainCreanceDatas } from "../creance/main-creance.data";
+import { debiteursDatas } from "../creance/debiteur.data";
 
 export type SubMenuType = {
   name: string;
@@ -1928,10 +1929,10 @@ const menuItemsData: Array<MenuItemType> = [
     path: "/etude_creance",
     icon: Creance,
     subMenu: [
-      // {
-      //   name: "Debiteur",
-      //   render: () => <CreanceMainContent data={debiteursDatas} />
-      // },
+      {
+        name: "Debiteur",
+        render: () => <CreanceMainContent data={debiteursDatas} />
+      },
       {
         name: "Creance",      
         render: () => <CreanceMainContent data={mainCreanceDatas} />

@@ -5,7 +5,9 @@ import colors from "../../common/theme/colors/colors";
 
 
 type CreanceInputsViewProps = {
-    fields: CreanceFieldType[]
+    fields: CreanceFieldType[],
+    repeatGridValue?: number,
+    isInputLeftAddOnHidden?: boolean
 }
 
 const DateInputStyled = styled.div`
@@ -14,7 +16,7 @@ const DateInputStyled = styled.div`
     padding: 0 10px 0 10px;
 `
 
-const CreanceInputsView = ({ fields }: CreanceInputsViewProps) => {
+const CreanceInputsView = ({ fields, repeatGridValue, isInputLeftAddOnHidden }: CreanceInputsViewProps) => {
 
     const switchInputType = (input: CreanceInputItem): JSX.Element => {
         switch (input.inputType) {
@@ -27,7 +29,7 @@ const CreanceInputsView = ({ fields }: CreanceInputsViewProps) => {
                     </NumberInputStepper>
                 </NumberInput>)
             case InputType.text:
-                return (<Input borderColor={colors.gray} isRequired={true} isDisabled={!input.isEditable} value={input.isEditable && !input.isEditable ? input.placeholder : undefined} type='tel' placeholder={input.placeholder} isReadOnly={input.isEditable && input.isEditable} />)
+                return (<Input borderColor={colors.gray} isRequired={true} isDisabled={!input.isEditable} value={input.isEditable && !input.isEditable ? input.placeholder : undefined} placeholder={input.placeholder} isReadOnly={input.isEditable && !input.isEditable} />)
             case InputType.date:
                 return (<DateInputStyled><input aria-label="Date" type="date" /></DateInputStyled>)
             default:
@@ -35,11 +37,14 @@ const CreanceInputsView = ({ fields }: CreanceInputsViewProps) => {
         }
     }
 
-    return (<Grid templateColumns='repeat(3, 1fr)' gap={4}>
+    return (<Grid templateColumns={`repeat(${repeatGridValue ? repeatGridValue : 3}, 1fr)`} gap={4}>
         {fields.map((e: CreanceFieldType) => <Flex gap={2}>
             <GridItem w={e.inputItem && e.inputItem.placeholder ? '100%' : ''} h='10'>
                 <InputGroup>
-                    <InputLeftAddon>{e.name}</InputLeftAddon>
+                    {
+                        isInputLeftAddOnHidden && isInputLeftAddOnHidden? <></> : 
+                        <InputLeftAddon>{e.name}</InputLeftAddon>
+                    }
                     {e.inputItem && switchInputType(e.inputItem)}
                 </InputGroup>
             </GridItem>

@@ -1,10 +1,11 @@
 import { GridItem, Input, Tab, TabList, TabPanel, TabPanels, Table, TableContainer, Tabs, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react"
-import { CreanceTabType } from "../../common/configs/ui/creance/creance.type"
+import { CreanceColumnType, CreanceFieldType, CreanceTabType } from "../../common/configs/ui/creance/creance.type"
 import colors from "../../common/theme/colors/colors"
 import styled from "styled-components"
+import CreanceInputsView from "./creance-inputs-view"
 
 type CreanceTabsViewProps = {
-    tabs: CreanceTabType[]
+    tabs?: CreanceTabType[],
 }
 
 const thStyle = {
@@ -24,36 +25,52 @@ const BaseStyledTable = styled.div`
 
 
 const CreanceTabsView = ({ tabs }: CreanceTabsViewProps) => {
+    const buildColumn = (e: CreanceColumnType | CreanceFieldType): JSX.Element => {
+        if ((e as CreanceColumnType).key === undefined) {
+            return (<CreanceInputsView isInputLeftAddOnHidden={true} repeatGridValue={1} fields={[(e as CreanceFieldType)]} />)
+        } else {
+            const _ = e as CreanceColumnType
+            return (
+                <Input w="90%" name={_.key} placeholder={_.label} size='lg' />
+            )
+        }
+    }
+
     return (
         <>
             <GridItem w='100%' h='10'>
-                <Tabs size='md' variant='enclosed'>
+                {tabs && <Tabs size='md' variant='enclosed'>
                     <TabList>
                         {tabs.map(({ tabName }: CreanceTabType) => <Tab>{tabName}</Tab>
                         )}
                     </TabList>
                     <TabPanels>
-                        {tabs.map(({ headers, tableContent }: CreanceTabType, index) => <TabPanel>
+                        {tabs.map(({ tableContent, fields, tableHeaders, rowCount }: CreanceTabType, index) => <TabPanel>
                             <BaseStyledTable>
                                 <TableContainer>
                                     <Table>
                                         <Thead>
                                             <Tr>
-                                                {headers.map((e, index) => (
+                                                {tableHeaders && tableHeaders.map((e, index) => (
                                                     <Th style={thStyle} key={index}>{e}</Th>
                                                 ))}
                                             </Tr>
                                         </Thead>
                                         <Tbody>
-                                            <Tr bg={ index  % 2 == 0 ? undefined : colors.gray}>
+                                            {tableContent && <Tr bg={index % 2 == 0 ? undefined : colors.gray}>
                                                 {
                                                     tableContent.map((column, i) => (
                                                         <Td
                                                             key={i}>
-                                                            <Input w="90%" name={column.key} placeholder={column.label} size='lg' />                                                            
+                                                            {buildColumn(column)}
                                                         </Td>
                                                     )
-                                                    )}  </Tr>
+                                                    )
+                                                }  </Tr>
+                                            }
+                                            {
+                                                fields && <CreanceInputsView repeatGridValue={rowCount} fields={fields} />
+                                            }
                                         </Tbody>
                                     </Table>
                                 </TableContainer>
@@ -61,7 +78,7 @@ const CreanceTabsView = ({ tabs }: CreanceTabsViewProps) => {
                         </TabPanel>
                         )}
                     </TabPanels>
-                </Tabs>
+                </Tabs>}
             </GridItem>
         </>
     )

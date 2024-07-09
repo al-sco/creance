@@ -34,6 +34,8 @@ export type CreanceColumnType = {
 
 export type CreanceTabType = {
   tabName: string;
-  headers: string[];
-  tableContent: CreanceColumnType[];
+  rowCount?: number;
+  tableHeaders?: string[];
+  tableContent?: CreanceColumnType[] | CreanceFieldType[];
+  fields?: CreanceFieldType[]  
 };
