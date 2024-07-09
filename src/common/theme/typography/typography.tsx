@@ -26,7 +26,6 @@ width: 100%;
 max-lines: 1;
 text-overflow: ellipsis;
 white-space: nowrap;
-resize: horizontal;
 overflow: hidden;
 background-color: ${props => props.$backgroundColor};
 border-radius: 8px;
