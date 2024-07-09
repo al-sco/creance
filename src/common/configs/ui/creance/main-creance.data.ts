@@ -3,6 +3,11 @@ import { CreanceDataType, CreanceFieldType, CreanceTabType, InputType } from "./
 const creanceFields: CreanceFieldType[] = [
     {
         name: 'Débiteur',
+        inputItem:{
+            inputType:InputType.text,
+            isEditable:true,
+            placeholder: 'Debiteur'
+        },
         selectItems: [
             {
                 title: 'Option1',
