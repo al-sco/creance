@@ -11,9 +11,10 @@ const creanceFields: CreanceFieldType[] = [
         key:'debiteur',
         inputItem:{
             inputType:InputType.text,
-            isEditable:true,
+            isEditable:false,
             placeholder: 'Debiteur'
         },
+        onInsert: acDebiteurProvider.simpleInsert,
 selectItems: acCreanceProvider.getSelectItems(acDebiteurProvider),
 
     },
@@ -21,7 +22,7 @@ selectItems: acCreanceProvider.getSelectItems(acDebiteurProvider),
         name: 'Périodicité',
         key:'periodicite',
         inputItem: {
-            isEditable: true,
+            isEditable: false,
             inputType: InputType.number,
             placeholder: "périodicité",
         },
@@ -31,8 +32,9 @@ selectItems: acCreanceProvider.getSelectItems(acPeriodiciteProvider),
     {
         name: 'Grpe Creance',
         key:'groupeCreance',
+        onInsert: acCreanceProvider.simpleInsert,
         inputItem: {
-            isEditable: true,
+            isEditable: false,
             placeholder: "grpe creance",
             inputType: InputType.text
         },
@@ -42,6 +44,8 @@ selectItems: acCreanceProvider.getSelectItems(acGroupeCreanceProvider),
     {
         name: 'Objet Créance',
      key:'objectCreance',   
+     onInsert: acCreanceProvider.simpleInsert,
+    
         inputItem: {
             isEditable: true,
             inputType: InputType.text,
@@ -51,8 +55,10 @@ selectItems: acCreanceProvider.getSelectItems(acGroupeCreanceProvider),
     {
         name: "Type d'Objet",
         key:'typeObject',
+        onInsert: acCreanceProvider.simpleInsert,
+        
         inputItem: {
-            isEditable: true,
+            isEditable: false,
             inputType: InputType.number,
             placeholder: "grpe creance",
         },
@@ -71,6 +77,7 @@ selectItems: acCreanceProvider.getSelectItems(acObjetCreanceProvider),
     {
         name: 'Capital Initial',
         key:'capitalInitial',
+        onInsert: acCreanceProvider.simpleInsert,
         inputItem: {
             isEditable: true,
             inputType: InputType.number,
@@ -80,6 +87,7 @@ selectItems: acCreanceProvider.getSelectItems(acObjetCreanceProvider),
     {
         name: 'Mont. Dû',
         key:'montantDu',
+        onInsert: acCreanceProvider.simpleInsert,
         inputItem: {
             isEditable: true,
             inputType: InputType.number,
@@ -107,6 +115,7 @@ selectItems: acCreanceProvider.getSelectItems(acObjetCreanceProvider),
     {
         name: 'Mont. Décaissé',
         key:'montDecaisse',
+        onInsert: acCreanceProvider.simpleInsert,
         
         inputItem: {
             isEditable: true,
@@ -118,7 +127,7 @@ selectItems: acCreanceProvider.getSelectItems(acObjetCreanceProvider),
         name: 'Total Dû',
         key:'totalDu',
         inputItem: {
-            isEditable: true,
+            isEditable: false,
             inputType: InputType.number,
             placeholder: "total dû",
         },
@@ -126,6 +135,7 @@ selectItems: acCreanceProvider.getSelectItems(acObjetCreanceProvider),
     {
         name: 'Mont. Déja Remb.',
         key:'montDejaRemb',
+        onInsert: acCreanceProvider.simpleInsert,
         inputItem: {
             isEditable: true,
             inputType: InputType.number,
@@ -135,6 +145,7 @@ selectItems: acCreanceProvider.getSelectItems(acObjetCreanceProvider),
     {
         name: 'Nb. Ech',
         key:'nbEch',
+        onInsert: acCreanceProvider.simpleInsert,
         inputItem: {
             isEditable: true,
             inputType: InputType.number,
@@ -153,6 +164,7 @@ selectItems: acCreanceProvider.getSelectItems(acObjetCreanceProvider),
     {
         name: 'Sté Caution',
         key:'steCaution',
+        onInsert: acCreanceProvider.simpleInsert,
         inputItem: {
             isEditable: true,
             inputType: InputType.number,
@@ -162,15 +174,17 @@ selectItems: acCreanceProvider.getSelectItems(acObjetCreanceProvider),
     {
         name: 'Date Reconnais.',
         key:'dateReconnais',
+        onInsert: acCreanceProvider.simpleInsert,
         inputItem: {
-            isEditable: true,
-            inputType: InputType.number,
+            isEditable: false,
+            inputType: InputType.date,
             placeholder: "date reconnaissance",
         },
     },
     {
         name: 'Commission',
         key:'commission',
+        onInsert: acCreanceProvider.simpleInsert,
         inputItem: {
             isEditable: true,
             inputType: InputType.text,
@@ -180,6 +194,7 @@ selectItems: acCreanceProvider.getSelectItems(acObjetCreanceProvider),
     {
         name: 'Divers Frais',
         key:'diversFrais',
+        onInsert: acCreanceProvider.simpleInsert,
         inputItem: {
             isEditable: true,
             inputType: InputType.number,
@@ -189,6 +204,7 @@ selectItems: acCreanceProvider.getSelectItems(acObjetCreanceProvider),
     {
         name: 'Date 1ere Ech.',
         key:'date1ereEch',
+        onInsert: acCreanceProvider.simpleInsert,
         inputItem: {
             inputType: InputType.date
         },
@@ -210,6 +226,7 @@ selectItems: acCreanceProvider.getSelectItems(acObjetCreanceProvider),
     {
         name: 'Mont Ass.',
         key:'montAss',
+        onInsert: acCreanceProvider.simpleInsert,
         inputItem: {
             isEditable: true,
             placeholder: "montant ass",
@@ -219,6 +236,7 @@ selectItems: acCreanceProvider.getSelectItems(acObjetCreanceProvider),
     {
         name: 'Date Dern Ech',
         key:'dateDernEch',
+        onInsert: acCreanceProvider.simpleInsert,
         inputItem: {
             inputType: InputType.date
         },
@@ -226,6 +244,7 @@ selectItems: acCreanceProvider.getSelectItems(acObjetCreanceProvider),
     {
         name: 'Encours',
         key:'enCours',
+        onInsert: acCreanceProvider.simpleInsert,
         inputItem: {
             isEditable: true,
             placeholder: "encours",
@@ -235,6 +254,8 @@ selectItems: acCreanceProvider.getSelectItems(acObjetCreanceProvider),
     {
         name: 'N° Précédent',
         key:'nPrecedent',
+        onInsert: acCreanceProvider.simpleInsert,
+
         inputItem: {
             isEditable: true,
             placeholder: "numéro précédent",
@@ -244,6 +265,16 @@ selectItems: acCreanceProvider.getSelectItems(acObjetCreanceProvider),
     {
         name: "Date d'Octroie.",
         key:'dateOctroie',
+        onInsert: acCreanceProvider.simpleInsert,
+        inputItem: {
+            inputType: InputType.date
+        },
+    },
+
+    {
+        name: "Date 1er Precompte.",
+        key:'date1erPrecompt',
+        onInsert: acCreanceProvider.simpleInsert,
         inputItem: {
             inputType: InputType.date
         },
@@ -251,15 +282,29 @@ selectItems: acCreanceProvider.getSelectItems(acObjetCreanceProvider),
     {
         name: 'N° Ancien',
         key:'nAncien',
+        onInsert: acCreanceProvider.simpleInsert,
+
         inputItem: {
             isEditable: true,
             placeholder: "numéro ancien",
             inputType: InputType.number
         },
     },
+
     {
-        name: 'Int. conv.',
+        name: 'Type Structure',
+        key:'typestructure',
+        onInsert: acCreanceProvider.simpleInsert,
+        inputItem: {
+            isEditable: false,
+            placeholder: "numéro ancien",
+            inputType: InputType.number
+        },
+    },
+    {
+        name: 'Int. conv. %',
         key:'intConv',
+        onInsert: acCreanceProvider.simpleInsert,
         inputItem: {
             isEditable: true,
             placeholder: "int conv",
@@ -269,6 +314,7 @@ selectItems: acCreanceProvider.getSelectItems(acObjetCreanceProvider),
     {
         name: 'Int. Ret.',
         key:'intRet',
+        onInsert: acCreanceProvider.simpleInsert,
         inputItem: {
             isEditable: true,
             placeholder: "int ret",
@@ -277,6 +323,7 @@ selectItems: acCreanceProvider.getSelectItems(acObjetCreanceProvider),
     },
     {
         name: 'Mont. Inv Conv. Payé',
+        onInsert: acCreanceProvider.simpleInsert,
         key:'montInvConvPaye',
         inputItem: {
             isEditable: true,
@@ -299,7 +346,7 @@ selectItems: acCreanceProvider.getSelectItems(acObjetCreanceProvider),
         inputItem: {
             isEditable: false,
             placeholder: "total a recouvrer",
-            inputType: InputType.text
+            inputType: InputType.number
         },
     },
     {
@@ -339,6 +386,7 @@ selectItems: acCreanceProvider.getSelectItems(acObjetCreanceProvider),
 const creanceTabs: CreanceTabType[] = [
     {
         tabName: 'Piece',
+        key:'piece',
         tableHeaders: ['Type Piece', 'Reference', 'Libelle', 'Date reception', 'Date emission'],
         tableContent: [
             {
@@ -365,6 +413,7 @@ const creanceTabs: CreanceTabType[] = [
     },
     {
         tabName: 'Garantie Personnelle',
+        key:'garantiePersonnelle',
         tableHeaders: ['Type Piece', 'Reference', 'Libelle', 'Date reception', 'Date emission'],
         tableContent: [
             {
@@ -391,6 +440,7 @@ const creanceTabs: CreanceTabType[] = [
     },
     {
         tabName: 'Référence',
+        key:'reference',
         tableContent: [
             {
                 label: "Type Piece",
@@ -419,5 +469,6 @@ const creanceTabs: CreanceTabType[] = [
 export const mainCreanceDatas: CreanceDataType = {
     title: 'Etude créance',
     fields: creanceFields,
+    state:acCreanceProvider,
     tabs: creanceTabs
 }
