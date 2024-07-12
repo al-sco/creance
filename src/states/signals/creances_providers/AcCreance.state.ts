@@ -1,4 +1,4 @@
-import { SelectItem } from "../../../common/configs/ui/creance/creance.type";
+import { CreanceStaticDataType, SelectItem } from "../../../common/configs/ui/creance/creance.type";
 import { AcDebiteur} from "../../AcData.types";
 import ICrudStateProvider from "../parameter_providers/ICrudStateProvider";
 
@@ -65,3 +65,24 @@ const acCreanceProvider = new AcCreanceStateProvider(
   "/creance",{}
 );
 export default acCreanceProvider;
+
+export const statusRecouvrement: boolean[] = [
+  true, false
+]
+
+export const classCreance: CreanceStaticDataType[] = [
+  {
+    label: 'Creance normal',
+    value: 'creance normal'
+  },
+  {
+    label: 'Creance contentieuse',
+    value: 'creance contentieuse'
+  }, 
+  {
+    label: 'Creance irrecouvrable',
+    value: 'creance irrecouvrable'
+  }, 
+]
+
+export const creanceSoldActivite: boolean[] = [true, false]

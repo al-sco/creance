@@ -46,3 +46,8 @@ export type CreanceTabType = {
   tableContent?: CreanceColumnType[] | CreanceFieldType[];
   fields?: CreanceFieldType[]  
 };
+
+export type CreanceStaticDataType = {
+  value: string,
+  label: string
+}
