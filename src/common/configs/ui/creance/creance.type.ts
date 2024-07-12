@@ -1,3 +1,5 @@
+import { Signal } from "@preact/signals-react";
+
 export enum InputType {
   text,
   number,
@@ -5,7 +7,7 @@ export enum InputType {
 }
 
 export type SelectItem = {
-  value: string;
+  value: any;
   title: string;
 };
 
@@ -17,9 +19,11 @@ export type CreanceInputItem = {
 
 export type CreanceFieldType = {
   name: string;
-  key:string
-  inputItem?: CreanceInputItem;
-  selectItems?: SelectItem[];
+  key:string,
+  onInsert?:(key:string,value:any)=>void
+  inputItem?: CreanceInputItem
+  selectItems?:()=>Promise<SelectItem[]>
+  state?:Signal<{}>
 };
 
 export type CreanceDataType = {

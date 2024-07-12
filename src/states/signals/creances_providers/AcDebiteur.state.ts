@@ -1,6 +1,9 @@
+import { SelectItem } from "../../../common/configs/ui/creance/creance.type";
 import { AcDebiteur } from "../../AcData.types";
 import ICrudStateProvider from "../parameter_providers/ICrudStateProvider";
 
+
+type ReturnProvider=()=>Promise<SelectItem[]>;
 class AcDebiteurStateProvider extends ICrudStateProvider<AcDebiteur> {
   mapDataToJson(data: AcDebiteur): {} {
     return {
@@ -41,8 +44,24 @@ class AcDebiteurStateProvider extends ICrudStateProvider<AcDebiteur> {
   }
 
   
+  simpleInsert=(key:string,value:any): void=>{
+   let state= this.getState();
+   state.value= {...state.value,...{[key]:value}}
+   console.log(state.value)
+  }
 
+  getSelectItems=(provider: any):ReturnProvider=>{
+
+      return async()=>{
+        let typeDebiteurs=(await provider.find()) as any[];    
+        return typeDebiteurs.map((typeDebiteur)=>({
+        title:typeDebiteur.libelle,
+        value:typeDebiteur.code
+        }));
+      }
+  }
 }
+
 
 const acDebiteurProvider = new AcDebiteurStateProvider(
   "/debiteur",{}

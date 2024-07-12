@@ -4,6 +4,7 @@ import colors from "../../common/theme/colors/colors"
 import { SearchIcon } from "@chakra-ui/icons"
 import { Signal, useSignal } from "@preact/signals-react"
 import { useRef } from "react"
+import { useSignals } from "@preact/signals-react/runtime"
 
 const SearchStyled = styled.div`
   width: 100%;
@@ -29,7 +30,7 @@ type ListableSearchableProps = {
 
   const currentContent=signal?.value??[];
   const searchRef=useRef<HTMLInputElement>(null)
-  useSignal()
+  useSignals()
   
   const handleSearch=()=>{
     if(signal){

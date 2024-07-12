@@ -1,7 +1,9 @@
-import { Flex, Grid, GridItem, Input, InputGroup, InputLeftAddon, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper, Select } from "@chakra-ui/react";
-import { CreanceFieldType, CreanceInputItem, InputType, SelectItem } from "../../common/configs/ui/creance/creance.type";
+import { Flex, Grid, GridItem, Input, InputGroup, InputLeftAddon, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper } from "@chakra-ui/react";
+import { CreanceFieldType, InputType } from "../../common/configs/ui/creance/creance.type";
 import styled from "styled-components";
 import colors from "../../common/theme/colors/colors";
+import { SelectableItem } from "../selectable-item";
+import { useSignals } from "@preact/signals-react/runtime";
 
 
 type CreanceInputsViewProps = {
@@ -18,8 +20,9 @@ const DateInputStyled = styled.div`
 
 const CreanceInputsView = ({ fields, repeatGridValue, isInputLeftAddOnHidden }: CreanceInputsViewProps) => {
 
-    const switchInputType = (input: CreanceInputItem): JSX.Element => {
-        switch (input.inputType) {
+    const switchInputType = ({inputItem,state,key,onInsert}:CreanceFieldType): JSX.Element => {
+    useSignals()
+        switch (inputItem?.inputType) {
             case InputType.number:
                 return (<NumberInput width='100%' >
                     <NumberInputField />
@@ -29,7 +32,11 @@ const CreanceInputsView = ({ fields, repeatGridValue, isInputLeftAddOnHidden }: 
                     </NumberInputStepper>
                 </NumberInput>)
             case InputType.text:
-                return (<Input borderColor={colors.gray} isRequired={true} isDisabled={!input.isEditable} value={input.isEditable && !input.isEditable ? input.placeholder : undefined} placeholder={input.placeholder} isReadOnly={input.isEditable && !input.isEditable} />)
+                return (<Input borderColor={colors.gray}  onChange={(e)=>{
+                    if(onInsert){
+                        onInsert(key,e.target.value)
+                    }
+                }} isRequired={true} isDisabled={!inputItem.isEditable} value={(state?.value as any)[key]} placeholder={inputItem.placeholder} isReadOnly={!inputItem.isEditable} />)
             case InputType.date:
                 return (<DateInputStyled><input aria-label="Date" type="date" /></DateInputStyled>)
             default:
@@ -45,14 +52,12 @@ const CreanceInputsView = ({ fields, repeatGridValue, isInputLeftAddOnHidden }: 
                         isInputLeftAddOnHidden && isInputLeftAddOnHidden? <></> : 
                         <InputLeftAddon>{e.name}</InputLeftAddon>
                     }
-                    {e.inputItem && switchInputType(e.inputItem)}
+                    {e.inputItem && switchInputType(e)}
                 </InputGroup>
             </GridItem>
             {e.selectItems &&
-                <Select placeholder=''>
-                    {e.selectItems.map((s: SelectItem) => <option value={s.value}>{s.title}</option>
-                    )}
-                </Select>}
+                <SelectableItem onSelectChanged={(value)=>e.onInsert && e.onInsert(e.key,value)} promisedSelectItems={e.selectItems} />
+                }
         </Flex>
         )}
     </Grid>);

@@ -1,3 +1,8 @@
+import acCreanceProvider from "../../../../states/signals/creances_providers/AcCreance.state";
+import acDebiteurProvider from "../../../../states/signals/creances_providers/AcDebiteur.state";
+import acGroupeCreanceProvider from "../../../../states/signals/parameter_providers/AcGroupeCreance.state";
+import acObjetCreanceProvider from "../../../../states/signals/parameter_providers/AcObjetCreances.state";
+import acPeriodiciteProvider from "../../../../states/signals/parameter_providers/AcPeriodicite.state";
 import { CreanceDataType, CreanceFieldType, CreanceTabType, InputType } from "./creance.type";
 
 const creanceFields: CreanceFieldType[] = [
@@ -9,16 +14,8 @@ const creanceFields: CreanceFieldType[] = [
             isEditable:true,
             placeholder: 'Debiteur'
         },
-        selectItems: [
-            {
-                title: 'Option1',
-                value: 'option1'
-            },
-            {
-                title: 'Option2',
-                value: 'option2'
-            }
-        ]
+selectItems: acCreanceProvider.getSelectItems(acDebiteurProvider),
+
     },
     {
         name: 'Périodicité',
@@ -28,20 +25,8 @@ const creanceFields: CreanceFieldType[] = [
             inputType: InputType.number,
             placeholder: "périodicité",
         },
-        selectItems: [
-            {
-                title: 'Mensuel',
-                value: 'mensuel'
-            },
-            {
-                title: 'Quotidien',
-                value: 'quotidien'
-            },
-            {
-                title: 'Annuel',
-                value: 'annuel'
-            }
-        ]
+selectItems: acCreanceProvider.getSelectItems(acPeriodiciteProvider),
+
     },
     {
         name: 'Grpe Creance',
@@ -51,16 +36,8 @@ const creanceFields: CreanceFieldType[] = [
             placeholder: "grpe creance",
             inputType: InputType.text
         },
-        selectItems: [
-            {
-                title: 'Option1',
-                value: 'option1'
-            },
-            {
-                title: 'Option2',
-                value: 'option2'
-            }
-        ]
+selectItems: acCreanceProvider.getSelectItems(acGroupeCreanceProvider),
+
     },
     {
         name: 'Objet Créance',
@@ -79,16 +56,8 @@ const creanceFields: CreanceFieldType[] = [
             inputType: InputType.number,
             placeholder: "grpe creance",
         },
-        selectItems: [
-            {
-                title: 'Option1',
-                value: 'option1'
-            },
-            {
-                title: 'Option2',
-                value: 'option2'
-            }
-        ]
+selectItems: acCreanceProvider.getSelectItems(acObjetCreanceProvider),
+
     },
     {
         name: 'Mont à Remb.',
@@ -227,16 +196,16 @@ const creanceFields: CreanceFieldType[] = [
     {
         name: 'Stat Recouv.',
         key:'statRecouv',
-        selectItems: [
-            {
-                title: 'Nom',
-                value: 'nom'
-            },
-            {
-                title: 'Oui',
-                value: 'oui'
-            }
-        ]
+        // selectItems: [
+        //     {
+        //         title: 'Nom',
+        //         value: 'nom'
+        //     },
+        //     {
+        //         title: 'Oui',
+        //         value: 'oui'
+        //     }
+        // ]
     },
     {
         name: 'Mont Ass.',
@@ -336,34 +305,34 @@ const creanceFields: CreanceFieldType[] = [
     {
         name: 'Crean Sold Avt Liq',
         key:'cranSoldAvtLiq',
-        selectItems: [
-            {
-                title: 'Option 1',
-                value: 'option1'
-            },
-            {
-                title: 'Option 1',
-                value: 'option1'
-            }
-        ]
+        // selectItems: [
+        //     {
+        //         title: 'Option 1',
+        //         value: 'option1'
+        //     },
+        //     {
+        //         title: 'Option 1',
+        //         value: 'option1'
+        //     }
+        // ]
     },
     {
         name: 'Class Créance',
         key:'classCreance',
-        selectItems: [
-            {
-                title: 'Crance Normal',
-                value: 'cranceNormal'
-            },
-            {
-                title: 'Crance Normal',
-                value: 'cranceNormal'
-            },
-            {
-                title: 'Crance Normal',
-                value: 'cranceNormal'
-            }
-        ]
+        // selectItems: [
+        //     {
+        //         title: 'Crance Normal',
+        //         value: 'cranceNormal'
+        //     },
+        //     {
+        //         title: 'Crance Normal',
+        //         value: 'cranceNormal'
+        //     },
+        //     {
+        //         title: 'Crance Normal',
+        //         value: 'cranceNormal'
+        //     }
+        // ]
     },
 ]
 
