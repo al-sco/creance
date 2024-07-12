@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import colors from "../../common/theme/colors/colors";
-import { Box, Grid } from "@chakra-ui/react";
+import { Box, Button, Flex, Grid } from "@chakra-ui/react";
 import { CreanceDataType } from "../../common/configs/ui/creance/creance.type";
 import CreanceInputsView from "./creance-inputs-view";
 import CreanceTabsView from "./creance-tab-view";
@@ -28,9 +28,12 @@ const StyledTitle = styled.h1`
 const CreanceMainContent = ({ data }: CreanceMainContentProps): JSX.Element => {
     return (
         <StyledCreanceMainContent>
-            <StyledTitle>
-                {data.title}
-            </StyledTitle>
+            <Flex justifyContent='space-between'>
+                <StyledTitle>
+                    {data.title}
+                </StyledTitle>
+                <Button variant='outline' color={colors.green} size='lg' style={{ border: `1px solid ${colors.green}` }}>Ajouter</Button>
+            </Flex>
             <Box h="20px" />
             <Grid templateColumns='repeat(1, 1fr)' gap={4}>
                 <CreanceInputsView repeatGridValue={2} fields={data.fields} />
