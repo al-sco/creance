@@ -66,11 +66,20 @@ const acCreanceProvider = new AcCreanceStateProvider(
 );
 export default acCreanceProvider;
 
-export const statusRecouvrement: boolean[] = [
-  true, false
-]
+export const booleanProvider=async():Promise<SelectItem[]>=>{
+  let status:boolean[]=[
+    true, false
+  ]
 
-export const classCreance: CreanceStaticDataType[] = [
+  return status.map((e)=>({
+    title:e?'Oui':'Non',
+    value:e?'Oui':'Non'
+  }))
+
+}
+
+export const classCreanceProvider= async():Promise<SelectItem[]>=>{
+  let creantTypes:CreanceStaticDataType[] = [
   {
     label: 'Creance normal',
     value: 'creance normal'
@@ -85,4 +94,5 @@ export const classCreance: CreanceStaticDataType[] = [
   }, 
 ]
 
-export const creanceSoldActivite: boolean[] = [true, false]
+return creantTypes.map((e)=>({title:e.label,value:e.value}))
+}

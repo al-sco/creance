@@ -1,4 +1,4 @@
-import acCreanceProvider from "../../../../states/signals/creances_providers/AcCreance.state";
+import acCreanceProvider, { booleanProvider, classCreanceProvider } from "../../../../states/signals/creances_providers/AcCreance.state";
 import acDebiteurProvider from "../../../../states/signals/creances_providers/AcDebiteur.state";
 import acGroupeCreanceProvider from "../../../../states/signals/parameter_providers/AcGroupeCreance.state";
 import acObjetCreanceProvider from "../../../../states/signals/parameter_providers/AcObjetCreances.state";
@@ -9,6 +9,7 @@ const creanceFields: CreanceFieldType[] = [
     {
         name: 'Débiteur',
         key:'debiteur',
+        state: acCreanceProvider.getState(),
         inputItem:{
             inputType:InputType.text,
             isEditable:false,
@@ -21,6 +22,7 @@ selectItems: acCreanceProvider.getSelectItems(acDebiteurProvider),
     {
         name: 'Périodicité',
         key:'periodicite',
+        state: acCreanceProvider.getState(),
         inputItem: {
             isEditable: false,
             inputType: InputType.number,
@@ -32,6 +34,7 @@ selectItems: acCreanceProvider.getSelectItems(acPeriodiciteProvider),
     {
         name: 'Grpe Creance',
         key:'groupeCreance',
+        state: acCreanceProvider.getState(),
         onInsert: acCreanceProvider.simpleInsert,
         inputItem: {
             isEditable: false,
@@ -44,6 +47,7 @@ selectItems: acCreanceProvider.getSelectItems(acGroupeCreanceProvider),
     {
         name: 'Objet Créance',
      key:'objectCreance',   
+     state: acCreanceProvider.getState(),
      onInsert: acCreanceProvider.simpleInsert,
     
         inputItem: {
@@ -55,6 +59,7 @@ selectItems: acCreanceProvider.getSelectItems(acGroupeCreanceProvider),
     {
         name: "Type d'Objet",
         key:'typeObject',
+        state: acCreanceProvider.getState(),
         onInsert: acCreanceProvider.simpleInsert,
         
         inputItem: {
@@ -68,6 +73,7 @@ selectItems: acCreanceProvider.getSelectItems(acObjetCreanceProvider),
     {
         name: 'Mont à Remb.',
         key:'montARemb',
+        state: acCreanceProvider.getState(),
         inputItem: {
             isEditable: false,
             inputType: InputType.text,
@@ -77,6 +83,7 @@ selectItems: acCreanceProvider.getSelectItems(acObjetCreanceProvider),
     {
         name: 'Capital Initial',
         key:'capitalInitial',
+        state: acCreanceProvider.getState(),
         onInsert: acCreanceProvider.simpleInsert,
         inputItem: {
             isEditable: true,
@@ -87,6 +94,7 @@ selectItems: acCreanceProvider.getSelectItems(acObjetCreanceProvider),
     {
         name: 'Mont. Dû',
         key:'montantDu',
+        state: acCreanceProvider.getState(),
         onInsert: acCreanceProvider.simpleInsert,
         inputItem: {
             isEditable: true,
@@ -97,7 +105,8 @@ selectItems: acCreanceProvider.getSelectItems(acObjetCreanceProvider),
     {
         name: 'N°Créance',
      key:'nCreance',   
-        inputItem: {
+     state: acCreanceProvider.getState(),
+     inputItem: {
             isEditable: false,
             placeholder: "numéro creance",
             inputType: InputType.text
@@ -106,6 +115,7 @@ selectItems: acCreanceProvider.getSelectItems(acObjetCreanceProvider),
     {
         name: 'Entité',
         key:'entite',
+        state: acCreanceProvider.getState(),
         inputItem: {
             isEditable: false,
             placeholder: "entité",
@@ -115,6 +125,7 @@ selectItems: acCreanceProvider.getSelectItems(acObjetCreanceProvider),
     {
         name: 'Mont. Décaissé',
         key:'montDecaisse',
+        state: acCreanceProvider.getState(),
         onInsert: acCreanceProvider.simpleInsert,
         
         inputItem: {
@@ -126,6 +137,7 @@ selectItems: acCreanceProvider.getSelectItems(acObjetCreanceProvider),
     {
         name: 'Total Dû',
         key:'totalDu',
+        state: acCreanceProvider.getState(),
         inputItem: {
             isEditable: false,
             inputType: InputType.number,
@@ -135,6 +147,7 @@ selectItems: acCreanceProvider.getSelectItems(acObjetCreanceProvider),
     {
         name: 'Mont. Déja Remb.',
         key:'montDejaRemb',
+        state: acCreanceProvider.getState(),
         onInsert: acCreanceProvider.simpleInsert,
         inputItem: {
             isEditable: true,
@@ -145,6 +158,7 @@ selectItems: acCreanceProvider.getSelectItems(acObjetCreanceProvider),
     {
         name: 'Nb. Ech',
         key:'nbEch',
+        state: acCreanceProvider.getState(),
         onInsert: acCreanceProvider.simpleInsert,
         inputItem: {
             isEditable: true,
@@ -155,6 +169,7 @@ selectItems: acCreanceProvider.getSelectItems(acObjetCreanceProvider),
     {
         name: 'Mont. Impayé',
         key:'montImpaye',
+        state: acCreanceProvider.getState(),
         inputItem: {
             isEditable: false,
             inputType: InputType.text,
@@ -164,6 +179,7 @@ selectItems: acCreanceProvider.getSelectItems(acObjetCreanceProvider),
     {
         name: 'Sté Caution',
         key:'steCaution',
+        state: acCreanceProvider.getState(),
         onInsert: acCreanceProvider.simpleInsert,
         inputItem: {
             isEditable: true,
@@ -174,6 +190,7 @@ selectItems: acCreanceProvider.getSelectItems(acObjetCreanceProvider),
     {
         name: 'Date Reconnais.',
         key:'dateReconnais',
+        state: acCreanceProvider.getState(),
         onInsert: acCreanceProvider.simpleInsert,
         inputItem: {
             isEditable: false,
@@ -184,6 +201,7 @@ selectItems: acCreanceProvider.getSelectItems(acObjetCreanceProvider),
     {
         name: 'Commission',
         key:'commission',
+        state: acCreanceProvider.getState(),
         onInsert: acCreanceProvider.simpleInsert,
         inputItem: {
             isEditable: true,
@@ -194,6 +212,7 @@ selectItems: acCreanceProvider.getSelectItems(acObjetCreanceProvider),
     {
         name: 'Divers Frais',
         key:'diversFrais',
+        state: acCreanceProvider.getState(),
         onInsert: acCreanceProvider.simpleInsert,
         inputItem: {
             isEditable: true,
@@ -204,6 +223,7 @@ selectItems: acCreanceProvider.getSelectItems(acObjetCreanceProvider),
     {
         name: 'Date 1ere Ech.',
         key:'date1ereEch',
+        state: acCreanceProvider.getState(),
         onInsert: acCreanceProvider.simpleInsert,
         inputItem: {
             inputType: InputType.date
@@ -212,20 +232,17 @@ selectItems: acCreanceProvider.getSelectItems(acObjetCreanceProvider),
     {
         name: 'Stat Recouv.',
         key:'statRecouv',
-        // selectItems: [
-        //     {
-        //         title: 'Nom',
-        //         value: 'nom'
-        //     },
-        //     {
-        //         title: 'Oui',
-        //         value: 'oui'
-        //     }
-        // ]
+        state: acCreanceProvider.getState(),
+        selectItems:booleanProvider,
+        onInsert: acCreanceProvider.simpleInsert,
+        inputItem: {
+            isEditable:false
+        }
     },
     {
         name: 'Mont Ass.',
         key:'montAss',
+        state: acCreanceProvider.getState(),
         onInsert: acCreanceProvider.simpleInsert,
         inputItem: {
             isEditable: true,
@@ -236,6 +253,7 @@ selectItems: acCreanceProvider.getSelectItems(acObjetCreanceProvider),
     {
         name: 'Date Dern Ech',
         key:'dateDernEch',
+        state: acCreanceProvider.getState(),
         onInsert: acCreanceProvider.simpleInsert,
         inputItem: {
             inputType: InputType.date
@@ -244,6 +262,7 @@ selectItems: acCreanceProvider.getSelectItems(acObjetCreanceProvider),
     {
         name: 'Encours',
         key:'enCours',
+        state: acCreanceProvider.getState(),
         onInsert: acCreanceProvider.simpleInsert,
         inputItem: {
             isEditable: true,
@@ -254,6 +273,7 @@ selectItems: acCreanceProvider.getSelectItems(acObjetCreanceProvider),
     {
         name: 'N° Précédent',
         key:'nPrecedent',
+        state: acCreanceProvider.getState(),
         onInsert: acCreanceProvider.simpleInsert,
 
         inputItem: {
@@ -265,6 +285,7 @@ selectItems: acCreanceProvider.getSelectItems(acObjetCreanceProvider),
     {
         name: "Date d'Octroie.",
         key:'dateOctroie',
+        state: acCreanceProvider.getState(),
         onInsert: acCreanceProvider.simpleInsert,
         inputItem: {
             inputType: InputType.date
@@ -274,6 +295,7 @@ selectItems: acCreanceProvider.getSelectItems(acObjetCreanceProvider),
     {
         name: "Date 1er Precompte.",
         key:'date1erPrecompt',
+        state: acCreanceProvider.getState(),
         onInsert: acCreanceProvider.simpleInsert,
         inputItem: {
             inputType: InputType.date
@@ -282,6 +304,7 @@ selectItems: acCreanceProvider.getSelectItems(acObjetCreanceProvider),
     {
         name: 'N° Ancien',
         key:'nAncien',
+        state: acCreanceProvider.getState(),
         onInsert: acCreanceProvider.simpleInsert,
 
         inputItem: {
@@ -294,6 +317,7 @@ selectItems: acCreanceProvider.getSelectItems(acObjetCreanceProvider),
     {
         name: 'Type Structure',
         key:'typestructure',
+        state: acCreanceProvider.getState(),
         onInsert: acCreanceProvider.simpleInsert,
         inputItem: {
             isEditable: false,
@@ -304,6 +328,7 @@ selectItems: acCreanceProvider.getSelectItems(acObjetCreanceProvider),
     {
         name: 'Int. conv. %',
         key:'intConv',
+        state: acCreanceProvider.getState(),
         onInsert: acCreanceProvider.simpleInsert,
         inputItem: {
             isEditable: true,
@@ -314,6 +339,7 @@ selectItems: acCreanceProvider.getSelectItems(acObjetCreanceProvider),
     {
         name: 'Int. Ret.',
         key:'intRet',
+        state: acCreanceProvider.getState(),
         onInsert: acCreanceProvider.simpleInsert,
         inputItem: {
             isEditable: true,
@@ -325,6 +351,7 @@ selectItems: acCreanceProvider.getSelectItems(acObjetCreanceProvider),
         name: 'Mont. Inv Conv. Payé',
         onInsert: acCreanceProvider.simpleInsert,
         key:'montInvConvPaye',
+        state: acCreanceProvider.getState(),
         inputItem: {
             isEditable: true,
             placeholder: "montant int conv payé",
@@ -334,6 +361,7 @@ selectItems: acCreanceProvider.getSelectItems(acObjetCreanceProvider),
     {
         name: 'Pénalité 1%',
         key:'penalite1',
+        state: acCreanceProvider.getState(),
         inputItem: {
             isEditable: false,
             placeholder: "penalité 1%",
@@ -343,6 +371,7 @@ selectItems: acCreanceProvider.getSelectItems(acObjetCreanceProvider),
     {
         name: 'Total à recouvrer',
         key:'totalARecouv',
+        state: acCreanceProvider.getState(),
         inputItem: {
             isEditable: false,
             placeholder: "total a recouvrer",
@@ -352,34 +381,16 @@ selectItems: acCreanceProvider.getSelectItems(acObjetCreanceProvider),
     {
         name: 'Crean Sold Avt Liq',
         key:'cranSoldAvtLiq',
-        // selectItems: [
-        //     {
-        //         title: 'Option 1',
-        //         value: 'option1'
-        //     },
-        //     {
-        //         title: 'Option 1',
-        //         value: 'option1'
-        //     }
-        // ]
+        state: acCreanceProvider.getState(),
+        onInsert: acCreanceProvider.simpleInsert,
+        selectItems:booleanProvider,
     },
     {
         name: 'Class Créance',
         key:'classCreance',
-        // selectItems: [
-        //     {
-        //         title: 'Crance Normal',
-        //         value: 'cranceNormal'
-        //     },
-        //     {
-        //         title: 'Crance Normal',
-        //         value: 'cranceNormal'
-        //     },
-        //     {
-        //         title: 'Crance Normal',
-        //         value: 'cranceNormal'
-        //     }
-        // ]
+        state: acCreanceProvider.getState(),
+        onInsert: acCreanceProvider.simpleInsert,
+        selectItems:classCreanceProvider
     },
 ]
 
@@ -392,76 +403,93 @@ const creanceTabs: CreanceTabType[] = [
             {
                 label: "Type Piece",
                 key: "TypePiece",
-            },
+        },
+
             {
                 label: "Reference",
                 key: "Reference",
-            },
+        },
+
             {
                 label: "Libelle",
                 key: "Libelle",
-            },
+        },
+
             {
                 label: "Date reception",
                 key: "DateReception",
-            },
+        },
+
             {
                 label: "Date emission",
                 key: "DateEmission",
-            },
+        },
+
         ]
     },
     {
         tabName: 'Garantie Personnelle',
         key:'garantiePersonnelle',
+        state: acCreanceProvider.getState(),
         tableHeaders: ['Type Piece', 'Reference', 'Libelle', 'Date reception', 'Date emission'],
         tableContent: [
             {
                 label: "Type Piece",
                 key: "TypePiece",
             },
+
             {
                 label: "Reference",
                 key: "Reference",
             },
+
             {
                 label: "Libelle",
                 key: "Libelle",
             },
+
             {
                 label: "Date reception",
                 key: "DateReception",
             },
+
             {
                 label: "Date emission",
                 key: "DateEmission",
             },
+
         ]
     },
     {
         tabName: 'Référence',
         key:'reference',
+        state: acCreanceProvider.getState(),
         tableContent: [
             {
                 label: "Type Piece",
                 key: "TypePiece",
-            },
+            state: acCreanceProvider.getState(),},
+
             {
                 label: "Reference",
                 key: "Reference",
-            },
+            state: acCreanceProvider.getState(),},
+
             {
                 label: "Libelle",
                 key: "Libelle",
-            },
+            state: acCreanceProvider.getState(),},
+
             {
                 label: "Date reception",
                 key: "DateReception",
-            },
+            state: acCreanceProvider.getState(),},
+
             {
                 label: "Date emission",
                 key: "DateEmission",
-            },
+            state: acCreanceProvider.getState(),},
+
         ]
     }
 ]
