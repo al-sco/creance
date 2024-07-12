@@ -1,4 +1,4 @@
-import acDebiteurProvider from "../../../../states/signals/creances_providers/AcDebiteur.state";
+import acDebiteurProvider, { naturePieceIdentite, regimeMariageProvider, sexeProvider, statusMatrimonialProvider } from "../../../../states/signals/creances_providers/AcDebiteur.state";
 import acBanqueAgenceProvider from "../../../../states/signals/parameter_providers/AcBanqueAgence.state";
 import acCategoryDebtorProvider from "../../../../states/signals/parameter_providers/AcCategoryDebtor.state";
 import acCiviliteProvider from "../../../../states/signals/parameter_providers/AcCivility.state";
@@ -10,7 +10,6 @@ import acStatutSalarieProvider from "../../../../states/signals/parameter_provid
 import acTypeDebiteurProvider from "../../../../states/signals/parameter_providers/AcTypeDebiteur.state";
 import acTypeDomicilProvider from "../../../../states/signals/parameter_providers/AcTypeDomicil.state";
 import acTypeEmployeurProvider from "../../../../states/signals/parameter_providers/AcTypeEmployeur.state";
-import acTypePieceProvider from "../../../../states/signals/parameter_providers/AcTypePiece.state";
 import {
   CreanceDataType,
   CreanceFieldType,
@@ -260,10 +259,12 @@ const debiteurTabs: CreanceTabType[] = [
       {
         name: "Sexe",
         key: 'sexe',
+        onInsert:acDebiteurProvider.simpleInsert,
+        selectItems: sexeProvider,
         state: acDebiteurProvider.getState(),
         inputItem: {
           inputType: InputType.text,
-          isEditable: true,
+          isEditable: false,
           placeholder: "sexe",
         },
       },
@@ -280,17 +281,18 @@ const debiteurTabs: CreanceTabType[] = [
         name: "Nat. pièce ident.",
         key: 'nationalitePieceIdentite',
         state: acDebiteurProvider.getState(),
-        inputItem: {
-          inputType:InputType.text,
-          isEditable:false
-        },
         onInsert: acDebiteurProvider.simpleInsert,
-        selectItems: acDebiteurProvider.getSelectItems(acTypePieceProvider),
+        selectItems: naturePieceIdentite,
 
       },
       {
         name: "Situation Matrimonnial",
         key: 'situationMatrimonnial',
+        inputItem:{
+          isEditable:false,
+        },
+        selectItems:statusMatrimonialProvider,
+        onInsert: acDebiteurProvider.simpleInsert,
         state: acDebiteurProvider.getState(),
       },
       {
@@ -306,7 +308,12 @@ const debiteurTabs: CreanceTabType[] = [
       {
         name: "Regime Mariage",
         key: 'regimeMariage',
+        selectItems:regimeMariageProvider,
+        onInsert:acDebiteurProvider.simpleInsert,
         state: acDebiteurProvider.getState(),
+        inputItem:{
+          isEditable:false
+        }
       },
       {
         name: "Date établis.",

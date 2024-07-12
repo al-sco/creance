@@ -469,6 +469,6 @@ const creanceTabs: CreanceTabType[] = [
 export const mainCreanceDatas: CreanceDataType = {
     title: 'Etude créance',
     fields: creanceFields,
-    state:acCreanceProvider,
+    state:acCreanceProvider.getState(),
     tabs: creanceTabs
 }

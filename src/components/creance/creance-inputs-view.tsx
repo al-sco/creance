@@ -12,7 +12,7 @@ type CreanceInputsViewProps = {
     isInputLeftAddOnHidden?: boolean
 }
 
-const DateInputStyled = styled.div`
+const DateInputStyled = styled.div` 
     display: flex;
     justify-content: center;
     padding: 0 10px 0 10px;

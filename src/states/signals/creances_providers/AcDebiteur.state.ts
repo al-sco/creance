@@ -65,19 +65,23 @@ class AcDebiteurStateProvider extends ICrudStateProvider<AcDebiteur> {
 const acDebiteurProvider = new AcDebiteurStateProvider("/debiteur", {});
 export default acDebiteurProvider;
 
-export const sexe: CreanceStaticDataType[] = [
-  {
-    label: "Masculin",
-    value: "M",
-  },
-  {
-    label: "Feminin",
-    value: "F",
-  },
-];
+export const sexeProvider=async():Promise<SelectItem[]>=>{
+  const sexe:Array<CreanceStaticDataType>=[
+    {
+      label: "Masculin",
+      value: "M",
+    },
+    {
+      label: "Feminin",
+      value: "F",
+    },
+  ]
 
-export const regimeMariage: CreanceStaticDataType[] = [
-  {
+  return sexe.map((s)=>({title:s.label,value:s.value}))
+}
+
+export const regimeMariageProvider=async():Promise<SelectItem[]>=>{
+  const regimeMariage:Array<CreanceStaticDataType>=[{
     label: "Communaute de biens",
     value: "communauteDeBiens",
   },
@@ -85,10 +89,13 @@ export const regimeMariage: CreanceStaticDataType[] = [
     label: "Separation de bien",
     value: "separationDeBien",
   },
-];
+]
+  return regimeMariage.map((s)=>({title:s.label,value:s.value}))
+}
 
-export const naturePieceIdentite: CreanceStaticDataType[] = [
-  {
+export const naturePieceIdentite=async():Promise<SelectItem[]>=>{
+
+  const naturePiece:CreanceStaticDataType[]=[{
     label: "CNI",
     value: "cni",
   },
@@ -118,8 +125,14 @@ export const naturePieceIdentite: CreanceStaticDataType[] = [
   }
 ];
 
-export const statusMatrimonial: CreanceStaticDataType[] = [
-  {
+return naturePiece.map((s)=>({title:s.label,value:s.value}))
+}
+
+
+
+
+export const statusMatrimonialProvider=async():Promise<SelectItem[]>=>{
+  const statusMatrimonial:CreanceStaticDataType[]= [{
     label: "Marié(e)",
     value: "marié(e)",
   },
@@ -136,3 +149,5 @@ export const statusMatrimonial: CreanceStaticDataType[] = [
     value: "veuf(ve)",
   },
 ];
+return statusMatrimonial.map((s)=>({title:s.label,value:s.value}))
+}
