@@ -554,22 +554,11 @@ const debiteurTabs: CreanceTabType[] = [
         state: acDebiteurProvider.getState(),
         onInsert: acDebiteurProvider.simpleInsert,
         selectItems: acDebiteurProvider.getSelectItems(acTypeDomicilProvider),
-
         inputItem: {
           inputType: InputType.text,
-          isEditable: true,
+          isEditable: false,
           placeholder: "type",
-        },
-        // selectItems: [
-        //   {
-        //     title: "Option 1",
-        //     value: "Option1",
-        //   },
-        //   {
-        //     title: "Option 2",
-        //     value: "Option2",
-        //   },
-        // ],
+        },        
       },
       {
         name: "N°Compte",
@@ -597,7 +586,7 @@ const debiteurTabs: CreanceTabType[] = [
         state: acDebiteurProvider.getState(),
         inputItem: {
           inputType: InputType.text,
-          isEditable: true,
+          isEditable: false,
           placeholder: "bq. agence",
         },
         onInsert: acDebiteurProvider.simpleInsert,

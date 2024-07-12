@@ -30,7 +30,7 @@ const BaseStyledTable = styled.div`
 const CreanceTabsView = ({ tabs, state }: CreanceTabsViewProps) => {
     useSignals()
     const buildColumn = (e: CreanceColumnType | CreanceFieldType): JSX.Element => {
-        if ((e as CreanceColumnType).key === undefined) {
+        if ((e as CreanceColumnType).label === undefined) {
             return (<CreanceInputsView isInputLeftAddOnHidden={true} repeatGridValue={1} fields={[(e as CreanceFieldType)]} />)
         } else {
             const _ = e as CreanceColumnType
@@ -40,7 +40,7 @@ const CreanceTabsView = ({ tabs, state }: CreanceTabsViewProps) => {
         }
     }
 
-    let filteredTabs=tabs?.filter((tab) =>['D',(state.value as {})['type'] && (state.value as {})['type'].toString().toUpperCase()].includes(tab.key))??[]
+    let filteredTabs = tabs?.filter((tab) => ['D', (state.value as {})['type'] && (state.value as {})['type'].toString().toUpperCase()].includes(tab.key)) ?? []
     return (
         <>
             <GridItem w='100%' h='10'>
