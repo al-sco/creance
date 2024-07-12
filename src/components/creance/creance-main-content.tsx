@@ -26,6 +26,7 @@ const StyledTitle = styled.h1`
 
 
 const CreanceMainContent = ({ data }: CreanceMainContentProps): JSX.Element => {
+
     return (
         <StyledCreanceMainContent>
             <Flex justifyContent='space-between'>
@@ -38,7 +39,7 @@ const CreanceMainContent = ({ data }: CreanceMainContentProps): JSX.Element => {
             <Grid templateColumns='repeat(1, 1fr)' gap={4}>
                 <CreanceInputsView repeatGridValue={2} fields={data.fields} />
                 <Box h="20px" />
-                {data.tabs && <CreanceTabsView tabs={data.tabs} />}
+                {data.tabs && <CreanceTabsView  state={data.state} tabs={data.tabs} />}
             </Grid>
         </StyledCreanceMainContent>
     );

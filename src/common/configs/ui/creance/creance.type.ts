@@ -28,6 +28,7 @@ export type CreanceFieldType = {
 
 export type CreanceDataType = {
   title: string,
+  state:Signal<{}>
   fields: CreanceFieldType[];
   tabs?: CreanceTabType[];
 };
@@ -39,6 +40,7 @@ export type CreanceColumnType = {
 
 export type CreanceTabType = {
   tabName: string;
+  key:string
   rowCount?: number;
   tableHeaders?: string[];
   tableContent?: CreanceColumnType[] | CreanceFieldType[];

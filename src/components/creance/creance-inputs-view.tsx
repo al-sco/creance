@@ -19,9 +19,9 @@ const DateInputStyled = styled.div`
 `
 
 const CreanceInputsView = ({ fields, repeatGridValue, isInputLeftAddOnHidden }: CreanceInputsViewProps) => {
-
-    const switchInputType = ({inputItem,state,key,onInsert}:CreanceFieldType): JSX.Element => {
     useSignals()
+    
+    const switchInputType = ({inputItem,state,key,onInsert}:CreanceFieldType): JSX.Element => {
         switch (inputItem?.inputType) {
             case InputType.number:
                 return (<NumberInput width='100%' >
@@ -32,13 +32,10 @@ const CreanceInputsView = ({ fields, repeatGridValue, isInputLeftAddOnHidden }: 
                     </NumberInputStepper>
                 </NumberInput>)
             case InputType.text:
-                return (<Input borderColor={colors.gray}  onChange={(e)=>{
-                    if(onInsert){
-                        onInsert(key,e.target.value)
-                    }
-                }} isRequired={true} isDisabled={!inputItem.isEditable} value={(state?.value as any)[key]} placeholder={inputItem.placeholder} isReadOnly={!inputItem.isEditable} />)
+                return (<Input borderColor={colors.gray}  onChange={(e)=>onInsert && onInsert(key,e.target.value)} 
+ isRequired={true} isDisabled={!inputItem.isEditable} value={(state?.value as any)[key]} placeholder={inputItem.placeholder} isReadOnly={!inputItem.isEditable} />)
             case InputType.date:
-                return (<DateInputStyled><input aria-label="Date" type="date" /></DateInputStyled>)
+                return (<DateInputStyled><input onChange={(e)=>onInsert && onInsert(key,e.target.value)} aria-label="Date" type="date" /></DateInputStyled>)
             default:
                 return <></>
         }

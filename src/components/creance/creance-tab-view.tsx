@@ -3,9 +3,12 @@ import { CreanceColumnType, CreanceFieldType, CreanceTabType } from "../../commo
 import colors from "../../common/theme/colors/colors"
 import styled from "styled-components"
 import CreanceInputsView from "./creance-inputs-view"
+import { useSignals } from "@preact/signals-react/runtime"
+import { Signal } from "@preact/signals-react"
 
 type CreanceTabsViewProps = {
     tabs?: CreanceTabType[],
+    state: Signal<{}>
 }
 
 const thStyle = {
@@ -24,7 +27,8 @@ const BaseStyledTable = styled.div`
 `;
 
 
-const CreanceTabsView = ({ tabs }: CreanceTabsViewProps) => {
+const CreanceTabsView = ({ tabs, state }: CreanceTabsViewProps) => {
+    useSignals()
     const buildColumn = (e: CreanceColumnType | CreanceFieldType): JSX.Element => {
         if ((e as CreanceColumnType).key === undefined) {
             return (<CreanceInputsView isInputLeftAddOnHidden={true} repeatGridValue={1} fields={[(e as CreanceFieldType)]} />)
@@ -36,16 +40,16 @@ const CreanceTabsView = ({ tabs }: CreanceTabsViewProps) => {
         }
     }
 
+    let filteredTabs=tabs?.filter((tab) =>['D',(state.value as {})['type'] && (state.value as {})['type'].toString().toUpperCase()].includes(tab.key))??[]
     return (
         <>
             <GridItem w='100%' h='10'>
                 {tabs && <Tabs size='md' variant='enclosed'>
                     <TabList>
-                        {tabs.map(({ tabName }: CreanceTabType) => <Tab>{tabName}</Tab>
-                        )}
+                        {filteredTabs.map(({ tabName }: CreanceTabType) => <Tab>{tabName}</Tab>)}
                     </TabList>
                     <TabPanels>
-                        {tabs.map(({ tableContent, fields, tableHeaders, rowCount }: CreanceTabType, index) => <TabPanel>
+                        {filteredTabs.map(({ tableContent, fields, tableHeaders, rowCount }: CreanceTabType) => <TabPanel>
                             <BaseStyledTable>
                                 <TableContainer>
                                     <Table>
@@ -57,7 +61,7 @@ const CreanceTabsView = ({ tabs }: CreanceTabsViewProps) => {
                                             </Tr>
                                         </Thead>
                                         <Tbody>
-                                            {tableContent && <Tr bg={index % 2 == 0 ? undefined : colors.gray}>
+                                            {tableContent && <Tr>
                                                 {
                                                     tableContent.map((column, i) => (
                                                         <Td
