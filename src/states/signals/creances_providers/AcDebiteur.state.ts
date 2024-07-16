@@ -37,7 +37,7 @@ class AcDebiteurStateProvider extends ICrudStateProvider<AcDebiteur> {
       debDateCtl: json["debDateCtl"],
       debEmail: json["debEmail"],
       debFax: json["debFax"],
-      debTelbur: json["debTelbur"],
+      debTelbur: json["debTelbur"], 
       debTeldom: json["debTeldom"],
       garphysCode: json["garphysCode"],
       propCode: json["propCode"],

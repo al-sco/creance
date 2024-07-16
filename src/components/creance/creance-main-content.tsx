@@ -37,7 +37,7 @@ const CreanceMainContent = ({ data }: CreanceMainContentProps): JSX.Element => {
             </Flex>
             <Box h="20px" />
             <Grid templateColumns='repeat(1, 1fr)' gap={4}>
-                <CreanceInputsView repeatGridValue={2} fields={data.fields} />
+                <CreanceInputsView repeatGridValue={data.columCount??2} fields={data.fields} />
                 <Box h="20px" />
                 {data.tabs && <CreanceTabsView  state={data.state} tabs={data.tabs} />}
             </Grid>

@@ -557,7 +557,7 @@ const debiteurTabs: CreanceTabType[] = [
     tableContent: [
       {
         name: "Type",
-        key: 'type',
+        key: 'domiciliationType',
         state: acDebiteurProvider.getState(),
         onInsert: acDebiteurProvider.simpleInsert,
         selectItems: acDebiteurProvider.getSelectItems(acTypeDomicilProvider),

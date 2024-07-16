@@ -6,6 +6,17 @@ import acPeriodiciteProvider from "../../../../states/signals/parameter_provider
 import { CreanceDataType, CreanceFieldType, CreanceTabType, InputType } from "./creance.type";
 
 const creanceFields: CreanceFieldType[] = [
+
+    {
+        name: 'N°Créance',
+     key:'nCreance',   
+     state: acCreanceProvider.getState(),
+     inputItem: {
+            isEditable: false,
+            placeholder: "numéro creance",
+            inputType: InputType.text
+        }
+    },
     {
         name: 'Débiteur',
         key:'debiteur',
@@ -19,6 +30,7 @@ const creanceFields: CreanceFieldType[] = [
 selectItems: acCreanceProvider.getSelectItems(acDebiteurProvider),
 
     },
+
     {
         name: 'Périodicité',
         key:'periodicite',
@@ -64,22 +76,13 @@ selectItems: acCreanceProvider.getSelectItems(acGroupeCreanceProvider),
         
         inputItem: {
             isEditable: false,
-            inputType: InputType.number,
+            inputType: InputType.text,
             placeholder: "grpe creance",
         },
 selectItems: acCreanceProvider.getSelectItems(acObjetCreanceProvider),
 
     },
-    {
-        name: 'Mont à Remb.',
-        key:'montARemb',
-        state: acCreanceProvider.getState(),
-        inputItem: {
-            isEditable: false,
-            inputType: InputType.text,
-            placeholder: "montant a rembourssé",
-        },
-    },
+    
     {
         name: 'Capital Initial',
         key:'capitalInitial',
@@ -102,16 +105,7 @@ selectItems: acCreanceProvider.getSelectItems(acObjetCreanceProvider),
             placeholder: "montant dû",
         },
     },
-    {
-        name: 'N°Créance',
-     key:'nCreance',   
-     state: acCreanceProvider.getState(),
-     inputItem: {
-            isEditable: false,
-            placeholder: "numéro creance",
-            inputType: InputType.text
-        }
-    },
+    
     {
         name: 'Entité',
         key:'entite',
@@ -258,7 +252,7 @@ selectItems: acCreanceProvider.getSelectItems(acObjetCreanceProvider),
         inputItem: {
             inputType: InputType.date
         },
-    },
+    },  
     {
         name: 'Encours',
         key:'enCours',
@@ -392,6 +386,16 @@ selectItems: acCreanceProvider.getSelectItems(acObjetCreanceProvider),
         onInsert: acCreanceProvider.simpleInsert,
         selectItems:classCreanceProvider
     },
+    {
+        name: 'Mont à Remb.',
+        key:'montARemb',
+        state: acCreanceProvider.getState(),
+        inputItem: {
+            isEditable: false,
+            inputType: InputType.text,
+            placeholder: "montant a rembourssé",
+        },
+    },
 ]
 
 const creanceTabs: CreanceTabType[] = [
@@ -455,7 +459,7 @@ const creanceTabs: CreanceTabType[] = [
 
             {
                 label: "Date emission",
-                key: "DateEmission",
+                key: "DateEmission",  
             },
 
         ]
@@ -492,11 +496,14 @@ const creanceTabs: CreanceTabType[] = [
 
         ]
     }
+
+    
 ]
 
 export const mainCreanceDatas: CreanceDataType = {
     title: 'Etude créance',
     fields: creanceFields,
+    columCount:3,
     state:acCreanceProvider.getState(),
     tabs: creanceTabs
 }

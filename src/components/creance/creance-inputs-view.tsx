@@ -41,7 +41,7 @@ const CreanceInputsView = ({ fields, repeatGridValue, isInputLeftAddOnHidden }: 
         }
     }
 
-    return (<Grid templateColumns={`repeat(${repeatGridValue ? repeatGridValue : 3}, 1fr)`} gap={4}>
+    return (<Grid templateColumns={`repeat(${repeatGridValue ??3}, 1fr)`} gap={4}>
         {fields.map((e: CreanceFieldType) => <Flex gap={2}>
             <GridItem w={e.inputItem && e.inputItem.placeholder ? '100%' : ''} h='10'>
                 <InputGroup>
