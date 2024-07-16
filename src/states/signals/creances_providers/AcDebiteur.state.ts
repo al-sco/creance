@@ -16,7 +16,7 @@ class AcDebiteurStateProvider extends ICrudStateProvider<AcDebiteur> {
       categDebCode: state["categorie"],
       debAdrpost: state["adressePostale"],
       debCel: state["cel"],
-      debCodeAnc: state[""],
+      debCodeAnc: state[""], //TODO,
       debCodeCharg: "", //TODO,
       debDateCtl:  state[""], //TODO,
       debEmail: state["email"],
@@ -30,7 +30,6 @@ class AcDebiteurStateProvider extends ICrudStateProvider<AcDebiteur> {
   }
 
   create=async(passedData:{}):Promise<void>=>{
-    console.log(this.mapDataToJson(passedData))
     let {status,data}=await axios.post(getUrl(this.basePath),this.mapDataToJson(passedData),{
         headers:{
             'Content-Type':'application/json',
@@ -81,6 +80,7 @@ class AcDebiteurStateProvider extends ICrudStateProvider<AcDebiteur> {
       }));
     };
   };
+
 }
 
 const acDebiteurProvider = new AcDebiteurStateProvider("/debiteur", {});

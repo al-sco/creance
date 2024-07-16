@@ -26,35 +26,34 @@ const creanceFields: CreanceFieldType[] = [
             isEditable:false,
             placeholder: 'Debiteur'
         },
-        onInsert: acDebiteurProvider.simpleInsert,
-selectItems: acCreanceProvider.getSelectItems(acDebiteurProvider),
+        onInsert: acCreanceProvider.simpleInsert,
+selectItems: acCreanceProvider.getDebiteursItems,
 
     },
 
     {
         name: 'Périodicité',
         key:'periodicite',
+        onInsert:acCreanceProvider.simpleInsert,
+        selectItems: acCreanceProvider.getSelectItems(acPeriodiciteProvider),
         state: acCreanceProvider.getState(),
         inputItem: {
             isEditable: false,
             inputType: InputType.number,
             placeholder: "périodicité",
         },
-selectItems: acCreanceProvider.getSelectItems(acPeriodiciteProvider),
-
     },
     {
         name: 'Grpe Creance',
         key:'groupeCreance',
         state: acCreanceProvider.getState(),
         onInsert: acCreanceProvider.simpleInsert,
+        selectItems: acCreanceProvider.getSelectItems(acGroupeCreanceProvider),
         inputItem: {
             isEditable: false,
             placeholder: "grpe creance",
             inputType: InputType.text
         },
-selectItems: acCreanceProvider.getSelectItems(acGroupeCreanceProvider),
-
     },
     {
         name: 'Objet Créance',
@@ -504,6 +503,7 @@ export const mainCreanceDatas: CreanceDataType = {
     title: 'Etude créance',
     fields: creanceFields,
     columCount:3,
+    create:acCreanceProvider.create,
     state:acCreanceProvider.getState(),
     tabs: creanceTabs
 }

@@ -25,7 +25,7 @@ const CreanceInputsView = ({ fields, repeatGridValue, isInputLeftAddOnHidden }: 
         switch (inputItem?.inputType) {
             case InputType.number:
                 return (<NumberInput width='100%' >
-                    <NumberInputField />
+                    <NumberInputField onChange={(e) => onInsert && onInsert(key, e.target.value)} readOnly={!inputItem.isEditable} value={(state?.value as any)[key] ?? ''}/>
                     <NumberInputStepper>
                         <NumberIncrementStepper />
                         <NumberDecrementStepper />

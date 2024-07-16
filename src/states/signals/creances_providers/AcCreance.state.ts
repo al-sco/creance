@@ -1,6 +1,7 @@
 import { CreanceStaticDataType, SelectItem } from "../../../common/configs/ui/creance/creance.type";
 import { AcDebiteur} from "../../AcData.types";
 import ICrudStateProvider from "../parameter_providers/ICrudStateProvider";
+import acDebiteurProvider from "./AcDebiteur.state";
 
 class AcCreanceStateProvider extends ICrudStateProvider<AcDebiteur> {
   mapDataToJson(data: AcDebiteur): {} {
@@ -45,10 +46,10 @@ class AcCreanceStateProvider extends ICrudStateProvider<AcDebiteur> {
   simpleInsert=(key:string,value:any): void=>{
    let state= this.getState();
    state.value= {...state.value,...{[key]:value}}
+   console.log(state.value)
   }
 
   getSelectItems=(provider: any):()=>Promise<SelectItem[]>=>{
-
       return async()=>{
         let typeDebiteurs=(await provider.find()) as any[];    
         return typeDebiteurs.map((typeDebiteur)=>({
@@ -58,6 +59,13 @@ class AcCreanceStateProvider extends ICrudStateProvider<AcDebiteur> {
       }
   }
 
+  getDebiteursItems = async(): Promise<SelectItem[]> => {
+    let typeDebiteurs = await acDebiteurProvider.find() as AcDebiteur[];
+    return typeDebiteurs.map((typeDebiteur) => ({
+      title: typeDebiteur.debEmail,
+      value: typeDebiteur.debAdrpost,
+    }));
+};
 }
 
 
