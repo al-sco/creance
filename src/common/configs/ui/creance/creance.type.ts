@@ -29,6 +29,7 @@ export type CreanceFieldType = {
 export type CreanceDataType = {
   title: string,
   state:Signal<{}>
+  create: (data: any) => Promise<void>,
   columCount?: number
   fields: CreanceFieldType[];
   tabs?: CreanceTabType[];

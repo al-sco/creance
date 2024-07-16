@@ -20,8 +20,8 @@ const DateInputStyled = styled.div`
 
 const CreanceInputsView = ({ fields, repeatGridValue, isInputLeftAddOnHidden }: CreanceInputsViewProps) => {
     useSignals()
-    
-    const switchInputType = ({inputItem,state,key,onInsert}:CreanceFieldType): JSX.Element => {
+
+    const switchInputType = ({ inputItem, state, key, onInsert }: CreanceFieldType): JSX.Element => {
         switch (inputItem?.inputType) {
             case InputType.number:
                 return (<NumberInput width='100%' >
@@ -32,29 +32,29 @@ const CreanceInputsView = ({ fields, repeatGridValue, isInputLeftAddOnHidden }: 
                     </NumberInputStepper>
                 </NumberInput>)
             case InputType.text:
-                return (<Input borderColor={colors.gray}  onChange={(e)=>onInsert && onInsert(key,e.target.value)} 
- isRequired={true} isDisabled={!inputItem.isEditable} value={(state?.value as any)[key]} placeholder={inputItem.placeholder} isReadOnly={!inputItem.isEditable} />)
+                return (<Input borderColor={colors.gray} onChange={(e) => onInsert && onInsert(key, e.target.value)}
+                    isRequired={true} isDisabled={!inputItem.isEditable} value={(state?.value as any)[key] ?? ''} placeholder={inputItem.placeholder} isReadOnly={!inputItem.isEditable} />)
             case InputType.date:
-                return (<DateInputStyled><input onChange={(e)=>onInsert && onInsert(key,e.target.value)} aria-label="Date" type="date" /></DateInputStyled>)
+                return (<DateInputStyled><input onChange={(e) => onInsert && onInsert(key, e.target.value)} aria-label="Date" type="date" /></DateInputStyled>)
             default:
                 return <></>
         }
     }
 
-    return (<Grid templateColumns={`repeat(${repeatGridValue ??3}, 1fr)`} gap={4}>
+    return (<Grid templateColumns={`repeat(${repeatGridValue ?? 3}, 1fr)`} gap={4}>
         {fields.map((e: CreanceFieldType) => <Flex gap={2}>
             <GridItem w={e.inputItem && e.inputItem.placeholder ? '100%' : ''} h='10'>
                 <InputGroup>
                     {
-                        isInputLeftAddOnHidden && isInputLeftAddOnHidden? <></> : 
-                        <InputLeftAddon>{e.name}</InputLeftAddon>
+                        isInputLeftAddOnHidden && isInputLeftAddOnHidden ? <></> :
+                            <InputLeftAddon>{e.name}</InputLeftAddon>
                     }
                     {e.inputItem && switchInputType(e)}
                 </InputGroup>
             </GridItem>
             {e.selectItems &&
-                <SelectableItem onSelectChanged={(value)=>e.onInsert && e.onInsert(e.key,value)} promisedSelectItems={e.selectItems} />
-                }
+                <SelectableItem onSelectChanged={(value) => e.onInsert && e.onInsert(e.key, value)} promisedSelectItems={e.selectItems} />
+            }
         </Flex>
         )}
     </Grid>);

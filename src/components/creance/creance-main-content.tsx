@@ -1,9 +1,10 @@
 import styled from "styled-components";
 import colors from "../../common/theme/colors/colors";
-import { Box, Button, Flex, Grid } from "@chakra-ui/react";
+import { Box, Button, Flex, Grid, useToast } from "@chakra-ui/react";
 import { CreanceDataType } from "../../common/configs/ui/creance/creance.type";
 import CreanceInputsView from "./creance-inputs-view";
 import CreanceTabsView from "./creance-tab-view";
+import { toastify } from "../../common/helper/toast_helper";
 
 type CreanceMainContentProps = {
     data: CreanceDataType
@@ -26,6 +27,15 @@ const StyledTitle = styled.h1`
 
 
 const CreanceMainContent = ({ data }: CreanceMainContentProps): JSX.Element => {
+    const toast=useToast()
+
+  
+    const submitData=async()=>{ 
+        toastify(toast,data.create({}),{
+            description: 'Donnée enregistrée',
+            title: ''
+          })
+        }
 
     return (
         <StyledCreanceMainContent>
@@ -33,7 +43,7 @@ const CreanceMainContent = ({ data }: CreanceMainContentProps): JSX.Element => {
                 <StyledTitle>
                     {data.title}
                 </StyledTitle>
-                <Button variant='outline' color={colors.green} size='lg' style={{ border: `1px solid ${colors.green}` }}>Ajouter</Button>
+                <Button variant='outline' onClick={submitData} color={colors.green} size='lg' style={{ border: `1px solid ${colors.green}` }}>Ajouter</Button>
             </Flex>
             <Box h="20px" />
             <Grid templateColumns='repeat(1, 1fr)' gap={4}>

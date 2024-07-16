@@ -1,30 +1,49 @@
+import axios from "axios";
 import {
   CreanceStaticDataType,
   SelectItem,
 } from "../../../common/configs/ui/creance/creance.type";
 import { AcDebiteur } from "../../AcData.types";
 import ICrudStateProvider from "../parameter_providers/ICrudStateProvider";
+import { getUrl } from "../../../common/configs/api/api_configs";
 
 type ReturnProvider = () => Promise<SelectItem[]>;
 class AcDebiteurStateProvider extends ICrudStateProvider<AcDebiteur> {
-  mapDataToJson(data: AcDebiteur): {} {
+  mapDataToJson(_: {}): {} {
+    let state=this.getState().value as any
+
     return {
-      categDebCode: data["id"],
-      categDebLib: data["libelle"],
-      debAdrpost: data["debAdrpost"],
-      debCel: data["debCel"],
-      debCodeAnc: data["debCodeAnc"],
-      debCodeCharg: data["debCodeCharg"],
-      debDateCtl: data["debDateCtl"],
-      debEmail: data["debEmail"],
-      debFax: data["debFax"],
-      debTelbur: data["debTelbur"],
-      debTeldom: data["debTeldom"],
-      garphysCode: data["garphysCode"],
-      propCode: data["propCode"],
-      typdebCode: data["typdebCode"],
+      categDebCode: state["categorie"],
+      debAdrpost: state["adressePostale"],
+      debCel: state["cel"],
+      debCodeAnc: state[""],
+      debCodeCharg: "", //TODO,
+      debDateCtl:  state[""], //TODO,
+      debEmail: state["email"],
+      debFax: state["fax"],
+      debTelbur: state["tel"],
+      debTeldom: "", // TODO
+      garphysCode: "", //TODO
+      propCode: "", //TODO,
+      typdebCode:state["type"],
     };
   }
+
+  create=async(passedData:{}):Promise<void>=>{
+    console.log(this.mapDataToJson(passedData))
+    let {status,data}=await axios.post(getUrl(this.basePath),this.mapDataToJson(passedData),{
+        headers:{
+            'Content-Type':'application/json',
+            'ngrok-skip-browser-warning':true
+        }
+    })
+    if(status==201){
+      console.log(data)
+      this.getState().value={}
+    }
+}
+
+
   mapEntitieFrom(json: any): AcDebiteur {
     return {
       id: json["id"],
@@ -45,6 +64,8 @@ class AcDebiteurStateProvider extends ICrudStateProvider<AcDebiteur> {
     };
   }
 
+
+
   simpleInsert = (key: string, value: any): void => {
     let state = this.getState();
     state.value = { ...state.value, ...{ [key]: value } };
@@ -64,6 +85,25 @@ class AcDebiteurStateProvider extends ICrudStateProvider<AcDebiteur> {
 
 const acDebiteurProvider = new AcDebiteurStateProvider("/debiteur", {});
 export default acDebiteurProvider;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 export const sexeProvider=async():Promise<SelectItem[]>=>{
   const sexe:Array<CreanceStaticDataType>=[

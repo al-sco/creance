@@ -614,6 +614,7 @@ const debiteurTabs: CreanceTabType[] = [
 
 export const debiteursDatas: CreanceDataType = {
   title: "Débiteur",
+  create:acDebiteurProvider.create,
   state: acDebiteurProvider.getState(),
   fields: debiteurFields,
   tabs: debiteurTabs,
