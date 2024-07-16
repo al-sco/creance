@@ -19,7 +19,7 @@ const router = createBrowserRouter([
                 children: menuItem.subMenus?.map((sb) => ({
                     path: sb.path,
                     errorElement: <ErrorPage />,
-                    loader: sb.viewName == 'parameter' ? sb.loader : undefined,
+                    loader: sb.loader,
                     element: sb.viewName == 'parameter' ? (<ParameterMainContent subMenu={sb} title={sb.name} colums={sb.columns ?? []} />) : (sb.subMenuType?.render ? sb.subMenuType?.render() : undefined)
                 }))
             }

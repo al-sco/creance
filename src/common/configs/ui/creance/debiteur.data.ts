@@ -22,6 +22,8 @@ const debiteurFields: CreanceFieldType[] = [
     name: "Code",
     key: 'code',
     state: acDebiteurProvider.getState(),
+    onInsert: acDebiteurProvider.simpleInsertWithRefresh,
+    selectItems: acDebiteurProvider.getDebiteursSelectItems,
     inputItem: {
       inputType: InputType.text,
       isEditable: false,
@@ -30,7 +32,7 @@ const debiteurFields: CreanceFieldType[] = [
   },
   {
     name: "Catégorie",
-    key: 'categorie',
+    key: 'categDebCode',
     state: acDebiteurProvider.getState(),
     onInsert: acDebiteurProvider.simpleInsert,
     selectItems: acDebiteurProvider.getSelectItems(acCategoryDebtorProvider),
@@ -54,7 +56,7 @@ const debiteurFields: CreanceFieldType[] = [
 
   {
     name: "Adr. Postale",
-    key: 'adressePostale',
+    key: 'debAdrpost',
     onInsert: acDebiteurProvider.simpleInsert,
     state: acDebiteurProvider.getState(),
     inputItem: {
@@ -65,7 +67,7 @@ const debiteurFields: CreanceFieldType[] = [
   },
   {
     name: "Email",
-    key: 'email',
+    key: 'debEmail',
     onInsert: acDebiteurProvider.simpleInsert,
     state: acDebiteurProvider.getState(),
     inputItem: {
@@ -76,7 +78,7 @@ const debiteurFields: CreanceFieldType[] = [
   },
   {
     name: "Cel",
-    key: 'cel',
+    key: 'debCel',
     onInsert: acDebiteurProvider.simpleInsert,
     state: acDebiteurProvider.getState(),
     inputItem: {
@@ -87,7 +89,7 @@ const debiteurFields: CreanceFieldType[] = [
   },
   {
     name: "Type",
-    key: 'type',
+    key: 'typdebCode',
     state: acDebiteurProvider.getState(),
     onInsert: acDebiteurProvider.simpleInsert,
     selectItems: acDebiteurProvider.getSelectItems(acTypeDebiteurProvider),
@@ -99,7 +101,7 @@ const debiteurFields: CreanceFieldType[] = [
   },
   {
     name: "Fax",
-    key: 'fax',
+    key: 'debFax',
     onInsert: acDebiteurProvider.simpleInsert,
     state: acDebiteurProvider.getState(),
     inputItem: {

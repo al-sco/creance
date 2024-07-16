@@ -53,7 +53,7 @@ const CreanceInputsView = ({ fields, repeatGridValue, isInputLeftAddOnHidden }: 
                 </InputGroup>
             </GridItem>
             {e.selectItems &&
-                <SelectableItem onSelectChanged={(value) => e.onInsert && e.onInsert(e.key, value)} promisedSelectItems={e.selectItems} />
+                <SelectableItem  onSelectChanged={(value) => e.onInsert && e.onInsert(e.key, value)} promisedSelectItems={e.selectItems} />
             }
         </Flex>
         )}

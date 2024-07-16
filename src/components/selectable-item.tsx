@@ -2,6 +2,7 @@ import { useEffect, useState, } from "react"
 import { SelectItem } from "../common/configs/ui/creance/creance.type"
 import { Select, Spinner } from "@chakra-ui/react"
 import { ErrorBoundary } from "react-error-boundary"
+import { useSignals } from "@preact/signals-react/runtime"
 
 
 type SelectItemProps={
@@ -10,6 +11,7 @@ type SelectItemProps={
 }
 
 export const SelectableItem = ({promisedSelectItems,onSelectChanged}:SelectItemProps) => {
+    useSignals()
     let [isLoading, setLoading] = useState(true)
     let [selectItems, setSelectItems] = useState<SelectItem[]>([])
     useEffect(() => {

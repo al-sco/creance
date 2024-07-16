@@ -64,6 +64,7 @@ import CreanceMainContent from "../../../../components/creance/creance-main-cont
 import acEntiteProvider from "../../../../states/signals/parameter_providers/AcEntite.state";
 import { mainCreanceDatas } from "../creance/main-creance.data";
 import { debiteursDatas } from "../creance/debiteur.data";
+import acDebiteurProvider from "../../../../states/signals/creances_providers/AcDebiteur.state";
 
 export type SubMenuType = {
   name: string;
@@ -1931,6 +1932,7 @@ const menuItemsData: Array<MenuItemType> = [
     subMenu: [
       {
         name: "Debiteur",
+        loader:acDebiteurProvider.find,
         render: () => <CreanceMainContent data={debiteursDatas} />
       },
       {
