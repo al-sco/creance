@@ -8,6 +8,7 @@ import { toastify } from "../../common/helper/toast_helper";
 
 type CreanceMainContentProps = {
     data: CreanceDataType
+    hasNoHeader?: boolean
 }
 
 const StyledCreanceMainContent = styled.section`
@@ -26,7 +27,7 @@ const StyledTitle = styled.h1`
 
 
 
-const CreanceMainContent = ({ data }: CreanceMainContentProps): JSX.Element => {
+const CreanceMainContent = ({ data, hasNoHeader }: CreanceMainContentProps): JSX.Element => {
     const toast=useToast()
 
   
@@ -39,12 +40,14 @@ const CreanceMainContent = ({ data }: CreanceMainContentProps): JSX.Element => {
 
     return (
         <StyledCreanceMainContent>
-            <Flex justifyContent='space-between'>
+            {
+                (hasNoHeader && hasNoHeader==true)? <></> : <Flex justifyContent='space-between'>
                 <StyledTitle>
                     {data.title}
                 </StyledTitle>
                 <Button variant='outline' onClick={submitData} color={colors.green} size='lg' style={{ border: `1px solid ${colors.green}` }}>Ajouter</Button>
             </Flex>
+            }
             <Box h="20px" />
             <Grid templateColumns='repeat(1, 1fr)' gap={4}>
                 <CreanceInputsView repeatGridValue={data.columCount??2} fields={data.fields} />
