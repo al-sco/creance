@@ -40,13 +40,19 @@ export type CreanceColumnType = {
   key: string;
 };
 
+export type AdditionnalContentType = {
+  label: string
+  child: JSX.Element
+}
+
 export type CreanceTabType = {
   tabName: string;
   key:string
   rowCount?: number;
   tableHeaders?: string[];
   tableContent?: CreanceColumnType[] | CreanceFieldType[];
-  fields?: CreanceFieldType[]  
+  fields?: CreanceFieldType[];
+  additionnalContent?: AdditionnalContentType
 };
 
 export type CreanceStaticDataType = {
