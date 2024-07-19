@@ -5,10 +5,7 @@ import styled from "styled-components"
 import CreanceInputsView from "./creance-inputs-view"
 import { useSignals } from "@preact/signals-react/runtime"
 import { Signal } from "@preact/signals-react"
-<<<<<<< HEAD
-=======
 import { DrawerComponent } from "../drawler"
->>>>>>> ad51c9fe39c61cbdaddd66d1f078a7230abe731e
 
 type CreanceTabsViewProps = {
     tabs?: CreanceTabType[],
@@ -30,10 +27,17 @@ const BaseStyledTable = styled.div`
     overflow-x: scroll;
 `;
 
+const AdditionnalButtonStyled = styled.div`
+    display: flex;
+    margin: 1rem 0 0 0;
+    justify-content: left;
+    align-items: center;
+`
+
 
 const CreanceTabsView = ({ tabs, state }: CreanceTabsViewProps) => {
     useSignals()
-    
+
     const buildColumn = (e: CreanceColumnType | CreanceFieldType): JSX.Element => {
         if ((e as CreanceColumnType).label === undefined) {
             return (<CreanceInputsView isInputLeftAddOnHidden={true} repeatGridValue={1} fields={[(e as CreanceFieldType)]} />)
@@ -45,9 +49,6 @@ const CreanceTabsView = ({ tabs, state }: CreanceTabsViewProps) => {
         }
     }
 
-<<<<<<< HEAD
-    let filteredTabs = tabs?.filter((tab) => ['D', (state.value as any)['type'] && (state.value as any)['type'].toString().toUpperCase()].includes(tab.key)) ?? []
-=======
 
 
     const buildTableContent = (tabs: CreanceTabType[]): JSX.Element => {
@@ -94,48 +95,14 @@ const CreanceTabsView = ({ tabs, state }: CreanceTabsViewProps) => {
 
 
     // let filteredTabs = tabs?.filter((tab) => ['D', (state.value as any)['type'] && (state.value as any)['type'].toString().toUpperCase()].includes(tab.key)) ?? []
->>>>>>> ad51c9fe39c61cbdaddd66d1f078a7230abe731e
     return (
         <>
             <GridItem w='100%' h='10'>
                 {tabs && <Tabs size='md' variant='enclosed'>
                     <TabList>
-                        {filteredTabs.map(({ tabName }: CreanceTabType) => <Tab>{tabName}</Tab>)}
+                        {tabs.map(({ tabName }: CreanceTabType) => <Tab>{tabName}</Tab>)}
                     </TabList>
-                    <TabPanels>
-                        {filteredTabs.map(({ tableContent, fields, tableHeaders, rowCount }: CreanceTabType) => <TabPanel>
-                            <BaseStyledTable>
-                                <TableContainer>
-                                    <Table>
-                                        <Thead>
-                                            <Tr>
-                                                {tableHeaders && tableHeaders.map((e, index) => (
-                                                    <Th style={thStyle} key={index}>{e}</Th>
-                                                ))}
-                                            </Tr>
-                                        </Thead>
-                                        <Tbody>
-                                            {tableContent && <Tr>
-                                                {
-                                                    tableContent.map((column, i) => (
-                                                        <Td
-                                                            key={i}>
-                                                            {buildColumn(column)}
-                                                        </Td>
-                                                    )
-                                                    )
-                                                }  </Tr>
-                                            }
-                                            {
-                                                fields && <CreanceInputsView repeatGridValue={rowCount} fields={fields} />
-                                            }
-                                        </Tbody>
-                                    </Table>
-                                </TableContainer>
-                            </BaseStyledTable>
-                        </TabPanel>
-                        )}
-                    </TabPanels>
+                    {buildTableContent(tabs)}
                 </Tabs>}
             </GridItem>
         </>

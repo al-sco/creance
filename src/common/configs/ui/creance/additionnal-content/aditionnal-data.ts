@@ -576,16 +576,7 @@ export const detailTerrainAditionnalData: CreanceDataType = {
             placeholder: "numero titre foncier",
           },
         },
-        {
-          name: "Titre Foncier",
-          key: "titreFoncier",
-          state: acDebiteurProvider.getState(),
-          inputItem: {
-            inputType: InputType.text,
-            isEditable: true,
-            placeholder: "numero titre foncier",
-          },
-        },
+     
         {
           name: "Circonscription",
           key: "Circonscription",
