@@ -23,14 +23,14 @@ export const DrawerComponent = ({ child, title }: DrawerProps): JSX.Element => {
                 isOpen={isOpen}
                 placement='right'
                 onClose={onClose}
-                variant='secondary'
+                variant='secondary'                
             // finalFocusRef={btnRef}                
             >
                 <DrawerOverlay />
                 <DrawerContent>
                     <DrawerCloseButton />
                     <DrawerHeader>{title}</DrawerHeader>
-                    <DrawerBody>
+                    <DrawerBody style={{overflow: 'hidden'}}>
                         {child}
                     </DrawerBody>
 
