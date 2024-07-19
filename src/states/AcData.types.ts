@@ -246,6 +246,10 @@ export type AcOrdonnateur=ParameterBaseData & {
   fonctCode:string
 }
 
+export type AcEcheancier= ParameterBaseData &{
+  
+}
+
 export type AcTypeTitreRecette=ParameterBaseData
 
 export type AcCreance=ParameterBaseData &  {

@@ -132,7 +132,7 @@ const debiteurTabs: CreanceTabType[] = [
       },
       {
         name: "Nom",
-        key: 'nom',
+        key: 'debNom',
         state: acDebiteurProvider.getState(),
         onInsert: acDebiteurProvider.simpleInsert,
         inputItem: {
@@ -143,7 +143,7 @@ const debiteurTabs: CreanceTabType[] = [
       },
       {
         name: "Prénom",
-        key: 'prenom',
+        key: 'debPren',
         onInsert: acDebiteurProvider.simpleInsert,
 
         state: acDebiteurProvider.getState(),
@@ -155,7 +155,7 @@ const debiteurTabs: CreanceTabType[] = [
       },
       {
         name: "Date de naissance",
-        key: 'dateNaissance',
+        key: 'debDatnaiss',
         onInsert: acDebiteurProvider.simpleInsert,
         state: acDebiteurProvider.getState(),
         inputItem: {
@@ -164,7 +164,7 @@ const debiteurTabs: CreanceTabType[] = [
       },
       {
         name: "Lieu de Naiss.",
-        key: 'lieuNaissance',
+        key: 'debLieunaiss',
         state: acDebiteurProvider.getState(),
         onInsert: acDebiteurProvider.simpleInsert,
         inputItem: {
@@ -175,7 +175,7 @@ const debiteurTabs: CreanceTabType[] = [
       },
       {
         name: "Quartier",
-        key: 'quartier',
+        key: 'quartCode',
 
         state: acDebiteurProvider.getState(),
         inputItem: {
@@ -188,7 +188,7 @@ const debiteurTabs: CreanceTabType[] = [
       },
       {
         name: "Nationalité",
-        key: 'nationalite',
+        key: 'natCode',
         state: acDebiteurProvider.getState(),
         inputItem: {
           inputType: InputType.text,
@@ -200,7 +200,7 @@ const debiteurTabs: CreanceTabType[] = [
       },
       {
         name: "Fonction",
-        key: 'fonction',
+        key: 'debFonction',
         state: acDebiteurProvider.getState(),
         inputItem: {
           inputType: InputType.text,
@@ -213,7 +213,7 @@ const debiteurTabs: CreanceTabType[] = [
       },
       {
         name: "Profession",
-        key: 'profession',
+        key: 'profesCode',
         state: acDebiteurProvider.getState(),
         inputItem: {
           inputType: InputType.text,
@@ -225,7 +225,7 @@ const debiteurTabs: CreanceTabType[] = [
       },
       {
         name: "Employeur",
-        key: 'employeur',
+        key: 'debEmployeur',
         state: acDebiteurProvider.getState(),
         inputItem: {
           inputType: InputType.text,
@@ -237,7 +237,7 @@ const debiteurTabs: CreanceTabType[] = [
       },
       {
         name: "Statue salarié",
-        key: 'statutSalarie',
+        key: 'statsalCode',
         state: acDebiteurProvider.getState(),
         inputItem: {
           inputType: InputType.text,
@@ -249,7 +249,7 @@ const debiteurTabs: CreanceTabType[] = [
       },
       {
         name: "Matricule",
-        key: 'matricule',
+        key: 'debMatric',
         state: acDebiteurProvider.getState(),
         onInsert: acDebiteurProvider.simpleInsert,
         inputItem: {
@@ -260,7 +260,7 @@ const debiteurTabs: CreanceTabType[] = [
       },
       {
         name: "Sexe",
-        key: 'sexe',
+        key: 'debSexe',
         onInsert:acDebiteurProvider.simpleInsert,
         selectItems: sexeProvider,
         state: acDebiteurProvider.getState(),
@@ -272,7 +272,7 @@ const debiteurTabs: CreanceTabType[] = [
       },
       {
         name: "Date de decès",
-        key: 'dateDeces',
+        key: 'debDatdec',
         onInsert: acDebiteurProvider.simpleInsert,
         state: acDebiteurProvider.getState(),
         inputItem: {
@@ -281,7 +281,7 @@ const debiteurTabs: CreanceTabType[] = [
       },
       {
         name: "Nat. pièce ident.",
-        key: 'nationalitePieceIdentite',
+        key: 'debNatpident',
         state: acDebiteurProvider.getState(),
         onInsert: acDebiteurProvider.simpleInsert,
         selectItems: naturePieceIdentite,
@@ -289,7 +289,7 @@ const debiteurTabs: CreanceTabType[] = [
       },
       {
         name: "Situation Matrimonnial",
-        key: 'situationMatrimonnial',
+        key: 'debSitmatri',
         inputItem:{
           isEditable:false,
         },
@@ -299,7 +299,7 @@ const debiteurTabs: CreanceTabType[] = [
       },
       {
         name: "Nombre d'enfant.",
-        key: 'nombreEnfant',
+        key: 'debNbrEnf',
         onInsert: acDebiteurProvider.simpleInsert,
         state: acDebiteurProvider.getState(),
         inputItem: {
@@ -309,7 +309,7 @@ const debiteurTabs: CreanceTabType[] = [
       },
       {
         name: "Regime Mariage",
-        key: 'regimeMariage',
+        key: 'regmatCode',
         selectItems:regimeMariageProvider,
         onInsert:acDebiteurProvider.simpleInsert,
         state: acDebiteurProvider.getState(),
@@ -319,7 +319,7 @@ const debiteurTabs: CreanceTabType[] = [
       },
       {
         name: "Date établis.",
-        key: 'dateEtablissement',
+        key: 'debDatetpident',
         onInsert: acDebiteurProvider.simpleInsert,
         state: acDebiteurProvider.getState(),
         inputItem: {
@@ -328,7 +328,7 @@ const debiteurTabs: CreanceTabType[] = [
       },
       {
         name: "N° pièce ident.",
-        key: 'nPieceIdentite',
+        key: 'debNumpident',
         onInsert: acDebiteurProvider.simpleInsert,
         state: acDebiteurProvider.getState(),
         inputItem: {
@@ -339,7 +339,7 @@ const debiteurTabs: CreanceTabType[] = [
       },
       {
         name: "Lieu établis",
-        key: 'lieuEtablissement',
+        key: 'debLieuetpident',
         onInsert: acDebiteurProvider.simpleInsert,
         state: acDebiteurProvider.getState(),
         inputItem: {
@@ -350,7 +350,7 @@ const debiteurTabs: CreanceTabType[] = [
       },
       {
         name: "Nom Conjoint",
-        key: 'nomConjoint',
+        key: 'debCjNom',
         onInsert: acDebiteurProvider.simpleInsert,
         state: acDebiteurProvider.getState(),
         inputItem: {
@@ -361,7 +361,7 @@ const debiteurTabs: CreanceTabType[] = [
       },
       {
         name: "Prénoms Conjoint",
-        key: 'prenomConjoint',
+        key: 'debCjPren',
         onInsert: acDebiteurProvider.simpleInsert,
         state: acDebiteurProvider.getState(),
         inputItem: {
@@ -372,7 +372,7 @@ const debiteurTabs: CreanceTabType[] = [
       },
       {
         name: "Addresse Conjoint",
-        key: 'addresseConjoint',
+        key: 'debCjAdr',
         onInsert: acDebiteurProvider.simpleInsert,
         state: acDebiteurProvider.getState(),
         inputItem: {
@@ -383,7 +383,7 @@ const debiteurTabs: CreanceTabType[] = [
       },
       {
         name: "Date naiss. Conjoint",
-        key: 'dateNaissanceConjoint',
+        key: 'debCjDatnaiss',
         onInsert: acDebiteurProvider.simpleInsert,
         state: acDebiteurProvider.getState(),
         inputItem: {
@@ -392,7 +392,7 @@ const debiteurTabs: CreanceTabType[] = [
       },
       {
         name: "Tel Conjoint",
-        key: 'telConjoint',
+        key: 'debCjTel',
         onInsert: acDebiteurProvider.simpleInsert,
         state: acDebiteurProvider.getState(),
         inputItem: {
@@ -403,7 +403,7 @@ const debiteurTabs: CreanceTabType[] = [
       },
       {
         name: "N°pièce ident. Conjoint",
-        key: 'nPieceIdentiteConjoint',
+        key: 'debCjNumpident',
         onInsert: acDebiteurProvider.simpleInsert,
         state: acDebiteurProvider.getState(),
         inputItem: {
@@ -413,7 +413,7 @@ const debiteurTabs: CreanceTabType[] = [
       },
       {
         name: "Nom du père",
-        key: 'nomPere',
+        key: 'debNpere',
         onInsert: acDebiteurProvider.simpleInsert,
         state: acDebiteurProvider.getState(),
         inputItem: {
@@ -424,7 +424,7 @@ const debiteurTabs: CreanceTabType[] = [
       },
       {
         name: "Prénoms du père",
-        key: 'prenomPere',
+        key: 'debPrpere',
         onInsert: acDebiteurProvider.simpleInsert,
         state: acDebiteurProvider.getState(),
         inputItem: {
@@ -435,7 +435,7 @@ const debiteurTabs: CreanceTabType[] = [
       },
       {
         name: "Nom de la mère",
-        key: 'nomMere',
+        key: 'debNmere',
         onInsert: acDebiteurProvider.simpleInsert,
         state: acDebiteurProvider.getState(),
         inputItem: {
@@ -446,7 +446,7 @@ const debiteurTabs: CreanceTabType[] = [
       },
       {
         name: "Prénoms de la mère",
-        key: 'prenomMere',
+        key: 'debPrmere',
         onInsert: acDebiteurProvider.simpleInsert,
         state: acDebiteurProvider.getState(),
         inputItem: {
@@ -457,7 +457,7 @@ const debiteurTabs: CreanceTabType[] = [
       },
       {
         name: "Rue",
-        key: 'rue',
+        key: 'debRue',
         onInsert: acDebiteurProvider.simpleInsert,
         state: acDebiteurProvider.getState(),
         inputItem: {
@@ -470,12 +470,12 @@ const debiteurTabs: CreanceTabType[] = [
   },
   {
     tabName: "Moral",
-    key: 'M',
+    key: 'acDebiteur',
     rowCount: 1,
     fields: [
       {
         name: "Registre de commerce",
-        key: 'registreCommerce',
+        key: 'debRegistcom',
         onInsert: acDebiteurProvider.simpleInsert,
         state: acDebiteurProvider.getState(),
         inputItem: {
@@ -486,7 +486,7 @@ const debiteurTabs: CreanceTabType[] = [
       },
       {
         name: "Raison social",
-        key: 'raisonSocial',
+        key: 'debRaisSociale',
         onInsert: acDebiteurProvider.simpleInsert,
         state: acDebiteurProvider.getState(),
         inputItem: {
@@ -497,7 +497,7 @@ const debiteurTabs: CreanceTabType[] = [
       },
       {
         name: "Capital social",
-        key: 'capitalSocial',
+        key: 'debCapitsocial',
         onInsert: acDebiteurProvider.simpleInsert,
         state: acDebiteurProvider.getState(),
         inputItem: {
@@ -508,7 +508,7 @@ const debiteurTabs: CreanceTabType[] = [
       },
       {
         name: "Forme Juridique",
-        key: 'formeJuridique',
+        key: 'debFormJurid',
         onInsert: acDebiteurProvider.simpleInsert,
         state: acDebiteurProvider.getState(),
         inputItem: {
@@ -519,7 +519,7 @@ const debiteurTabs: CreanceTabType[] = [
       },
       {
         name: "Domaine d'activité",
-        key: 'domaineActivite',
+        key: 'debDomActiv',
         state: acDebiteurProvider.getState(),
         onInsert: acDebiteurProvider.simpleInsert,
         inputItem: {
@@ -530,7 +530,7 @@ const debiteurTabs: CreanceTabType[] = [
       },
       {
         name: "Siège social",
-        key: 'siegeSocial',
+        key: 'debSiegSocial',
         state: acDebiteurProvider.getState(),
         onInsert: acDebiteurProvider.simpleInsert,
         inputItem: {
@@ -541,7 +541,7 @@ const debiteurTabs: CreanceTabType[] = [
       },
       {
         name: "Nom Gérant",
-        key: 'nomGerant',
+        key: 'debNomGerant',
         onInsert: acDebiteurProvider.simpleInsert,
         state: acDebiteurProvider.getState(),
         inputItem: {
@@ -554,12 +554,12 @@ const debiteurTabs: CreanceTabType[] = [
   },
   {
     tabName: "Domiciliation",
-    key: 'D',
+    key: 'domCode',
     tableHeaders: ["Type", "N°Compte", "Libellé", "Banque agence", "Banque"],
     tableContent: [
       {
         name: "Type",
-        key: 'domiciliationType',
+        key: 'typdomCode',
         state: acDebiteurProvider.getState(),
         onInsert: acDebiteurProvider.simpleInsert,
         selectItems: acDebiteurProvider.getSelectItems(acTypeDomicilProvider),
@@ -571,7 +571,7 @@ const debiteurTabs: CreanceTabType[] = [
       },
       {
         name: "N°Compte",
-        key: 'nCompte',
+        key: 'nCompte?',
         state: acDebiteurProvider.getState(),
         inputItem: {
           inputType: InputType.number,
@@ -581,7 +581,7 @@ const debiteurTabs: CreanceTabType[] = [
       },
       {
         name: "Libellé",
-        key: 'libelle',
+        key: 'domLib',
         state: acDebiteurProvider.getState(),
         inputItem: {
           inputType: InputType.text,
@@ -591,7 +591,7 @@ const debiteurTabs: CreanceTabType[] = [
       },
       {
         name: "Banque Agence",
-        key: 'banqueAgence',
+        key: 'bqagCode',
         state: acDebiteurProvider.getState(),
         inputItem: {
           inputType: InputType.text,
@@ -603,7 +603,7 @@ const debiteurTabs: CreanceTabType[] = [
       },
       {
         name: "Banque",
-        key: 'banque',
+        key: 'banque?',
         state: acDebiteurProvider.getState(),
         inputItem: {
           inputType: InputType.text,
