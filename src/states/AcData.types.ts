@@ -252,6 +252,10 @@ export type AcEcheancier= ParameterBaseData &{
 
 export type AcTypeTitreRecette=ParameterBaseData
 
+export type AcLogement = ParameterBaseData &{
+  
+}
+
 export type AcCreance=ParameterBaseData &  {
   objCreanCode:string
   creanCodeGlob:string
