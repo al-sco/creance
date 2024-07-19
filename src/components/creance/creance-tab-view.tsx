@@ -1,11 +1,10 @@
-import { Button, GridItem, Input, Tab, TabList, TabPanel, TabPanels, Table, TableContainer, Tabs, Tbody, Td, Th, Thead, Tr, useDisclosure } from "@chakra-ui/react"
-import { AdditionnalContentType, CreanceColumnType, CreanceFieldType, CreanceTabType } from "../../common/configs/ui/creance/creance.type"
+import { GridItem, Input, Tab, TabList, TabPanel, TabPanels, Table, TableContainer, Tabs, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react"
+import { CreanceColumnType, CreanceFieldType, CreanceTabType } from "../../common/configs/ui/creance/creance.type"
 import colors from "../../common/theme/colors/colors"
 import styled from "styled-components"
 import CreanceInputsView from "./creance-inputs-view"
 import { useSignals } from "@preact/signals-react/runtime"
 import { Signal } from "@preact/signals-react"
-import React from "react"
 import { DrawerComponent } from "../drawler"
 
 type CreanceTabsViewProps = {
@@ -54,7 +53,7 @@ const CreanceTabsView = ({ tabs, state }: CreanceTabsViewProps) => {
 
     const buildTableContent = (tabs: CreanceTabType[]): JSX.Element => {
         return <TabPanels>
-            {tabs.map(({ tableContent, fields, tableHeaders, rowCount, additionnalContent }: CreanceTabType) => <TabPanel>
+            {tabs.map(({ tableContent, fields, tableHeaders, rowCount, additionnalContents }: CreanceTabType) => <TabPanel>
                 <BaseStyledTable>
                     <TableContainer>
                         <Table>
@@ -85,7 +84,9 @@ const CreanceTabsView = ({ tabs, state }: CreanceTabsViewProps) => {
                     </TableContainer>
                 </BaseStyledTable>
                 <AdditionnalButtonStyled>
-                    {additionnalContent && <DrawerComponent child={additionnalContent.child} title={additionnalContent.label} />}
+                    {additionnalContents && additionnalContents.map((e) => {
+                        return <DrawerComponent child={e.child} title={e.label} />
+                    })}
                 </AdditionnalButtonStyled>
             </TabPanel>
             )}

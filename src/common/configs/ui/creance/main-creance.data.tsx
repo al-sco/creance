@@ -3,13 +3,13 @@ import acCreanceProvider, {
   classCreanceProvider,
 } from "../../../../states/signals/creances_providers/AcCreance.state";
 import acDebiteurProvider from "../../../../states/signals/creances_providers/AcDebiteur.state";
-import acBanqueAgenceProvider from "../../../../states/signals/parameter_providers/AcBanqueAgence.state";
 import acGroupeCreanceProvider from "../../../../states/signals/parameter_providers/AcGroupeCreance.state";
 import acObjetCreanceProvider from "../../../../states/signals/parameter_providers/AcObjetCreances.state";
 import acPeriodiciteProvider from "../../../../states/signals/parameter_providers/AcPeriodicite.state";
 import acTypeDomicilProvider from "../../../../states/signals/parameter_providers/AcTypeDomicil.state";
-import { detailGarantisAditionnalData } from "./additionnal-content/aditionnal-data";
-import { DetailsGarantisAdditionnalContent } from "./additionnal-content/details-garantie-additionnal-content";
+import { detailGarantisAditionnalData, detailLogementAditionnalData, detailTerrainAditionnalData } from "./additionnal-content/aditionnal-data";
+import { GarantiesPersonnellesAdditionnalContent } from "./additionnal-content/garanties-personnelles-additionnal-content";
+import { GarantiesReellesAdditionnalContentContent } from "./additionnal-content/garanties-reelles-adtitionnal-content";
 import {
   CreanceDataType,
   CreanceFieldType,
@@ -471,10 +471,12 @@ const creanceTabs: CreanceTabType[] = [
   },
   {
     tabName: "Garantie Personnelle",
-    additionnalContent: {
-      label: 'Detail Garanties Pers.',
-      child: <DetailsGarantisAdditionnalContent data={detailGarantisAditionnalData} />,
-    },    
+    additionnalContents: [
+      {
+        label: 'Detail Garanties Pers.',
+        child: <GarantiesPersonnellesAdditionnalContent data={detailGarantisAditionnalData} />,
+      }
+    ],
     key: "garantiePersonnelle",
     tableHeaders: [
       "Type",
@@ -564,11 +566,21 @@ const creanceTabs: CreanceTabType[] = [
           isEditable: true,
         },
       },
-    ],    
+    ],
   },
   {
-    tabName: "Garanties Réelles",    
+    tabName: "Garanties Réelles",
     key: "garaniesReelles",
+    additionnalContents: [
+      {
+        label: 'Details Logement',
+        child: <GarantiesReellesAdditionnalContentContent data={detailLogementAditionnalData} />,
+      },
+      {
+        label: 'Details Terrain',
+        child: <GarantiesReellesAdditionnalContentContent data={detailTerrainAditionnalData} />,
+      }
+    ],
     tableHeaders: [
       "Type",
       "N°Garantie",
@@ -641,8 +653,8 @@ const creanceTabs: CreanceTabType[] = [
         key: "code",
         state: acDebiteurProvider.getState(),
         inputItem: {
-            inputType: InputType.text,
-            isEditable: false
+          inputType: InputType.text,
+          isEditable: false
         }
       },
     ],
