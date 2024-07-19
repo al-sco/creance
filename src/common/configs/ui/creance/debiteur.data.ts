@@ -44,7 +44,7 @@ const debiteurFields: CreanceFieldType[] = [
   },
   {
     name: "Tèl",
-    key: 'tel',
+    key: 'debTeldom',
     onInsert: acDebiteurProvider.simpleInsert,
     state: acDebiteurProvider.getState(),
     inputItem: {
