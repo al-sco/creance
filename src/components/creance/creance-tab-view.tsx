@@ -5,6 +5,10 @@ import styled from "styled-components"
 import CreanceInputsView from "./creance-inputs-view"
 import { useSignals } from "@preact/signals-react/runtime"
 import { Signal } from "@preact/signals-react"
+<<<<<<< HEAD
+=======
+import { DrawerComponent } from "../drawler"
+>>>>>>> ad51c9fe39c61cbdaddd66d1f078a7230abe731e
 
 type CreanceTabsViewProps = {
     tabs?: CreanceTabType[],
@@ -41,7 +45,56 @@ const CreanceTabsView = ({ tabs, state }: CreanceTabsViewProps) => {
         }
     }
 
+<<<<<<< HEAD
     let filteredTabs = tabs?.filter((tab) => ['D', (state.value as any)['type'] && (state.value as any)['type'].toString().toUpperCase()].includes(tab.key)) ?? []
+=======
+
+
+    const buildTableContent = (tabs: CreanceTabType[]): JSX.Element => {
+        return <TabPanels>
+            {tabs.map(({ tableContent, fields, tableHeaders, rowCount, additionnalContents }: CreanceTabType) => <TabPanel>
+                <BaseStyledTable>
+                    <TableContainer>
+                        <Table>
+                            <Thead>
+                                <Tr>
+                                    {tableHeaders && tableHeaders.map((e, index) => (
+                                        <Th style={thStyle} key={index}>{e}</Th>
+                                    ))}
+                                </Tr>
+                            </Thead>
+                            <Tbody>
+                                {tableContent && <Tr>
+                                    {
+                                        tableContent.map((column, i) => (
+                                            <Td
+                                                key={i}>
+                                                {buildColumn(column)}
+                                            </Td>
+                                        )
+                                        )
+                                    }  </Tr>
+                                }
+                                {
+                                    fields && <CreanceInputsView repeatGridValue={rowCount} fields={fields} />
+                                }
+                            </Tbody>
+                        </Table>
+                    </TableContainer>
+                </BaseStyledTable>
+                <AdditionnalButtonStyled>
+                    {additionnalContents && additionnalContents.map((e) => {
+                        return <DrawerComponent child={e.child} title={e.label} />
+                    })}
+                </AdditionnalButtonStyled>
+            </TabPanel>
+            )}
+        </TabPanels>
+    }
+
+
+    // let filteredTabs = tabs?.filter((tab) => ['D', (state.value as any)['type'] && (state.value as any)['type'].toString().toUpperCase()].includes(tab.key)) ?? []
+>>>>>>> ad51c9fe39c61cbdaddd66d1f078a7230abe731e
     return (
         <>
             <GridItem w='100%' h='10'>

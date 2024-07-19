@@ -52,7 +52,7 @@ export type CreanceTabType = {
   tableHeaders?: string[];
   tableContent?: CreanceColumnType[] | CreanceFieldType[];
   fields?: CreanceFieldType[];
-  additionnalContent?: AdditionnalContentType
+  additionnalContents?: AdditionnalContentType[]
 };
 
 export type CreanceStaticDataType = {

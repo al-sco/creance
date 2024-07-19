@@ -2,30 +2,11 @@ import { Button, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerFoo
 import colors from "../common/theme/colors/colors";
 import styled from "styled-components";
 
-const theme = extendTheme({
-    components: {
-        Drawer: {
-            parts: ['dialog', 'header', 'body'],
-            variants: {
-                primary: {
-                    secondary: {
-                        dialog: {
-                            maxW: "200px",
-                        }
-                    }
-                },
-            },
-        }
-    }
-});
-export default theme;
 
 type DrawerProps = {
     title: string
     child: JSX.Element
 }
-
-
 
 export const DrawerComponent = ({ child, title }: DrawerProps): JSX.Element => {
     // const btnRef = React.useRef();        
@@ -33,7 +14,7 @@ export const DrawerComponent = ({ child, title }: DrawerProps): JSX.Element => {
 
     return (
         <>
-            <Button colorScheme='undefined' style={{ color: colors.white, backgroundColor: colors.bleu }} onClick={onOpen}>
+            <Button colorScheme='undefined' style={{ color: colors.white, backgroundColor: colors.bleu, margin: '0 0.5rem 0 0.5rem' }} onClick={onOpen}>
                 {title}
             </Button>
             
@@ -42,14 +23,14 @@ export const DrawerComponent = ({ child, title }: DrawerProps): JSX.Element => {
                 isOpen={isOpen}
                 placement='right'
                 onClose={onClose}
-                variant='secondary'
+                variant='secondary'                
             // finalFocusRef={btnRef}                
             >
                 <DrawerOverlay />
                 <DrawerContent>
                     <DrawerCloseButton />
                     <DrawerHeader>{title}</DrawerHeader>
-                    <DrawerBody>
+                    <DrawerBody style={{overflow: 'hidden'}}>
                         {child}
                     </DrawerBody>
 
