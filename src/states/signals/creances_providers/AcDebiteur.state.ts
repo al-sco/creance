@@ -10,10 +10,10 @@ import { signal } from "@preact/signals-react";
 
 type ReturnProvider = () => Promise<SelectItem[]>;
 export class AcDebiteurStateProvider extends ICrudStateProvider<AcDebiteur> {
-  static  domiciliationTypeCode='D';
-  static  physiqueTypeCode='P';
-  static  moralTypeCode='M';
-  static  debiteurTypeKeyCode='typdebCode';
+  static domiciliationTypeCode = 'D';
+  static physiqueTypeCode = 'P';
+  static moralTypeCode = 'M';
+  static debiteurTypeKeyCode = 'typdebCode';
 
   debiteursListState = signal<AcDebiteur[]>([]);
 
@@ -38,9 +38,9 @@ export class AcDebiteurStateProvider extends ICrudStateProvider<AcDebiteur> {
     };
   }
 
-  create = async (passedData: {}): Promise<void> => {
+  create = async (passedData: {}): Promise<AcDebiteur|null> => {
     console.log(this.mapDataToJson(passedData));
-    let { status } = await axios.post(
+    let { status,data } = await axios.post(
       getUrl(this.basePath),
       this.mapDataToJson(passedData),
       {
@@ -53,7 +53,10 @@ export class AcDebiteurStateProvider extends ICrudStateProvider<AcDebiteur> {
     if (status == 201) {
       await this.find()
       this.getState().value = {};
+     return this.mapEntitieFrom(data) 
     }
+
+    return null
   };
 
   find = async (): Promise<AcDebiteur[]> => {
@@ -91,20 +94,18 @@ export class AcDebiteurStateProvider extends ICrudStateProvider<AcDebiteur> {
   simpleInsert = (key: string, value: any): void => {
     let state = this.getState();
     state.value = { ...state.value, ...{ [key]: value } };
-    console.log(state.value);
   };
 
   simpleInsertWithRefresh = (key: string, value: any): void => {
     let state = this.getState();
-    let existingValueIndex = this.debiteursListState.value.findIndex((acDebiteur)=>acDebiteur.code==value);
+    let existingValueIndex = this.debiteursListState.value.findIndex((acDebiteur) => acDebiteur.code == value);
 
-    if(existingValueIndex!=-1){
-      let existingDebiteur=this.debiteursListState.value[existingValueIndex]
-      state.value = { ...{ [key]: value }, ...existingDebiteur};
-      console.log((state.value as any)[key])
+    if (existingValueIndex != -1) {
+      let existingDebiteur = this.debiteursListState.value[existingValueIndex]
+      state.value = { ...{ [key]: value }, ...existingDebiteur };
       return;
     }
-    state.value = { ...{ [key]: value }};
+    state.value = { ...{ [key]: value } };
   };
 
   getSelectItems = (provider: any): ReturnProvider => {
@@ -117,14 +118,28 @@ export class AcDebiteurStateProvider extends ICrudStateProvider<AcDebiteur> {
     };
   };
 
-  getDebiteursSelectItems =async(): Promise<SelectItem[]> => {
-      let typeDebiteurs = (await acDebiteurProvider.find());
-      return typeDebiteurs.map((typeDebiteur) => ({
-        title: typeDebiteur.code,//TODO add debiteur name
-        value: typeDebiteur.code,
-      }));
-    };
+  getDebiteursSelectItems = async (): Promise<SelectItem[]> => {
+    let typeDebiteurs = (await acDebiteurProvider.find());
+    return typeDebiteurs.map((typeDebiteur) => ({
+      title: typeDebiteur.code,//TODO add debiteur name
+      value: typeDebiteur.code,
+    }));
+  };
+
+
+  createDebiteurFully = (providers: ICrudStateProvider<any>[]) => {
+    return async (_:any): Promise<void> => {
+      let debiteur= await this.create({})
+      console.log("Once saved")
+      console.log(debiteur)
+      if(debiteur){
+        for (let provider of providers) {
+          await provider.create({debCode:debiteur.id})
+        }
+      }
+    }
   }
+}
 
 const acDebiteurProvider = new AcDebiteurStateProvider("/debiteur", {});
 export default acDebiteurProvider;

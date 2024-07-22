@@ -1,4 +1,5 @@
 import acDebiteurProvider, { AcDebiteurStateProvider, naturePieceIdentite, regimeMariageProvider, sexeProvider, statusMatrimonialProvider } from "../../../../states/signals/creances_providers/AcDebiteur.state";
+import acDebiteurMoralProvider from "../../../../states/signals/creances_providers/AcDebiteurMoral.state";
 import acBanqueAgenceProvider from "../../../../states/signals/parameter_providers/AcBanqueAgence.state";
 import acCategoryDebtorProvider from "../../../../states/signals/parameter_providers/AcCategoryDebtor.state";
 import acCiviliteProvider from "../../../../states/signals/parameter_providers/AcCivility.state";
@@ -476,8 +477,8 @@ const debiteurTabs: CreanceTabType[] = [
       {
         name: "Registre de commerce",
         key: 'debRegistcom',
-        onInsert: acDebiteurProvider.simpleInsert,
-        state: acDebiteurProvider.getState(),
+        onInsert: acDebiteurMoralProvider.simpleInsert,
+        state: acDebiteurMoralProvider.getState(),
         inputItem: {
           inputType: InputType.text,
           isEditable: true,
@@ -487,8 +488,8 @@ const debiteurTabs: CreanceTabType[] = [
       {
         name: "Raison social",
         key: 'debRaisSociale',
-        onInsert: acDebiteurProvider.simpleInsert,
-        state: acDebiteurProvider.getState(),
+        onInsert: acDebiteurMoralProvider.simpleInsert,
+        state: acDebiteurMoralProvider.getState(),
         inputItem: {
           inputType: InputType.text,
           placeholder: "raison social",
@@ -498,8 +499,8 @@ const debiteurTabs: CreanceTabType[] = [
       {
         name: "Capital social",
         key: 'debCapitsocial',
-        onInsert: acDebiteurProvider.simpleInsert,
-        state: acDebiteurProvider.getState(),
+        onInsert: acDebiteurMoralProvider.simpleInsert,
+        state: acDebiteurMoralProvider.getState(),
         inputItem: {
           inputType: InputType.text,
           isEditable: true,
@@ -509,8 +510,8 @@ const debiteurTabs: CreanceTabType[] = [
       {
         name: "Forme Juridique",
         key: 'debFormJurid',
-        onInsert: acDebiteurProvider.simpleInsert,
-        state: acDebiteurProvider.getState(),
+        onInsert: acDebiteurMoralProvider.simpleInsert,
+        state: acDebiteurMoralProvider.getState(),
         inputItem: {
           inputType: InputType.text,
           isEditable: true,
@@ -520,8 +521,8 @@ const debiteurTabs: CreanceTabType[] = [
       {
         name: "Domaine d'activité",
         key: 'debDomActiv',
-        state: acDebiteurProvider.getState(),
-        onInsert: acDebiteurProvider.simpleInsert,
+        state: acDebiteurMoralProvider.getState(),
+        onInsert: acDebiteurMoralProvider.simpleInsert,
         inputItem: {
           inputType: InputType.text,
           isEditable: true,
@@ -531,8 +532,8 @@ const debiteurTabs: CreanceTabType[] = [
       {
         name: "Siège social",
         key: 'debSiegSocial',
-        state: acDebiteurProvider.getState(),
-        onInsert: acDebiteurProvider.simpleInsert,
+        state: acDebiteurMoralProvider.getState(),
+        onInsert: acDebiteurMoralProvider.simpleInsert,
         inputItem: {
           inputType: InputType.text,
           isEditable: true,
@@ -542,8 +543,8 @@ const debiteurTabs: CreanceTabType[] = [
       {
         name: "Nom Gérant",
         key: 'debNomGerant',
-        onInsert: acDebiteurProvider.simpleInsert,
-        state: acDebiteurProvider.getState(),
+        onInsert: acDebiteurMoralProvider.simpleInsert,
+        state: acDebiteurMoralProvider.getState(),
         inputItem: {
           inputType: InputType.text,
           isEditable: true,
@@ -616,7 +617,7 @@ const debiteurTabs: CreanceTabType[] = [
 
 export const debiteursDatas: CreanceDataType = {
   title: "Débiteur",
-  create:acDebiteurProvider.create,
+  create:acDebiteurProvider.createDebiteurFully([acDebiteurMoralProvider]),
   state: acDebiteurProvider.getState(),
   fields: debiteurFields,
   tabs: debiteurTabs,

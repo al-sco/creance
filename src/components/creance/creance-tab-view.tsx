@@ -94,11 +94,6 @@ const CreanceTabsView = ({ tabs, state }: CreanceTabsViewProps) => {
     }
 
 
-    console.log(`tabs: ${tabs?.length}`)
-    for (let i of tabs!){
-        console.log(i.key)
-    }
-
     let filteredTabs = tabs?.filter((tab) => ['D', ((state.value as any)[AcDebiteurStateProvider.debiteurTypeKeyCode] && (state.value as any)[AcDebiteurStateProvider.debiteurTypeKeyCode]?.toString().toUpperCase())].includes(tab.key)) ?? []
     return (
         <>

@@ -1,26 +1,29 @@
-import { AcCreance, AcDebiteurMoral, AcDebiteurPhysique } from "../../AcData.types";
+import { AcDebiteurMoral } from "../../AcData.types";
 import ICrudStateProvider from "../parameter_providers/ICrudStateProvider";
 
 
 
 
-class AcCreanceStateProvider extends ICrudStateProvider<AcDebiteurMoral> {
-    mapDataToJson(data: AcDebiteurMoral): {} {
+export class AcDebiteurMoralStateProvider extends ICrudStateProvider<AcDebiteurMoral> {
+    mapDataToJson(parentProviderData: AcDebiteurMoral): {} {
+      console.log(parentProviderData)
+    let state = this.getState().value as any;
+
         return {
-          id: data["id"],
-          acDebiteur: data["debiteur"],
-          debRaisSociale: data["debRaisSociale"],
-          debRegistcom: data["debRegistcom"],
-          debDatcreat: data["debDatcreat"],
-          debCapitsocial: data["debCapitsocial"],
-          debFormJurid: data["debFormJurid"],
-          debDomActiv: data["debDomActiv"],
-          debSiegSocial: data["debSiegSocial"],
-          debNomGerant: data["debNomGerant"],
-          ancCiv: data["ancCiv"],
-          debCodeCharg: data["debCodeCharg"],
-          debCpteContrib: data["debCpteContrib"],
-          civGerant: data["civGerant"]
+          id: state['id'],
+          debCode:  parentProviderData.debCode,
+          debRaisSociale: state["debRaisSociale"],
+          debRegistcom: state["debRegistcom"],
+          debDatcreat: state["debDatcreat"],
+          debCapitsocial: state["debCapitsocial"],
+          debFormJurid: state["debFormJurid"],
+          debDomActiv: state["debDomActiv"],
+          debSiegSocial: state["debSiegSocial"],
+          debNomGerant: state["debNomGerant"],
+          ancCiv: state["ancCiv"],
+          debCodeCharg: state["debCodeCharg"],
+          debCpteContrib: state["debCpteContrib"],
+          civGerant: state["civGerant"]
         };
       }
       
@@ -28,8 +31,8 @@ class AcCreanceStateProvider extends ICrudStateProvider<AcDebiteurMoral> {
     
       mapEntitieFrom(json: any): AcDebiteurMoral {
         return { 
-          id: json["id"],
-          debiteur: json["acDebiteur"],
+          id:json['debCode'],
+          debCode: json["debCode"],
           debRaisSociale: json["debRaisSociale"],
           debRegistcom: json["debRegistcom"],
           debDatcreat: json["debDatcreat"],
@@ -43,6 +46,16 @@ class AcCreanceStateProvider extends ICrudStateProvider<AcDebiteurMoral> {
           debCpteContrib: json["debCpteContrib"],
           civGerant: json["civGerant"]
         };
-      }
-      
+      } 
+
+
+    simpleInsert = (key: string, value: any): void => {
+        let state = this.getState();
+        state.value = { ...state.value, ...{ [key]: value } };
+        console.log(state.value)
+      };
+    
 }      
+
+const acDebiteurMoralProvider = new AcDebiteurMoralStateProvider("/debiteur-moral", {});
+export default acDebiteurMoralProvider;

@@ -1,4 +1,4 @@
-import { AcCreance, AcDebiteurPhysique } from "../../AcData.types";
+import { AcDebiteurPhysique } from "../../AcData.types";
 import ICrudStateProvider from "../parameter_providers/ICrudStateProvider";
 
 
@@ -8,7 +8,6 @@ class AcCreanceStateProvider extends ICrudStateProvider<AcDebiteurPhysique> {
     mapDataToJson(data: AcDebiteurPhysique): {} {
         return {
           id: data["id"],
-          acDebiteur: data["acDebiteur"],
           quartCode: data["quartCode"],
           profesCode: data["profesCode"],
           natCode: data["natCode"],
@@ -59,7 +58,7 @@ class AcCreanceStateProvider extends ICrudStateProvider<AcDebiteurPhysique> {
       mapEntitieFrom(json: any): AcDebiteurPhysique {
         return {
           id: json["id"],
-          acDebiteur: json["acDebiteur"],
+          debiteurCode:json["debCode"],
           quartCode: json["quartCode"],
           profesCode: json["profesCode"],
           natCode: json["natCode"],

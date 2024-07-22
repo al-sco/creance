@@ -76,7 +76,7 @@ export type SubMenuType = {
   headers?: ParameterColumnType[]
   handleDelete?: (data: any) => Promise<void>,
   handleEdit?: (data: any) => Promise<void>,
-  create?: (data: any) => Promise<void>,
+  create?: (data: any) => Promise<any>,
   additionalHeaderRender?: () => JSX.Element,
   render?: () => JSX.Element,
 };

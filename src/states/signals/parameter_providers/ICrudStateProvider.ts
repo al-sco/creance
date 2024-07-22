@@ -74,7 +74,7 @@ export default abstract class ICrudStateProvider<T extends Identifiable> {
 
     // create a new entry 
     
-    create=async(data:T):Promise<void>=>{
+    create=async(data:T):Promise<T|null>=>{
         // console.log(this.create)
         console.log(this.mapDataToJson(data))
         let {status}=await axios.post(getUrl(this.basePath),this.mapDataToJson(data),{
@@ -86,6 +86,8 @@ export default abstract class ICrudStateProvider<T extends Identifiable> {
         if(status==201){
            await this.find()
         }
+
+        return null
     }
     
     // map Entitie from Json

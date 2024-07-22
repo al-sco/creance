@@ -167,8 +167,8 @@ export type AcDebiteur=ParameterBaseData &  {
   debTeldom:string
 }
 
-export type AcDebiteurMoral=ParameterBaseData &  {
-  debiteur:AcDebiteur
+export type AcDebiteurMoral=Omit<ParameterBaseData,'code'|'libelle'>  &  {
+  debCode:number
   debRaisSociale:string
   debRegistcom:string
   debDatcreat:Date
@@ -181,10 +181,10 @@ export type AcDebiteurMoral=ParameterBaseData &  {
   debCodeCharg:string
   debCpteContrib:string
   civGerant:string
-}
+} 
 
-export type AcDebiteurPhysique=ParameterBaseData &  {
-  debiteur:AcDebiteur
+export type AcDebiteurPhysique=Omit<ParameterBaseData,"code"|"libelle"> &  {
+  debiteurCode:number
   quartCode:string
   profesCode:string
   natCode:string
