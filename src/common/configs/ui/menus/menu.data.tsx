@@ -139,11 +139,14 @@ const menuItemsData: Array<MenuItemType> = [
     subMenu: [
       {
         name: "Agence de banque",
-        loader: acBanqueAgenceProvider.find,
+        loader: async()=>{
+          acBanqueAgenceProvider.setCurrentSelectedBanque(undefined)
+          return await acBanqueAgenceProvider.findRequiredState([acBanqueProvider])
+        },
         nameHeader: "Agence",
-        dataProvider: acBanqueAgenceProvider.getState(),
+        dataProvider: acBanqueAgenceProvider.filteredAgenceBanque,
         handleDelete: acBanqueAgenceProvider.delete,
-        additionalHeaderRender: () => <ListableSearchableItemComponent asSearchField={false} placeholder="Rechercher une banque" searchPlaceholder="Exemple: Ecobank" />,
+        additionalHeaderRender: () => <ListableSearchableItemComponent handleResultSelection={acBanqueAgenceProvider.setCurrentSelectedBanque}  data={acBanqueProvider.getSelectItems()} asSearchField={false} placeholder="Rechercher une banque" searchPlaceholder="Exemple: Ecobank" />,
         handleEdit: acBanqueAgenceProvider.update,
         create: acBanqueAgenceProvider.create,
         nameColumn: "",
@@ -167,6 +170,11 @@ const menuItemsData: Array<MenuItemType> = [
           {
             label: "Libelle",
             key: "libelle",
+          },
+
+          {
+            label: "Code Banque",
+            key: "bqCode",
           },
         ],
       },
@@ -737,9 +745,13 @@ const menuItemsData: Array<MenuItemType> = [
       {
         name: "Groupe Créance",
         nameColumn: "Gestion des Groupes de Creance",
-        dataProvider: acGroupeCreanceProvider.getState(),
-        loader: acGroupeCreanceProvider.find,
+        dataProvider: acGroupeCreanceProvider.filteredEntites,
+        loader: async()=>{
+          acGroupeCreanceProvider.setCurrentSelectedEntite(undefined)
+          return await acGroupeCreanceProvider.findRequiredState([acEntiteProvider])
+        },
         create: acGroupeCreanceProvider.create,
+        additionalHeaderRender: () => <ListableSearchableItemComponent handleResultSelection={acGroupeCreanceProvider.setCurrentSelectedEntite}  data={acEntiteProvider.getSelectItems()}  asSearchField={false} placeholder="Rechercher une entité" searchPlaceholder="Exemple: Entité" />,
         handleDelete: acGroupeCreanceProvider.delete,
         handleEdit: acGroupeCreanceProvider.update,
         nameHeader: "Gestion des Entités ACCC",

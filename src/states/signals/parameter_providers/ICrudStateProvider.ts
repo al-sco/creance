@@ -18,8 +18,9 @@ export default abstract class ICrudStateProvider<T extends Identifiable> {
         this.state=signal(initialState??[])
         this.basePath=basePath
     }
+    
     // fetch data
-    find=async():Promise<T[]|{}>=>{
+     find=async():Promise<T[]|{}>=>{
         let {data,status}=await axios.get(getUrl(this.basePath),
     { 
         headers: {
@@ -49,6 +50,13 @@ export default abstract class ICrudStateProvider<T extends Identifiable> {
             await this.find()
         }
     }
+
+    findRequiredState=async(providers:ICrudStateProvider<any>[]):Promise<T[]|{}>=>{      
+        for (let index = 0; index < providers.length; index++) {
+            await providers[index].find()
+        }
+        return await this.find()
+      }
 
     // delete data
     delete=async(data:T):Promise<void>=>{

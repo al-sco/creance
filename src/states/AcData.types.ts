@@ -6,7 +6,10 @@ export type ParameterBaseData = Identifiable & {
   libelle: string;
 };
 
-export type AcBanqueAgence = ParameterBaseData;
+export type AcBanqueAgence = ParameterBaseData & {
+  bqCode:string
+};
+
 export type AcBanque = ParameterBaseData & {
   responsabilite: string;
   adresse: string;
