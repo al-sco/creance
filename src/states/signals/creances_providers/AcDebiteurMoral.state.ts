@@ -27,7 +27,7 @@ class AcCreanceStateProvider extends ICrudStateProvider<AcDebiteurMoral> {
       
     
       mapEntitieFrom(json: any): AcDebiteurMoral {
-        return {
+        return { 
           id: json["id"],
           debiteur: json["acDebiteur"],
           debRaisSociale: json["debRaisSociale"],

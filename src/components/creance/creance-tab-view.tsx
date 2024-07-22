@@ -6,6 +6,7 @@ import CreanceInputsView from "./creance-inputs-view"
 import { useSignals } from "@preact/signals-react/runtime"
 import { Signal } from "@preact/signals-react"
 import { DrawerComponent } from "../drawler"
+import { AcDebiteurStateProvider } from "../../states/signals/creances_providers/AcDebiteur.state"
 
 type CreanceTabsViewProps = {
     tabs?: CreanceTabType[],
@@ -48,7 +49,6 @@ const CreanceTabsView = ({ tabs, state }: CreanceTabsViewProps) => {
             )
         }
     }
-
 
 
     const buildTableContent = (tabs: CreanceTabType[]): JSX.Element => {
@@ -94,15 +94,20 @@ const CreanceTabsView = ({ tabs, state }: CreanceTabsViewProps) => {
     }
 
 
-    // let filteredTabs = tabs?.filter((tab) => ['D', (state.value as any)['type'] && (state.value as any)['type'].toString().toUpperCase()].includes(tab.key)) ?? []
+    console.log(`tabs: ${tabs?.length}`)
+    for (let i of tabs!){
+        console.log(i.key)
+    }
+
+    let filteredTabs = tabs?.filter((tab) => ['D', ((state.value as any)[AcDebiteurStateProvider.debiteurTypeKeyCode] && (state.value as any)[AcDebiteurStateProvider.debiteurTypeKeyCode]?.toString().toUpperCase())].includes(tab.key)) ?? []
     return (
         <>
             <GridItem w='100%' h='10'>
-                {tabs && <Tabs size='md' variant='enclosed'>
+                {filteredTabs && <Tabs size='md' variant='enclosed'>
                     <TabList>
-                        {tabs.map(({ tabName }: CreanceTabType) => <Tab>{tabName}</Tab>)}
+                        {filteredTabs.map(({ tabName }: CreanceTabType) => <Tab>{tabName}</Tab>)}
                     </TabList>
-                    {buildTableContent(tabs)}
+                    {buildTableContent(filteredTabs)}
                 </Tabs>}
             </GridItem>
         </>

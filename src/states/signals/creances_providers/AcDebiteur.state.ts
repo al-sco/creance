@@ -9,7 +9,12 @@ import { getUrl } from "../../../common/configs/api/api_configs";
 import { signal } from "@preact/signals-react";
 
 type ReturnProvider = () => Promise<SelectItem[]>;
-class AcDebiteurStateProvider extends ICrudStateProvider<AcDebiteur> {
+export class AcDebiteurStateProvider extends ICrudStateProvider<AcDebiteur> {
+  static  domiciliationTypeCode='D';
+  static  physiqueTypeCode='P';
+  static  moralTypeCode='M';
+  static  debiteurTypeKeyCode='typdebCode';
+
   debiteursListState = signal<AcDebiteur[]>([]);
 
   mapDataToJson(_: {}): {} {

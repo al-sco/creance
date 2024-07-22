@@ -1,4 +1,4 @@
-import acDebiteurProvider, { naturePieceIdentite, regimeMariageProvider, sexeProvider, statusMatrimonialProvider } from "../../../../states/signals/creances_providers/AcDebiteur.state";
+import acDebiteurProvider, { AcDebiteurStateProvider, naturePieceIdentite, regimeMariageProvider, sexeProvider, statusMatrimonialProvider } from "../../../../states/signals/creances_providers/AcDebiteur.state";
 import acBanqueAgenceProvider from "../../../../states/signals/parameter_providers/AcBanqueAgence.state";
 import acCategoryDebtorProvider from "../../../../states/signals/parameter_providers/AcCategoryDebtor.state";
 import acCiviliteProvider from "../../../../states/signals/parameter_providers/AcCivility.state";
@@ -89,7 +89,7 @@ const debiteurFields: CreanceFieldType[] = [
   },
   {
     name: "Type",
-    key: 'typdebCode',
+    key: AcDebiteurStateProvider.debiteurTypeKeyCode,
     state: acDebiteurProvider.getState(),
     onInsert: acDebiteurProvider.simpleInsert,
     selectItems: acDebiteurProvider.getSelectItems(acTypeDebiteurProvider),
@@ -116,7 +116,7 @@ const debiteurTabs: CreanceTabType[] = [
   {
     tabName: "Physique",
     rowCount: 2,
-    key: 'P',
+    key: AcDebiteurStateProvider.physiqueTypeCode,
     fields: [
       {
         name: "Civilité",
@@ -470,7 +470,7 @@ const debiteurTabs: CreanceTabType[] = [
   },
   {
     tabName: "Moral",
-    key: 'acDebiteur',
+    key: AcDebiteurStateProvider.moralTypeCode,
     rowCount: 1,
     fields: [
       {
@@ -554,7 +554,7 @@ const debiteurTabs: CreanceTabType[] = [
   },
   {
     tabName: "Domiciliation",
-    key: 'domCode',
+    key: AcDebiteurStateProvider.domiciliationTypeCode,
     tableHeaders: ["Type", "N°Compte", "Libellé", "Banque agence", "Banque"],
     tableContent: [
       {
