@@ -11,7 +11,7 @@ class AcGroupeCreanceStateProvider extends ICrudStateProvider<AcGroupeCreance> {
           grpCreanCode: data["id"],
             grpCreanLib: data["libelle"],
             grpCreanLibLong: data["libelleLong"],
-            entiteCode:data["entiteCode"]
+            entiteCode:this.currentSelectedEntiteItem.value?.value
         };
     }
     

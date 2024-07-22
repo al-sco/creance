@@ -764,10 +764,7 @@ const menuItemsData: Array<MenuItemType> = [
             key: "libelle",
             label: "Libelle",
           },
-          {
-            key: "entiteCode",
-            label: "Entité Code",
-          },
+
           {
             key: "libelleLong",
             label: "Libellé Long",
