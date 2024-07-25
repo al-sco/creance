@@ -1,5 +1,5 @@
 import { CreanceStaticDataType, SelectItem } from "../../../common/configs/ui/creance/creance.type";
-import { AcDebiteur} from "../../AcData.types";
+import { AcCreance, AcDebiteur} from "../../AcData.types";
 import ICrudStateProvider from "../parameter_providers/ICrudStateProvider";
 import acDebiteurProvider from "./AcDebiteur.state";
 
@@ -8,7 +8,7 @@ class AcCreanceStateProvider extends ICrudStateProvider<AcCreance> {
   mapDataToJson(data: AcCreance): {} {
     return {
       creanCode: data["id"],
-      periodCode: data["periodCode"],
+      periodCode: data.categCode,
       objCreanCode: data["objCreanCode"],
       creanCodeGlob: data["creanCodeGlob"],
       debCode: data["debCode"],
@@ -71,7 +71,7 @@ class AcCreanceStateProvider extends ICrudStateProvider<AcCreance> {
   mapEntitieFrom(json: any): AcCreance {
     return {
       id: json["creanCode"],
-      periodCode: json["periodCode"],
+      code: json["periodCode"],
       objCreanCode: json["objCreanCode"],
       creanCodeGlob: json["creanCodeGlob"],
       debCode: json["debCode"],

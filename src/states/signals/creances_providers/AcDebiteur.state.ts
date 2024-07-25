@@ -21,8 +21,7 @@ export class AcDebiteurStateProvider extends ICrudStateProvider<AcDebiteur> {
     let state = this.getState().value as any;
 
     return {
-      categDebCode: state["id"],
-      categDebLib: state["libelle"],
+      categDebCode: state["categDebCode"],
       debAdrpost: state["debAdrpost"],
       debCel: state["debCel"],
       debCodeAnc: state["debCodeAnc"],
@@ -66,6 +65,7 @@ export class AcDebiteurStateProvider extends ICrudStateProvider<AcDebiteur> {
       },
     });
     if (status == 200) {
+      console.log(data)
       this.debiteursListState.value = data.map(this.mapEntitieFrom);
     }
     return this.debiteursListState.value;
@@ -74,8 +74,8 @@ export class AcDebiteurStateProvider extends ICrudStateProvider<AcDebiteur> {
   mapEntitieFrom(json: any): AcDebiteur {
     return {
       id: json["id"],
-      code: json["id"],
-      libelle: json["categDebCode"],
+      debCode: json["id"],
+      categDebCode: json["categDebCode"],
       debAdrpost: json["debAdrpost"],
       debCel: json["debCel"],
       debCodeAnc: json["debCodeAnc"],
@@ -98,7 +98,7 @@ export class AcDebiteurStateProvider extends ICrudStateProvider<AcDebiteur> {
 
   simpleInsertWithRefresh = (key: string, value: any): void => {
     let state = this.getState();
-    let existingValueIndex = this.debiteursListState.value.findIndex((acDebiteur) => acDebiteur.code == value);
+    let existingValueIndex = this.debiteursListState.value.findIndex((acDebiteur) => acDebiteur.debCode == value);
 
     if (existingValueIndex != -1) {
       let existingDebiteur = this.debiteursListState.value[existingValueIndex]
@@ -121,8 +121,8 @@ export class AcDebiteurStateProvider extends ICrudStateProvider<AcDebiteur> {
   getDebiteursSelectItems = async (): Promise<SelectItem[]> => {
     let typeDebiteurs = (await acDebiteurProvider.find());
     return typeDebiteurs.map((typeDebiteur) => ({
-      title: typeDebiteur.code,//TODO add debiteur name
-      value: typeDebiteur.code,
+      title: typeDebiteur.debCode.toString(),//TODO add debiteur name
+      value: typeDebiteur.debCode,
     }));
   };
 

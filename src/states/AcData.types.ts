@@ -152,8 +152,10 @@ export type AcTypeSaisie = ParameterBaseData;
 export type AcVille = ParameterBaseData;
 export type AcZone = ParameterBaseData & { description: string };
 
-export type AcDebiteur=ParameterBaseData &  {
+export type AcDebiteur=Omit<ParameterBaseData,'libelle'|'code'> &  {
   propCode:number
+  debCode:number,
+  categDebCode:string
   garphysCode:number
   typdebCode:string
   debAdrpost:string

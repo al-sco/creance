@@ -253,7 +253,7 @@ const debiteurTabs: CreanceTabType[] = [
         key: 'debMatric',
         state: acDebiteurProvider.getState(),
         onInsert: acDebiteurProvider.simpleInsert,
-        inputItem: {
+        inputItem: { 
           inputType: InputType.text,
           isEditable: true,
           placeholder: "matricule",
