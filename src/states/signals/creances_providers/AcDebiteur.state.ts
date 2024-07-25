@@ -7,6 +7,7 @@ import { AcDebiteur } from "../../AcData.types";
 import ICrudStateProvider from "../parameter_providers/ICrudStateProvider";
 import { getUrl } from "../../../common/configs/api/api_configs";
 import { signal } from "@preact/signals-react";
+import acDebiteurMoralProvider from "./AcDebiteurMoral.state";
 
 type ReturnProvider = () => Promise<SelectItem[]>;
 export class AcDebiteurStateProvider extends ICrudStateProvider<AcDebiteur> {
@@ -19,8 +20,9 @@ export class AcDebiteurStateProvider extends ICrudStateProvider<AcDebiteur> {
 
   mapDataToJson(_: {}): {} {
     let state = this.getState().value as any;
-
+    console.log(state["code"])
     return {
+      debCode: state["code"],
       categDebCode: state["categDebCode"],
       debAdrpost: state["debAdrpost"],
       debCel: state["debCel"],
@@ -37,9 +39,9 @@ export class AcDebiteurStateProvider extends ICrudStateProvider<AcDebiteur> {
     };
   }
 
-  create = async (passedData: {}): Promise<AcDebiteur|null> => {
+  create = async (passedData: {}): Promise<AcDebiteur | null> => {
     console.log(this.mapDataToJson(passedData));
-    let { status,data } = await axios.post(
+    let { status, data } = await axios.post(
       getUrl(this.basePath),
       this.mapDataToJson(passedData),
       {
@@ -52,10 +54,30 @@ export class AcDebiteurStateProvider extends ICrudStateProvider<AcDebiteur> {
     if (status == 201) {
       await this.find()
       this.getState().value = {};
-     return this.mapEntitieFrom(data) 
+      return this.mapEntitieFrom(data)
     }
 
     return null
+  };
+
+
+  update = async (passedData: {}): Promise<void> => {
+    console.log(this.mapDataToJson(passedData));
+    let { status, data } = await axios.patch(
+      getUrl(this.basePath),
+      this.mapDataToJson(passedData),
+      {
+        headers: {
+          "Content-Type": "application/json",
+          "ngrok-skip-browser-warning": true,
+        },
+      }
+    );
+    console.log(data)
+    if (status == 200) {
+      await this.find()
+      this.getState().value = {};
+    }
   };
 
   find = async (): Promise<AcDebiteur[]> => {
@@ -103,9 +125,13 @@ export class AcDebiteurStateProvider extends ICrudStateProvider<AcDebiteur> {
     if (existingValueIndex != -1) {
       let existingDebiteur = this.debiteursListState.value[existingValueIndex]
       state.value = { ...{ [key]: value }, ...existingDebiteur };
+
+      acDebiteurMoralProvider.findOne(parseInt(value))
       return;
     }
     state.value = { ...{ [key]: value } };
+
+    // call external providers
   };
 
   getSelectItems = (provider: any): ReturnProvider => {
@@ -128,14 +154,22 @@ export class AcDebiteurStateProvider extends ICrudStateProvider<AcDebiteur> {
 
 
   createDebiteurFully = (providers: ICrudStateProvider<any>[]) => {
-    return async (_:any): Promise<void> => {
-      let debiteur= await this.create({})
-      console.log("Once saved")
-      console.log(debiteur)
-      if(debiteur){
-        for (let provider of providers) {
-          await provider.create({debCode:debiteur.id})
+    return async (_: any): Promise<void> => {
+      let debCode = (this.getState().value as any)["code"]
+      if (!debCode) {
+        let debiteur = await this.create({})
+        console.log(debiteur)
+        if (debiteur) {
+          for (let provider of providers) {
+            await provider.create({ debCode: debiteur.id })
+          }
         }
+        return;
+      }
+
+      await this.update({})
+      for (let provider of providers) {
+        await provider.update({ debCode: debCode })
       }
     }
   }

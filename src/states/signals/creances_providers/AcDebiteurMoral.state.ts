@@ -1,5 +1,7 @@
+import axios from "axios";
 import { AcDebiteurMoral } from "../../AcData.types";
 import ICrudStateProvider from "../parameter_providers/ICrudStateProvider";
+import { getUrl } from "../../../common/configs/api/api_configs";
 
 
 
@@ -8,7 +10,6 @@ export class AcDebiteurMoralStateProvider extends ICrudStateProvider<AcDebiteurM
     mapDataToJson(parentProviderData: AcDebiteurMoral): {} {
       console.log(parentProviderData)
     let state = this.getState().value as any;
-
         return {
           id: state['id'],
           debCode:  parentProviderData.debCode,
@@ -26,8 +27,20 @@ export class AcDebiteurMoralStateProvider extends ICrudStateProvider<AcDebiteurM
           civGerant: state["civGerant"]
         };
       }
+
+
       
-      
+      findOne = async (id:number): Promise<void> => {
+        let { data, status } = await axios.get(getUrl(`${this.basePath}/${id}`), {
+          headers: {
+            "ngrok-skip-browser-warning": true,
+          },
+        });
+        console.log(data)
+        if (status == 200) {
+          this.getState().value=this.mapEntitieFrom(data)
+        }
+      };
     
       mapEntitieFrom(json: any): AcDebiteurMoral {
         return { 
