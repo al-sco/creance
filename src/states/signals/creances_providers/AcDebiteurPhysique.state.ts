@@ -1,11 +1,14 @@
+import axios from "axios";
 import { AcDebiteurPhysique } from "../../AcData.types";
 import ICrudStateProvider from "../parameter_providers/ICrudStateProvider";
+import { getUrl } from "../../../common/configs/api/api_configs";
 
 
 
 
-class AcCreanceStateProvider extends ICrudStateProvider<AcDebiteurPhysique> {
+ export class AcDebiteurPhysiqueStateProvider extends ICrudStateProvider<AcDebiteurPhysique> {
     mapDataToJson(data: AcDebiteurPhysique): {} {
+      let state=this.getState().value as any
         return {
           id: data["id"],
           quartCode: data["quartCode"],
@@ -53,6 +56,20 @@ class AcCreanceStateProvider extends ICrudStateProvider<AcDebiteurPhysique> {
           regmatCode: data["regmatCode"]
         };
       }
+
+
+      findOne = async (id:number): Promise<void> => {
+        let { data, status } = await axios.get(getUrl(`${this.basePath}/${id}`), {
+          headers: {
+            "ngrok-skip-browser-warning": true,
+          },
+        });
+        console.log(data)
+        if (status == 200) {
+          this.getState().value=this.mapEntitieFrom(data)
+        }
+      };
+    
       
     
       mapEntitieFrom(json: any): AcDebiteurPhysique {
@@ -104,4 +121,13 @@ class AcCreanceStateProvider extends ICrudStateProvider<AcDebiteurPhysique> {
           regmatCode: json["regmatCode"]
         };
       }
-}      
+      
+    simpleInsert = (key: string, value: any): void => {
+      let state = this.getState();
+      state.value = { ...state.value, ...{ [key]: value } };
+      console.log(state.value)
+    };
+}     
+
+const acDebiteurPhysiqueProvider= new AcDebiteurPhysiqueStateProvider("/debiteur-physique", {})
+export default acDebiteurPhysiqueProvider

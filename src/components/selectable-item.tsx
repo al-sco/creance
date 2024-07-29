@@ -29,7 +29,7 @@ export const SelectableItem = ({promisedSelectItems,onSelectChanged}:SelectItemP
     }
     return (
         <ErrorBoundary fallback={<span>error</span>}> 
-        <Select onChange={(e)=>onSelectChanged(e.target.value)}>
+        <Select placeholder="Selectionner" onChange={(e)=>onSelectChanged(e.target.value)}>
             {selectItems.map((s: SelectItem) => <option value={s.value}>{s.title}</option>
             )}
         </Select>
