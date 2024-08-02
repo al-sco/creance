@@ -18,7 +18,7 @@ type ParameterTableProps = {
   columns: ParameterColumnType[];
 };
 
-const BaseStyledTable = styled.div`
+export const BaseStyledTable = styled.div`
   padding: 12px;
   border-radius: 12px;
   height: 80%;

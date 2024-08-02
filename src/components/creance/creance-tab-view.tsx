@@ -45,7 +45,7 @@ const CreanceTabsView = ({ tabs, state }: CreanceTabsViewProps) => {
         } else {
             const _ = e as CreanceColumnType
             return (
-                <Input width='auto' name={_.key} placeholder={_.label} size='lg' />
+                <Input name={_.key} placeholder={_.label} size='lg' />
             )
         }
     }

@@ -45,7 +45,7 @@ const TableHeaderForm = ({ subMenu }: { subMenu: SubMenuItem }) => {
         <Stack direction="row">
           {subMenu.headers!.map((header, index) => <Input border={`1px solid ${colors.lightGray}`} name={header.key} variant={"outline"} key={index} placeholder={header.label} size='lg' />)}
         </Stack>
-        <Button type="submit" _active={colors.green} size="lg" color={colors.green} bg={colors.background} border={`1.5px solid ${colors.green}`} >Ajouter</Button>
+        <Button type="submit" _hover={{color: colors.white, backgroundColor: colors.bleu}} _active={colors.green} size="lg" color={colors.bleu} bg={colors.background} border={`1.5px solid ${colors.bleu}`} >Ajouter</Button>
       </Stack>
     </Form>
   )
