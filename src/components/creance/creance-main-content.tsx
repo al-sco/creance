@@ -30,7 +30,6 @@ const StyledTitle = styled.h1`
 const CreanceMainContent = ({ data, hasNoHeader }: CreanceMainContentProps): JSX.Element => {
     const toast=useToast()
 
-  
     const submitData=async()=>{ 
         toastify(toast,data.create({}),{
             description: 'Donnée enregistrée',

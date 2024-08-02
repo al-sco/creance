@@ -52,7 +52,7 @@ const CreanceTabsView = ({ tabs, state }: CreanceTabsViewProps) => {
 
     const buildTableContent = (tabs: CreanceTabType[]): JSX.Element => {
         return <TabPanels>
-            {tabs.map(({ tableContent, fields, tableHeaders, rowCount, additionnalContents }: CreanceTabType) => <TabPanel>
+            {tabs.map(({ tableContent, fields, tableHeaders, rowCount, additionnalContents, }: CreanceTabType, index) => <TabPanel key={index}>
                 <BaseStyledTable>
                     <TableContainer>
                         <Table>
@@ -93,7 +93,10 @@ const CreanceTabsView = ({ tabs, state }: CreanceTabsViewProps) => {
     }
 
 
-    let filteredTabs = tabs?.filter((tab) => ['D', ((state.value as any)[AcDebiteurStateProvider.debiteurTypeKeyCode] && (state.value as any)[AcDebiteurStateProvider.debiteurTypeKeyCode]?.toString().toUpperCase())].includes(tab.key)) ?? []
+    var filteredTabs = tabs?.filter((tab) => ['D', ((state.value as any)[AcDebiteurStateProvider.debiteurTypeKeyCode] && (state.value as any)[AcDebiteurStateProvider.debiteurTypeKeyCode]?.toString().toUpperCase())].includes(tab.key)) ?? []    
+    if (filteredTabs.length == 0) {
+        filteredTabs = tabs!
+    }
     return (
         <>
             <GridItem w='100%' h='10'>

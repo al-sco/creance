@@ -18,12 +18,12 @@ const SearchFieldStyled = styled.div`
   padding: 10px 10px;
 `
 
-const StyledBadge=styled.div`
-padding: 10px 25px;
-border-radius: 25px;
-font-weight: 700;
-color: ${colors.white};
-background-color: ${colors.green};
+const StyledBadge = styled.div`
+  padding: 10px 25px;
+  border-radius: 25px;
+  font-weight: 700;
+  color: ${colors.white};
+  background-color: ${colors.green};
 `
 
 
@@ -39,14 +39,14 @@ type ListableSearchableProps = {
 
 const ListableSearchableItemComponent = ({ placeholder, searchPlaceholder, asSearchField, signal, data, handleResultSelection }: ListableSearchableProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const [currentModalSearchValue,setCurrentModalSearchValue]=useState<string |undefined>()
-  const [currentSelectedItem,setCurrentSelectedItem]=useState<SelectItem| undefined>()
+  const [currentModalSearchValue, setCurrentModalSearchValue] = useState<string | undefined>()
+  const [currentSelectedItem, setCurrentSelectedItem] = useState<SelectItem | undefined>()
 
   const [currentResult, setCurrentResult] = useState<SelectItem[] | undefined>(data)
 
 
   const onModalTextEditting = (value?: string) => {
-    setCurrentModalSearchValue(()=>value)
+    setCurrentModalSearchValue(() => value)
 
     if (value && value !== '') {
       let result = data?.filter((e) => e.title.toLowerCase().includes(value.toLowerCase()))
@@ -75,14 +75,13 @@ const ListableSearchableItemComponent = ({ placeholder, searchPlaceholder, asSea
   const onResultSelectionPressed = (selectItem: SelectItem) => {
     onClose()
     handleResultSelection && handleResultSelection(selectItem)
-    setCurrentSelectedItem(()=>selectItem)
+    setCurrentSelectedItem(() => selectItem)
   }
 
   return asSearchField ?
     <Button w='500px' size='none' bg={colors.lightGreen} style={{ boxShadow: `.3px .3px 2px ${colors.green}, .3px .3px 2px ${colors.green}` }}>
       <SearchFieldStyled>
-
-        <InputGroup p={0}>
+        <InputGroup border='none' p={0}>
           <InputLeftElement pointerEvents='none'>
             <SearchIcon color={colors.lightGray} /> <Box w='10px ' />
           </InputLeftElement>
@@ -93,24 +92,24 @@ const ListableSearchableItemComponent = ({ placeholder, searchPlaceholder, asSea
     </Button> :
     <>
 
-    <Stack direction="row" alignItems="center">
-    <Button onClick={!asSearchField ? onOpen : undefined} w='500px' size='none' bg={colors.lightGreen} style={{ boxShadow: `.3px .3px 2px ${colors.green}, .3px .3px 2px ${colors.green}` }}>
-        <SearchStyled>
-          <Stack direction='row'>
-            <SearchIcon color={colors.lightGray} /> <Box w='10px ' />
-            <span style={{ color: colors.lightGray }}>{placeholder}</span>
-          </Stack>
-        </SearchStyled>
-        
-      </Button>
-      <Box w={100} />
-      {
-        currentSelectedItem && (<StyledBadge>
-        <span>{currentSelectedItem.title}</span>
-      </StyledBadge>)
-      }
-    </Stack>
-    
+      <Stack direction="row" alignItems="center">
+        <Button onClick={!asSearchField ? onOpen : undefined} w='500px' size='none' bg={colors.lightGreen} style={{ boxShadow: `.3px .3px 2px ${colors.green}, .3px .3px 2px ${colors.green}` }}>
+          <SearchStyled>
+            <Stack direction='row'>
+              <SearchIcon color={colors.lightGray} /> <Box w='10px ' />
+              <span style={{ color: colors.lightGray }}>{placeholder}</span>
+            </Stack>
+          </SearchStyled>
+
+        </Button>
+        <Box w={100} />
+        {
+          currentSelectedItem && (<StyledBadge>
+            <span>{currentSelectedItem.title}</span>
+          </StyledBadge>)
+        }
+      </Stack>
+
 
 
       <Modal scrollBehavior="inside" isOpen={isOpen} size='xl' onClose={onClose}>
@@ -118,7 +117,7 @@ const ListableSearchableItemComponent = ({ placeholder, searchPlaceholder, asSea
           bg="rgba(0,0,0,.5)"
         />
         <ModalContent borderRadius={10}>
-          <ModalHeader><Input value={currentModalSearchValue}  onChange={(e) => onModalTextEditting(e.target.value)} placeholder={searchPlaceholder} /></ModalHeader>
+          <ModalHeader><Input value={currentModalSearchValue} onChange={(e) => onModalTextEditting(e.target.value)} placeholder={searchPlaceholder} /></ModalHeader>
           <ModalBody p={4}>
             {
               currentResult && <SearchResultBuilder results={currentResult} onResultPressed={onResultSelectionPressed} />
