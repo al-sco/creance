@@ -1,10 +1,17 @@
 import axios from "axios";
-import { AcDebiteurPhysique } from "../../AcData.types";
+import { AcDebiteurPhysique, Identifiable } from "../../AcData.types";
 import ICrudStateProvider from "../parameter_providers/ICrudStateProvider";
 import { getUrl } from "../../../common/configs/api/api_configs";
 
 
 
+abstract class HasFieldStateSave<T extends Identifiable> extends ICrudStateProvider<T> {
+  simpleInsert = (key: string, value: any): void => {
+    let state = this.getState();
+    state.value = { ...state.value, ...{ [key]: value } };
+    console.log(state.value)
+  };
+}
 
 export class AcDebiteurPhysiqueStateProvider extends ICrudStateProvider<AcDebiteurPhysique> {
   mapDataToJson(data: AcDebiteurPhysique): {} {

@@ -7,7 +7,7 @@ export type ParameterBaseData = Identifiable & {
 };
 
 export type AcBanqueAgence = ParameterBaseData & {
-  bqCode:string
+  bqCode: string
 };
 
 export type AcBanque = ParameterBaseData & {
@@ -35,7 +35,7 @@ export type AcCpteClientSonar = {
   planCptaNum: String;
 };
 
-export type AvCompte={
+export type AvCompte = {
   id: string;
 
 }
@@ -152,174 +152,176 @@ export type AcTypeSaisie = ParameterBaseData;
 export type AcVille = ParameterBaseData;
 export type AcZone = ParameterBaseData & { description: string };
 
-export type AcDebiteur=Omit<ParameterBaseData,'libelle'|'code'> &  {
-  propCode:number
-  debCode:number,
-  categDebCode:string
-  garphysCode:number
-  typdebCode:string
-  debAdrpost:string
-  debCel:string
-  debEmail:string
-  debTelbur:string
-  debFax:string
-  debDateCtl:Date
-  debCodeCharg:string
-  debCodeAnc:string
-  debTeldom:string
+export type AcDebiteur = Omit<ParameterBaseData, 'libelle' | 'code'> & {
+  propCode: number
+  debCode: number,
+  categDebCode: string
+  garphysCode: number
+  typdebCode: string
+  debAdrpost: string
+  debCel: string
+  debEmail: string
+  debTelbur: string
+  debFax: string
+  debDateCtl: Date
+  debCodeCharg: string
+  debCodeAnc: string
+  debTeldom: string
 }
 
-export type AcDebiteurMoral=Omit<ParameterBaseData,'code'|'libelle'>  &  {
-  debCode:number
-  debRaisSociale:string
-  debRegistcom:string
-  debDatcreat:Date
-  debCapitsocial:number
-  debFormJurid:string
-  debDomActiv:string
-  debSiegSocial:string
-  debNomGerant:string
-  ancCiv:string
-  debCodeCharg:string
-  debCpteContrib:string
-  civGerant:string
-} 
+export type AcDebiteurMoral = Omit<ParameterBaseData, 'code' | 'libelle'> & {
+  debCode: number
+  debRaisSociale: string
+  debRegistcom: string
+  debDatcreat: Date
+  debCapitsocial: number
+  debFormJurid: string
+  debDomActiv: string
+  debSiegSocial: string
+  debNomGerant: string
+  ancCiv: string
+  debCodeCharg: string
+  debCpteContrib: string
+  civGerant: string
+}
 
-export type AcDebiteurPhysique=Omit<ParameterBaseData,"code"|"libelle"> &  {
-  debiteurCode:number
-  quartCode:string
-  profesCode:string
-  natCode:string
-  empCode:string
-  statsalCode:AcStatutSalarie
-  fonctCode:string
-  debNom:string
-  debPren:string
-  debDatnaiss:Date
-  debLieunaiss:string
-  debDatdec:Date
-  debTeldom:string
-  debNatpident:string
-  debNumpident:string
-  debDatetpident:Date
-  debLieuetpident:string
-  debSitmatri:string
-  debRue:string
-  debNmere:string
-  debPrmere:string
-  debNpere:string
-  debPrpere:string
-  debNbrEnf:string
-  debSexe:string
-  debMatric:string
-  civCode:AcCivilite
-  debCjNom:string
-  debCjPren:string
-  debCjDatnaiss:Date
-  debCjTel:string
-  debCjAdr:string
-  debCjNumpident:string
-  debDateCtl:Date
-  debEmployeur:string
-  debCodeAnc:string
-  ancCiv:string
-  debDatcreat:string
-  ancNat:string
-  debCodeCharg:string
-  debAncDatnaiss:Date
-  debAncSituat:string
-  debFonction:string
-  regmatCode:string
+export type AcDebiteurPhysique = Omit<ParameterBaseData, "code" | "libelle"> & {
+  debiteurCode: number
+  quartCode: string
+  profesCode: string
+  natCode: string
+  empCode: string
+  statsalCode: AcStatutSalarie
+  fonctCode: string
+  debNom: string
+  debPren: string
+  debDatnaiss: Date
+  debLieunaiss: string
+  debDatdec: Date
+  debTeldom: string
+  debNatpident: string
+  debNumpident: string
+  debDatetpident: Date
+  debLieuetpident: string
+  debSitmatri: string
+  debRue: string
+  debNmere: string
+  debPrmere: string
+  debNpere: string
+  debPrpere: string
+  debNbrEnf: string
+  debSexe: string
+  debMatric: string
+  civCode: AcCivilite
+  debCjNom: string
+  debCjPren: string
+  debCjDatnaiss: Date
+  debCjTel: string
+  debCjAdr: string
+  debCjNumpident: string
+  debDateCtl: Date
+  debEmployeur: string
+  debCodeAnc: string
+  ancCiv: string
+  debDatcreat: string
+  ancNat: string
+  debCodeCharg: string
+  debAncDatnaiss: Date
+  debAncSituat: string
+  debFonction: string
+  regmatCode: string
 }
 
 
-export type AcDomicialition=ParameterBaseData &  {
-  bqagCode:string
-  typdomCode:string
-  garphysCode:number
-  debCode:number
-  domDateCtl:Date
-  ancAg:string
-  villeCode:string
-  numBenef:number
+export type AcDomicialition = Omit<ParameterBaseData, 'code' | 'libelle'> & {
+  bqagCode: string
+  domCode: string
+  domLib: string
+  typdomCode: string
+  garphysCode: number
+  debCode: number
+  domDateCtl: Date
+  ancAg: string
+  villeCode: string
+  numBenef: number
 }
 
-export type AcOrdonnateur=ParameterBaseData & {
-  ordoAdr:string
-  ordoTel:string
-  ordoMinistTut:string
-  fonctCode:string
+export type AcOrdonnateur = ParameterBaseData & {
+  ordoAdr: string
+  ordoTel: string
+  ordoMinistTut: string
+  fonctCode: string
 }
 
-export type AcEcheancier= ParameterBaseData &{
-  
+export type AcEcheancier = ParameterBaseData & {
+
 }
 
-export type AcTypeTitreRecette=ParameterBaseData
+export type AcTypeTitreRecette = ParameterBaseData
 
-export type AcLogement = ParameterBaseData &{
-  
+export type AcLogement = ParameterBaseData & {
+
 }
 
-export type AcCreance=ParameterBaseData &  {
-  objCreanCode:string
-  creanCodeGlob:string
-  grpCreanCode:AcGroupeCreance
-  debCode:string
-  creanCapitInit:number
-  creanMontDu:number
-  creanDejRemb:number
-  creanPenalite:number
-  creanEncours:number
-  creanSoldeInit:number
-  creanMontImpaye:number
-  creanMontIc:number
-  creanMontIr:number
-  creanMontAss:number
-  creanMontDebloq:number
-  creanFrais:number
-  creanCommBanq:number
-  creanObjet:string
-  creanTauxic:string
-  creanTauxir:string
-  creanNbech:string
-  creanDateft:Date
-  creanDatech:Date
-  creanDuree:number
-  creanDatoctroi:Date
-  creanStatrecouv:string
-  creanDatrec:Date
-  creanDatecrea:Date
-  creanCommStecaut:number
-  creanCodePrec:string
-  creanCodeAnc:string
-  creanUserCode:string
-  ordoCode:AcOrdonnateur
-  creanDatfin:Date
-  creanMontIcPaye:number
-  creanMotifIrrecouv:string
-  creanValide:string
-  creanDateCtl:Date
-  creanCodeCharg:string
-  creanMajDate:Date
-  creanTropPercu:string
-  pcCode:string
-  categCode:string
-  creanMontAncInit:number
-  delegCode:string
-  typeTitreCode:AcTypeTitreRecette
-  creanRef:string
-  cpteCliNum:number
-  creanUserCpte:string
-  creanDateCpte:Date
-  cpteRegrp:string
-  cptoperCode:string
-  creanClasse:string
-  typoperCode:string
-  creanOp:string
-  creanIdentAgtresor:string
-  creanStab:string
-  creanSoldAvantLiq:string
+export type AcCreance = ParameterBaseData & {
+  objCreanCode: string
+  creanCodeGlob: string
+  grpCreanCode: AcGroupeCreance
+  debCode: string
+  creanCapitInit: number
+  creanMontDu: number
+  creanDejRemb: number
+  creanPenalite: number
+  creanEncours: number
+  creanSoldeInit: number
+  creanMontImpaye: number
+  creanMontIc: number
+  creanMontIr: number
+  creanMontAss: number
+  creanMontDebloq: number
+  creanFrais: number
+  creanCommBanq: number
+  creanObjet: string
+  creanTauxic: string
+  creanTauxir: string
+  creanNbech: string
+  creanDateft: Date
+  creanDatech: Date
+  creanDuree: number
+  creanDatoctroi: Date
+  creanStatrecouv: string
+  creanDatrec: Date
+  creanDatecrea: Date
+  creanCommStecaut: number
+  creanCodePrec: string
+  creanCodeAnc: string
+  creanUserCode: string
+  ordoCode: AcOrdonnateur
+  creanDatfin: Date
+  creanMontIcPaye: number
+  creanMotifIrrecouv: string
+  creanValide: string
+  creanDateCtl: Date
+  creanCodeCharg: string
+  creanMajDate: Date
+  creanTropPercu: string
+  pcCode: string
+  categCode: string
+  creanMontAncInit: number
+  delegCode: string
+  typeTitreCode: AcTypeTitreRecette
+  creanRef: string
+  cpteCliNum: number
+  creanUserCpte: string
+  creanDateCpte: Date
+  cpteRegrp: string
+  cptoperCode: string
+  creanClasse: string
+  typoperCode: string
+  creanOp: string
+  creanIdentAgtresor: string
+  creanStab: string
+  creanSoldAvantLiq: string
 
 }
 
