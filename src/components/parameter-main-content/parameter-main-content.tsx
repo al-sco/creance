@@ -23,7 +23,7 @@ const StyledParameterMainContent = styled.div`
     padding: 2% 3.5% 3.5% 3.5%;
     height:100vh;
     overflow-y: hidden;
-    background-color: ${colors.white};
+    background-color: ${colors.background};
 `;
 
 const ParameterMainContent = ({ colums, subMenu }: ParameterMainContentProps) => {

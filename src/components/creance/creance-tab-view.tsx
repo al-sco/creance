@@ -45,11 +45,10 @@ const CreanceTabsView = ({ tabs, state }: CreanceTabsViewProps) => {
         } else {
             const _ = e as CreanceColumnType
             return (
-                <Input w="90%" name={_.key} placeholder={_.label} size='lg' />
+                <Input width='auto' name={_.key} placeholder={_.label} size='lg' />
             )
         }
     }
-
 
     const buildTableContent = (tabs: CreanceTabType[]): JSX.Element => {
         return <TabPanels>

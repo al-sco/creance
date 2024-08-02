@@ -12,7 +12,7 @@ type CreanceInputsViewProps = {
     isInputLeftAddOnHidden?: boolean
 }
 
-const CreanceInputsView = ({ fields, isInputLeftAddOnHidden }: CreanceInputsViewProps) => {
+const CreanceInputsView = ({ fields, repeatGridValue, isInputLeftAddOnHidden }: CreanceInputsViewProps) => {
     useSignals()
 
     const switchInputType = ({ inputItem, state, key, onInsert }: CreanceFieldType): JSX.Element => {
@@ -35,7 +35,7 @@ const CreanceInputsView = ({ fields, isInputLeftAddOnHidden }: CreanceInputsView
         }
     }
     // ${repeatGridValue ?? 3}
-    let columns=Math.round((fields.length/3))
+    let columns=Math.round((fields.length/(repeatGridValue?? 3)))
     return (<Grid gridAutoFlow="column" gridTemplateRows={`repeat(${columns}, 1fr)`} gap={4}>
         {fields.map((e: CreanceFieldType) => <Flex>
             <GridItem w={e.inputItem && e.inputItem.placeholder ? '100%' : ''} h='10'>
