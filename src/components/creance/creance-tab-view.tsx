@@ -19,10 +19,11 @@ const thStyle = {
 };
 
 const BaseStyledTable = styled.div`
-    padding: 12px;
-    border-radius: 12px;
+    padding: 14px;
+    border-radius: 10px;
     height: 80%;
-    width: 100%;
+    width: 100%;    
+    /* background-color: ${colors.red}; */
     border: 1px solid ${colors.tableBorder};
     overflow-y: scroll;
     overflow-x: scroll;
@@ -67,7 +68,7 @@ const CreanceTabsView = ({ tabs, state }: CreanceTabsViewProps) => {
                                 {tableContent && <Tr>
                                     {
                                         tableContent.map((column, i) => (
-                                            <Td
+                                            <Td 
                                                 key={i}>
                                                 {buildColumn(column)}
                                             </Td>

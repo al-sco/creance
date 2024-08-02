@@ -41,7 +41,7 @@ const CreanceInputsView = ({ fields, repeatGridValue, isInputLeftAddOnHidden }: 
             <GridItem w={e.inputItem && e.inputItem.placeholder ? '100%' : ''} h='10'>
                 <InputGroup style={{
                     alignItems: "center",
-                    display: 'grid', gridTemplateColumns: e.selectItems && e.inputItem ? '1fr 1fr 1fr' : '1fr 3fr'
+                    display: 'grid', gridTemplateColumns: '1fr auto auto'
                 }}>
                     {
                         isInputLeftAddOnHidden && isInputLeftAddOnHidden ? <></> :
