@@ -25,6 +25,7 @@ const BaseStyledTable = styled.div`
   width: 100%;
   border: 1px solid ${colors.tableBorder};
   overflow-y: scroll;
+  background-color: ${colors.white};
   overflow-x: scroll;
 `;
 

@@ -27,7 +27,7 @@ type NonEditableTableRowProps = TableRowProps & TableRowFuncType
 
 export const TableRow = ({ index, columns, onDeletePressed, onEditPressed, data }: NonEditableTableRowProps) => {
     return (
-        <Tr  bg={index % 2 == 0 ? undefined : colors.lightGreen}>{
+        <Tr bg={index % 2 == 0 ? undefined : colors.gray}>{
             columns.map((column, i) => (
                 <Td 
                     key={i}>
