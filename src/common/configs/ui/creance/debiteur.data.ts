@@ -575,7 +575,7 @@ const debiteurTabs: CreanceTabType[] = [
         name: "Banque Agence",
         key: 'bqagCode',
         state: acDomiciliationStateProvider.getState(),
-        onInsert: acDomiciliationStateProvider.simpleInsert,
+        onInsert: acDomiciliationStateProvider.setBanqueAgenceCode,
         inputItem: {
           inputType: InputType.text,
           isEditable: false,
@@ -585,8 +585,7 @@ const debiteurTabs: CreanceTabType[] = [
       },
       {
         name: "Banque",
-        key: 'banque?',
-        onInsert: acDomiciliationStateProvider.simpleInsert,
+        key: 'banque',
         state: acDomiciliationStateProvider.getState(),
         inputItem: {
           inputType: InputType.text,

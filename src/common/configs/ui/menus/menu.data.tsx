@@ -139,14 +139,14 @@ const menuItemsData: Array<MenuItemType> = [
     subMenu: [
       {
         name: "Agence de banque",
-        loader: async()=>{
+        loader: async () => {
           acBanqueAgenceProvider.setCurrentSelectedBanque(undefined)
           return await acBanqueAgenceProvider.findRequiredState([acBanqueProvider])
         },
         nameHeader: "Agence",
         dataProvider: acBanqueAgenceProvider.filteredAgenceBanque,
         handleDelete: acBanqueAgenceProvider.delete,
-        additionalHeaderRender: () => <ListableSearchableItemComponent handleResultSelection={acBanqueAgenceProvider.setCurrentSelectedBanque}  data={acBanqueProvider.getSelectItems()} asSearchField={false} placeholder="Rechercher une banque" searchPlaceholder="Exemple: Ecobank" />,
+        additionalHeaderRender: () => <ListableSearchableItemComponent handleResultSelection={acBanqueAgenceProvider.setCurrentSelectedBanque} data={acBanqueProvider.getSelectItems()} asSearchField={false} placeholder="Rechercher une banque" searchPlaceholder="Exemple: Ecobank" />,
         handleEdit: acBanqueAgenceProvider.update,
         create: acBanqueAgenceProvider.create,
         nameColumn: "",
@@ -553,7 +553,7 @@ const menuItemsData: Array<MenuItemType> = [
         handleDelete: acEntiteProvider.delete,
         handleEdit: acEntiteProvider.update,
         headers: [
-          
+
           {
             key: "code",
             label: "Code",
@@ -563,13 +563,13 @@ const menuItemsData: Array<MenuItemType> = [
             label: "Libelle",
           },
           {
-          key: "responsable",
-          label: "Responsable ou Fondé de pourvoirs",
-        },
-        {
-          key: "libelleLong",
-          label: "Libellé Long",
-        }, ],
+            key: "responsable",
+            label: "Responsable ou Fondé de pourvoirs",
+          },
+          {
+            key: "libelleLong",
+            label: "Libellé Long",
+          },],
         columns: [
           {
             key: "code",
@@ -746,12 +746,12 @@ const menuItemsData: Array<MenuItemType> = [
         name: "Groupe Créance",
         nameColumn: "Gestion des Groupes de Creance",
         dataProvider: acGroupeCreanceProvider.filteredEntites,
-        loader: async()=>{
+        loader: async () => {
           acGroupeCreanceProvider.setCurrentSelectedEntite(undefined)
           return await acGroupeCreanceProvider.findRequiredState([acEntiteProvider])
         },
         create: acGroupeCreanceProvider.create,
-        additionalHeaderRender: () => <ListableSearchableItemComponent handleResultSelection={acGroupeCreanceProvider.setCurrentSelectedEntite}  data={acEntiteProvider.getSelectItems()}  asSearchField={false} placeholder="Rechercher une entité" searchPlaceholder="Exemple: Entité" />,
+        additionalHeaderRender: () => <ListableSearchableItemComponent handleResultSelection={acGroupeCreanceProvider.setCurrentSelectedEntite} data={acEntiteProvider.getSelectItems()} asSearchField={false} placeholder="Rechercher une entité" searchPlaceholder="Exemple: Entité" />,
         handleDelete: acGroupeCreanceProvider.delete,
         handleEdit: acGroupeCreanceProvider.update,
         nameHeader: "Gestion des Entités ACCC",
@@ -1711,8 +1711,8 @@ const menuItemsData: Array<MenuItemType> = [
             key: "typePaie",
             label: "Paie",
           },
-          
-         
+
+
 
         ],
         dataProvider: acTypeOperationProvider.getState(),
@@ -1738,7 +1738,7 @@ const menuItemsData: Array<MenuItemType> = [
             key: "typePaie",
             label: "Paie",
           },
-        
+
 
         ],
       },
@@ -1941,14 +1941,19 @@ const menuItemsData: Array<MenuItemType> = [
     subMenu: [
       {
         name: "Debiteur",
-        loader:acDebiteurProvider.find,
+        loader: async () => {
+          //TODO need to fix overloading
+          await acBanqueProvider.find()
+          await acBanqueAgenceProvider.find()
+          return await acDebiteurProvider.find()
+        },
         render: () => <CreanceMainContent data={debiteursDatas} />
       },
       {
-        name: "Creance",      
+        name: "Creance",
         render: () => <CreanceMainContent data={mainCreanceDatas} />
-      },    
-    ]   
+      },
+    ]
   },
   {
     name: "Suivi Clientèle",

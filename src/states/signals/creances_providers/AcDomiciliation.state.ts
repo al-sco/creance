@@ -1,4 +1,6 @@
-import { AcDomicialition } from "../../AcData.types";
+import { AcBanqueAgence, AcDomicialition } from "../../AcData.types";
+import acBanqueProvider from "../parameter_providers/AcBanque.state";
+import acBanqueAgenceProvider from "../parameter_providers/AcBanqueAgence.state";
 import ICrudStateProvider from "../parameter_providers/ICrudStateProvider";
 
 
@@ -42,6 +44,12 @@ class AcDomicialitionStateProvider extends ICrudStateProvider<AcDomicialition> {
   simpleInsert = (key: string, value: any): void => {
     let state = this.getState();
     state.value = { ...state.value, ...{ [key]: value } };
+    console.log(state.value)
+  };
+
+  setBanqueAgenceCode = (key: string, value: any): void => {
+    let state = this.getState();
+    state.value = { ...state.value, ...{ [key]: value, 'banque': acBanqueProvider.getBanqueFromId(acBanqueAgenceProvider.getAgenceBanqueById(value)?.bqCode) } };
     console.log(state.value)
   };
 }
