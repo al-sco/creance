@@ -3,11 +3,12 @@ import {
   CreanceStaticDataType,
   SelectItem,
 } from "../../../common/configs/ui/creance/creance.type";
-import { AcDebiteur } from "../../AcData.types";
+import { AcDebiteur, AcDebiteurMoral, AcDebiteurPhysique } from "../../AcData.types";
 import ICrudStateProvider from "../parameter_providers/ICrudStateProvider";
 import { getUrl } from "../../../common/configs/api/api_configs";
 import { signal } from "@preact/signals-react";
 import acDebiteurMoralProvider from "./AcDebiteurMoral.state";
+import acDebiteurPhysiqueProvider from "./AcDebiteurPhysique.state";
 
 type ReturnProvider = () => Promise<SelectItem[]>;
 export class AcDebiteurStateProvider extends ICrudStateProvider<AcDebiteur> {
@@ -127,6 +128,7 @@ export class AcDebiteurStateProvider extends ICrudStateProvider<AcDebiteur> {
       state.value = { ...{ [key]: value }, ...existingDebiteur };
 
       acDebiteurMoralProvider.findOne(parseInt(value))
+      acDebiteurPhysiqueProvider.findOne(parseInt(value))
       return;
     }
     state.value = { ...{ [key]: value } };
@@ -153,26 +155,30 @@ export class AcDebiteurStateProvider extends ICrudStateProvider<AcDebiteur> {
   };
 
 
-  createDebiteurFully = (providers: ICrudStateProvider<any>[]) => {
-    return async (_: any): Promise<void> => {
-      let debCode = (this.getState().value as any)["code"]
-      if (!debCode) {
-        let debiteur = await this.create({})
-        console.log(debiteur)
-        if (debiteur) {
-          for (let provider of providers) {
-            await provider.create({ debCode: debiteur.id })
-          }
+  createDebiteurFully = async (): Promise<void> => {
+    let debCode = (this.getState().value as any)["code"]
+    if (!debCode) {
+      let debiteur = await this.create({})
+      console.log(debiteur)
+      if (debiteur) {
+
+        if (debiteur.typdebCode == 'M') {
+          await acDebiteurMoralProvider.create({ debCode: debiteur.id } as AcDebiteurMoral)
+        }
+        else if (debiteur.typdebCode == 'P') {
+          let data = { debiteurCode: parseInt(debiteur.id), id: parseInt(debiteur.id) } as AcDebiteurPhysique;
+          await acDebiteurPhysiqueProvider.create(data)
         }
         return;
       }
 
       await this.update({})
-      for (let provider of providers) {
-        await provider.update({ debCode: debCode })
-      }
+      // for (let provider of providers) {
+      //   await provider.update({ debCode: debCode })
+      // }
     }
   }
+
 }
 
 const acDebiteurProvider = new AcDebiteurStateProvider("/debiteur", {});
