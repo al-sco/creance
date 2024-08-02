@@ -44,7 +44,7 @@ const CreanceMainContent = ({ data, hasNoHeader }: CreanceMainContentProps): JSX
                 <StyledTitle>
                     {data.title}
                 </StyledTitle>
-                <Button variant='outline' onClick={submitData} color={colors.green} size='lg' style={{ border: `1px solid ${colors.green}` }}>Ajouter</Button>
+                <Button variant='outline' onClick={submitData} _hover={{color: colors.white, backgroundColor: colors.bleu}} _active={colors.green} size="lg" color={colors.bleu} bg={colors.background} border={`1.5px solid ${colors.bleu}`} >Ajouter</Button>
             </Flex>
             }
             <Box h="20px" />
