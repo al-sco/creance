@@ -237,9 +237,6 @@ const creanceFields: CreanceFieldType[] = [
     state: acCreanceProvider.getState(),
     selectItems: booleanProvider,
     onInsert: acCreanceProvider.simpleInsert,
-    inputItem: {
-      isEditable: false,
-    },
   },
   {
     name: "Mont Ass.",

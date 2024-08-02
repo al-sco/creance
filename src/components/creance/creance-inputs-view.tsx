@@ -12,49 +12,47 @@ type CreanceInputsViewProps = {
     isInputLeftAddOnHidden?: boolean
 }
 
-const DateInputStyled = styled.div` 
-    display: flex;
-    justify-content: center;
-    padding: 0 10px 0 10px;
-`
-
-const CreanceInputsView = ({ fields, repeatGridValue, isInputLeftAddOnHidden }: CreanceInputsViewProps) => {
+const CreanceInputsView = ({ fields, isInputLeftAddOnHidden }: CreanceInputsViewProps) => {
     useSignals()
 
     const switchInputType = ({ inputItem, state, key, onInsert }: CreanceFieldType): JSX.Element => {
         switch (inputItem?.inputType) {
             case InputType.number:
                 return (<NumberInput width='100%' >
-                    <NumberInputField onChange={(e) => onInsert && onInsert(key, e.target.value)} readOnly={!inputItem.isEditable} value={(state?.value as any)[key] ?? ''}/>
+                    <NumberInputField backgroundColor={colors.white} onChange={(e) => onInsert && onInsert(key, e.target.value)} readOnly={!inputItem.isEditable} value={(state?.value as any)[key] ?? ''} />
                     <NumberInputStepper>
                         <NumberIncrementStepper />
                         <NumberDecrementStepper />
                     </NumberInputStepper>
                 </NumberInput>)
             case InputType.text:
-                return (<Input borderColor={colors.gray} onChange={(e) => onInsert && onInsert(key, e.target.value)}
+                return (<Input borderColor={colors.white} _disabled={{ backgroundColor: `${colors.white}` }} backgroundColor={colors.white} onChange={(e) => onInsert && onInsert(key, e.target.value)}
                     isRequired={true} isDisabled={!inputItem.isEditable} value={(state?.value as any)[key] ?? ''} placeholder={inputItem.placeholder} isReadOnly={!inputItem.isEditable} />)
             case InputType.date:
-                return (<DateInputStyled><input onChange={(e) => onInsert && onInsert(key, e.target.value)} aria-label="Date" type="date" /></DateInputStyled>)
+                return (<Input style={{ border: `2px solid ${colors.white}`, borderRadius: '4px', padding: '0 7px', margin: '0' }} onChange={(e) => onInsert && onInsert(key, e.target.value)} aria-label="Date" type="date" />)
             default:
                 return <></>
         }
     }
-
-    return (<Grid templateColumns={`repeat(${repeatGridValue ?? 3}, 1fr)`} gap={4}>
-        {fields.map((e: CreanceFieldType) => <Flex gap={2}>
+    // ${repeatGridValue ?? 3}
+    let columns=Math.round((fields.length/3))
+    return (<Grid gridAutoFlow="column" gridTemplateRows={`repeat(${columns}, 1fr)`} gap={4}>
+        {fields.map((e: CreanceFieldType) => <Flex>
             <GridItem w={e.inputItem && e.inputItem.placeholder ? '100%' : ''} h='10'>
-                <InputGroup>
+                <InputGroup style={{
+                    alignItems: "center",
+                    display: 'grid', gridTemplateColumns: e.selectItems && e.inputItem ? '1fr 1fr 1fr' : '1fr 3fr'
+                }}>
                     {
                         isInputLeftAddOnHidden && isInputLeftAddOnHidden ? <></> :
                             <InputLeftAddon>{e.name}</InputLeftAddon>
                     }
                     {e.inputItem && switchInputType(e)}
+                    {e.selectItems &&
+                        <SelectableItem onSelectChanged={(value) => e.onInsert && e.onInsert(e.key, value)} promisedSelectItems={e.selectItems} />
+                    }
                 </InputGroup>
             </GridItem>
-            {e.selectItems &&
-                <SelectableItem  onSelectChanged={(value) => e.onInsert && e.onInsert(e.key, value)} promisedSelectItems={e.selectItems} />
-            }
         </Flex>
         )}
     </Grid>);

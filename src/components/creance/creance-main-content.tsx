@@ -15,7 +15,7 @@ const StyledCreanceMainContent = styled.section`
     padding: 2.5% 2.5% 2.5% 2.5%;
     height: 100vh;
     overflow-y: auto;
-    background-color: ${colors.white};
+    background-color: ${colors.background};
 `
 
 const StyledTitle = styled.h1`

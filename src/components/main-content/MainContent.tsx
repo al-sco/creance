@@ -2,6 +2,7 @@ import { SubMenuItem } from '../../common/configs/ui/menus/menus.type'
 import styled from 'styled-components'
 import { signal } from '@preact/signals-react'
 import MainContentWrapper from './main-content-wrapper'
+import colors from '../../common/theme/colors/colors'
 
 type MainContentProps = {
   title: string,
@@ -12,6 +13,7 @@ type MainContentProps = {
 
 
 const StyledMainContent = styled.div`
+    background-color: ${colors.background};
 `;
 
 const MainContent = ({ subMenus, title, render}: MainContentProps) => {

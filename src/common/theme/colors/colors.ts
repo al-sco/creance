@@ -11,7 +11,8 @@ interface Colors {
     red: string,
     darkGreen: string
     lightGreen: string
-    tableBorder: string    
+    tableBorder: string
+    background: string
 }
 
 
@@ -29,6 +30,7 @@ const colors: Colors = {
     lightGreen:'#EDF7EF',
     bleu: '#3182CE',
     red: '#E53E3E',
+    background: '#DBDFEB'
 }
 
 export default colors;
