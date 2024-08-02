@@ -1,6 +1,7 @@
 import acDebiteurProvider, { AcDebiteurStateProvider, naturePieceIdentite, regimeMariageProvider, sexeProvider, statusMatrimonialProvider } from "../../../../states/signals/creances_providers/AcDebiteur.state";
 import acDebiteurMoralProvider from "../../../../states/signals/creances_providers/AcDebiteurMoral.state";
 import acDebiteurPhysiqueProvider from "../../../../states/signals/creances_providers/AcDebiteurPhysique.state";
+import acDomiciliationStateProvider from "../../../../states/signals/creances_providers/AcDomiciliation.state";
 import acBanqueAgenceProvider from "../../../../states/signals/parameter_providers/AcBanqueAgence.state";
 import acCategoryDebtorProvider from "../../../../states/signals/parameter_providers/AcCategoryDebtor.state";
 import acCiviliteProvider from "../../../../states/signals/parameter_providers/AcCivility.state";
@@ -539,8 +540,8 @@ const debiteurTabs: CreanceTabType[] = [
       {
         name: "Type",
         key: 'typdomCode',
-        state: acDebiteurProvider.getState(),
-        onInsert: acDebiteurProvider.simpleInsert,
+        state: acDomiciliationStateProvider.getState(),
+        onInsert: acDomiciliationStateProvider.simpleInsert,
         selectItems: acDebiteurProvider.getSelectItems(acTypeDomicilProvider),
         inputItem: {
           inputType: InputType.text,
@@ -551,7 +552,8 @@ const debiteurTabs: CreanceTabType[] = [
       {
         name: "N°Compte",
         key: 'nCompte?',
-        state: acDebiteurProvider.getState(),
+        state: acDomiciliationStateProvider.getState(),
+        onInsert: acDomiciliationStateProvider.simpleInsert,
         inputItem: {
           inputType: InputType.number,
           isEditable: true,
@@ -561,7 +563,8 @@ const debiteurTabs: CreanceTabType[] = [
       {
         name: "Libellé",
         key: 'domLib',
-        state: acDebiteurProvider.getState(),
+        state: acDomiciliationStateProvider.getState(),
+        onInsert: acDomiciliationStateProvider.simpleInsert,
         inputItem: {
           inputType: InputType.text,
           isEditable: true,
@@ -571,19 +574,20 @@ const debiteurTabs: CreanceTabType[] = [
       {
         name: "Banque Agence",
         key: 'bqagCode',
-        state: acDebiteurProvider.getState(),
+        state: acDomiciliationStateProvider.getState(),
+        onInsert: acDomiciliationStateProvider.simpleInsert,
         inputItem: {
           inputType: InputType.text,
           isEditable: false,
           placeholder: "bq. agence",
         },
-        onInsert: acDebiteurProvider.simpleInsert,
         selectItems: acDebiteurProvider.getSelectItems(acBanqueAgenceProvider),
       },
       {
         name: "Banque",
         key: 'banque?',
-        state: acDebiteurProvider.getState(),
+        onInsert: acDomiciliationStateProvider.simpleInsert,
+        state: acDomiciliationStateProvider.getState(),
         inputItem: {
           inputType: InputType.text,
           isEditable: false,
