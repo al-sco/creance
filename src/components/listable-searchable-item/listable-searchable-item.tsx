@@ -79,13 +79,13 @@ const ListableSearchableItemComponent = ({ placeholder, searchPlaceholder, asSea
   }
 
   return asSearchField ?
-    <Button w='500px' size='none' bg={colors.lightGreen} style={{ boxShadow: `.3px .3px 2px ${colors.green}, .3px .3px 2px ${colors.green}` }}>
+    <Button w='500px' size='bg' bg={colors.lightGreen} style={{ boxShadow: `.3px .3px 2px ${colors.green}, .3px .3px 2px ${colors.green}` }}>
       <SearchFieldStyled>
-        <InputGroup border='none' p={0}>
+        <InputGroup border='transparent' p={0}>
           <InputLeftElement pointerEvents='none'>
             <SearchIcon color={colors.lightGray} /> <Box w='10px ' />
           </InputLeftElement>
-          <Input type='tel' onChange={handleSearch} ref={searchRef} focusBorderColor="transparent" placeholder='rechercher ici' />
+          <Input type='tel' onChange={handleSearch} ref={searchRef} focusBorderColor="transparent" placeholder='Effectuer une recherche' />
         </InputGroup>
       </SearchFieldStyled>
 

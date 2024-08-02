@@ -1,6 +1,5 @@
 import { Button, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerFooter, DrawerHeader, DrawerOverlay, extendTheme, Input, useDisclosure } from "@chakra-ui/react"
 import colors from "../common/theme/colors/colors";
-import styled from "styled-components";
 
 
 type DrawerProps = {
@@ -23,11 +22,11 @@ export const DrawerComponent = ({ child, title }: DrawerProps): JSX.Element => {
                 isOpen={isOpen}
                 placement='right'
                 onClose={onClose}
-                variant='secondary'                
+                variant='secondary'                                
             // finalFocusRef={btnRef}                
             >
                 <DrawerOverlay />
-                <DrawerContent>
+                <DrawerContent backgroundColor={colors.background}>
                     <DrawerCloseButton />
                     <DrawerHeader>{title}</DrawerHeader>
                     <DrawerBody style={{overflow: 'hidden'}}>
