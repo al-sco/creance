@@ -25,6 +25,22 @@ export type AcCptOperation = {
   codeGroupeCreance: string;
 };
 
+
+
+export type AcAssurance = {
+  assureCode: string;
+  creanCode?: string; 
+  assurCode: string;
+  assurPolice?: string; 
+  assurDatdeb?: string; 
+  assurPrime?: number; 
+  assurDatsigne?: string; 
+  assurDateCtl?: string; 
+  assurUser?: string; 
+};
+
+
+
 export type AcCpteClientSonar = {
   id: String;
   cpteCliCode: String;
