@@ -20,7 +20,7 @@ import {
 const creanceFields: CreanceFieldType[] = [
   {
     name: "N°Créance",
-    key: "nCreance",
+    key: "creanCode",
     state: acCreanceProvider.getState(),
     inputItem: {
       isEditable: false,
@@ -30,7 +30,7 @@ const creanceFields: CreanceFieldType[] = [
   },
   {
     name: "Débiteur",
-    key: "debiteur",
+    key: "debCode",
     state: acCreanceProvider.getState(),
     inputItem: {
       inputType: InputType.text,
@@ -43,7 +43,7 @@ const creanceFields: CreanceFieldType[] = [
 
   {
     name: "Périodicité",
-    key: "periodicite",
+    key: "periodCode",
     onInsert: acCreanceProvider.simpleInsert,
     selectItems: acCreanceProvider.getSelectItems(acPeriodiciteProvider),
     state: acCreanceProvider.getState(),
@@ -55,7 +55,7 @@ const creanceFields: CreanceFieldType[] = [
   },
   {
     name: "Grpe Creance",
-    key: "groupeCreance",
+    key: "grpCreanCode",
     state: acCreanceProvider.getState(),
     onInsert: acCreanceProvider.simpleInsert,
     selectItems: acCreanceProvider.getSelectItems(acGroupeCreanceProvider),
@@ -67,7 +67,7 @@ const creanceFields: CreanceFieldType[] = [
   },
   {
     name: "Objet Créance",
-    key: "objectCreance",
+    key: "creanObjet",
     state: acCreanceProvider.getState(),
     onInsert: acCreanceProvider.simpleInsert,
 
@@ -79,7 +79,7 @@ const creanceFields: CreanceFieldType[] = [
   },
   {
     name: "Type d'Objet",
-    key: "typeObject",
+    key: "objCreanCode",
     state: acCreanceProvider.getState(),
     onInsert: acCreanceProvider.simpleInsert,
 
@@ -93,7 +93,7 @@ const creanceFields: CreanceFieldType[] = [
 
   {
     name: "Capital Initial",
-    key: "capitalInitial",
+    key: "creanCapitInit",
     state: acCreanceProvider.getState(),
     onInsert: acCreanceProvider.simpleInsert,
     inputItem: {
@@ -104,7 +104,7 @@ const creanceFields: CreanceFieldType[] = [
   },
   {
     name: "Mont. Dû",
-    key: "montantDu",
+    key: "creanMontDu",
     state: acCreanceProvider.getState(),
     onInsert: acCreanceProvider.simpleInsert,
     inputItem: {
@@ -116,7 +116,7 @@ const creanceFields: CreanceFieldType[] = [
 
   {
     name: "Entité",
-    key: "entite",
+    key: "entiteLib",
     state: acCreanceProvider.getState(),
     inputItem: {
       isEditable: false,
@@ -126,7 +126,7 @@ const creanceFields: CreanceFieldType[] = [
   },
   {
     name: "Mont. Décaissé",
-    key: "montDecaisse",
+    key: "creanMontDebloq",
     state: acCreanceProvider.getState(),
     onInsert: acCreanceProvider.simpleInsert,
 
@@ -138,7 +138,7 @@ const creanceFields: CreanceFieldType[] = [
   },
   {
     name: "Total Dû",
-    key: "totalDu",
+    key: "totalDu ?",
     state: acCreanceProvider.getState(),
     inputItem: {
       isEditable: false,
@@ -148,7 +148,7 @@ const creanceFields: CreanceFieldType[] = [
   },
   {
     name: "Mont. Déja Remb.",
-    key: "montDejaRemb",
+    key: "creanDejRemb",
     state: acCreanceProvider.getState(),
     onInsert: acCreanceProvider.simpleInsert,
     inputItem: {
@@ -159,7 +159,7 @@ const creanceFields: CreanceFieldType[] = [
   },
   {
     name: "Nb. Ech",
-    key: "nbEch",
+    key: "creanNbech",
     state: acCreanceProvider.getState(),
     onInsert: acCreanceProvider.simpleInsert,
     inputItem: {
@@ -170,7 +170,7 @@ const creanceFields: CreanceFieldType[] = [
   },
   {
     name: "Mont. Impayé",
-    key: "montImpaye",
+    key: "creanMontImpaye",
     state: acCreanceProvider.getState(),
     inputItem: {
       isEditable: false,
@@ -180,7 +180,7 @@ const creanceFields: CreanceFieldType[] = [
   },
   {
     name: "Sté Caution",
-    key: "steCaution",
+    key: "creanCommStecaut",
     state: acCreanceProvider.getState(),
     onInsert: acCreanceProvider.simpleInsert,
     inputItem: {
@@ -191,7 +191,7 @@ const creanceFields: CreanceFieldType[] = [
   },
   {
     name: "Date Reconnais.",
-    key: "dateReconnais",
+    key: "creanDatrec",
     state: acCreanceProvider.getState(),
     onInsert: acCreanceProvider.simpleInsert,
     inputItem: {
@@ -202,7 +202,7 @@ const creanceFields: CreanceFieldType[] = [
   },
   {
     name: "Commission",
-    key: "commission",
+    key: "creanCommBanq",
     state: acCreanceProvider.getState(),
     onInsert: acCreanceProvider.simpleInsert,
     inputItem: {
@@ -213,7 +213,7 @@ const creanceFields: CreanceFieldType[] = [
   },
   {
     name: "Divers Frais",
-    key: "diversFrais",
+    key: "creanFrais",
     state: acCreanceProvider.getState(),
     onInsert: acCreanceProvider.simpleInsert,
     inputItem: {
@@ -224,7 +224,7 @@ const creanceFields: CreanceFieldType[] = [
   },
   {
     name: "Date 1ere Ech.",
-    key: "date1ereEch",
+    key: "creanDateft",
     state: acCreanceProvider.getState(),
     onInsert: acCreanceProvider.simpleInsert,
     inputItem: {
@@ -233,14 +233,14 @@ const creanceFields: CreanceFieldType[] = [
   },
   {
     name: "Stat Recouv.",
-    key: "statRecouv",
+    key: "creanStatrecouv",
     state: acCreanceProvider.getState(),
     selectItems: booleanProvider,
     onInsert: acCreanceProvider.simpleInsert,
   },
   {
     name: "Mont Ass.",
-    key: "montAss",
+    key: "creanMontAss",
     state: acCreanceProvider.getState(),
     onInsert: acCreanceProvider.simpleInsert,
     inputItem: {
@@ -251,7 +251,7 @@ const creanceFields: CreanceFieldType[] = [
   },
   {
     name: "Date Dern Ech",
-    key: "dateDernEch",
+    key: "creanDatech",
     state: acCreanceProvider.getState(),
     onInsert: acCreanceProvider.simpleInsert,
     inputItem: {
@@ -260,7 +260,7 @@ const creanceFields: CreanceFieldType[] = [
   },
   {
     name: "Encours",
-    key: "enCours",
+    key: "creanEncours",
     state: acCreanceProvider.getState(),
     onInsert: acCreanceProvider.simpleInsert,
     inputItem: {
@@ -271,7 +271,7 @@ const creanceFields: CreanceFieldType[] = [
   },
   {
     name: "N° Précédent",
-    key: "nPrecedent",
+    key: "creanCodePrec",
     state: acCreanceProvider.getState(),
     onInsert: acCreanceProvider.simpleInsert,
 
@@ -283,7 +283,7 @@ const creanceFields: CreanceFieldType[] = [
   },
   {
     name: "Date d'Octroie.",
-    key: "dateOctroie",
+    key: "creanDatoctroi",
     state: acCreanceProvider.getState(),
     onInsert: acCreanceProvider.simpleInsert,
     inputItem: {
@@ -293,7 +293,7 @@ const creanceFields: CreanceFieldType[] = [
 
   {
     name: "Date 1er Precompte.",
-    key: "date1erPrecompt",
+    key: "date1erPrecompt ?",
     state: acCreanceProvider.getState(),
     onInsert: acCreanceProvider.simpleInsert,
     inputItem: {
@@ -302,7 +302,7 @@ const creanceFields: CreanceFieldType[] = [
   },
   {
     name: "N° Ancien",
-    key: "nAncien",
+    key: "creanCodeAnc",
     state: acCreanceProvider.getState(),
     onInsert: acCreanceProvider.simpleInsert,
 
@@ -315,7 +315,7 @@ const creanceFields: CreanceFieldType[] = [
 
   {
     name: "Type Structure",
-    key: "typestructure",
+    key: "typeStructOrgcode",
     state: acCreanceProvider.getState(),
     onInsert: acCreanceProvider.simpleInsert,
     inputItem: {
@@ -326,7 +326,7 @@ const creanceFields: CreanceFieldType[] = [
   },
   {
     name: "Int. conv. %",
-    key: "intConv",
+    key: "creanMontIc",
     state: acCreanceProvider.getState(),
     onInsert: acCreanceProvider.simpleInsert,
     inputItem: {
@@ -337,7 +337,7 @@ const creanceFields: CreanceFieldType[] = [
   },
   {
     name: "Int. Ret.",
-    key: "intRet",
+    key: "creanMontIr",
     state: acCreanceProvider.getState(),
     onInsert: acCreanceProvider.simpleInsert,
     inputItem: {
@@ -349,7 +349,7 @@ const creanceFields: CreanceFieldType[] = [
   {
     name: "Mont. Inv Conv. Payé",
     onInsert: acCreanceProvider.simpleInsert,
-    key: "montInvConvPaye",
+    key: "creanMontIcPaye",
     state: acCreanceProvider.getState(),
     inputItem: {
       isEditable: true,
@@ -359,7 +359,7 @@ const creanceFields: CreanceFieldType[] = [
   },
   {
     name: "Pénalité 1%",
-    key: "penalite1",
+    key: "creanPenalite",
     state: acCreanceProvider.getState(),
     inputItem: {
       isEditable: false,
@@ -369,7 +369,7 @@ const creanceFields: CreanceFieldType[] = [
   },
   {
     name: "Total à recouvrer",
-    key: "totalARecouv",
+    key: "totalARecouv ?",
     state: acCreanceProvider.getState(),
     inputItem: {
       isEditable: false,
@@ -379,21 +379,21 @@ const creanceFields: CreanceFieldType[] = [
   },
   {
     name: "Crean Sold Avt Liq",
-    key: "cranSoldAvtLiq",
+    key: "creanSoldAvantLiq",
     state: acCreanceProvider.getState(),
     onInsert: acCreanceProvider.simpleInsert,
     selectItems: booleanProvider,
   },
   {
     name: "Class Créance",
-    key: "classCreance",
+    key: "creanClasse",
     state: acCreanceProvider.getState(),
     onInsert: acCreanceProvider.simpleInsert,
     selectItems: classCreanceProvider,
   },
   {
     name: "Mont à Remb.",
-    key: "montARemb",
+    key: "montARemb ?",
     state: acCreanceProvider.getState(),
     inputItem: {
       isEditable: false,

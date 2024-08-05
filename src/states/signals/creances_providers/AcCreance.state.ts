@@ -7,8 +7,9 @@ import acDebiteurProvider from "./AcDebiteur.state";
 class AcCreanceStateProvider extends ICrudStateProvider<AcCreance> {
   mapDataToJson(data: AcCreance): {} {
     return {
-      creanCode: data["id"],
-      periodCode: data.categCode,
+      creanCode: data.categCode,
+      periodCode: data["periodCode"],
+      entiteLib: data["entiteLib"],
       objCreanCode: data["objCreanCode"],
       creanCodeGlob: data["creanCodeGlob"],
       debCode: data["debCode"],
@@ -54,6 +55,8 @@ class AcCreanceStateProvider extends ICrudStateProvider<AcCreance> {
       delegCode: data["delegCode"],
       creanRef: data["creanRef"],
       cpteCliNum: data["cpteCliNum"],
+      typeStructOrgcode: data["typeStructOrgcode"],
+      typeStructOrglib: data["typeStructOrglib"],
       creanUserCpte: data["creanUserCpte"],
       creanDateCpte: data["creanDateCpte"],
       cpteRegrp: data["cpteRegrp"],
@@ -127,7 +130,8 @@ class AcCreanceStateProvider extends ICrudStateProvider<AcCreance> {
       creanIdentAgtresor: json["creanIdentAgtresor"],
       creanStab: json["creanStab"],
       creanSoldAvantLiq: json["creanSoldAvantLiq"],
-      grpCreanCode: json["grpCreanCode"]
+      grpCreanCode: json["grpCreanCode"],
+      periodCode: json["periodCode"]
     };
   }
   
