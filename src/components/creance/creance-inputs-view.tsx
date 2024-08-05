@@ -36,12 +36,12 @@ const CreanceInputsView = ({ fields, repeatGridValue, isInputLeftAddOnHidden }: 
     }
     // ${repeatGridValue ?? 3}
     let columns=Math.round((fields.length/(repeatGridValue?? 3)))
-    return (<Grid gridAutoFlow="column" gridTemplateRows={`repeat(${columns}, 1fr)`} gap={4}>
+    return (<Grid gridAutoFlow="column" gridTemplateRows={`repeat(${columns}, 1fr)`} gap={4} overflowX={"scroll"} overflowY={"scroll"}  >
         {fields.map((e: CreanceFieldType) => <Flex>
             <GridItem w={e.inputItem && e.inputItem.placeholder ? '100%' : ''} h='10'>
                 <InputGroup style={{
                     alignItems: "center",
-                    display: 'grid', gridTemplateColumns: '1fr auto auto'
+                    display: 'grid', gridTemplateColumns: 'auto 1fr auto',
                 }}>
                     {
                         isInputLeftAddOnHidden && isInputLeftAddOnHidden ? <></> :

@@ -12,9 +12,11 @@ type CreanceMainContentProps = {
 }
 
 const StyledCreanceMainContent = styled.section`
-    padding: 2.5% 2.5% 2.5% 2.5%;
+    padding: 2.5% 2.5% 10.5% 2.5%;
     height: 100vh;
-    overflow-y: auto;
+    width: 100vw;
+    overflow-y: scroll;
+    overflow-x: "scroll";
     background-color: ${colors.background};
 `
 
