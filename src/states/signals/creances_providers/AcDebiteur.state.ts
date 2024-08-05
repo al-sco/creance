@@ -203,11 +203,11 @@ export const regimeMariageProvider = async (): Promise<SelectItem[]> => {
   const regimeMariage: Array<CreanceStaticDataType> = [
     {
       label: "Communaute de biens",
-      value: "communauteDeBiens",
+      value: "C",
     },
     {
       label: "Separation de bien",
-      value: "separationDeBien",
+      value: "S",
     },
   ];
   return regimeMariage.map((s) => ({ title: s.label, value: s.value }));
