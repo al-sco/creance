@@ -83,7 +83,7 @@ class AcCreanceStateProvider extends ICrudStateProvider<AcCreance> {
       creanSoldeInit: json["creanSoldeInit"],
       creanMontImpaye: json["creanMontImpaye"],
       creanMontIc: json["creanMontIc"],
-      creanMontIr: json["creanMontIr"],
+      creanMontIr: json["creanMontIr"], 
       creanMontAss: json["creanMontAss"],
       creanMontDebloq: json["creanMontDebloq"],
       creanFrais: json["creanFrais"],

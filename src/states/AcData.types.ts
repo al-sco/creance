@@ -133,6 +133,18 @@ export type AcParam = ParameterBaseData & {
   valeur: string;
   commentaire: string;
 };
+
+export type AcPiece = {
+  pieceCode: string;
+  typePieceCode: string;
+  creanCode: string;
+  pieceLib?: string; 
+  pieceRef?: string; 
+  pieceDateRecept?: string; 
+  pieceDateEmis?: string; 
+};
+
+
 export type AcPosteComptable = ParameterBaseData;
 
 export type AcProfession = ParameterBaseData;
