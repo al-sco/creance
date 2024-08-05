@@ -141,6 +141,23 @@ export type Cloture = {
   cloture: "CLOTURE";
 };
 
+export type AcGarReelle = {
+  id: string;
+  terCode?: string; 
+  creanCode: string;
+  logeCode?: string; 
+  typgarReelCode: string;
+  gareelLib?: string; 
+  gareelObjNum?: string; 
+  gareelModeAcq?: string; 
+  gareelObjMont?: number; 
+  gareelDatinscrip?: string; 
+  gareelDateCtl?: string; 
+  gareelType?: string; 
+  gareelNumSerieType?: string; 
+};
+
+
 export type AcExercice = {
   id: number;
   libelle: string;
