@@ -17,6 +17,83 @@ import {
   InputType,
 } from "./creance.type";
 
+
+const defaultGarantiesPersonnells = [
+  {
+    name: "Type",
+    key: "type",
+    selectItems: acDebiteurProvider.getSelectItems(acTypeDomicilProvider),
+  },
+  {
+    name: "Employeur",
+    key: "emp",
+    selectItems: acDebiteurProvider.getSelectItems(acTypeDomicilProvider),
+  },
+  {
+    name: "Status Sal.",
+    key: "status",
+    selectItems: acDebiteurProvider.getSelectItems(acTypeDomicilProvider),
+  },
+  {
+    name: "Quartier",
+    key: "quartier",
+    selectItems: acDebiteurProvider.getSelectItems(acTypeDomicilProvider),
+  },
+  {
+    name: "Priorité",
+    key: "priorité",
+    state: acDebiteurProvider.getState(),
+    inputItem: {
+      inputType: InputType.text,
+      isEditable: true,
+    },
+  },
+  {
+    name: "Nom",
+    key: "nom",
+    state: acDebiteurProvider.getState(),
+    inputItem: {
+      inputType: InputType.text,
+      isEditable: true,
+    },
+  },
+  {
+    name: "Prénoms",
+    key: "prénoms",
+    state: acDebiteurProvider.getState(),
+    inputItem: {
+      inputType: InputType.text,
+      isEditable: true,
+    },
+  },
+  {
+    name: "Date d'inscription",
+    key: "dateInscription",
+    state: acDebiteurProvider.getState(),
+    inputItem: {
+      inputType: InputType.date,
+    },
+  },
+  {
+    name: "Fonction",
+    key: "fonction",
+    selectItems: acDebiteurProvider.getSelectItems(acTypeDomicilProvider),
+  },
+  {
+    name: "Profession",
+    key: "profession",
+    selectItems: acDebiteurProvider.getSelectItems(acTypeDomicilProvider),
+  },
+  {
+    name: "Addresse postal",
+    key: "addr",
+    state: acDebiteurProvider.getState(),
+    inputItem: {
+      inputType: InputType.text,
+      isEditable: true,
+    },
+  },
+]
 const creanceFields: CreanceFieldType[] = [
   {
     name: "N°Créance",
@@ -403,6 +480,57 @@ const creanceFields: CreanceFieldType[] = [
   },
 ];
 
+const defaultPieceTabRow = [
+  {
+    name: "Pièce",
+    key: "typePiece",
+    state: acDebiteurProvider.getState(),
+    inputItem: {
+      inputType: InputType.text,
+      isEditable: false,
+      placeholder: "type",
+    },
+    selectItems: acDebiteurProvider.getSelectItems(acTypeDomicilProvider),
+  },
+  {
+    name: "Reférence",
+    key: "ref",
+    state: acDebiteurProvider.getState(),
+    inputItem: {
+      inputType: InputType.text,
+      isEditable: true,
+      placeholder: "reference",
+    },
+  },
+  {
+    name: "Libellé",
+    key: "libelle",
+    state: acDebiteurProvider.getState(),
+    inputItem: {
+      inputType: InputType.text,
+      isEditable: true,
+      placeholder: "libelle",
+    },
+  },
+  {
+    name: "Date Emission",
+    key: "dateEmi",
+    state: acDebiteurProvider.getState(),
+    inputItem: {
+      inputType: InputType.date,
+      isEditable: false,
+    },
+  },
+  {
+    name: "Date Reception",
+    key: "dateRec",
+    state: acDebiteurProvider.getState(),
+    inputItem: {
+      inputType: InputType.date,
+      isEditable: false,
+    },
+  },
+];
 const creanceTabs: CreanceTabType[] = [
   {
     tabName: "Pièce",
@@ -414,57 +542,9 @@ const creanceTabs: CreanceTabType[] = [
       "Date Emission",
       "Date Reception",
     ],
-    tableContent: [
-      {
-        name: "Pièce",
-        key: "typePiece",
-        state: acDebiteurProvider.getState(),
-        inputItem: {
-          inputType: InputType.text,
-          isEditable: false,
-          placeholder: "type",
-        },
-        selectItems: acDebiteurProvider.getSelectItems(acTypeDomicilProvider),
-      },
-      {
-        name: "Reférence",
-        key: "ref",
-        state: acDebiteurProvider.getState(),
-        inputItem: {
-          inputType: InputType.text,
-          isEditable: true,
-          placeholder: "reference",
-        },
-      },
-      {
-        name: "Libellé",
-        key: "libelle",
-        state: acDebiteurProvider.getState(),
-        inputItem: {
-          inputType: InputType.text,
-          isEditable: true,
-          placeholder: "libelle",
-        },
-      },
-      {
-        name: "Date Emission",
-        key: "dateEmi",
-        state: acDebiteurProvider.getState(),
-        inputItem: {
-          inputType: InputType.date,
-          isEditable: false,
-        },
-      },
-      {
-        name: "Date Reception",
-        key: "dateRec",
-        state: acDebiteurProvider.getState(),
-        inputItem: {
-          inputType: InputType.date,
-          isEditable: false,
-        },
-      },
-    ],
+
+    hasAddButton: true,
+    tableContent: defaultPieceTabRow,
   },
   {
     tabName: "Garantie Personnelle",
@@ -488,82 +568,8 @@ const creanceTabs: CreanceTabType[] = [
       "Profession",
       "Adress Postale",
     ],
-    tableContent: [
-      {
-        name: "Type",
-        key: "type",
-        selectItems: acDebiteurProvider.getSelectItems(acTypeDomicilProvider),
-      },
-      {
-        name: "Employeur",
-        key: "emp",
-        selectItems: acDebiteurProvider.getSelectItems(acTypeDomicilProvider),
-      },
-      {
-        name: "Status Sal.",
-        key: "status",
-        selectItems: acDebiteurProvider.getSelectItems(acTypeDomicilProvider),
-      },
-      {
-        name: "Quartier",
-        key: "quartier",
-        selectItems: acDebiteurProvider.getSelectItems(acTypeDomicilProvider),
-      },
-      {
-        name: "Priorité",
-        key: "priorité",
-        state: acDebiteurProvider.getState(),
-        inputItem: {
-          inputType: InputType.text,
-          isEditable: true,
-        },
-      },
-      {
-        name: "Nom",
-        key: "nom",
-        state: acDebiteurProvider.getState(),
-        inputItem: {
-          inputType: InputType.text,
-          isEditable: true,
-        },
-      },
-      {
-        name: "Prénoms",
-        key: "prénoms",
-        state: acDebiteurProvider.getState(),
-        inputItem: {
-          inputType: InputType.text,
-          isEditable: true,
-        },
-      },
-      {
-        name: "Date d'inscription",
-        key: "dateInscription",
-        state: acDebiteurProvider.getState(),
-        inputItem: {
-          inputType: InputType.date,
-        },
-      },
-      {
-        name: "Fonction",
-        key: "fonction",
-        selectItems: acDebiteurProvider.getSelectItems(acTypeDomicilProvider),
-      },
-      {
-        name: "Profession",
-        key: "profession",
-        selectItems: acDebiteurProvider.getSelectItems(acTypeDomicilProvider),
-      },
-      {
-        name: "Addresse postal",
-        key: "addr",
-        state: acDebiteurProvider.getState(),
-        inputItem: {
-          inputType: InputType.text,
-          isEditable: true,
-        },
-      },
-    ],
+    hasAddButton: true,
+    tableContent: defaultGarantiesPersonnells,
   },
   {
     tabName: "Garanties Réelles",
@@ -588,6 +594,7 @@ const creanceTabs: CreanceTabType[] = [
       "Logement",
       "Code",
     ],
+    hasAddButton: true,
     tableContent: [
       {
         name: "Type",
@@ -711,6 +718,8 @@ const creanceTabs: CreanceTabType[] = [
     ],
   }
 ];
+
+
 
 export const mainCreanceDatas: CreanceDataType = {
   title: "Etude créance",

@@ -19,16 +19,16 @@ export type CreanceInputItem = {
 
 export type CreanceFieldType = {
   name: string;
-  key:string,
-  onInsert?:(key:string,value:any)=>void
+  key: string,
+  onInsert?: (key: string, value: any) => void
   inputItem?: CreanceInputItem
-  selectItems?:()=>Promise<SelectItem[]>
-  state?:Signal<{}>
+  selectItems?: () => Promise<SelectItem[]>
+  state?: Signal<{}>
 };
 
 export type CreanceDataType = {
   title: string,
-  state:Signal<{}>
+  state: Signal<{}>
   create: (data: any) => Promise<void>,
   columCount?: number
   fields: CreanceFieldType[];
@@ -47,10 +47,11 @@ export type AdditionnalContentType = {
 
 export type CreanceTabType = {
   tabName: string;
-  key:string
+  key: string
   rowCount?: number;
   tableHeaders?: string[];
   tableContent?: CreanceColumnType[] | CreanceFieldType[];
+  hasAddButton?: boolean
   fields?: CreanceFieldType[];
   additionnalContents?: AdditionnalContentType[]
 };
