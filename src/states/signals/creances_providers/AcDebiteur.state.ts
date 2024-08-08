@@ -21,7 +21,6 @@ export class AcDebiteurStateProvider extends ICrudStateProvider<AcDebiteur> {
 
   mapDataToJson(_: {}): {} {
     let state = this.getState().value as any;
-    console.log(state["code"])
     return {
       debCode: state["code"],
       categDebCode: state["categDebCode"],

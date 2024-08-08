@@ -1,12 +1,21 @@
-import { AcBanqueAgence, AcDomicialition } from "../../AcData.types";
-import acBanqueProvider from "../parameter_providers/AcBanque.state";
-import acBanqueAgenceProvider from "../parameter_providers/AcBanqueAgence.state";
+import { Signal } from "@preact/signals-react";
+import { AcDomicialition } from "../../AcData.types";
 import ICrudStateProvider from "../parameter_providers/ICrudStateProvider";
 
 
+type DomiciliationRowFieldData = {
+  rowIndex: number,
+  bqagCode: string,
+  typdomCode: string,
+  domLib: string,
+  numAccount: string,
+}
 
 
 class AcDomicialitionStateProvider extends ICrudStateProvider<AcDomicialition> {
+
+  fields: Signal<DomiciliationRowFieldData[]> = new Signal()
+
   mapDataToJson(data: AcDomicialition): {} {
     return {
       domCode: data["domCode"],
@@ -41,19 +50,12 @@ class AcDomicialitionStateProvider extends ICrudStateProvider<AcDomicialition> {
     };
   }
 
-  simpleInsert = (key: string, value: any): void => {
-    let state = this.getState();
-    state.value = { ...state.value, ...{ [key]: value } };
-    console.log(state.value)
-  };
 
-  setBanqueAgenceCode = (key: string, value: any): void => {
-    let state = this.getState();
-    state.value = { ...state.value, ...{ [key]: value, 'banque': acBanqueProvider.getBanqueFromId(acBanqueAgenceProvider.getAgenceBanqueById(value)?.bqCode) } };
-    console.log(state.value)
-  };
+  saveFieldData = (fieldsData: DomiciliationRowFieldData[]) => {
+    this.fields.value = fieldsData
+  }
 }
 
-const acDomiciliationStateProvider = new AcDomicialitionStateProvider("/debiteur-physique", {})
+const acDomiciliationStateProvider = new AcDomicialitionStateProvider("/debiteur-physique")
 export default acDomiciliationStateProvider
 

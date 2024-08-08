@@ -16,11 +16,10 @@ const StyledMainContent = styled.div`
     background-color: ${colors.background};
 `;
 
-const MainContent = ({ subMenus, title, render}: MainContentProps) => {
+const MainContent = ({ subMenus, title, render }: MainContentProps) => {
   const isHidden = signal<boolean>(false)
 
   const handleHidden = () => {
-    console.log(isHidden.value)
     isHidden.value = !isHidden.value
   }
 

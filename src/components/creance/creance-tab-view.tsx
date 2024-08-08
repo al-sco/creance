@@ -1,6 +1,8 @@
 import {
+    Box,
     Button, GridItem,
     Input,
+    Stack,
     TabList,
     TabPanel,
     TabPanels,
@@ -27,6 +29,7 @@ import { Signal } from "@preact/signals-react";
 import { DrawerComponent } from "../drawler";
 import { AcDebiteurStateProvider } from "../../states/signals/creances_providers/AcDebiteur.state";
 import { useState } from "react"
+import { AcDomicialition } from "../../states/AcData.types";
 
 type CreanceTabsViewProps = {
     tabs?: CreanceTabType[];
@@ -59,13 +62,33 @@ const AdditionnalButtonStyled = styled.div`
 
 const BuildTabContent = ({ additionnalContents, fields, index, rowCount, tableContent, hasAddButton, tableHeaders }: { index: number, hasAddButton?: boolean, tableHeaders: string[] | undefined, tableContent: CreanceColumnType[] | CreanceFieldType[] | undefined, fields: CreanceFieldType[] | undefined, rowCount: number | undefined, additionnalContents: import("/home/genius-obed/Works/ofceab_studio/migration_accc/web_app/src/common/configs/ui/creance/creance.type").AdditionnalContentType[] | undefined }) => {
     const [tabRowCount, setTabRowCount] = useState<number>(1)
+    const rowFields = new Map<number, Signal<{}>>([
+        [
+            0, new Signal<{}>({}),
+        ]
+    ])
+
+
+
+
+    const handleTabFieldChanged = (key: string, value: any, rowIndex: number) => {
+        let rowData = rowFields.get(rowIndex)
+        if (rowData) {
+            rowData.value = { ...rowData.value, [key]: value }
+            console.log(rowData.value)
+        }
+    }
+
 
     const buildColumn = (
-        e: CreanceColumnType | CreanceFieldType
+        e: CreanceColumnType | CreanceFieldType, rowIndex?: number
     ): JSX.Element => {
         if ((e as CreanceColumnType).label === undefined) {
             return (
                 <CreanceInputsView
+                    onChanged={handleTabFieldChanged}
+                    rowIndex={rowIndex}
+                    tabRowState={hasAddButton === true ? rowFields.get(rowIndex!) : undefined}
                     isInputLeftAddOnHidden={true}
                     repeatGridValue={1}
                     fields={[e as CreanceFieldType]}
@@ -79,9 +102,19 @@ const BuildTabContent = ({ additionnalContents, fields, index, rowCount, tableCo
 
     return <TabPanel key={index}>
         {
-            hasAddButton && (<Button onClick={() => setTabRowCount(() => tabRowCount + 1)}>
-                Add
-            </Button>)
+            hasAddButton && (<Stack direction='row'>
+                <Button bg={colors.white} onClick={() => {
+                    rowFields.set(tabRowCount + 1, new Signal())
+                    setTabRowCount(() => tabRowCount + 1)
+                }}>
+                    Ajouter
+                </Button>
+                <Box w={2} />
+                <Button bg={colors.lightGreen} onClick={() => alert('Not yet defined')}>
+                    Sauvergarder
+                </Button>
+            </Stack>
+            )
         }
         <BaseStyledTable>
             <TableContainer>
@@ -94,12 +127,11 @@ const BuildTabContent = ({ additionnalContents, fields, index, rowCount, tableCo
                         </Tr>
                     </Thead>
                     <Tbody>
-
-                        {tableContent && (new Array(tabRowCount).fill(0)).map((rowIndex) => (<Tr key={rowIndex}>
+                        {tableContent && (new Array(tabRowCount).fill(0)).map((_, rowIndex) => (<Tr key={rowIndex}>
                             {tableContent!.map((column, i) => (
                                 <Td
                                     key={i}>
-                                    {buildColumn(column)}
+                                    {buildColumn(column, rowIndex)}
                                 </Td>
                             )
                             )}  </Tr>))
