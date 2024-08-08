@@ -16,20 +16,20 @@ export const DrawerComponent = ({ child, title }: DrawerProps): JSX.Element => {
             <Button colorScheme='undefined' style={{ color: colors.white, backgroundColor: colors.bleu, margin: '0 0.5rem 0 0.5rem' }} onClick={onOpen}>
                 {title}
             </Button>
-            
+
             <Drawer
                 id="drawer"
                 isOpen={isOpen}
                 placement='right'
                 onClose={onClose}
-                variant='secondary'                                
+                variant='secondary'
             // finalFocusRef={btnRef}                
             >
                 <DrawerOverlay />
                 <DrawerContent backgroundColor={colors.background}>
                     <DrawerCloseButton />
                     <DrawerHeader>{title}</DrawerHeader>
-                    <DrawerBody style={{overflow: 'hidden'}}>
+                    <DrawerBody>
                         {child}
                     </DrawerBody>
 
