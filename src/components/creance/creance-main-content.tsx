@@ -14,7 +14,8 @@ type CreanceMainContentProps = {
 const StyledCreanceMainContent = styled.section`
     padding: 2.5% 2.5% 10.5% 2.5%;
     height: 100vh;
-    width: 100vw;
+    width: 75vw;
+    padding-right: 1%;
     overflow-y: scroll;
     overflow-x: "scroll";
     background-color: ${colors.background};
@@ -50,7 +51,7 @@ const CreanceMainContent = ({ data, hasNoHeader }: CreanceMainContentProps): JSX
             </Flex>
             }
             <Box h="20px" />
-            <Grid templateColumns='repeat(1, 1fr)' gap={4}>
+            <Grid templateColumns='repeat(1, 1fr)' gap={4}   overflowX={"scroll"} >
                 <CreanceInputsView repeatGridValue={data.columCount??2} fields={data.fields} />
                 <Box h="20px" />
                 {data.tabs && <CreanceTabsView  state={data.state} tabs={data.tabs} />}
