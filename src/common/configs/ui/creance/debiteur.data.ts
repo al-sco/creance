@@ -536,6 +536,7 @@ const debiteurTabs: CreanceTabType[] = [
     tabName: "Domiciliation",
     key: AcDebiteurStateProvider.domiciliationTypeCode,
     tableHeaders: ["Type", "N°Compte", "Libellé", "Banque agence", "Banque"],
+    hasAddButton: true,
     tableContent: [
       {
         name: "Type",
