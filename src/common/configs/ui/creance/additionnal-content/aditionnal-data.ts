@@ -8,7 +8,9 @@ import acTypeDomicilProvider from "../../../../../states/signals/parameter_provi
 import { CreanceDataType, InputType } from "../creance.type";
 
 export const detailGarantisAditionnalData: CreanceDataType = {
-  create: acCreanceProvider.create,
+  create: async (data: any) => {
+    await acCreanceProvider.create(data)
+  },
   title: "",
   columCount: 2,
   state: acDebiteurProvider.getState(),
@@ -358,7 +360,9 @@ export const detailGarantisAditionnalData: CreanceDataType = {
 };
 
 export const detailTerrainAditionnalData: CreanceDataType = {
-  create: acCreanceProvider.create,
+  create: async (data: any) => {
+    await acCreanceProvider.create(data)
+  },
   title: "",
   columCount: 2,
   state: acDebiteurProvider.getState(),
@@ -576,7 +580,7 @@ export const detailTerrainAditionnalData: CreanceDataType = {
             placeholder: "numero titre foncier",
           },
         },
-     
+
         {
           name: "Circonscription",
           key: "Circonscription",
@@ -644,7 +648,9 @@ export const detailTerrainAditionnalData: CreanceDataType = {
 };
 
 export const detailLogementAditionnalData: CreanceDataType = {
-  create: acCreanceProvider.create,
+  create: async (data: any) => {
+    await acCreanceProvider.create(data)
+  },
   title: "",
   columCount: 2,
   state: acDebiteurProvider.getState(),

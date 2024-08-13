@@ -20,43 +20,43 @@ export type AcClasse = ParameterBaseData;
 
 export type AcGarantiePhy = {
   id: string;
-  profesCode?: string; 
+  profesCode?: string;
   typgarPhysCode: string;
-  empCode?: string; 
+  empCode?: string;
   statsalCode: string;
-  quartCode?: string; 
-  fonctCode?: string; 
-  debCode?: number; 
-  garphysNom?: string; 
-  garphysPren?: string; 
-  garphysDatnaiss?: string; 
-  garphysLieunaiss?: string; 
-  garphysDatdec?: string; 
-  garphysAdrpost?: string; 
-  garphysSalbrut?: number; 
-  garphysTeldom?: string; 
-  garphysCel?: string; 
-  garphysEmail?: string; 
-  garphysRue?: string; 
-  garphysTelbur?: string; 
-  garphysSitmat?: string; 
-  garphysSexe?: string; 
-  garphysSalNet?: number; 
-  garphysDatRetr?: string; 
-  garphysMatric?: string; 
-  garphysNompere?: string; 
-  garphysNommere?: string; 
-  garphysNatpident?: string; 
-  garphysNumpident?: string; 
-  garphysLieuetab?: string; 
-  garphysDatevalidit?: string; 
-  garphysDatetablt?: string; 
-  garphysDateCtl?: string; 
-  garphysCharg?: string; 
-  indic?: string; 
-  natCode?: string; 
-  civCode?: string; 
-  garphysCodeUser?: string; 
+  quartCode?: string;
+  fonctCode?: string;
+  debCode?: number;
+  garphysNom?: string;
+  garphysPren?: string;
+  garphysDatnaiss?: string;
+  garphysLieunaiss?: string;
+  garphysDatdec?: string;
+  garphysAdrpost?: string;
+  garphysSalbrut?: number;
+  garphysTeldom?: string;
+  garphysCel?: string;
+  garphysEmail?: string;
+  garphysRue?: string;
+  garphysTelbur?: string;
+  garphysSitmat?: string;
+  garphysSexe?: string;
+  garphysSalNet?: number;
+  garphysDatRetr?: string;
+  garphysMatric?: string;
+  garphysNompere?: string;
+  garphysNommere?: string;
+  garphysNatpident?: string;
+  garphysNumpident?: string;
+  garphysLieuetab?: string;
+  garphysDatevalidit?: string;
+  garphysDatetablt?: string;
+  garphysDateCtl?: string;
+  garphysCharg?: string;
+  indic?: string;
+  natCode?: string;
+  civCode?: string;
+  garphysCodeUser?: string;
 };
 
 
@@ -70,15 +70,16 @@ export type AcCptOperation = {
 
 
 export type AcAssurance = {
+  id: number
   assureCode: string;
-  creanCode?: string; 
+  creanCode?: string;
   assurCode: string;
-  assurPolice?: string; 
-  assurDatdeb?: string; 
-  assurPrime?: number; 
-  assurDatsigne?: string; 
-  assurDateCtl?: string; 
-  assurUser?: string; 
+  assurPolice?: string;
+  assurDatdeb?: string;
+  assurPrime?: number;
+  assurDatsigne?: string;
+  assurDateCtl?: string;
+  assurUser?: string;
 };
 
 
@@ -143,18 +144,18 @@ export type Cloture = {
 
 export type AcGarReelle = {
   id: string;
-  terCode?: string; 
+  terCode?: string;
   creanCode: string;
-  logeCode?: string; 
+  logeCode?: string;
   typgarReelCode: string;
-  gareelLib?: string; 
-  gareelObjNum?: string; 
-  gareelModeAcq?: string; 
-  gareelObjMont?: number; 
-  gareelDatinscrip?: string; 
-  gareelDateCtl?: string; 
-  gareelType?: string; 
-  gareelNumSerieType?: string; 
+  gareelLib?: string;
+  gareelObjNum?: string;
+  gareelModeAcq?: string;
+  gareelObjMont?: number;
+  gareelDatinscrip?: string;
+  gareelDateCtl?: string;
+  gareelType?: string;
+  gareelNumSerieType?: string;
 };
 
 
@@ -194,13 +195,14 @@ export type AcParam = ParameterBaseData & {
 };
 
 export type AcPiece = {
+  id: number
   pieceCode: string;
   typePieceCode: string;
   creanCode: string;
-  pieceLib?: string; 
-  pieceRef?: string; 
-  pieceDateRecept?: string; 
-  pieceDateEmis?: string; 
+  pieceLib?: string;
+  pieceRef?: string;
+  pieceDateRecept?: string;
+  pieceDateEmis?: string;
 };
 
 
@@ -350,7 +352,7 @@ export type AcLogement = ParameterBaseData & {
 
 }
 
-export type AcCreance = ParameterBaseData & {
+export type AcCreance = Omit<ParameterBaseData, 'libelle'> & {
   objCreanCode: string
   creanCodeGlob: string
   grpCreanCode: AcGroupeCreance
@@ -383,7 +385,7 @@ export type AcCreance = ParameterBaseData & {
   creanCodePrec: string
   creanCodeAnc: string
   creanUserCode: string
-  ordoCode: AcOrdonnateur
+  // ordoCode: AcOrdonnateur
   creanDatfin: Date
   creanMontIcPaye: number
   creanMotifIrrecouv: string
@@ -396,7 +398,7 @@ export type AcCreance = ParameterBaseData & {
   categCode: string
   creanMontAncInit: number
   delegCode: string
-  typeTitreCode: AcTypeTitreRecette
+  // typeTitreCode: AcTypeTitreRecette
   creanRef: string
   cpteCliNum: number
   creanUserCpte: string

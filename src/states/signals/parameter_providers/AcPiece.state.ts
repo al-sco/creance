@@ -1,5 +1,5 @@
 import axios from "axios";
-import { AcPiece, Identifiable } from "../../AcData.types";
+import { AcPiece } from "../../AcData.types";
 import ICrudStateProvider from "../parameter_providers/ICrudStateProvider";
 import { getUrl } from "../../../common/configs/api/api_configs";
 
@@ -34,6 +34,7 @@ export class AcPieceStateProvider extends ICrudStateProvider<AcPiece> {
 
   mapEntitieFrom(json: any): AcPiece {
     return {
+      id: json["pieceCode"],
       pieceCode: json["pieceCode"],
       typePieceCode: json["typePieceCode"],
       creanCode: json["creanCode"],

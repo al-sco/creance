@@ -5,10 +5,13 @@ import colors from "../../common/theme/colors/colors";
 import { ParameterColumnType } from "../parameter-main-content/parameter-main-content";
 import { TableEditProps } from "./table-row";
 
-export const TableRowEdit = ({ index, columns, onEditPressed, data,handleEdit }: TableEditProps) => {
-    let inputsValuesStates = new Map<ParameterColumnType, [string, React.Dispatch<React.SetStateAction<string>>]>([
-        ...columns.map((col) => [col, useState<string>(data[col.key])])
-    ]);
+export const TableRowEdit = ({ index, columns, onEditPressed, data, handleEdit }: TableEditProps) => {
+    let inputsValuesStates = new Map<ParameterColumnType, [string, React.Dispatch<React.SetStateAction<string>>]>();
+
+    for (let column of columns) {
+        inputsValuesStates.set(column, useState<string>(data[column.key]))
+    }
+
 
     let inputRefs = columns.map((_) => useRef<HTMLInputElement>(null))
 
@@ -21,16 +24,16 @@ export const TableRowEdit = ({ index, columns, onEditPressed, data,handleEdit }:
                 nextInput.current?.focus()
             }
             else {
-                let obj={}
+                let obj = {}
                 columns.forEach((col) => {
                     const [value, _] = inputsValuesStates.get(col)!
-                    Object.defineProperty(obj,col.key,{value:value,writable:false})
-                    })
+                    Object.defineProperty(obj, col.key, { value: value, writable: false })
+                })
 
-                    
-                    Object.defineProperty(obj,'id',{value:data.id,writable:false})
-                    
-                if(handleEdit){
+
+                Object.defineProperty(obj, 'id', { value: data.id, writable: false })
+
+                if (handleEdit) {
                     handleEdit(obj)
                 }
             }

@@ -18,7 +18,7 @@ import {
   useTab,
 } from "@chakra-ui/react";
 import {
-    AdditionnalContentType,
+  AdditionnalContentType,
   CreanceColumnType,
   CreanceFieldType,
   CreanceTabType,
@@ -31,7 +31,6 @@ import { Signal } from "@preact/signals-react";
 import { DrawerComponent } from "../drawler";
 import { AcDebiteurStateProvider } from "../../states/signals/creances_providers/AcDebiteur.state";
 import { useState } from "react";
-import { AcDomicialition } from "../../states/AcData.types";
 
 type CreanceTabsViewProps = {
   tabs?: CreanceTabType[];
@@ -69,16 +68,18 @@ const BuildTabContent = ({
   tableContent,
   hasAddButton,
   tableHeaders,
+  handleSave
 }: {
   index: number;
   hasAddButton?: boolean;
+  handleSave?: (data: any[]) => void
   tableHeaders: string[] | undefined;
   tableContent: CreanceColumnType[] | CreanceFieldType[] | undefined;
   fields: CreanceFieldType[] | undefined;
   rowCount: number | undefined;
   additionnalContents:
-    |AdditionnalContentType[]
-    | undefined;
+  | AdditionnalContentType[]
+  | undefined;
 }) => {
   const [tabRowCount, setTabRowCount] = useState<number>(1);
   const rowFields = new Map<number, Signal<{}>>([[0, new Signal<{}>({})]]);
@@ -90,6 +91,18 @@ const BuildTabContent = ({
       console.log(rowData.value);
     }
   };
+
+  const handleSaveRows = () => {
+    if (handleSave !== undefined) {
+      let data: any[] = []
+
+      for (let value of rowFields.values()) {
+        data.push(value.value)
+      }
+
+      handleSave!(data)
+    }
+  }
 
   const buildColumn = (
     e: CreanceColumnType | CreanceFieldType,
@@ -130,7 +143,7 @@ const BuildTabContent = ({
           <Box w={2} />
           <Button
             bg={colors.lightGreen}
-            onClick={() => alert("Not yet defined")}
+            onClick={handleSaveRows}
           >
             Sauvergarder
           </Button>
@@ -211,11 +224,13 @@ const CreanceTabsView = ({ tabs, state }: CreanceTabsViewProps) => {
               rowCount,
               additionnalContents,
               hasAddButton,
+              handleTabRowSave
             }: CreanceTabType,
             index
           ) => (
             <BuildTabContent
               index={index}
+              handleSave={handleTabRowSave}
               tableHeaders={tableHeaders}
               tableContent={tableContent}
               hasAddButton={hasAddButton}
@@ -234,9 +249,9 @@ const CreanceTabsView = ({ tabs, state }: CreanceTabsViewProps) => {
       [
         "D",
         (state.value as any)[AcDebiteurStateProvider.debiteurTypeKeyCode] &&
-          (state.value as any)[AcDebiteurStateProvider.debiteurTypeKeyCode]
-            ?.toString()
-            .toUpperCase(),
+        (state.value as any)[AcDebiteurStateProvider.debiteurTypeKeyCode]
+          ?.toString()
+          .toUpperCase(),
       ].includes(tab.key)
     ) ?? [];
   if (filteredTabs.length == 0) {

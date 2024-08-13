@@ -29,7 +29,7 @@ export type CreanceFieldType = {
 export type CreanceDataType = {
   title: string,
   state: Signal<{}>
-  create: (data: any) => Promise<void>,
+  create: (data: any) => Promise<any | void>,
   columCount?: number
   fields: CreanceFieldType[];
   tabs?: CreanceTabType[];
@@ -50,6 +50,7 @@ export type CreanceTabType = {
   key: string
   rowCount?: number;
   tableHeaders?: string[];
+  handleTabRowSave?: (data: any[]) => void,
   tableContent?: CreanceColumnType[] | CreanceFieldType[];
   hasAddButton?: boolean
   fields?: CreanceFieldType[];

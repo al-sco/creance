@@ -1,4 +1,4 @@
-import { Badge, Box, Button, Input, InputGroup, InputLeftElement, List, ListIcon, ListItem, Modal, ModalBody, ModalContent, ModalHeader, ModalOverlay, Stack, useDisclosure } from "@chakra-ui/react"
+import { Box, Button, Input, InputGroup, InputLeftElement, Modal, ModalBody, ModalContent, ModalHeader, ModalOverlay, Stack, useDisclosure } from "@chakra-ui/react"
 import styled from "styled-components"
 import colors from "../../common/theme/colors/colors"
 import { SearchIcon } from "@chakra-ui/icons"

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { AcGarReelle, Identifiable } from "../../AcData.types";
+import { AcGarReelle } from "../../AcData.types";
 import ICrudStateProvider from "../parameter_providers/ICrudStateProvider";
 import { getUrl } from "../../../common/configs/api/api_configs";
 
@@ -63,4 +63,4 @@ export class AcGarReelleStateProvider extends ICrudStateProvider<AcGarReelle> {
   };
 }
 
-const acGarReelleProvider = new AcGarReelleStateProvider("/garantie-reelle", {});
+export const acGarReelleProvider = new AcGarReelleStateProvider("/garantie-reelle", {});

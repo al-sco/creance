@@ -1,20 +1,16 @@
 import { Signal } from "@preact/signals-react";
 import { AcDomicialition } from "../../AcData.types";
 import ICrudStateProvider from "../parameter_providers/ICrudStateProvider";
+import axios from "axios";
+import { getUrl } from "../../../common/configs/api/api_configs";
 
 
-type DomiciliationRowFieldData = {
-  rowIndex: number,
-  bqagCode: string,
-  typdomCode: string,
-  domLib: string,
-  numAccount: string,
-}
+
 
 
 class AcDomicialitionStateProvider extends ICrudStateProvider<AcDomicialition> {
 
-  fields: Signal<DomiciliationRowFieldData[]> = new Signal()
+  fields: Signal<AcDomicialition[]> = new Signal()
 
   mapDataToJson(data: AcDomicialition): {} {
     return {
@@ -51,8 +47,25 @@ class AcDomicialitionStateProvider extends ICrudStateProvider<AcDomicialition> {
   }
 
 
-  saveFieldData = (fieldsData: DomiciliationRowFieldData[]) => {
-    this.fields.value = fieldsData
+  create = async ({ debCode }: { debCode: number }): Promise<AcDomicialition | void> => {
+
+    let rowWithDebCodeAdded = this.fields.value.map((row) => ({ ...row, debCode }))
+    let { status } = await axios.post(getUrl(`${this.basePath}/all`), rowWithDebCodeAdded, {
+      headers: {
+        'Content-Type': 'application/json',
+        'ngrok-skip-browser-warning': true
+      }
+    })
+    if (status == 201) {
+      await this.find()
+    }
+  }
+
+
+  saveFieldData = (fieldsData: any[]) => {
+    this.fields.value = fieldsData.map((field) => this.mapEntitieFrom(field))
+    console.log("From dom state")
+    console.log(this.fields.value)
   }
 }
 

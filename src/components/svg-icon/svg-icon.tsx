@@ -4,7 +4,7 @@ import colors from '../../common/theme/colors/colors'
 
 
 const StyledSvg = styled.svg<{ $color?: string }>`
-    fill: ${props => colors.white};
+    fill: ${colors.white};
 `
 
 const SvgIcon = (props: {

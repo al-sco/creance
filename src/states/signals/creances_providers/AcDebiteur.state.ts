@@ -9,6 +9,7 @@ import { getUrl } from "../../../common/configs/api/api_configs";
 import { signal } from "@preact/signals-react";
 import acDebiteurMoralProvider from "./AcDebiteurMoral.state";
 import acDebiteurPhysiqueProvider from "./AcDebiteurPhysique.state";
+import acDomiciliationStateProvider from "./AcDomiciliation.state";
 
 type ReturnProvider = () => Promise<SelectItem[]>;
 export class AcDebiteurStateProvider extends ICrudStateProvider<AcDebiteur> {
@@ -39,7 +40,7 @@ export class AcDebiteurStateProvider extends ICrudStateProvider<AcDebiteur> {
     };
   }
 
-  create = async (passedData: {}): Promise<AcDebiteur | null> => {
+  create = async (passedData: {}): Promise<AcDebiteur | void> => {
     console.log(this.mapDataToJson(passedData));
     let { status, data } = await axios.post(
       getUrl(this.basePath),
@@ -57,7 +58,6 @@ export class AcDebiteurStateProvider extends ICrudStateProvider<AcDebiteur> {
       return this.mapEntitieFrom(data)
     }
 
-    return null
   };
 
 
@@ -159,7 +159,10 @@ export class AcDebiteurStateProvider extends ICrudStateProvider<AcDebiteur> {
     if (!debCode) {
       let debiteur = await this.create({})
       console.log(debiteur)
+
       if (debiteur) {
+
+        await acDomiciliationStateProvider.create({ debCode: debiteur.id })
 
         if (debiteur.typdebCode == 'M') {
           await acDebiteurMoralProvider.create({ debCode: debiteur.id } as AcDebiteurMoral)

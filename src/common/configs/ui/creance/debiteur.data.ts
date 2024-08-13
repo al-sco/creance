@@ -537,12 +537,12 @@ const debiteurTabs: CreanceTabType[] = [
     key: AcDebiteurStateProvider.domiciliationTypeCode,
     tableHeaders: ["Type", "N°Compte", "Libellé", "Banque agence", "Banque"],
     hasAddButton: true,
+    handleTabRowSave: acDomiciliationStateProvider.saveFieldData,
     tableContent: [
       {
         name: "Type",
         key: 'typdomCode',
         state: acDomiciliationStateProvider.getState(),
-        onInsert: acDomiciliationStateProvider.simpleInsert,
         selectItems: acDebiteurProvider.getSelectItems(acTypeDomicilProvider),
         inputItem: {
           inputType: InputType.text,
@@ -552,9 +552,8 @@ const debiteurTabs: CreanceTabType[] = [
       },
       {
         name: "N°Compte",
-        key: 'nCompte?',
+        key: 'nCompte',
         state: acDomiciliationStateProvider.getState(),
-        onInsert: acDomiciliationStateProvider.simpleInsert,
         inputItem: {
           inputType: InputType.number,
           isEditable: true,
@@ -565,7 +564,6 @@ const debiteurTabs: CreanceTabType[] = [
         name: "Libellé",
         key: 'domLib',
         state: acDomiciliationStateProvider.getState(),
-        onInsert: acDomiciliationStateProvider.simpleInsert,
         inputItem: {
           inputType: InputType.text,
           isEditable: true,
@@ -576,7 +574,6 @@ const debiteurTabs: CreanceTabType[] = [
         name: "Banque Agence",
         key: 'bqagCode',
         state: acDomiciliationStateProvider.getState(),
-        onInsert: acDomiciliationStateProvider.setBanqueAgenceCode,
         inputItem: {
           inputType: InputType.text,
           isEditable: false,

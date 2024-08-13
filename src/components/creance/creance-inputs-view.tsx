@@ -58,15 +58,23 @@ const CreanceInputsView = ({
           <NumberInput width="100%">
             <NumberInputField
               backgroundColor={colors.white}
+              onChange={(e) => (hasTabContentHandleChangedDefined &&
+                handleFieldChanged!(
+                  key,
+                  e.target.value,
+                  rowIndex!
+                )) ||
+                (onInsert && onInsert(key, e.target.value))}
+
               onKeyDown={(e) =>
                 e.key == "Enter"
                   ? (hasTabContentHandleChangedDefined &&
-                      handleFieldChanged!(
-                        key,
-                        e.currentTarget.value,
-                        rowIndex!
-                      )) ||
-                    (onInsert && onInsert(key, e.currentTarget.value))
+                    handleFieldChanged!(
+                      key,
+                      e.currentTarget.value,
+                      rowIndex!
+                    )) ||
+                  (onInsert !== undefined && onInsert(key, e.currentTarget.value))
                   : undefined
               }
               readOnly={!inputItem.isEditable}
@@ -84,15 +92,23 @@ const CreanceInputsView = ({
             borderColor={colors.white}
             _disabled={{ backgroundColor: `${colors.white}` }}
             backgroundColor={colors.white}
+            onChange={(e) => (hasTabContentHandleChangedDefined &&
+              handleFieldChanged!(
+                key,
+                e.target.value,
+                rowIndex!
+              )) ||
+              (onInsert && onInsert(key, e.target.value))}
+
             onKeyDown={(e) =>
               e.key == "Enter"
                 ? (hasTabContentHandleChangedDefined &&
-                    handleFieldChanged!(
-                      key,
-                      e.currentTarget.value,
-                      rowIndex!
-                    )) ||
-                  (onInsert && onInsert(key, e.currentTarget.value))
+                  handleFieldChanged!(
+                    key,
+                    e.currentTarget.value,
+                    rowIndex!
+                  )) ||
+                (onInsert && onInsert(key, e.currentTarget.value))
                 : undefined
             }
             isRequired={true}

@@ -8,8 +8,8 @@ class AcCreanceStateProvider extends ICrudStateProvider<AcCreance> {
   mapDataToJson(data: AcCreance): {} {
     return {
       creanCode: data.categCode,
-      periodCode: data["periodCode"],
-      entiteLib: data["entiteLib"],
+      // periodCode: data["periodCode"],
+      // entiteLib: data["entiteLib"],
       objCreanCode: data["objCreanCode"],
       creanCodeGlob: data["creanCodeGlob"],
       debCode: data["debCode"],
@@ -55,8 +55,8 @@ class AcCreanceStateProvider extends ICrudStateProvider<AcCreance> {
       delegCode: data["delegCode"],
       creanRef: data["creanRef"],
       cpteCliNum: data["cpteCliNum"],
-      typeStructOrgcode: data["typeStructOrgcode"],
-      typeStructOrglib: data["typeStructOrglib"],
+      // typeStructOrgcode: data["typeStructOrgcode"],
+      // typeStructOrglib: data["typeStructOrglib"],
       creanUserCpte: data["creanUserCpte"],
       creanDateCpte: data["creanDateCpte"],
       cpteRegrp: data["cpteRegrp"],
@@ -73,6 +73,8 @@ class AcCreanceStateProvider extends ICrudStateProvider<AcCreance> {
 
   mapEntitieFrom(json: any): AcCreance {
     return {
+      // ordoCode:,
+
       id: json["creanCode"],
       code: json["periodCode"],
       objCreanCode: json["objCreanCode"],
@@ -131,7 +133,7 @@ class AcCreanceStateProvider extends ICrudStateProvider<AcCreance> {
       creanStab: json["creanStab"],
       creanSoldAvantLiq: json["creanSoldAvantLiq"],
       grpCreanCode: json["grpCreanCode"],
-      periodCode: json["periodCode"]
+      // periodCode: json["periodCode"]
     };
   }
 

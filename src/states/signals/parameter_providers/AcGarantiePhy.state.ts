@@ -1,5 +1,5 @@
 import axios from "axios";
-import { AcGarantiePhy, Identifiable } from "../../AcData.types";
+import { AcGarantiePhy } from "../../AcData.types";
 import ICrudStateProvider from "../parameter_providers/ICrudStateProvider";
 import { getUrl } from "../../../common/configs/api/api_configs";
 

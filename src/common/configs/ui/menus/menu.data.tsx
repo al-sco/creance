@@ -15,8 +15,8 @@ import { ParameterColumnType } from "../../../../components/parameter-main-conte
 import acCategoryDebtorProvider from "../../../../states/signals/parameter_providers/AcCategoryDebtor.state";
 import acCilivityProvider from "../../../../states/signals/parameter_providers/AcCivility.state";
 import acClasseProvider from "../../../../states/signals/parameter_providers/AcClasse.state";
-import acCodeProduitSonareciProvider from "../../../../states/signals/parameter_providers/AcCodeProduitsSonareci";
-import acComptableAccountOperationSonareciProvider from "../../../../states/signals/parameter_providers/AcComptableAccountOperationSonareci.state";
+// import acCodeProduitSonareciProvider from "../../../../states/signals/parameter_providers/AcCodeProduitsSonareci";
+// import acComptableAccountOperationSonareciProvider from "../../../../states/signals/parameter_providers/AcComptableAccountOperationSonareci.state";
 import acEtapeProvider from "../../../../states/signals/parameter_providers/AcEtape.state";
 import acEtatLocalisationProvider from "../../../../states/signals/parameter_providers/AcEtatLocalisation.state";
 import acExercicesProvider from "../../../../states/signals/parameter_providers/AcExercice.state";
@@ -358,11 +358,11 @@ const menuItemsData: Array<MenuItemType> = [
         name: "Cpte Comptable d'Opération",
         nameHeader: "Groupe Creance / Type Opération",
         nameColumn: "Compte Ecriture",
-        loader: acComptableAccountOperationSonareciProvider.find,
-        dataProvider: acComptableAccountOperationSonareciProvider.getState(),
-        create: acComptableAccountOperationSonareciProvider.create,
-        handleDelete: acComptableAccountOperationSonareciProvider.delete,
-        handleEdit: acComptableAccountOperationSonareciProvider.update,
+        // loader: acComptableAccountOperationSonareciProvider.find,
+        // dataProvider: acComptableAccountOperationSonareciProvider.getState(),
+        // create: acComptableAccountOperationSonareciProvider.create,
+        // handleDelete: acComptableAccountOperationSonareciProvider.delete,
+        // handleEdit: acComptableAccountOperationSonareciProvider.update,
         headers: [
           {
             key: "groupeCreance",
@@ -396,11 +396,11 @@ const menuItemsData: Array<MenuItemType> = [
         name: "Cpte comptable d'operation Sonar",
         nameHeader: "Groupe Creance / Type Opération",
         nameColumn: "Compte Ecriture",
-        loader: acComptableAccountOperationSonareciProvider.find,
-        dataProvider: acComptableAccountOperationSonareciProvider.getState(),
-        create: acComptableAccountOperationSonareciProvider.create,
-        handleDelete: acComptableAccountOperationSonareciProvider.delete,
-        handleEdit: acComptableAccountOperationSonareciProvider.update,
+        // loader: acComptableAccountOperationSonareciProvider.find,
+        // dataProvider: acComptableAccountOperationSonareciProvider.getState(),
+        // create: acComptableAccountOperationSonareciProvider.create,
+        // handleDelete: acComptableAccountOperationSonareciProvider.delete,
+        // handleEdit: acComptableAccountOperationSonareciProvider.update,
         headers: [
           {
             key: "groupeCreance",
@@ -439,11 +439,11 @@ const menuItemsData: Array<MenuItemType> = [
         name: "Cpte comptable d'operation Sonar Modif",
         nameHeader: "Groupe Creance / Type Opération",
         nameColumn: "Compte Ecriture",
-        loader: acComptableAccountOperationSonareciProvider.find,
-        dataProvider: acComptableAccountOperationSonareciProvider.getState(),
-        create: acComptableAccountOperationSonareciProvider.create,
-        handleDelete: acComptableAccountOperationSonareciProvider.delete,
-        handleEdit: acComptableAccountOperationSonareciProvider.update,
+        // loader: acComptableAccountOperationSonareciProvider.find,
+        // dataProvider: acComptableAccountOperationSonareciProvider.getState(),
+        // create: acComptableAccountOperationSonareciProvider.create,
+        // handleDelete: acComptableAccountOperationSonareciProvider.delete,
+        // handleEdit: acComptableAccountOperationSonareciProvider.update,
         headers: [
           {
             key: "groupeCreance",
@@ -481,12 +481,12 @@ const menuItemsData: Array<MenuItemType> = [
         name: "Codes produits Sonareci",
         nameHeader: "",
         nameColumn: "Code Produits (Cptes Clients)",
-        dataProvider: acCodeProduitSonareciProvider.getState(),
-        loader: acCodeProduitSonareciProvider.find,
-        create: acCodeProduitSonareciProvider.create,
-        handleDelete: acCodeProduitSonareciProvider.delete,
-        handleEdit: acCodeProduitSonareciProvider.update
-        ,
+        // dataProvider: acCodeProduitSonareciProvider.getState(),
+        // loader: acCodeProduitSonareciProvider.find,
+        // create: acCodeProduitSonareciProvider.create,
+        // handleDelete: acCodeProduitSonareciProvider.delete,
+        // handleEdit: acCodeProduitSonareciProvider.update
+        // ,
         headers: [
           {
             key: "code",
