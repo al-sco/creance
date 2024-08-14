@@ -552,10 +552,10 @@ const debiteurTabs: CreanceTabType[] = [
       },
       {
         name: "N°Compte",
-        key: 'nCompte',
+        key: 'domCode',
         state: acDomiciliationStateProvider.getState(),
         inputItem: {
-          inputType: InputType.number,
+          inputType: InputType.text,
           isEditable: true,
           placeholder: "num. compte",
         },

@@ -23,11 +23,10 @@ class AcDomicialitionStateProvider extends ICrudStateProvider<AcDomicialition> {
       domDateCtl: data["domDateCtl"],
       ancAg: data["ancAg"],
       villeCode: data["villeCode"],
-      numBenef: data["numBenef"],
     };
   }
 
-
+ 
 
 
   mapEntitieFrom(json: any): AcDomicialition {
@@ -49,13 +48,16 @@ class AcDomicialitionStateProvider extends ICrudStateProvider<AcDomicialition> {
 
   create = async ({ debCode }: { debCode: number }): Promise<AcDomicialition | void> => {
 
-    let rowWithDebCodeAdded = this.fields.value.map((row) => ({ ...row, debCode }))
+    let rowWithDebCodeAdded = this.fields.value.map((row) => ({ ...row, debCode:debCode }))
     let { status } = await axios.post(getUrl(`${this.basePath}/all`), rowWithDebCodeAdded, {
       headers: {
         'Content-Type': 'application/json',
         'ngrok-skip-browser-warning': true
       }
     })
+    console.log(`From dom ${status}`)
+    console.log(rowWithDebCodeAdded);
+    
     if (status == 201) {
       await this.find()
     }
@@ -69,6 +71,6 @@ class AcDomicialitionStateProvider extends ICrudStateProvider<AcDomicialition> {
   }
 }
 
-const acDomiciliationStateProvider = new AcDomicialitionStateProvider("/debiteur-physique")
+const acDomiciliationStateProvider = new AcDomicialitionStateProvider("/domiciliation")
 export default acDomiciliationStateProvider
 
