@@ -1,7 +1,10 @@
 import styled from "styled-components"
 import ComponentBuilder, { ComponentBuilderType } from "./component_builder"
-import { Box, Select } from "@chakra-ui/react"
+import { Box, InputGroup, InputLeftAddon, Select } from "@chakra-ui/react"
 import { AdditionnalContentType } from "../../common/configs/ui/creance/creance.type"
+import { useSignals } from "@preact/signals-react/runtime"
+import { signal } from "@preact/signals-react"
+import PaiementAdditionalLayoutBuilder from "./paiement_additionnal_layout_builder"
 
 const ComponentWrapper = styled.section`
     padding: 1rem 1rem;
@@ -17,6 +20,14 @@ const Wrapper = styled.div`
 `
 
 const PaiementComponent = ({ data, selectItem }: ComponentProps) => {
+    useSignals()
+
+    const selected = signal<AdditionnalContentType>(selectItem![0])
+    const onSelectChanged = (value: string) => {
+        selected.value = selectItem!.find((e) => e.label == value)!
+        console.log(selected.value.label)
+    }
+
     return (
         <ComponentWrapper>
             {
@@ -26,13 +37,17 @@ const PaiementComponent = ({ data, selectItem }: ComponentProps) => {
                 )
             }
             <Box p={2} />
-            <Select placeholder='Select option'>
-                {
-                    selectItem?.map((e) =>
-                        <option value='option1'>{e.label}</option>
-                    )
-                }
-            </Select>
+            <InputGroup>
+                <InputLeftAddon w={100}>Type</InputLeftAddon>
+                <Select w={200} onChange={(e) => onSelectChanged(e.target.value)}>
+                    {
+                        selectItem?.map((e) =>
+                            <option value={e.label}>{e.label}</option>
+                        )
+                    }
+                </Select>
+            </InputGroup>
+            <PaiementAdditionalLayoutBuilder child={selected} />
         </ComponentWrapper>
     )
 }

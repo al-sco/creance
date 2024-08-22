@@ -1,7 +1,18 @@
 import { ComponentBuilderType } from "../../../../components/paiement/component_builder";
 import acCreanceProvider from "../../../../states/signals/creances_providers/AcCreance.state";
-import { InputType } from "../creance/creance.type";
+import { AdditionnalContentType, InputType } from "../creance/creance.type";
 import { paiementCreanceViewData } from "./paiement_creance_view_data";
+
+export const especePaiementSelectItem: AdditionnalContentType[] = [
+    {
+        label: 'Normal',
+        child: <>Hi </>
+    },
+    {
+        label: 'Frais',
+        child: <>Ho </>
+    },
+]
 
 export const especePaiementComponentData: ComponentBuilderType[] = [
     {
@@ -9,7 +20,7 @@ export const especePaiementComponentData: ComponentBuilderType[] = [
         child: paiementCreanceViewData
     },
     {
-        label: 'Effet/Cheque',
+        label: 'Espece',
         child: [
             {
                 name: "N°Créance",

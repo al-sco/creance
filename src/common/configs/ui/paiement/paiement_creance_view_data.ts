@@ -3,63 +3,154 @@ import { CreanceFieldType, InputType } from "../creance/creance.type";
 
 export const paiementCreanceViewData: CreanceFieldType[] = [
     {
-        name: "N°Créance",
+        name: "Code",
         key: "creanCode",
         state: acCreanceProvider.getState(),
+        selectItems: acCreanceProvider.getDebiteursItems,
         inputItem: {
             isEditable: false,
-            placeholder: "numéro creance",
+            placeholder: "code",
             inputType: InputType.text,
         },
     },
     {
-        name: "N°Créance",
+        name: "Debiteur",
         key: "creanCode",
         state: acCreanceProvider.getState(),
         inputItem: {
             isEditable: false,
-            placeholder: "numéro creance",
+            placeholder: "debiteur",
             inputType: InputType.text,
         },
     },
     {
-        name: "N°Créance",
+        name: "Groupe Creance",
         key: "creanCode",
         state: acCreanceProvider.getState(),
         inputItem: {
             isEditable: false,
-            placeholder: "numéro creance",
+            placeholder: "groupe creance",
             inputType: InputType.text,
         },
     },
     {
-        name: "N°Créance",
+        name: "Nbr Ech",
         key: "creanCode",
         state: acCreanceProvider.getState(),
         inputItem: {
             isEditable: false,
-            placeholder: "numéro creance",
+            placeholder: "nombre echeance",
+            inputType: InputType.number,
+        },
+    },
+    {
+        name: "Objet",
+        key: "creanCode",
+        state: acCreanceProvider.getState(),
+        inputItem: {
+            isEditable: false,
+            placeholder: "objet",
             inputType: InputType.text,
         },
     },
     {
-        name: "N°Créance",
+        name: "Capital Initial",
         key: "creanCode",
         state: acCreanceProvider.getState(),
         inputItem: {
             isEditable: false,
-            placeholder: "numéro creance",
+            placeholder: "capital initial",
             inputType: InputType.text,
         },
     },
     {
-        name: "N°Créance",
+        name: "Taux Int. Conv",
         key: "creanCode",
         state: acCreanceProvider.getState(),
         inputItem: {
             isEditable: false,
-            placeholder: "numéro creance",
+            placeholder: "taux int conv",
             inputType: InputType.text,
+        },
+    },
+    {
+        name: "Taux Int. Ret",
+        key: "creanCode",
+        state: acCreanceProvider.getState(),
+        inputItem: {
+            isEditable: false,
+            placeholder: "taux int ret",
+            inputType: InputType.text,
+        },
+    },
+    {
+        name: "Date Effet",
+        key: "creanCode",
+        state: acCreanceProvider.getState(),
+        inputItem: {
+            isEditable: false,
+            placeholder: "date effet",
+            inputType: InputType.text,
+        },
+    },
+    {
+        name: "Date Ech",
+        key: "creanCode",
+        state: acCreanceProvider.getState(),
+        inputItem: {
+            isEditable: false,
+            placeholder: "date ech",
+            inputType: InputType.text,
+        },
+    },
+    {
+        name: "Date Octroi",
+        key: "creanCode",
+        state: acCreanceProvider.getState(),
+        inputItem: {
+            isEditable: false,
+            placeholder: "date octroi",
+            inputType: InputType.text,
+        },
+    },
+    {
+        name: "Durée",
+        key: "creanCode",
+        state: acCreanceProvider.getState(),
+        inputItem: {
+            isEditable: false,
+            placeholder: "duree",
+            inputType: InputType.text,
+        },
+    },
+    {
+        name: "Periodicité",
+        key: "creanCode",
+        state: acCreanceProvider.getState(),
+        inputItem: {
+            isEditable: false,
+            placeholder: "periodicite",
+            inputType: InputType.text,
+        },
+    },
+    {
+        name: "Status",
+        key: "creanCode",
+        state: acCreanceProvider.getState(),
+        inputItem: {
+            isEditable: false,
+            placeholder: "status",
+            inputType: InputType.text,
+        },
+    },
+    {
+        name: "Montant Debloqué",
+        key: "creanCode",
+        state: acCreanceProvider.getState(),
+        inputItem: {
+            isEditable: false,
+            placeholder: "montant debloque",
+            inputType: InputType.number,
         },
     },
 ] 

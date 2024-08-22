@@ -1,4 +1,5 @@
 import { ComponentBuilderType } from "../../../../components/paiement/component_builder";
+import NormalEffetPaiementComponents from "../../../../components/paiement/paiement-additionnal-components/normal_effet_paiement_component";
 import acCreanceProvider from "../../../../states/signals/creances_providers/AcCreance.state";
 import { AdditionnalContentType, InputType } from "../creance/creance.type";
 import { paiementCreanceViewData } from "./paiement_creance_view_data";
@@ -6,14 +7,13 @@ import { paiementCreanceViewData } from "./paiement_creance_view_data";
 export const effetPaiementSelectItem: AdditionnalContentType[] = [
     {
         label: 'Normal',
-        child: <>Normal Content</>
+        child: <NormalEffetPaiementComponents />
     },
     {
         label: 'Frais',
-        child: <>Frais Content</>
+        child: <>Ho</>
     },
 ]
-
 
 export const effetPaiementComponentData: ComponentBuilderType[] = [
     {
@@ -24,43 +24,45 @@ export const effetPaiementComponentData: ComponentBuilderType[] = [
         label: 'Effet/Cheque',
         child: [
             {
-                name: "N°Créance",
+                name: "Type Effet",
                 key: "creanCode",
                 state: acCreanceProvider.getState(),
+                selectItems: acCreanceProvider.getDebiteursItems,
                 inputItem: {
                     isEditable: false,
-                    placeholder: "numéro creance",
+                    placeholder: "type effet",
                     inputType: InputType.text,
                 },
             },
             {
-                name: "N°Créance",
+                name: "Numero",
                 key: "creanCode",
                 state: acCreanceProvider.getState(),
                 inputItem: {
-                    isEditable: false,
-                    placeholder: "numéro creance",
+                    isEditable: true,
+                    placeholder: "numéro",
                     inputType: InputType.text,
                 },
             },
             {
-                name: "N°Créance",
+                name: "Banque Emettrice",
                 key: "creanCode",
                 state: acCreanceProvider.getState(),
+                selectItems: acCreanceProvider.getDebiteursItems,
                 inputItem: {
                     isEditable: false,
-                    placeholder: "numéro creance",
+                    placeholder: "banque emettrice",
                     inputType: InputType.text,
                 },
             },
             {
-                name: "N°Créance",
+                name: "Montant",
                 key: "creanCode",
                 state: acCreanceProvider.getState(),
                 inputItem: {
-                    isEditable: false,
-                    placeholder: "numéro creance",
-                    inputType: InputType.text,
+                    isEditable: true,
+                    placeholder: "montant",
+                    inputType: InputType.number,
                 },
             },
         ]
