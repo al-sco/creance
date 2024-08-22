@@ -61,7 +61,9 @@ const SideBarMenu = () => {
                 <Image src={logo} w={100} />
             </StyledImage>
             <Box h="48px" />
-            <Stack direction="column">
+            <Stack direction="column" style={{
+                height:"85%", overflow:"scroll"
+            }}>
                 {
                     menuItems.map((mItem) => (<MenuItemComponent onPressed={handleChangeCurrentItem} menu={mItem} isSelected={currentSideBarMenuId === mItem.id} key={mItem.id} />))
                 }
