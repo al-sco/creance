@@ -65,6 +65,8 @@ import acEntiteProvider from "../../../../states/signals/parameter_providers/AcE
 import { mainCreanceDatas } from "../creance/main-creance.data";
 import { debiteursDatas } from "../creance/debiteur.data";
 import acDebiteurProvider from "../../../../states/signals/creances_providers/AcDebiteur.state";
+import PaiementMainContent from "../../../../components/paiement/paiement_main_content";
+import { effetPaiementData, especePaiementData } from "../paiement/main_paiement_data";
 
 export type SubMenuType = {
   name: string;
@@ -1961,19 +1963,12 @@ const menuItemsData: Array<MenuItemType> = [
     icon: FollowClient,
     subMenu: [
       {
-        name: "Enregistrement",
+        name: "Paiement Effet",
+        render: () => <PaiementMainContent data={effetPaiementData} />
       },
       {
-        name: "Mise à jour",
-      },
-      {
-        name: "Annulation",
-      },
-      {
-        name: "Consultation",
-      },
-      {
-        name: "Suivi des actes de Recouvrement",
+        name: "Paiement Espece",
+        render: () => <PaiementMainContent data={especePaiementData} />
       },
     ],
   },
