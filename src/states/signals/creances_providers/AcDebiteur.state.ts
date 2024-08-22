@@ -171,6 +171,12 @@ export class AcDebiteurStateProvider extends ICrudStateProvider<AcDebiteur> {
           let data = { debiteurCode: parseInt(debiteur.id), id: parseInt(debiteur.id) } as AcDebiteurPhysique;
           await acDebiteurPhysiqueProvider.create(data)
         }
+
+        try {
+          await acDomiciliationStateProvider.create({ debCode: debiteur.id })
+        } catch (error) {
+          console.error(error)
+        }
         return;
       }
 
