@@ -66,7 +66,7 @@ import { mainCreanceDatas } from "../creance/main-creance.data";
 import { debiteursDatas } from "../creance/debiteur.data";
 import acDebiteurProvider from "../../../../states/signals/creances_providers/AcDebiteur.state";
 import PaiementMainContent from "../../../../components/paiement/paiement_main_content";
-import { effetPaiementData, especePaiementData } from "../paiement/main_paiement_data";
+import { effetPaiementData, especePaiementData } from "../paiement/main-paiement.data";
 
 export type SubMenuType = {
   name: string;

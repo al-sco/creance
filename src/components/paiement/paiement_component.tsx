@@ -47,7 +47,7 @@ const PaiementComponent = ({ data, selectItem }: ComponentProps) => {
                     }
                 </Select>
             </InputGroup>
-            <PaiementAdditionalLayoutBuilder child={selected} />
+            <PaiementAdditionalLayoutBuilder childAsAdditionnalContent={selected} />
         </ComponentWrapper>
     )
 }

@@ -5,12 +5,12 @@ import { paiementCreanceViewData } from "./paiement_creance_view_data";
 
 export const especePaiementSelectItem: AdditionnalContentType[] = [
     {
-        label: 'Normal',
+        label: 'Frais',
         child: <>Hi </>
     },
     {
-        label: 'Frais',
-        child: <>Ho </>
+        label: 'Espece',
+        child: <>Ho</>
     },
 ]
 

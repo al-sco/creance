@@ -1,7 +1,7 @@
-import { effetPaiementComponentData, effetPaiementSelectItem } from "./effet_paiement_data";
-import { especePaiementComponentData, especePaiementSelectItem } from "./espece_paiement_data";
 import { PaiementType } from "./paiement.type";
 import PaiementComponent from "../../../../components/paiement/paiement_component";
+import { effetPaiementSelectItem, effetPaiementComponentData } from "./effet-paiement.data";
+import { especePaiementSelectItem, especePaiementComponentData } from "./espece-paiement.data";
 
 export const especePaiementData: PaiementType = {
     child: <PaiementComponent selectItem={especePaiementSelectItem} data={especePaiementComponentData} />

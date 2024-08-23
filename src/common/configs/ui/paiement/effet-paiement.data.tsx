@@ -1,17 +1,19 @@
-import { ComponentBuilderType } from "../../../../components/paiement/component_builder";
+import ComponentBuilder, { ComponentBuilderType } from "../../../../components/paiement/component_builder";
 import NormalEffetPaiementComponents from "../../../../components/paiement/paiement-additionnal-components/normal_effet_paiement_component";
 import acCreanceProvider from "../../../../states/signals/creances_providers/AcCreance.state";
 import { AdditionnalContentType, InputType } from "../creance/creance.type";
+import { fraisEffetPaiementData } from "./additionnal-paiement-data/frais-effet-paiement.data";
+import { normalEffetPaiementData } from "./additionnal-paiement-data/normal-effet-paiement.data";
 import { paiementCreanceViewData } from "./paiement_creance_view_data";
 
 export const effetPaiementSelectItem: AdditionnalContentType[] = [
     {
         label: 'Normal',
-        child: <NormalEffetPaiementComponents />
+        child: <NormalEffetPaiementComponents selectItem={normalEffetPaiementData} />
     },
     {
         label: 'Frais',
-        child: <>Ho</>
+        child: <ComponentBuilder label="Frais" child={fraisEffetPaiementData} />
     },
 ]
 
