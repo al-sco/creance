@@ -4,30 +4,30 @@ import { CreanceFieldType, InputType } from "../../creance/creance.type";
 
 export const paie_banq_remb: CreanceFieldType[] = [
   {
-    name: "N° Réçu Mannuel",
+    name: "Libelle paiement",
     key: "numRecu",
     state: acCreanceProvider.getState(),
     inputItem: {
         isEditable: true,
         placeholder: "numero",
-        inputType: InputType.number,
+        inputType: InputType.text,
     },
 },
 {
-    name: "N° Frais",
+    name: "Montant paiement",
     key: "frais",
     selectItems: acCreanceProvider.getDebiteursItems,
     state: acCreanceProvider.getState(),
     inputItem: {
-      isEditable: false,
-      placeholder: "numero frais",
-      inputType: InputType.text,
+      isEditable: true,
+      inputType: InputType.number,
     },
   },
   {
-    name: "N° Lig Ech",
+    name: "Compte Opération",
     key: "numEch",
     state: acCreanceProvider.getState(),
+    selectItems:acCreanceProvider.getDebiteursItems,
     inputItem: {
       isEditable: false,
       placeholder: "numero lig ech",
@@ -35,27 +35,26 @@ export const paie_banq_remb: CreanceFieldType[] = [
     },
   },
   {
-    name: "Type Frais",
+    name: "Banque Agence",
     key: "typeFrais",
     state: acCreanceProvider.getState(),
+    selectItems:acCreanceProvider.getDebiteursItems,
     inputItem: {
       isEditable: false,
-      placeholder: "type frais",
       inputType: InputType.text,
     },
   },
   {
-    name: "Montant",
-    key: "montant",
+    name: "Banque",
+    key: "montantPaye",
     state: acCreanceProvider.getState(),
     inputItem: {
       isEditable: false,
-      placeholder: "montant",
       inputType: InputType.text,
     },
   },
   {
-    name: "Montant Payé",
+    name: "N°Reçus Manuel",
     key: "montantPaye",
     state: acCreanceProvider.getState(),
     inputItem: {
@@ -65,11 +64,12 @@ export const paie_banq_remb: CreanceFieldType[] = [
     },
   },
   {
-    name: "Date Paiement",
-    key: "dateP",
+    name: "Date de paiement",
+    key: "montant",
     state: acCreanceProvider.getState(),
     inputItem: {
       isEditable: false,
+      placeholder: "montant",
       inputType: InputType.date,
     },
   },

@@ -12,8 +12,24 @@ import { paiementCreanceViewData } from "./paiement_creance_view_data";
 
 
 export const especePaiementSelectItem: AdditionnalContentType[] = [
+
     {
-        label: 'Paiement en espèces',
+        label: 'Paiement en espèces 1',
+        child: <MultiComponentsBuilder children={
+            [
+                {
+                    
+                    child:  <ComponentBuilder label="ENREGISTREMENT DES PAIEMENTS EN ESPECES" child={enrgst_paie_esp} />
+                },
+                {
+                    child: <NormalEffetPaiementComponents selectItem={normalEffetPaiementData} />
+                },  
+            ]
+        } />
+    },
+
+    {
+        label: 'Paiement en espèces 2',
         child: <ComponentBuilder label="FRAIS" child={fraisEffetPaiementData} />
     },
     {
