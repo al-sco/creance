@@ -8,6 +8,9 @@ import PaiementAdditionalLayoutBuilder from "./paiement_additionnal_layout_build
 
 const ComponentWrapper = styled.section`
     padding: 1rem 1rem;
+    overflow: auto;
+    height: 100vh;
+    /*  width: 75vw; */
 `
 
 type ComponentProps = {
@@ -39,7 +42,7 @@ const PaiementComponent = ({ data, selectItem }: ComponentProps) => {
             <Box p={2} />
             <InputGroup>
                 <InputLeftAddon w={100}>Type</InputLeftAddon>
-                <Select w={200} onChange={(e) => onSelectChanged(e.target.value)}>
+                <Select w={300} onChange={(e) => onSelectChanged(e.target.value)}>
                     {
                         selectItem?.map((e) =>
                             <option value={e.label}>{e.label}</option>
