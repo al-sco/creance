@@ -75,12 +75,12 @@ const SubSideBarMenu = ({ title, subMenuItems, handleHidden, isHidden, parents }
                         parents==undefined? subMenuItems
                         .map((subMenu, index) => (<SubMenuItemComponent key={index} onPressed={handleMenuClick} isSelected={subMenuItem === subMenu.id} subMenu={subMenu} />))
                  : parents.map((p:SubMenuParent) => (                    
-                    <Stack marginBottom={5} direction='column' justifyContent="start" spacing={0} alignItems="start" >
+                    <Stack marginBottom={5} direction='column' justifyContent="start" spacing={0} alignItems="start" >                     
                             <StyledTitle>{p.label}</StyledTitle>
                            <span>
                              {
                                 getSubmenus(subMenuItems, p.id)
-                                .map((subMenu, index) => (<SubMenuItemComponent key={index} onPressed={handleMenuClick} isSelected={subMenuItem === subMenu.id} subMenu={subMenu} />))
+                                .map((subMenu, index) => (<SubMenuItemComponent hasLeftIndicator={p.label!=undefined} key={index} onPressed={handleMenuClick} isSelected={subMenuItem === subMenu.id} subMenu={subMenu} />))
                             }</span>
                         </Stack>
                  ))

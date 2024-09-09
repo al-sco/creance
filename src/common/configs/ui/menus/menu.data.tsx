@@ -70,7 +70,7 @@ import { effetPaiementData, especePaiementData, factureAntPaiementData, factureE
 
 export type SubMenuParent = {
   id: number
-  label: string
+  label?: string
 }
 
 export type SubMenuType = {
@@ -1977,6 +1977,9 @@ const menuItemsData: Array<MenuItemType> = [
         id: 1,
         label: 'Effet'
       },
+      {
+        id: -1,
+      },
     ],
     subMenu: [
       {
@@ -2002,6 +2005,21 @@ const menuItemsData: Array<MenuItemType> = [
         name: "Paiement par Effet",
         parentId: 1,
         render: () => <PaiementMainContent data={factureAntPaiementData} />
+      },
+      {
+        name: "Test Direct", 
+        parentId: -1,       
+        render: () => <PaiementMainContent data={factureEspPaiementData} />
+      },
+      {
+        name: "Test Direct 1", 
+        parentId: -1,       
+        render: () => <PaiementMainContent data={factureEspPaiementData} />
+      },
+      {
+        name: "Test Direct 2", 
+        parentId: -1,       
+        render: () => <PaiementMainContent data={factureEspPaiementData} />
       },
    
     ],
