@@ -36,7 +36,6 @@ const SubMenuItemComponent = ({ subMenu, isSelected, onPressed }: SubMenuItemPro
                         </Stack>
                     </StyledMenuItem>
                 </BorderedStyle>
-
             </Link>
         )
     )

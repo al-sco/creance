@@ -68,6 +68,11 @@ import acDebiteurProvider from "../../../../states/signals/creances_providers/Ac
 import PaiementMainContent from "../../../../components/paiement/paiement_main_content";
 import { effetPaiementData, especePaiementData, factureAntPaiementData, factureEspPaiementData, fraisPaiementData } from "../paiement/main-paiement.data";
 
+export type SubMenuParent = {
+  id: number
+  label: string
+}
+
 export type SubMenuType = {
   name: string;
   nameHeader?: string
@@ -81,12 +86,14 @@ export type SubMenuType = {
   create?: (data: any) => Promise<any>,
   additionalHeaderRender?: () => JSX.Element,
   render?: () => JSX.Element,
+  parentId?: number
 };
 
 type MenuItemType = {
   name: string;
   icon: string;
   path: string;
+  parents?: SubMenuParent[]
   subMenu?: SubMenuType[];
 };
 
@@ -1961,9 +1968,20 @@ const menuItemsData: Array<MenuItemType> = [
     name: "Suivi Clientèle",
     path: "/followClient",
     icon: FollowClient,
+    parents: [
+      {
+        id: 0,
+        label: 'Espece'
+      },
+      {
+        id: 1,
+        label: 'Effet'
+      },
+    ],
     subMenu: [
       {
         name: "Paiement en Espece",
+        parentId: 0,
         render: () => <PaiementMainContent data={especePaiementData} />
       },
       
@@ -1977,10 +1995,12 @@ const menuItemsData: Array<MenuItemType> = [
       // },
       {
         name: "Paiement des Factures en espece",
+        parentId: 0,
         render: () => <PaiementMainContent data={factureEspPaiementData} />
       },
       {
         name: "Paiement par Effet",
+        parentId: 1,
         render: () => <PaiementMainContent data={factureAntPaiementData} />
       },
    
@@ -2056,7 +2076,8 @@ export const menuItems: MenuItem[] = menuItemsData.map((menuItem, index) => ({
   id: index,
   path: menuItem.path,
   icon: menuItem.icon,
-  name: menuItem.name,
+  name: menuItem.name,  
+  parents: menuItem.parents,
   subMenus: menuItem.subMenu?.map(
     (subMenu, index): SubMenuItem => ({
       id: index,
@@ -2064,7 +2085,7 @@ export const menuItems: MenuItem[] = menuItemsData.map((menuItem, index) => ({
       nameColumn: subMenu.nameColumn,
       nameHeader: subMenu.nameHeader,
       headers: subMenu.headers,
-      subMenuType: subMenu,
+      subMenuType: subMenu,      
       viewName: getViewName(menuItem),
       loader: subMenu.loader,
       render:
@@ -2073,6 +2094,7 @@ export const menuItems: MenuItem[] = menuItemsData.map((menuItem, index) => ({
           : undefined,
       columns: subMenu.columns,
       path: formatLabelToPath(subMenu),
+      parentId: subMenu.parentId
     })
   ),
 }));

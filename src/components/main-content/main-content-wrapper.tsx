@@ -5,6 +5,7 @@ import { Outlet, useNavigation } from "react-router-dom"
 import { SubMenuItem } from "../../common/configs/ui/menus/menus.type"
 import { Signal } from "@preact/signals-react"
 import styled from "styled-components"
+import { SubMenuParent } from "../../common/configs/ui/menus/menu.data"
 
 const StyledSpinnerDiv = styled.div`
     display: grid;
@@ -18,9 +19,10 @@ type MainContentWrapperProps = {
     isHidden: Signal<boolean>,
     handleHidden: () => void,
     title: string,
+    parents?: SubMenuParent[]
 }
 
-const MainContentWrapper = ({ subMenus, isHidden, handleHidden, title }: MainContentWrapperProps): JSX.Element => {
+const MainContentWrapper = ({ subMenus, isHidden, handleHidden, title, parents }: MainContentWrapperProps): JSX.Element => {
     const navigation = useNavigation()
     useSignals()
 
@@ -28,7 +30,7 @@ const MainContentWrapper = ({ subMenus, isHidden, handleHidden, title }: MainCon
         <Grid templateColumns={isHidden.value ? 'minmax(50px, 4.5%) 5fr' : '1fr 5fr'}>
             <GridItem>
                 {
-                    subMenus && <SubSideBarMenu isHidden={isHidden} handleHidden={handleHidden} title={title} subMenuItems={subMenus} />
+                    subMenus && <SubSideBarMenu isHidden={isHidden} handleHidden={handleHidden} title={title} subMenuItems={subMenus} parents={parents} />
                 }
             </GridItem>
             <GridItem>
