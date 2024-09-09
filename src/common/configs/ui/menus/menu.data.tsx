@@ -66,7 +66,7 @@ import { mainCreanceDatas } from "../creance/main-creance.data";
 import { debiteursDatas } from "../creance/debiteur.data";
 import acDebiteurProvider from "../../../../states/signals/creances_providers/AcDebiteur.state";
 import PaiementMainContent from "../../../../components/paiement/paiement_main_content";
-import { effetPaiementData, especePaiementData } from "../paiement/main-paiement.data";
+import { effetPaiementData, especePaiementData, factureAntPaiementData, factureEspPaiementData, fraisPaiementData } from "../paiement/main-paiement.data";
 
 export type SubMenuType = {
   name: string;
@@ -1963,13 +1963,27 @@ const menuItemsData: Array<MenuItemType> = [
     icon: FollowClient,
     subMenu: [
       {
-        name: "Paiement Effet",
-        render: () => <PaiementMainContent data={effetPaiementData} />
-      },
-      {
-        name: "Paiement Espece",
+        name: "Paiement en Espece",
         render: () => <PaiementMainContent data={especePaiementData} />
       },
+      
+      // {
+      //   name: "Paiement des Frais",
+      //   render: () => <PaiementMainContent data={fraisPaiementData} />
+      // },
+      // {
+      //   name: "Paiem. anter en espece à la Banq",
+      //   render: () => <PaiementMainContent data={especePaiementData} />
+      // },
+      {
+        name: "Paiement des Factures en espece",
+        render: () => <PaiementMainContent data={factureEspPaiementData} />
+      },
+      {
+        name: "Paiement par Effet",
+        render: () => <PaiementMainContent data={factureAntPaiementData} />
+      },
+   
     ],
   },
   {

@@ -57,7 +57,8 @@ export const normalEffetPaiementData : ComponentBuilderType[] = [
                     inputType: InputType.text,
                 },
             },
-        ]
+        ],
+      
     },
     {
         label: 'Debiteur Principal',

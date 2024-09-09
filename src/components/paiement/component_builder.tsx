@@ -4,8 +4,8 @@ import CreanceInputsView from "../creance/creance-inputs-view"
 import styled from "styled-components"
 
 export type ComponentBuilderType = {
-    label: string
-    child: CreanceFieldType[]
+    label?: string
+    child?: CreanceFieldType[]
 }
 
 const TitleStyle = styled.h1`

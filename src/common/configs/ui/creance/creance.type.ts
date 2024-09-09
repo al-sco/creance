@@ -42,7 +42,7 @@ export type CreanceColumnType = {
 
 export type AdditionnalContentType = {
   label: string
-  child: JSX.Element
+  child?: JSX.Element
 }
 
 export type CreanceTabType = {
