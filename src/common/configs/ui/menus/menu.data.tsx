@@ -66,7 +66,7 @@ import { mainCreanceDatas } from "../creance/main-creance.data";
 import { debiteursDatas } from "../creance/debiteur.data";
 import acDebiteurProvider from "../../../../states/signals/creances_providers/AcDebiteur.state";
 import PaiementMainContent from "../../../../components/paiement/paiement_main_content";
-import { effetPaiementData, especePaiementData, factureAntPaiementData, factureEspPaiementData, fraisPaiementData } from "../paiement/main-paiement.data";
+import { effetPaiementData, especePaiementData, factureAntPaiementData, factureEspPaiementData, fraisCreancePaiementData, fraisPaiementData } from "../paiement/main-paiement.data";
 
 export type SubMenuParent = {
   id: number
@@ -1971,11 +1971,11 @@ const menuItemsData: Array<MenuItemType> = [
     parents: [
       {
         id: 0,
-        label: 'Espece'
+        label: 'Paiement en Espece'
       },
       {
         id: 1,
-        label: 'Effet'
+        label: 'Paiement par Cheque'
       },
       {
         id: -1,
@@ -1983,45 +1983,30 @@ const menuItemsData: Array<MenuItemType> = [
     ],
     subMenu: [
       {
-        name: "Paiement en Espece",
+        name: "Paiemt. de Creance",
         parentId: 0,
         render: () => <PaiementMainContent data={especePaiementData} />
       },
-      
-      // {
-      //   name: "Paiement des Frais",
-      //   render: () => <PaiementMainContent data={fraisPaiementData} />
-      // },
-      // {
-      //   name: "Paiem. anter en espece à la Banq",
-      //   render: () => <PaiementMainContent data={especePaiementData} />
-      // },
       {
-        name: "Paiement des Factures en espece",
+        name: "Paiemt. de Facture",
         parentId: 0,
         render: () => <PaiementMainContent data={factureEspPaiementData} />
       },
       {
-        name: "Paiement par Effet",
+        name: "Paiemt. de Creances",
+        parentId: 1,
+        render: () => <PaiementMainContent data={fraisCreancePaiementData} />
+      },
+      {
+        name: "Paiemt. de Factures",
         parentId: 1,
         render: () => <PaiementMainContent data={factureAntPaiementData} />
       },
       {
-        name: "Test Direct", 
+        name:'Paiement par virement non reçu(CGRAE,OVP,PGT,CNPS) ',
         parentId: -1,       
         render: () => <PaiementMainContent data={factureEspPaiementData} />
       },
-      {
-        name: "Test Direct 1", 
-        parentId: -1,       
-        render: () => <PaiementMainContent data={factureEspPaiementData} />
-      },
-      {
-        name: "Test Direct 2", 
-        parentId: -1,       
-        render: () => <PaiementMainContent data={factureEspPaiementData} />
-      },
-   
     ],
   },
   {
