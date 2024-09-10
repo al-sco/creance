@@ -36,6 +36,8 @@ const NormalEffetPaiementComponents = ({ selectItem }: CreanceMainContentProps) 
                 <Button variant='outline' _hover={{ color: colors.white, backgroundColor: colors.bleu }} size="md" color={colors.white} bg={colors.bleu} border={`1.5px solid ${colors.bleu}`} >Paiement de Frais</Button>
             </Flex>
             <PaiementAdditionalLayoutBuilder  childAsComponentBuilder={selected} />            
+
+            <>Hello Im Fixed</>
         </>
     )
 }
