@@ -7,6 +7,7 @@ import { fraisPaiementComponentData, fraisPaiementSelectItem } from "./fraisPaie
 import { factureEspComponentData, factureEspPaiementSelectItem } from "./factureEspPaiement.data";
 import { virementPaiementComponentData, virementPaiementSelectItem } from "./virementPaiementData";
 import { fraisCreancePaiementSelectItem, fraisCreanceComponentData } from "./fraisCreancePaiement.data";
+import { fraisFacturePaiementSelectItem, fraisFacturePaiementComponentData } from "./fraisFacturePaiement.data";
 
 export const especePaiementData: PaiementType = {
     child: <PaiementComponent selectItem={especePaiementSelectItem} data={especePaiementComponentData} />
@@ -24,6 +25,10 @@ export const factureAntPaiementData: PaiementType= {
     child: <PaiementComponent selectItem={fraisPaiementSelectItem} data={factureAntComponentData} />
 }
 
+export const fraisFacturePaiementData: PaiementType= {
+    child: <PaiementComponent selectItem={fraisFacturePaiementSelectItem} data={fraisFacturePaiementComponentData} />
+}
+
 export const factureEspPaiementData: PaiementType= {
     child: <PaiementComponent selectItem={factureEspPaiementSelectItem} data={factureEspComponentData} />
 }
@@ -35,3 +40,4 @@ export const virementPaiementData: PaiementType= {
 export const fraisCreancePaiementData: PaiementType={
     child: <PaiementComponent selectItem={fraisCreancePaiementSelectItem} data={fraisCreanceComponentData} />
 } 
+

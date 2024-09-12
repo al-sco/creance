@@ -91,7 +91,4 @@ export const fraisCreanceComponentData: ComponentBuilderType[] = [
       ]
   }
 
-   
-
-
 ]

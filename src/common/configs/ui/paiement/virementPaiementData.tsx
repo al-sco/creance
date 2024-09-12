@@ -62,7 +62,6 @@ export const virementPaiementComponentData: ComponentBuilderType[] = [
                     inputType: InputType.date,
                 },
             },
-            
             {
                 name: "Mode Paiement",
                 key: "numRecu",

@@ -66,7 +66,7 @@ import { mainCreanceDatas } from "../creance/main-creance.data";
 import { debiteursDatas } from "../creance/debiteur.data";
 import acDebiteurProvider from "../../../../states/signals/creances_providers/AcDebiteur.state";
 import PaiementMainContent from "../../../../components/paiement/paiement_main_content";
-import { effetPaiementData, especePaiementData, factureAntPaiementData, factureEspPaiementData, fraisCreancePaiementData, fraisPaiementData } from "../paiement/main-paiement.data";
+import { effetPaiementData, especePaiementData, factureAntPaiementData, factureEspPaiementData, fraisCreancePaiementData, fraisFacturePaiementData, fraisPaiementData, virementPaiementData } from "../paiement/main-paiement.data";
 
 export type SubMenuParent = {
   id: number
@@ -1979,6 +1979,7 @@ const menuItemsData: Array<MenuItemType> = [
       },
       {
         id: -1,
+        label:'Paiement par virement'
       },
     ],
     subMenu: [
@@ -2000,12 +2001,12 @@ const menuItemsData: Array<MenuItemType> = [
       {
         name: "Paiemt. de Factures",
         parentId: 1,
-        render: () => <PaiementMainContent data={factureAntPaiementData} />
+        render: () => <PaiementMainContent data={fraisFacturePaiementData} />
       },
       {
         name:'Paiement par virement non reçu(CGRAE,OVP,PGT,CNPS) ',
         parentId: -1,       
-        render: () => <PaiementMainContent data={factureEspPaiementData} />
+        render: () => <PaiementMainContent data={virementPaiementData} />
       },
     ],
   },

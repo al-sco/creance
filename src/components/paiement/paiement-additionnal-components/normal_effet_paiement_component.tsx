@@ -17,7 +17,7 @@ const NormalEffetPaiementComponents = ({ selectItem }: CreanceMainContentProps) 
         selected.value = selectItem!.find((e) => e.label == value)!
         console.log(selected.value.label)
     }
-    
+
     return (
         <>
             <Flex justifyContent='space-between'>
@@ -37,7 +37,7 @@ const NormalEffetPaiementComponents = ({ selectItem }: CreanceMainContentProps) 
             </Flex>
             <PaiementAdditionalLayoutBuilder  childAsComponentBuilder={selected} />            
 
-            <>Hello Im Fixed</>
+            <></>
         </>
     )
 }
