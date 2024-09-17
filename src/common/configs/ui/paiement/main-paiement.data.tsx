@@ -21,9 +21,7 @@ export const fraisPaiementData: PaiementType= {
     child: <PaiementComponent selectItem={fraisPaiementSelectItem} data={fraisPaiementComponentData} />
 }
 
-export const factureAntPaiementData: PaiementType= {
-    child: <PaiementComponent selectItem={fraisPaiementSelectItem} data={factureAntComponentData} />
-}
+
 
 export const fraisFacturePaiementData: PaiementType= {
     child: <PaiementComponent selectItem={fraisFacturePaiementSelectItem} data={fraisFacturePaiementComponentData} />

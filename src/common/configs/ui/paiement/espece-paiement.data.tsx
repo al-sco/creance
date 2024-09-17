@@ -48,21 +48,8 @@ export const especePaiementSelectItem: AdditionnalContentType[] = [
     },
 
     {
-        label: 'Paiement avec frais',
+        label: 'Paiement de frais',
         child: <ComponentBuilder label="FRAIS" child={fraisEffetPaiementData} />
-    },
-    {
-        label: 'Paiement après saisie et vente',
-        child: <MultiComponentsBuilder children={
-            [
-                {
-                    child:  <ComponentBuilder label="INFORMATION SUR LA SAISE DE BIENS" child={saisie_et_vente} />
-                },
-                {
-                    child:  <ComponentBuilder label="ENREGISTREMENT DES PAIEMENTS EN ESPECES" child={enrgst_paie_esp} />
-                },  
-            ]
-        } />
     },
     // {
     //     label: 'Paiement par banque rembs.',

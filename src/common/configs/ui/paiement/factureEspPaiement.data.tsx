@@ -18,7 +18,7 @@ export const factureEspPaiementSelectItem: AdditionnalContentType[] = [
   },
 
   {
-      label: 'Paiement avec frais',
+      label: 'Paiement de frais',
       child: <MultiComponentsBuilder children={
           [
               { 
@@ -27,12 +27,6 @@ export const factureEspPaiementSelectItem: AdditionnalContentType[] = [
           ]
       } />
   },
-
-  {
-    label:'Paiement Anterieure',
-    child:<ComponentBuilder label="PAIEMENT DE FACTURE INTERIEUR" child={factureEspAntrData} />
-  },
-
   {
     label:'Paiement en Espece',
     child:<ComponentBuilder label="PAIEMENT DE FACTURE EN ESPECE" child={factureEspData} />

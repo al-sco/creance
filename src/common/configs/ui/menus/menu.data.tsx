@@ -1947,9 +1947,26 @@ const menuItemsData: Array<MenuItemType> = [
     name: "Etude de Creance",
     path: "/etude_creance",
     icon: Creance,
+    parents:[{
+      id:3,
+      label:"Ecran d'enreg. de Frais"
+    },
+  
+    {
+      id:0,
+      label:'Compte Creance'
+    },
+    {
+      id:1,
+      label:'Compte Debiteur'
+    }
+  
+  
+  ],
     subMenu: [
       {
         name: "Debiteur",
+        parentId:1,
         loader: async () => {
           //TODO need to fix overloading
           await acBanqueProvider.find()
@@ -1960,8 +1977,14 @@ const menuItemsData: Array<MenuItemType> = [
       },
       {
         name: "Creance",
+        parentId:0,
         render: () => <CreanceMainContent data={mainCreanceDatas} />
       },
+      {
+        name:"Frais",
+        parentId:3,
+        render: () => <CreanceMainContent data={mainCreanceDatas} />
+      }
     ]
   },
   {

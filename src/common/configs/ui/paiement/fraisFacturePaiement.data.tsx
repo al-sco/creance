@@ -22,7 +22,7 @@ export const fraisFacturePaiementSelectItem: AdditionnalContentType[] = [
         child: <ComponentBuilder label="Paiement" child={SfraisFacturePaiementData} />
     },
     {
-      label:'Paiement avec frais',
+      label:'Paiement de frais',
       child: <MultiComponentsBuilder children={
           [
               {

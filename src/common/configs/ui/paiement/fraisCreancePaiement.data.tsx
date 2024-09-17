@@ -20,7 +20,7 @@ export const fraisCreancePaiementSelectItem: AdditionnalContentType[] = [
   },
 
   {
-      label: 'Paiement avec frais',
+      label: 'Paiement de frais',
       child: <MultiComponentsBuilder children={
           [
               { 
