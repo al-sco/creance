@@ -1960,6 +1960,7 @@ const menuItemsData: Array<MenuItemType> = [
       id:1,
       label:'Compte Debiteur'
     }
+   
   
   
   ],
@@ -1981,7 +1982,12 @@ const menuItemsData: Array<MenuItemType> = [
         render: () => <CreanceMainContent data={mainCreanceDatas} />
       },
       {
-        name:"Frais",
+        name:"Creation de  Frais",
+        parentId:3,
+        render: () => <CreanceMainContent data={mainCreanceDatas} />
+      },
+      {
+        name:"Frais de Mutation",
         parentId:3,
         render: () => <CreanceMainContent data={mainCreanceDatas} />
       }
@@ -2004,6 +2010,10 @@ const menuItemsData: Array<MenuItemType> = [
         id: -1,
         label:'Paiement par virement'
       },
+      {
+        id:4,
+        label:'Autre paiement'
+      }
     ],
     subMenu: [
       {
@@ -2029,6 +2039,22 @@ const menuItemsData: Array<MenuItemType> = [
       {
         name:'Paiement par virement non reçu(CGRAE,OVP,PGT,CNPS) ',
         parentId: -1,       
+        render: () => <PaiementMainContent data={virementPaiementData} />
+      },
+
+      {
+        name:'1',
+        parentId: 4,       
+        render: () => <PaiementMainContent data={virementPaiementData} />
+      },
+      {
+        name:'2',
+        parentId: 4,       
+        render: () => <PaiementMainContent data={virementPaiementData} />
+      },
+      {
+        name:'3',
+        parentId: 4,       
         render: () => <PaiementMainContent data={virementPaiementData} />
       },
     ],
