@@ -66,7 +66,7 @@ import { mainCreanceDatas } from "../creance/main-creance.data";
 import { debiteursDatas } from "../creance/debiteur.data";
 import acDebiteurProvider from "../../../../states/signals/creances_providers/AcDebiteur.state";
 import PaiementMainContent from "../../../../components/paiement/paiement_main_content";
-import { effetPaiementData, especePaiementData, factureAntPaiementData, factureEspPaiementData, fraisCreancePaiementData, fraisFacturePaiementData, fraisPaiementData, virementPaiementData } from "../paiement/main-paiement.data";
+import { ecranFraisPaiementData, effetPaiementData, especePaiementData, factureEspPaiementData, fraisCreancePaiementData, fraisFacturePaiementData, fraisPaiementData, virementPaiementData } from "../paiement/main-paiement.data";
 
 export type SubMenuParent = {
   id: number
@@ -1984,13 +1984,23 @@ const menuItemsData: Array<MenuItemType> = [
       {
         name:"Creation de  Frais",
         parentId:3,
-        render: () => <CreanceMainContent data={mainCreanceDatas} />
+        render: () => <PaiementMainContent data={ecranFraisPaiementData} />
       },
       {
-        name:"Frais de Mutation",
+        name:"Autre frais",
         parentId:3,
-        render: () => <CreanceMainContent data={mainCreanceDatas} />
-      }
+        render: () => <PaiementMainContent data={ecranFraisPaiementData} />
+      },
+      // {
+      //   name:"Frais de Mutation", 
+      //   parentId:3,
+      //   render: () => <CreanceMainContent data={mainCreanceDatas} />
+      // },
+      // {
+      //   name:"Visite de terrain",
+      //   parentId:3,
+      //   render: () => <CreanceMainContent data={mainCreanceDatas} />
+      // }
     ]
   },
   {
