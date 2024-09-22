@@ -9,7 +9,7 @@ import { MenuItem } from "../../common/configs/ui/menus/menus.type";
 
 
 const StyledSideBarMenu = styled.div`
-  padding:50px 18px;
+  padding: 50px 0 18px 10px;
   height: 100vh;
   background-color: ${colors.darkGreen};
   overflow-y: hidden;
@@ -43,6 +43,7 @@ const StyledImage = styled.div`
 const SideBarMenu = () => {
     
     const [currentSideBarMenuId, setCurrentItem] = useState<number>();
+    const [isClose, setIsClose] = useState<boolean>(true);
 
     useEffect(()=>{
         let currentMenu=menuItems.find((menuItem)=>window.location.pathname.startsWith(menuItem.path))        
@@ -52,6 +53,7 @@ const SideBarMenu = () => {
     },[])
 
     const handleChangeCurrentItem = (menu: MenuItem) => {
+        setIsClose(currentSideBarMenuId === menu.id && !isClose);
         setCurrentItem((_) => menu.id)
     }
 
@@ -62,10 +64,10 @@ const SideBarMenu = () => {
             </StyledImage>
             <Box h="48px" />
             <Stack direction="column" style={{
-                height:"85%", overflow:"scroll"
+                height:"85%", overflowY:"scroll", overflowX:"hidden"
             }}>
                 {
-                    menuItems.map((mItem) => (<MenuItemComponent onPressed={handleChangeCurrentItem} menu={mItem} isSelected={currentSideBarMenuId === mItem.id} key={mItem.id} />))
+                    menuItems.map((mItem) => (<MenuItemComponent isClose={isClose} onPressed={handleChangeCurrentItem} menu={mItem} isSelected={currentSideBarMenuId === mItem.id} key={mItem.id} />))
                 }
             </Stack>
         </StyledSideBarMenu>

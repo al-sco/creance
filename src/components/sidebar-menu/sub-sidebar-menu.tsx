@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { Box, Stack } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import { SubMenuItem } from "../../common/configs/ui/menus/menus.type";
 import { StyledSubTitle } from "../../common/theme/typography/typography";
 import SubMenuItemComponent from "../menu-item/sub-menu-item";
@@ -7,7 +7,6 @@ import { useEffect, useState } from "react";
 import colors from "../../common/theme/colors/colors";
 import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
 import { Signal } from "@preact/signals-react";
-import { SubMenuParent } from "../../common/configs/ui/menus/menu.data";
 
 
 const StyledSideBarMenu = styled.div`
@@ -23,12 +22,6 @@ const StyledDiv = styled.div`
     overflow-y: scroll;
 `;
 
-
-const StyledTitle = styled.div`
-    font-size: 14;
-    font-weight: bold;
-`;
-
 const HideButtonStyled = styled.div`
     padding: 10px 15px 10px 15px;
     border-radius: 0 10% 10% 0;
@@ -39,11 +32,11 @@ type SubSideBarMenuProps = {
     handleHidden: () => void,
     isHidden: Signal<boolean>,
     title: string
-    parents?: SubMenuParent[]
+    parentPath: string
     subMenuItems: Array<SubMenuItem>
 }
 
-const SubSideBarMenu = ({ title, subMenuItems, handleHidden, isHidden, parents }: SubSideBarMenuProps) => {
+const SubSideBarMenu = ({ title, subMenuItems, handleHidden, isHidden, parentPath }: SubSideBarMenuProps) => {
     const [subMenuItem, setSubMenuItem] = useState<number>()
 
     useEffect(() => {
@@ -58,10 +51,6 @@ const SubSideBarMenu = ({ title, subMenuItems, handleHidden, isHidden, parents }
         setSubMenuItem((_) => subMenu.id)
     }
 
-    const getSubmenus = (menus: SubMenuItem[],parentId: number): SubMenuItem[] => {
-        return menus.filter((m) => m.parentId == parentId)
-    }
-
     return (
         <>
             {!isHidden.value &&                
@@ -72,19 +61,9 @@ const SubSideBarMenu = ({ title, subMenuItems, handleHidden, isHidden, parents }
                 <Box h="37px" />
                 <StyledDiv>
                     {
-                        parents==undefined? subMenuItems
-                        .map((subMenu, index) => (<SubMenuItemComponent key={index} onPressed={handleMenuClick} isSelected={subMenuItem === subMenu.id} subMenu={subMenu} />))
-                 : parents.map((p:SubMenuParent) => (                    
-                    <Stack marginBottom={5} direction='column' justifyContent="start" spacing={0} alignItems="start" >                     
-                            <StyledTitle>{p.label}</StyledTitle>
-                           <span>
-                             {
-                                getSubmenus(subMenuItems, p.id)
-                                .map((subMenu, index) => (<SubMenuItemComponent hasLeftIndicator={p.label!=undefined} key={index} onPressed={handleMenuClick} isSelected={subMenuItem === subMenu.id} subMenu={subMenu} />))
-                            }</span>
-                        </Stack>
-                 ))
-                        }
+                       subMenuItems
+                        .map((subMenu, index) => (<SubMenuItemComponent parrentPath={parentPath} key={index} onPressed={handleMenuClick} isSelected={subMenuItem === subMenu.id} subMenu={subMenu} />))                
+                    }
                 </StyledDiv>
             </StyledSideBarMenu>}
             <Box style={{ margin: '0 0 0 0', position: 'fixed', bottom: '10px',cursor:'pointer' }}>

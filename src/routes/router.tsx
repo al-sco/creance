@@ -4,6 +4,7 @@ import ErrorPage from "../pages/error/Error"
 import Root from "../pages/Root"
 import MainContent from "../components/main-content/MainContent"
 import ParameterMainContent from "../components/parameter-main-content/parameter-main-content"
+import { MenuItem } from "../common/configs/ui/menus/menus.type"
 
 
 const router = createBrowserRouter([
@@ -11,10 +12,10 @@ const router = createBrowserRouter([
         path: '/',
         element: <Root />,
         errorElement: <ErrorPage />,
-        children: menuItems.map((menuItem) => (
+        children: menuItems.map((menuItem:MenuItem) => (
             {
                 path: menuItem.path,
-                element: <MainContent subMenus={menuItem.subMenus} render={menuItem.render} title={menuItem.name} icon={menuItem.icon} parents={menuItem.parents} />,
+                element: <MainContent subMenus={menuItem.subMenus} render={menuItem.render} title={menuItem.name} icon={menuItem.icon} parrentPath={menuItem.path} hasSubMenusInSideBar={menuItem.hasSubMenusInSideBar} />,
                 errorElement: <ErrorPage />,
                 children: menuItem.subMenus?.map((sb) => ({
                     path: sb.path,

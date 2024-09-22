@@ -5,7 +5,6 @@ import { Outlet, useNavigation } from "react-router-dom"
 import { SubMenuItem } from "../../common/configs/ui/menus/menus.type"
 import { Signal } from "@preact/signals-react"
 import styled from "styled-components"
-import { SubMenuParent } from "../../common/configs/ui/menus/menu.data"
 
 const StyledSpinnerDiv = styled.div`
     display: grid;
@@ -19,20 +18,23 @@ type MainContentWrapperProps = {
     isHidden: Signal<boolean>,
     handleHidden: () => void,
     title: string,
-    parents?: SubMenuParent[]
+    parrentPath: string
+    hasSubMenusInSideBar?: boolean
 }
 
-const MainContentWrapper = ({ subMenus, isHidden, handleHidden, title, parents }: MainContentWrapperProps): JSX.Element => {
+const MainContentWrapper = ({ subMenus, isHidden, handleHidden, title, parrentPath, hasSubMenusInSideBar }: MainContentWrapperProps): JSX.Element => {
     const navigation = useNavigation()
     useSignals()
 
     return (
-        <Grid templateColumns={isHidden.value ? 'minmax(50px, 4.5%) 5fr' : '1fr 5fr'}>
-            <GridItem>
-                {
-                    subMenus && <SubSideBarMenu isHidden={isHidden} handleHidden={handleHidden} title={title} subMenuItems={subMenus} parents={parents} />
-                }
-            </GridItem>
+        <Grid templateColumns={isHidden.value ? 'minmax(50px, 4.5%) 5fr' : hasSubMenusInSideBar? '1fr 5fr' : '5fr'}>
+            { hasSubMenusInSideBar &&
+                <GridItem>
+                    {
+                        subMenus && <SubSideBarMenu parentPath={parrentPath} isHidden={isHidden} handleHidden={handleHidden} title={title} subMenuItems={subMenus} />
+                    }
+                </GridItem>
+            }
             <GridItem>
                 {
                     navigation.state === "loading" ? <StyledSpinnerDiv><Spinner size='xl' color="orange" /></StyledSpinnerDiv> : <Outlet />

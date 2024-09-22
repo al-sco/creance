@@ -12,6 +12,7 @@ type SubMenuItemProps = {
     isSelected: boolean
     hasLeftIndicator?: boolean
     onPressed: (e: SubMenuItem) => void
+    parrentPath: string
 }
 
 const BorderedStyle = styled.div`
@@ -25,12 +26,12 @@ const SubMenuNameStyled = styled.div`
   overflow-y: scroll;
 `
 
-const SubMenuItemComponent = ({ subMenu, isSelected, onPressed, hasLeftIndicator }: SubMenuItemProps) => {
+const SubMenuItemComponent = ({ subMenu, isSelected, onPressed, hasLeftIndicator, parrentPath }: SubMenuItemProps) => {
     return (
         (
-            <Link to={subMenu.path.toString()} onClick={() => onPressed(subMenu)}>
+            <Link to={parrentPath+'/'+subMenu.path.toString()} onClick={() => onPressed(subMenu)}>
                 <BorderedStyle>
-                    <StyledMenuItem $textColor={isSelected ? colors.black : colors.lightGray}>
+                    <StyledMenuItem $textColor={isSelected ? colors.green : colors.lightGray}>
                             {hasLeftIndicator!=undefined && hasLeftIndicator?
                             <Stack direction='row' spacing={4} justifyContent="start" alignItems="center" >
                             {isSelected && <ChevronRightIcon />}

@@ -66,12 +66,8 @@ import { mainCreanceDatas } from "../creance/main-creance.data";
 import { debiteursDatas } from "../creance/debiteur.data";
 import acDebiteurProvider from "../../../../states/signals/creances_providers/AcDebiteur.state";
 import PaiementMainContent from "../../../../components/paiement/paiement_main_content";
-import { ecranFraisPaiementData, effetPaiementData, especePaiementData, factureEspPaiementData, fraisCreancePaiementData, fraisFacturePaiementData, fraisPaiementData, virementPaiementData } from "../paiement/main-paiement.data";
+import { ecranFraisPaiementData, especePaiementData, factureEspPaiementData, fraisCreancePaiementData, fraisFacturePaiementData, virementPaiementData } from "../paiement/main-paiement.data";
 
-export type SubMenuParent = {
-  id: number
-  label?: string
-}
 
 export type SubMenuType = {
   name: string;
@@ -86,14 +82,13 @@ export type SubMenuType = {
   create?: (data: any) => Promise<any>,
   additionalHeaderRender?: () => JSX.Element,
   render?: () => JSX.Element,
-  parentId?: number
 };
 
 type MenuItemType = {
   name: string;
   icon: string;
   path: string;
-  parents?: SubMenuParent[]
+  hasSubMenusInSideBar?: boolean
   subMenu?: SubMenuType[];
 };
 
@@ -113,7 +108,7 @@ const menuItemsData: Array<MenuItemType> = [
   {
     name: "Action",
     path: "/action",
-    icon: Account,
+    icon: Account,    
     subMenu: [
       {
         name: "Connexion",
@@ -145,6 +140,7 @@ const menuItemsData: Array<MenuItemType> = [
     name: "Paramètres",
     icon: Settings,
     path: "/settings",
+    hasSubMenusInSideBar: true,
     subMenu: [
       {
         name: "Agence de banque",
@@ -1946,28 +1942,10 @@ const menuItemsData: Array<MenuItemType> = [
   {
     name: "Etude de Creance",
     path: "/etude_creance",
-    icon: Creance,
-    parents:[{
-      id:3,
-      label:"Ecran d'enreg. de Frais"
-    },
-  
-    {
-      id:0,
-      label:'Compte Creance'
-    },
-    {
-      id:1,
-      label:'Compte Debiteur'
-    }
-   
-  
-  
-  ],
+    icon: Creance,   
     subMenu: [
       {
         name: "Debiteur",
-        parentId:1,
         loader: async () => {
           //TODO need to fix overloading
           await acBanqueProvider.find()
@@ -1978,17 +1956,14 @@ const menuItemsData: Array<MenuItemType> = [
       },
       {
         name: "Creance",
-        parentId:0,
         render: () => <CreanceMainContent data={mainCreanceDatas} />
       },
       {
         name:"Creation de  Frais",
-        parentId:3,
         render: () => <PaiementMainContent data={ecranFraisPaiementData} />
       },
       {
         name:"Autre frais",
-        parentId:3,
         render: () => <PaiementMainContent data={ecranFraisPaiementData} />
       },
       // {
@@ -2007,66 +1982,27 @@ const menuItemsData: Array<MenuItemType> = [
     name: "Suivi Clientèle",
     path: "/followClient",
     icon: FollowClient,
-    parents: [
-      {
-        id: 0,
-        label: 'Paiement en Espece'
-      },
-      {
-        id: 1,
-        label: 'Paiement par Cheque'
-      },
-      {
-        id: -1,
-        label:'Paiement par virement'
-      },
-      {
-        id:4,
-        label:'Autre paiement'
-      }
-    ],
     subMenu: [
       {
         name: "Paiemt. de Creance",
-        parentId: 0,
         render: () => <PaiementMainContent data={especePaiementData} />
       },
       {
         name: "Paiemt. de Facture",
-        parentId: 0,
         render: () => <PaiementMainContent data={factureEspPaiementData} />
       },
       {
         name: "Paiemt. de Creances",
-        parentId: 1,
         render: () => <PaiementMainContent data={fraisCreancePaiementData} />
       },
       {
         name: "Paiemt. de Factures",
-        parentId: 1,
         render: () => <PaiementMainContent data={fraisFacturePaiementData} />
       },
       {
         name:'Paiement par virement non reçu(CGRAE,OVP,PGT,CNPS) ',
-        parentId: -1,       
         render: () => <PaiementMainContent data={virementPaiementData} />
-      },
-
-      {
-        name:'1',
-        parentId: 4,       
-        render: () => <PaiementMainContent data={virementPaiementData} />
-      },
-      {
-        name:'2',
-        parentId: 4,       
-        render: () => <PaiementMainContent data={virementPaiementData} />
-      },
-      {
-        name:'3',
-        parentId: 4,       
-        render: () => <PaiementMainContent data={virementPaiementData} />
-      },
+      },    
     ],
   },
   {
@@ -2140,7 +2076,7 @@ export const menuItems: MenuItem[] = menuItemsData.map((menuItem, index) => ({
   path: menuItem.path,
   icon: menuItem.icon,
   name: menuItem.name,  
-  parents: menuItem.parents,
+  hasSubMenusInSideBar: menuItem.hasSubMenusInSideBar,
   subMenus: menuItem.subMenu?.map(
     (subMenu, index): SubMenuItem => ({
       id: index,
@@ -2157,7 +2093,6 @@ export const menuItems: MenuItem[] = menuItemsData.map((menuItem, index) => ({
           : undefined,
       columns: subMenu.columns,
       path: formatLabelToPath(subMenu),
-      parentId: subMenu.parentId
     })
   ),
 }));
