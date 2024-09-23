@@ -59,7 +59,7 @@ const MenuItemComponent = ({ menu, isSelected, onPressed, isClose }: MenuItemPro
         </StyledMenuItem >
         </Link >
         {
-            menu.subMenus && <SubMenusStyled style={{ display: menu.hasSubMenusInSideBar? 'none' : isSelected && !isClose ? 'block' : 'none' }}>
+            menu.subMenus && <SubMenusStyled style={{ display: isSelected && !isClose ? 'block' : 'none' }}>
                 <StyledDiv>
                     {
                         menu.subMenus

@@ -22,19 +22,19 @@ type MainContentWrapperProps = {
     hasSubMenusInSideBar?: boolean
 }
 
-const MainContentWrapper = ({ subMenus, isHidden, handleHidden, title, parrentPath, hasSubMenusInSideBar }: MainContentWrapperProps): JSX.Element => {
+const MainContentWrapper = ({ subMenus, isHidden, handleHidden, title, parrentPath }: MainContentWrapperProps): JSX.Element => {
     const navigation = useNavigation()
     useSignals()
-
+    
     return (
-        <Grid templateColumns={isHidden.value ? 'minmax(50px, 4.5%) 5fr' : hasSubMenusInSideBar? '1fr 5fr' : '5fr'}>
-            { hasSubMenusInSideBar &&
+        <Grid templateColumns={isHidden.value ? 'minmax(50px, 4.5%) 5fr' : subMenus!=undefined && subMenus.length!=0 ? '5fr' : '5fr'}>
+            {/* { subMenus!=undefined && subMenus.length!=0 ?
                 <GridItem>
                     {
-                        subMenus && <SubSideBarMenu parentPath={parrentPath} isHidden={isHidden} handleHidden={handleHidden} title={title} subMenuItems={subMenus} />
+                        <SubSideBarMenu parentPath={parrentPath} isHidden={isHidden} handleHidden={handleHidden} title={title} subMenuItems={subMenus} />
                     }
-                </GridItem>
-            }
+                </GridItem> : <></>
+            } */}
             <GridItem>
                 {
                     navigation.state === "loading" ? <StyledSpinnerDiv><Spinner size='xl' color="orange" /></StyledSpinnerDiv> : <Outlet />

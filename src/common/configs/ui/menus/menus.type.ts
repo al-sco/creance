@@ -8,7 +8,6 @@ export type MenuItem = {
     icon: string
     subMenus?: SubMenuItem[]
     render?: () => JSX.Element,
-    hasSubMenusInSideBar?: boolean
 }
 
 export type SubMenuItem = {
@@ -23,7 +22,7 @@ export type SubMenuItem = {
     loader?: (params: any) => any[],
     render?: () => JSX.Element,
     path: string
-    parentId?: number
+    subMenus?: SubMenuItem[]
 }
 
 

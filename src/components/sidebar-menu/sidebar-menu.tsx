@@ -6,6 +6,7 @@ import MenuItemComponent from "../menu-item/menu-item";
 import { menuItems } from "../../common/configs/ui/menus/menu.data";
 import colors from "../../common/theme/colors/colors";
 import { MenuItem } from "../../common/configs/ui/menus/menus.type";
+import { signal } from "@preact/signals-react";
 
 
 const StyledSideBarMenu = styled.div`
@@ -57,7 +58,7 @@ const SideBarMenu = () => {
         setCurrentItem((_) => menu.id)
     }
 
-    return (
+    return (        
         <StyledSideBarMenu>
             <StyledImage>
                 <Image src={logo} w={100} />

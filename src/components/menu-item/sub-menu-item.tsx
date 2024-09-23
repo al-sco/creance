@@ -5,6 +5,7 @@ import { Stack } from "@chakra-ui/react"
 import { ChevronRightIcon } from "@chakra-ui/icons"
 import { SubMenuItem } from "../../common/configs/ui/menus/menus.type"
 import styled from "styled-components"
+import { useState } from "react"
 
 
 type SubMenuItemProps = {
@@ -27,9 +28,10 @@ const SubMenuNameStyled = styled.div`
 `
 
 const SubMenuItemComponent = ({ subMenu, isSelected, onPressed, hasLeftIndicator, parrentPath }: SubMenuItemProps) => {
+
     return (
         (
-            <Link to={parrentPath+'/'+subMenu.path.toString()} onClick={() => onPressed(subMenu)}>
+            <Link to={subMenu.subMenus!=undefined? parrentPath+'/'+subMenu.path.toString() : parrentPath+'/'+subMenu.path.toString()} onClick={() => onPressed(subMenu)}>
                 <BorderedStyle>
                     <StyledMenuItem $textColor={isSelected ? colors.green : colors.lightGray}>
                             {hasLeftIndicator!=undefined && hasLeftIndicator?

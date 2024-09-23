@@ -82,6 +82,7 @@ export type SubMenuType = {
   create?: (data: any) => Promise<any>,
   additionalHeaderRender?: () => JSX.Element,
   render?: () => JSX.Element,
+  subMenu?: SubMenuItem[];
 };
 
 type MenuItemType = {
@@ -140,7 +141,6 @@ const menuItemsData: Array<MenuItemType> = [
     name: "Paramètres",
     icon: Settings,
     path: "/settings",
-    hasSubMenusInSideBar: true,
     subMenu: [
       {
         name: "Agence de banque",
@@ -1985,7 +1985,15 @@ const menuItemsData: Array<MenuItemType> = [
     subMenu: [
       {
         name: "Paiemt. de Creance",
-        render: () => <PaiementMainContent data={especePaiementData} />
+        render: () => <PaiementMainContent data={especePaiementData} />,
+        subMenu: [
+          {
+            id: 1,
+            name: 'Paiement X',
+            path: '/paiementX',
+            render: () => <PaiementMainContent data={factureEspPaiementData} />
+          },
+        ]
       },
       {
         name: "Paiemt. de Facture",
@@ -2076,7 +2084,6 @@ export const menuItems: MenuItem[] = menuItemsData.map((menuItem, index) => ({
   path: menuItem.path,
   icon: menuItem.icon,
   name: menuItem.name,  
-  hasSubMenusInSideBar: menuItem.hasSubMenusInSideBar,
   subMenus: menuItem.subMenu?.map(
     (subMenu, index): SubMenuItem => ({
       id: index,
@@ -2093,6 +2100,7 @@ export const menuItems: MenuItem[] = menuItemsData.map((menuItem, index) => ({
           : undefined,
       columns: subMenu.columns,
       path: formatLabelToPath(subMenu),
+      subMenus: subMenu.subMenu
     })
   ),
 }));

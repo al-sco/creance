@@ -28,7 +28,6 @@ const PaiementComponent = ({ data, selectItem }: ComponentProps) => {
     const selected = signal<AdditionnalContentType>(selectItem![0])
     const onSelectChanged = (value: string) => {
         selected.value = selectItem!.find((e) => e.label == value)!
-        console.log(selected.value.label)
     }
 
     return (

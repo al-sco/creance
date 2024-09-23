@@ -33,7 +33,7 @@ type SubSideBarMenuProps = {
     isHidden: Signal<boolean>,
     title: string
     parentPath: string
-    subMenuItems: Array<SubMenuItem>
+    subMenuItems: SubMenuItem[]
 }
 
 const SubSideBarMenu = ({ title, subMenuItems, handleHidden, isHidden, parentPath }: SubSideBarMenuProps) => {

@@ -10,7 +10,6 @@ type MainContentProps = {
   render?: () => JSX.Element,
   subMenus: SubMenuItem[] | undefined
   parrentPath: string
-  hasSubMenusInSideBar?: boolean
 }
 
 
@@ -18,7 +17,7 @@ const StyledMainContent = styled.div`
     background-color: ${colors.background};
 `;
 
-const MainContent = ({ subMenus, title, render, parrentPath, hasSubMenusInSideBar }: MainContentProps) => {
+const MainContent = ({ subMenus, title, render, parrentPath }: MainContentProps) => {
   const isHidden = signal<boolean>(false)
 
   const handleHidden = () => {
@@ -28,7 +27,7 @@ const MainContent = ({ subMenus, title, render, parrentPath, hasSubMenusInSideBa
   return (
     <StyledMainContent>
       {render && render()}
-      <MainContentWrapper hasSubMenusInSideBar={hasSubMenusInSideBar} handleHidden={handleHidden} isHidden={isHidden} subMenus={subMenus} title={title} parrentPath={parrentPath} />
+      <MainContentWrapper handleHidden={handleHidden} isHidden={isHidden} subMenus={subMenus} title={title} parrentPath={parrentPath} />
     </StyledMainContent >
   )
 }
