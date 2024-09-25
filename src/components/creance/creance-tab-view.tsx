@@ -53,6 +53,12 @@ const BaseStyledTable = styled.div`
   overflow-x: scroll;
 `;
 
+const TabNameStyle = styled.div`
+  margin: 0 0 2rem 0;
+  font-weight: bold;
+  font-size: 1%.5;
+`
+
 const AdditionnalButtonStyled = styled.div`
   display: flex;
   margin: 1rem 0 0 0;
@@ -68,9 +74,11 @@ const BuildTabContent = ({
   tableContent,
   hasAddButton,
   tableHeaders,
-  handleSave
+  handleSave,
+  tabName
 }: {
   index: number;
+  tabName: string;
   hasAddButton?: boolean;
   handleSave?: (data: any[]) => void
   tableHeaders: string[] | undefined;
@@ -128,7 +136,8 @@ const BuildTabContent = ({
   };
 
   return (
-    <TabPanel key={index}>
+    <TabPanel key={index}>    
+      <TabNameStyle>{tabName}</TabNameStyle>      
       {hasAddButton && (
         <Stack direction="row">
           <Button
@@ -181,7 +190,7 @@ const BuildTabContent = ({
       <AdditionnalButtonStyled>
         {additionnalContents &&
           additionnalContents.map((e) => {
-            return <DrawerComponent child={e.child} title={e.label} />;
+            return <DrawerComponent child={e.child!} title={e.label!} />;
           })}
       </AdditionnalButtonStyled>
     </TabPanel>
@@ -222,6 +231,7 @@ const CreanceTabsView = ({ tabs, state }: CreanceTabsViewProps) => {
               fields,
               tableHeaders,
               rowCount,
+              tabName,
               additionnalContents,
               hasAddButton,
               handleTabRowSave
@@ -230,6 +240,7 @@ const CreanceTabsView = ({ tabs, state }: CreanceTabsViewProps) => {
           ) => (
             <BuildTabContent
               index={index}
+              tabName={tabName}
               handleSave={handleTabRowSave}
               tableHeaders={tableHeaders}
               tableContent={tableContent}
