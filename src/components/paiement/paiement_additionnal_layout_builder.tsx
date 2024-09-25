@@ -5,7 +5,7 @@ import styled from "styled-components"
 import ComponentBuilder, { ComponentBuilderType } from "./component_builder"
 
 type LayoutProps = {
-    childAsAdditionnalContent?: Signal<AdditionnalContentType>
+    childAsAdditionnalContent?: Signal<AdditionnalContentType|undefined>
     childAsComponentBuilder?: Signal<ComponentBuilderType>
 }
 
@@ -18,7 +18,7 @@ const PaiementAdditionalLayoutBuilder = ({ childAsAdditionnalContent, childAsCom
 
     return (
         <Wrapper>
-            {childAsAdditionnalContent && childAsAdditionnalContent.value.child}
+            {childAsAdditionnalContent && childAsAdditionnalContent.value && childAsAdditionnalContent.value.child}
             {childAsComponentBuilder && <ComponentBuilder label={childAsComponentBuilder.value.label} child={childAsComponentBuilder.value.child} />}
         </Wrapper>
     )

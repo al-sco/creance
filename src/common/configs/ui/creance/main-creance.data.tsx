@@ -531,6 +531,7 @@ const defaultPieceTabRow = [
     },
   },
 ];
+
 const creanceTabs: CreanceTabType[] = [
   {
     tabName: "Pièce",
@@ -719,7 +720,182 @@ const creanceTabs: CreanceTabType[] = [
   }
 ];
 
+const fraisTabs: CreanceTabType[] = [
+  {
+    tabName: "Creance",
+    key: "piece",
+    tableHeaders: [
+      "Type Piece",
+      "Référence",
+      "Libellé",
+      "Date Emission",
+      "Date Reception",
+    ],
 
+  },
+  {
+    tabName: "Mutation",
+    fields: [
+      {
+        name: "Code",
+        key: 'numAssu',
+        state: acDebiteurProvider.getState(),
+        inputItem: {
+          inputType: InputType.text,
+          isEditable: true,
+          placeholder: "registre de commerce",
+        },
+        selectItems: acDebiteurProvider.getSelectItems(acTypeDomicilProvider),
+      },
+    ],
+    key: ""
+  },
+  {
+    tabName: "Garanties Réelles",
+    key: "garaniesReelles",
+    additionnalContents: [
+      {
+        label: 'Details Logement',
+        child: <GarantiesReellesAdditionnalContentContent data={detailLogementAditionnalData} />,
+      },
+      {
+        label: 'Details Terrain',
+        child: <GarantiesReellesAdditionnalContentContent data={detailTerrainAditionnalData} />,
+      }
+    ],
+    tableHeaders: [
+      "Type",
+      "N°Garantie",
+      "Date Inscript",
+      "Obj Montant",
+      "Libelle",
+      "Terrain",
+      "Logement",
+      "Code",
+    ],
+    hasAddButton: true,
+    tableContent: [
+      {
+        name: "Type",
+        key: "type",
+        state: acDebiteurProvider.getState(),
+        selectItems: acDebiteurProvider.getSelectItems(acTypeDomicilProvider),
+      },
+      {
+        name: "N°Garantie",
+        key: "numGarant",
+        state: acDebiteurProvider.getState(),
+        inputItem: {
+          inputType: InputType.text,
+          isEditable: true,
+          placeholder: "numGarant",
+        },
+      },
+      {
+        name: "Date Inscript",
+        key: "dateIns",
+        state: acDebiteurProvider.getState(),
+        inputItem: {
+          inputType: InputType.date,
+        },
+      },
+      {
+        name: "Obj Montant",
+        key: "objMontant",
+        state: acDebiteurProvider.getState(),
+        inputItem: {
+          inputType: InputType.text,
+          isEditable: true,
+          placeholder: "Obj montant",
+        },
+      },
+      {
+        name: "Libelle",
+        key: "libelle",
+        state: acDebiteurProvider.getState(),
+        inputItem: {
+          inputType: InputType.text,
+          isEditable: true,
+          placeholder: "libelle",
+        },
+      },
+      {
+        name: "Terrain",
+        key: "terrain",
+        state: acDebiteurProvider.getState(),
+        selectItems: acDebiteurProvider.getSelectItems(acTypeDomicilProvider),
+      },
+      {
+        name: "Logement",
+        key: "logement",
+        state: acDebiteurProvider.getState(),
+        selectItems: acDebiteurProvider.getSelectItems(acTypeDomicilProvider),
+      },
+      {
+        name: "Code",
+        key: "code",
+        state: acDebiteurProvider.getState(),
+        inputItem: {
+          inputType: InputType.text,
+          isEditable: false
+        }
+      },
+    ],
+  },
+  {
+    tabName: "Assurance",
+    key: 'A',
+    rowCount: 1,
+    fields: [
+      {
+        name: "Code",
+        key: 'numAssu',
+        state: acDebiteurProvider.getState(),
+        inputItem: {
+          inputType: InputType.text,
+          isEditable: true,
+        },
+        selectItems: acDebiteurProvider.getSelectItems(acTypeDomicilProvider),
+      },
+      {
+        name: "Police",
+        key: 'police',
+        state: acDebiteurProvider.getState(),
+        inputItem: {
+          inputType: InputType.text,
+          placeholder: "police",
+          isEditable: true,
+        },
+      },
+      {
+        name: "Date début",
+        key: 'dateDebut',
+        state: acDebiteurProvider.getState(),
+        inputItem: {
+          inputType: InputType.date,
+        },
+      },
+      {
+        name: "Prime",
+        key: 'prime',
+        state: acDebiteurProvider.getState(),
+        inputItem: {
+          inputType: InputType.text,
+          placeholder: "prime",
+          isEditable: true,
+        },
+      },
+      {
+        name: "Date Signature",
+        key: 'dateSign',
+        state: acDebiteurProvider.getState(),
+        inputItem: {
+          inputType: InputType.date,
+        },
+      },
+    ],
+  }
+];
 
 export const mainCreanceDatas: CreanceDataType = {
   title: "Etude créance",
@@ -728,4 +904,13 @@ export const mainCreanceDatas: CreanceDataType = {
   create: acCreanceProvider.create,
   state: acCreanceProvider.getState(),
   tabs: creanceTabs,
+};
+
+export const fraisCreationData: CreanceDataType = {
+  title: "Creation De Frais",
+  fields: [],  
+  hasAddbutton: true,
+  create: acCreanceProvider.create,
+  state: acCreanceProvider.getState(),
+  tabs: fraisTabs,
 };

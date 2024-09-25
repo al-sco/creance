@@ -7,9 +7,10 @@ import PaiementAdditionalLayoutBuilder from "../paiement_additionnal_layout_buil
 
 type CreanceMainContentProps = {
     selectItem?: ComponentBuilderType[]
+    hasNoPaidButton?: boolean
 }
 
-const NormalEffetPaiementComponents = ({ selectItem }: CreanceMainContentProps) => {
+const NormalEffetPaiementComponents = ({ selectItem, hasNoPaidButton }: CreanceMainContentProps) => {
     useSignals()
 
     const selected = signal<ComponentBuilderType>(selectItem![0])
@@ -33,7 +34,7 @@ const NormalEffetPaiementComponents = ({ selectItem }: CreanceMainContentProps) 
                         </Select>
                     </InputGroup>
                 </Flex>
-                <Button variant='outline' _hover={{ color: colors.white, backgroundColor: colors.bleu }} size="md" color={colors.white} bg={colors.bleu} border={`1.5px solid ${colors.bleu}`} >Paiement de Frais</Button>
+                { hasNoPaidButton!=undefined && hasNoPaidButton? <></> : <Button variant='outline' _hover={{ color: colors.white, backgroundColor: colors.bleu }} size="md" color={colors.white} bg={colors.bleu} border={`1.5px solid ${colors.bleu}`} >Paiement de Frais</Button>}
             </Flex>
             <PaiementAdditionalLayoutBuilder  childAsComponentBuilder={selected} />            
 

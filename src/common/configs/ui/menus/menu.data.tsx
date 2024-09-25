@@ -62,7 +62,7 @@ import acCompteOperProvider from "../../../../states/signals/parameter_providers
 import ListableSearchableItemComponent from "../../../../components/listable-searchable-item/listable-searchable-item";
 import CreanceMainContent from "../../../../components/creance/creance-main-content";
 import acEntiteProvider from "../../../../states/signals/parameter_providers/AcEntite.state";
-import { mainCreanceDatas } from "../creance/main-creance.data";
+import { fraisCreationData, mainCreanceDatas } from "../creance/main-creance.data";
 import { debiteursDatas } from "../creance/debiteur.data";
 import acDebiteurProvider from "../../../../states/signals/creances_providers/AcDebiteur.state";
 import PaiementMainContent from "../../../../components/paiement/paiement_main_content";
@@ -1960,7 +1960,7 @@ const menuItemsData: Array<MenuItemType> = [
       },
       {
         name:"Creation de  Frais",
-        render: () => <PaiementMainContent data={ecranFraisPaiementData} />
+        render: () => <CreanceMainContent data={fraisCreationData} />
       },
       {
         name:"Autre frais",

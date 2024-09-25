@@ -18,7 +18,7 @@ const ComponentBuilder = ({ label, child }: ComponentBuilderType) => {
         <Box>
             <TitleStyle>{label}</TitleStyle>
             <Box p={2} />
-            <CreanceInputsView fields={child} />
+            <CreanceInputsView fields={child!} />
         </Box>
     )
 }

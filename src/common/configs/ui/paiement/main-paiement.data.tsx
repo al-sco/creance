@@ -34,7 +34,7 @@ export const factureEspPaiementData: PaiementType= {
 }
 
 export const virementPaiementData: PaiementType= {
-    child: <PaiementComponent selectItem={virementPaiementSelectItem} data={virementPaiementComponentData} />
+    child: <PaiementComponent hasNoSelectButton={true} selectItem={virementPaiementSelectItem} data={virementPaiementComponentData} />
 }
 
 export const fraisCreancePaiementData: PaiementType={

@@ -16,18 +16,19 @@ const ComponentWrapper = styled.section`
 type ComponentProps = {
     data: ComponentBuilderType[]
     selectItem?: AdditionnalContentType[]
+    hasNoSelectButton?: boolean
 }
 
 const Wrapper = styled.div`
     margin: 0.5rem 0 2rem 0;
 `
 
-const PaiementComponent = ({ data, selectItem }: ComponentProps) => {
+const PaiementComponent = ({ data, selectItem, hasNoSelectButton }: ComponentProps) => {
     useSignals()
 
-    const selected = signal<AdditionnalContentType>(selectItem![0])
+    const selected = signal<AdditionnalContentType|undefined>(selectItem && selectItem[0])
     const onSelectChanged = (value: string) => {
-        selected.value = selectItem!.find((e) => e.label == value)!
+        selected.value = selectItem && selectItem.find((e) => e.label == value)!
     }
 
     return (
@@ -39,16 +40,16 @@ const PaiementComponent = ({ data, selectItem }: ComponentProps) => {
                 )
             }
             <Box p={2} />
-            <InputGroup>
+            {hasNoSelectButton!=undefined && hasNoSelectButton? <></> :  selectItem && <InputGroup>
                 <InputLeftAddon w={100}>Type</InputLeftAddon>
                 <Select w={300} onChange={(e) => onSelectChanged(e.target.value)}>
                     {
-                        selectItem?.map((e) =>
+                        selectItem.map((e) =>
                             <option value={e.label}>{e.label}</option>
                         )
                     }
                 </Select>
-            </InputGroup>
+            </InputGroup>}
             <PaiementAdditionalLayoutBuilder childAsAdditionnalContent={selected} />
         </ComponentWrapper>
     )

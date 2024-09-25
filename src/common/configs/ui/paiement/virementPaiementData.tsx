@@ -7,9 +7,8 @@ import { normalEffetPaiementData } from "./additionnal-paiement-data/normal-effe
 import { paiementCreanceViewData } from "./paiement_creance_view_data";
 
 export const virementPaiementSelectItem: AdditionnalContentType[] = [
-    {
-        label: '',
-        child: <NormalEffetPaiementComponents selectItem={normalEffetPaiementData} />
+    {        
+        child: <NormalEffetPaiementComponents hasNoPaidButton={true} selectItem={normalEffetPaiementData} />
     },
 ]
 
@@ -85,4 +84,5 @@ export const virementPaiementComponentData: ComponentBuilderType[] = [
                 },
             },
         ]
-   }]
+   },
+]

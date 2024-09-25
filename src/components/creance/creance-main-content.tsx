@@ -47,12 +47,11 @@ const CreanceMainContent = ({ data, hasNoHeader }: CreanceMainContentProps): JSX
                 <StyledTitle>
                     {data.title}
                 </StyledTitle>
-                <Button variant='outline' onClick={submitData} _hover={{color: colors.white, backgroundColor: colors.bleu}} _active={colors.green} size="lg" color={colors.bleu} bg={colors.background} border={`1.5px solid ${colors.bleu}`} >Ajouter</Button>
+               { data.hasAddbutton!=undefined && data.hasAddbutton? <></> : <Button variant='outline' onClick={submitData} _hover={{color: colors.white, backgroundColor: colors.bleu}} _active={colors.green} size="lg" color={colors.bleu} bg={colors.background} border={`1.5px solid ${colors.bleu}`} >Ajouter</Button>}
             </Flex>
             }
-            <Box h="20px" />
-            <Grid templateColumns='repeat(1, 1fr)' gap={4}   overflowX={"scroll"} >
-                <CreanceInputsView repeatGridValue={data.columCount??2} fields={data.fields} />
+            <Grid templateColumns='repeat(1, 1fr)' gap={data.fields.length!=0? 4 : 0}   overflowX={"scroll"} >
+                { data.fields.length!=0 && <CreanceInputsView repeatGridValue={data.columCount??2} fields={data.fields} />}
                 <Box h="20px" />
                 {data.tabs && <CreanceTabsView  state={data.state} tabs={data.tabs} />}
             </Grid>

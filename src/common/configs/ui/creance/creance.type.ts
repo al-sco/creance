@@ -33,6 +33,7 @@ export type CreanceDataType = {
   columCount?: number
   fields: CreanceFieldType[];
   tabs?: CreanceTabType[];
+  hasAddbutton?: boolean
 };
 
 export type CreanceColumnType = {
@@ -47,6 +48,7 @@ export type AdditionnalContentType = {
 
 export type CreanceTabType = {
   tabName: string;
+  tabTitle?:string
   key: string
   rowCount?: number;
   tableHeaders?: string[];
