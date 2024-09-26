@@ -1,17 +1,13 @@
-import ComponentBuilder, { ComponentBuilderType } from "../../../../components/paiement/component_builder";
-import NormalEffetPaiementComponents from "../../../../components/paiement/paiement-additionnal-components/normal_effet_paiement_component";
+import { ComponentBuilderType } from "../../../../components/paiement/component_builder";
 import acCreanceProvider from "../../../../states/signals/creances_providers/AcCreance.state";
-import { AdditionnalContentType, InputType } from "../creance/creance.type";
-import { fraisEffetPaiementData } from "./additionnal-paiement-data/frais-effet-paiement.data";
-import { normalEffetPaiementData } from "./additionnal-paiement-data/normal-effet-paiement.data";
-import { paiementCreanceViewData } from "./paiement_creance_view_data";
+import { InputType } from "../creance/creance.type";
 
 
 export const factureAntComponentData: ComponentBuilderType[] = [
 
     {
         label:'CONTRAT BAIL',
-        child:[
+        fields:[
             {
                 name: "N°CONTRAT",
                 key: "numRecu",
@@ -155,7 +151,7 @@ export const factureAntComponentData: ComponentBuilderType[] = [
 
     {
         label:"PAIEMENT",
-        child:[
+        fields:[
             {
                 name: "LIBELLE",
                 key: "dateP",

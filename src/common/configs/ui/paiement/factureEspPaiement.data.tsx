@@ -1,13 +1,9 @@
 import ComponentBuilder, { ComponentBuilderType } from "../../../../components/paiement/component_builder";
 import MultiComponentsBuilder from "../../../../components/paiement/multi-components-builder";
-import NormalEffetPaiementComponents from "../../../../components/paiement/paiement-additionnal-components/normal_effet_paiement_component";
 import acCreanceProvider from "../../../../states/signals/creances_providers/AcCreance.state";
 import { AdditionnalContentType, InputType } from "../creance/creance.type";
-import { enrgst_paie_esp } from "./additionnal-paiement-data/enrgst_paie_esp.data";
 import { factureEspData } from "./additionnal-paiement-data/factureEsp.data";
-import { factureEspAntrData } from "./additionnal-paiement-data/factureEspAntr.data";
 import { factureEspFraisPaiementData } from "./additionnal-paiement-data/factureEspFrais.data";
-import { normalEffetPaiementData } from "./additionnal-paiement-data/normal-effet-paiement.data";
 
 
 
@@ -22,14 +18,14 @@ export const factureEspPaiementSelectItem: AdditionnalContentType[] = [
       child: <MultiComponentsBuilder children={
           [
               { 
-                  child:  <ComponentBuilder label="FRAIS" child={factureEspFraisPaiementData} />
+                  child:  <ComponentBuilder label="FRAIS" fields={factureEspFraisPaiementData} />
               },
           ]
       } />
   },
   {
     label:'Paiement en Espece',
-    child:<ComponentBuilder label="PAIEMENT DE FACTURE EN ESPECE" child={factureEspData} />
+    child:<ComponentBuilder label="PAIEMENT DE FACTURE EN ESPECE" fields={factureEspData} />
   }
 
 
@@ -40,7 +36,7 @@ export const factureEspComponentData: ComponentBuilderType[] = [
 
     {
         label:'CONTRAT',
-        child:[
+        fields:[
             {
                 name: "N°CONTRAT",
                 key: "numRecu",

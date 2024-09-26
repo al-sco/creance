@@ -35,7 +35,7 @@ const PaiementComponent = ({ data, selectItem, hasNoSelectButton }: ComponentPro
         <ComponentWrapper>
             {
                 data.map((e) => <Wrapper>
-                    <ComponentBuilder label={e.label} child={e.child} />
+                    <ComponentBuilder label={e.label} child={e.child} fields={e.fields} />
                 </Wrapper>
                 )
             }

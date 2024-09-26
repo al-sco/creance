@@ -1,12 +1,6 @@
-import ComponentBuilder, { ComponentBuilderType } from "../../../../components/paiement/component_builder";
-import NormalEffetPaiementComponents from "../../../../components/paiement/paiement-additionnal-components/normal_effet_paiement_component";
+import { ComponentBuilderType } from "../../../../components/paiement/component_builder";
 import acCreanceProvider from "../../../../states/signals/creances_providers/AcCreance.state";
 import { AdditionnalContentType, InputType } from "../creance/creance.type";
-import { FraisVisiteTerrain } from "./additionnal-paiement-data/ecranFraisVisiteTerrain.data";
-import { factureFraisPaiementData } from "./additionnal-paiement-data/factureFrais.data";
-import { fraisEffetPaiementData } from "./additionnal-paiement-data/frais-effet-paiement.data";
-import { normalEffetPaiementData } from "./additionnal-paiement-data/normal-effet-paiement.data";
-import { paiementCreanceViewData } from "./paiement_creance_view_data";
 
 export const FraisVisiteTerrainPaiementSelectItem: AdditionnalContentType[] = [
    
@@ -20,7 +14,7 @@ export const FraisVisiteTerrainPaiementSelectItem: AdditionnalContentType[] = [
 export const FraisVisiteTerrainPaiementComponentData: ComponentBuilderType[] = [
     {
         label:'Groupe Creance',
-        child:[
+        fields:[
             {
                 name: "Groupe Creance",
                 key: "numRecu",
@@ -36,7 +30,7 @@ export const FraisVisiteTerrainPaiementComponentData: ComponentBuilderType[] = [
 ]}, 
 {
     label:'Info du client',
-    child:[
+    fields:[
         {
             
             name: "Nom",

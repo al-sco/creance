@@ -13,18 +13,18 @@ export const effetPaiementSelectItem: AdditionnalContentType[] = [
     },
     {
         label: 'Frais',
-        child: <ComponentBuilder label="Frais" child={fraisEffetPaiementData} />
+        child: <ComponentBuilder label="Frais" fields={fraisEffetPaiementData} />
     },
 ]
 
 export const effetPaiementComponentData: ComponentBuilderType[] = [
     {
         label: 'Creance',
-        child: paiementCreanceViewData,
+        fields: paiementCreanceViewData,
     },
     {
         label: 'Effet/Cheque',
-        child: [
+        fields: [
             {
                 name: "Type Effet",
                 key: "creanCode",

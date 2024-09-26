@@ -1,10 +1,7 @@
 import ComponentBuilder, { ComponentBuilderType } from "../../../../components/paiement/component_builder";
-import NormalEffetPaiementComponents from "../../../../components/paiement/paiement-additionnal-components/normal_effet_paiement_component";
 import acCreanceProvider from "../../../../states/signals/creances_providers/AcCreance.state";
 import { AdditionnalContentType, InputType } from "../creance/creance.type";
-import { fraisEffetPaiementData } from "./additionnal-paiement-data/frais-effet-paiement.data";
 import { SfraisFacturePaiementData } from "./additionnal-paiement-data/SfraisFacture.data";
-import { normalEffetPaiementData } from "./additionnal-paiement-data/normal-effet-paiement.data";
 import MultiComponentsBuilder from "../../../../components/paiement/multi-components-builder";
 import { factureFraisPaiementData } from "./additionnal-paiement-data/factureFrais.data";
 import { factureFraisChequePaiementData } from "./additionnal-paiement-data/factureFraisCheque.data";
@@ -19,17 +16,17 @@ export const fraisFacturePaiementSelectItem: AdditionnalContentType[] = [
   
   {
         label: 'Paiement sans frais',
-        child: <ComponentBuilder label="Paiement" child={SfraisFacturePaiementData} />
+        child: <ComponentBuilder label="Paiement" fields={SfraisFacturePaiementData} />
     },
     {
       label:'Paiement de frais',
       child: <MultiComponentsBuilder children={
           [
               {
-                  child: <ComponentBuilder label="FRAIS" child={factureFraisPaiementData}/>
+                  child: <ComponentBuilder label="FRAIS" fields={factureFraisPaiementData}/>
               },
               {
-                  child: <ComponentBuilder label="EFFET/CHEQUES" child={factureFraisChequePaiementData} />
+                  child: <ComponentBuilder label="EFFET/CHEQUES" fields={factureFraisChequePaiementData} />
 
               }
           ]
@@ -41,7 +38,7 @@ export const fraisFacturePaiementSelectItem: AdditionnalContentType[] = [
 export const fraisFacturePaiementComponentData: ComponentBuilderType[] = [
     {
         label:'CONTRAT BAIL',
-        child:[
+        fields:[
             {
                 name: "N°CONTRAT",
                 key: "numRecu",

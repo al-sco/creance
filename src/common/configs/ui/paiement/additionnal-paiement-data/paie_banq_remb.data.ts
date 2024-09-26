@@ -1,4 +1,3 @@
-import { ComponentBuilderType } from "../../../../../components/paiement/component_builder";
 import acCreanceProvider from "../../../../../states/signals/creances_providers/AcCreance.state";
 import { CreanceFieldType, InputType } from "../../creance/creance.type";
 

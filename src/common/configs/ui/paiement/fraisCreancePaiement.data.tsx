@@ -4,11 +4,7 @@ import NormalEffetPaiementComponents from "../../../../components/paiement/paiem
 import acCreanceProvider from "../../../../states/signals/creances_providers/AcCreance.state";
 import { AdditionnalContentType, InputType } from "../creance/creance.type";
 import { creance_SfraisPaiementData } from "./additionnal-paiement-data/creance_Sfrais_screen.data";
-import { enrgst_paie_esp } from "./additionnal-paiement-data/enrgst_paie_esp.data";
-import { factureEspData } from "./additionnal-paiement-data/factureEsp.data";
-import { factureEspAntrData } from "./additionnal-paiement-data/factureEspAntr.data";
 import { factureEspFraisPaiementData } from "./additionnal-paiement-data/factureEspFrais.data";
-import { normalEffetPaiementData } from "./additionnal-paiement-data/normal-effet-paiement.data";
 import { paiementCreanceViewData } from "./paiement_creance_view_data";
 
 
@@ -24,7 +20,7 @@ export const fraisCreancePaiementSelectItem: AdditionnalContentType[] = [
       child: <MultiComponentsBuilder children={
           [
               { 
-                  child:  <ComponentBuilder label="FRAIS" child={factureEspFraisPaiementData} />
+                  child:  <ComponentBuilder label="FRAIS" fields={factureEspFraisPaiementData} />
               },
           ]
       } />
@@ -41,11 +37,11 @@ export const fraisCreanceComponentData: ComponentBuilderType[] = [
 
     {
         label:'CONTRAT',
-        child:paiementCreanceViewData
+        fields:paiementCreanceViewData
     },
     {
       label: 'Effet/Cheque',
-      child: [
+      fields: [
           {
               name: "Type Effet",
               key: "creanCode",

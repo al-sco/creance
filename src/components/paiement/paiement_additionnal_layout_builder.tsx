@@ -19,7 +19,7 @@ const PaiementAdditionalLayoutBuilder = ({ childAsAdditionnalContent, childAsCom
     return (
         <Wrapper>
             {childAsAdditionnalContent && childAsAdditionnalContent.value && childAsAdditionnalContent.value.child}
-            {childAsComponentBuilder && <ComponentBuilder label={childAsComponentBuilder.value.label} child={childAsComponentBuilder.value.child} />}
+            {childAsComponentBuilder && <ComponentBuilder label={childAsComponentBuilder.value.label} child={childAsComponentBuilder.value.child} fields={childAsComponentBuilder.value.fields} />}
         </Wrapper>
     )
 }

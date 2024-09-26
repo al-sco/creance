@@ -5,7 +5,7 @@ import { InputType } from "../../creance/creance.type";
 export const normalEffetPaiementData : ComponentBuilderType[] = [
     {
         label: 'Garantie Personnel',
-        child: [
+        fields: [
             {
                 name: "N°",
                 key: "creanCode",
@@ -62,7 +62,7 @@ export const normalEffetPaiementData : ComponentBuilderType[] = [
     },
     {
         label: 'Debiteur Principal',
-        child: [
+        fields: [
             {
                 name: "Libelle",
                 key: "libelle",
@@ -87,7 +87,7 @@ export const normalEffetPaiementData : ComponentBuilderType[] = [
     },
     {
         label: 'Assureur',
-        child: [
+        fields: [
             {
                 name: "N°",
                 key: "creanCode",

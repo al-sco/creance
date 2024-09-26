@@ -1,8 +1,7 @@
-import ComponentBuilder, { ComponentBuilderType } from "../../../../components/paiement/component_builder";
+import { ComponentBuilderType } from "../../../../components/paiement/component_builder";
 import NormalEffetPaiementComponents from "../../../../components/paiement/paiement-additionnal-components/normal_effet_paiement_component";
 import acCreanceProvider from "../../../../states/signals/creances_providers/AcCreance.state";
 import { AdditionnalContentType, InputType } from "../creance/creance.type";
-import { fraisEffetPaiementData } from "./additionnal-paiement-data/frais-effet-paiement.data";
 import { normalEffetPaiementData } from "./additionnal-paiement-data/normal-effet-paiement.data";
 import { paiementCreanceViewData } from "./paiement_creance_view_data";
 
@@ -15,11 +14,11 @@ export const virementPaiementSelectItem: AdditionnalContentType[] = [
 export const virementPaiementComponentData: ComponentBuilderType[] = [
     {
         label: 'Creance',
-        child: paiementCreanceViewData,
+        fields: paiementCreanceViewData,
     },
    {
     label:'ENREGISTREMENT DES PAIEMENTS CGRAE-OVP-CNPS-PGT',
-        child:[
+    fields:[
             {
                 name: "N°Rèçu Manuel",
                 key: "numRecu",

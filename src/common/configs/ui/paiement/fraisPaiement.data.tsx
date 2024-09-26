@@ -1,16 +1,13 @@
 import ComponentBuilder, { ComponentBuilderType } from "../../../../components/paiement/component_builder";
-import NormalEffetPaiementComponents from "../../../../components/paiement/paiement-additionnal-components/normal_effet_paiement_component";
 import acCreanceProvider from "../../../../states/signals/creances_providers/AcCreance.state";
 import { AdditionnalContentType, InputType } from "../creance/creance.type";
 import { factureFraisPaiementData } from "./additionnal-paiement-data/factureFrais.data";
-import { fraisEffetPaiementData } from "./additionnal-paiement-data/frais-effet-paiement.data";
-import { normalEffetPaiementData } from "./additionnal-paiement-data/normal-effet-paiement.data";
 import { paiementCreanceViewData } from "./paiement_creance_view_data";
 
 export const fraisPaiementSelectItem: AdditionnalContentType[] = [
     {
         label: 'Frais',
-        child: <ComponentBuilder label="Frais" child={factureFraisPaiementData} />
+        child: <ComponentBuilder label="Frais" fields={factureFraisPaiementData} />
     },
     
 ]
@@ -18,12 +15,12 @@ export const fraisPaiementSelectItem: AdditionnalContentType[] = [
 export const fraisPaiementComponentData: ComponentBuilderType[] = [
     {
         label: 'Creance',
-        child: paiementCreanceViewData,
+        fields: paiementCreanceViewData,
     },
 
     {
         label:'Frais',
-        child:[
+        fields:[
             {
                 name: "N° Réçu Mannuel",
                 key: "numRecu",

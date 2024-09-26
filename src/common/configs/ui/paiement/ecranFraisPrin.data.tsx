@@ -21,10 +21,10 @@ export const ecranFraisPaiementSelectItem: AdditionnalContentType[] = [
         child: <MultiComponentsBuilder children={
             [
                 { 
-                    child:  <ComponentBuilder label="Creance" child={ecranCreanceFrais} />
+                    child:  <ComponentBuilder label="Creance" fields={ecranCreanceFrais} />
                 },
                 {
-                    child:  <ComponentBuilder label="Recaputulatif" child={ecranCreanceFraisRecapulatif} />
+                    child:  <ComponentBuilder label="Recaputulatif" fields={ecranCreanceFraisRecapulatif} />
                 }
             ]
         } />
@@ -34,16 +34,16 @@ export const ecranFraisPaiementSelectItem: AdditionnalContentType[] = [
         child: <MultiComponentsBuilder children={
             [
                 { 
-                    child:  <ComponentBuilder label="Mutaion" child={FraisMutation} />
+                    child:  <ComponentBuilder label="Mutaion" fields={FraisMutation} />
                 },
                 {
-                    child:  <ComponentBuilder label="Logement" child={FraisLogement} />
+                    child:  <ComponentBuilder label="Logement" fields={FraisLogement} />
                 },
                 {
-                    child:  <ComponentBuilder label="Terrain" child={FraisTerrain} />
+                    child:  <ComponentBuilder label="Terrain" fields={FraisTerrain} />
                 },
                 {
-                    child:  <ComponentBuilder label="Premier Acquereur" child={FraisPremierAcquereur} />
+                    child:  <ComponentBuilder label="Premier Acquereur" fields={FraisPremierAcquereur} />
                 }
             ]
         } />
@@ -56,7 +56,7 @@ export const ecranFraisPaiementSelectItem: AdditionnalContentType[] = [
 export const ecranFraisPaiementComponentData: ComponentBuilderType[] = [
     {
         label: 'Frais',
-        child:[{
+        fields:[{
             
                 name: "Type",
                 key: "type",
