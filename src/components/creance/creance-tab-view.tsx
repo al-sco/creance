@@ -76,10 +76,10 @@ const BuildTabContent = ({
   hasAddButton,
   tableHeaders,
   handleSave,
-  tabName
+  tabTitle
 }: {
   index: number;
-  tabName: string;
+  tabTitle: string;
   hasAddButton?: boolean;
   handleSave?: (data: any[]) => void
   tableHeaders: string[] | undefined;
@@ -138,7 +138,7 @@ const BuildTabContent = ({
 
   return (
     <TabPanel key={index}>    
-      <TabNameStyle>{tabName}</TabNameStyle>      
+      {tabTitle && <TabNameStyle>{tabTitle}</TabNameStyle>}      
       {hasAddButton && (
         <Stack direction="row">
           <Button
@@ -232,7 +232,7 @@ const CreanceTabsView = ({ tabs, state, children }: CreanceTabsViewProps) => {
               fields,
               tableHeaders,
               rowCount,
-              tabName,
+              tabTitle,
               additionnalContents,
               hasAddButton,
               handleTabRowSave
@@ -241,7 +241,7 @@ const CreanceTabsView = ({ tabs, state, children }: CreanceTabsViewProps) => {
           ) => (
             <BuildTabContent
               index={index}
-              tabName={tabName}
+              tabTitle={tabTitle}
               handleSave={handleTabRowSave}
               tableHeaders={tableHeaders}
               tableContent={tableContent}
