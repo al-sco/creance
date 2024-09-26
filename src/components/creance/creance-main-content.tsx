@@ -53,7 +53,7 @@ const CreanceMainContent = ({ data, hasNoHeader }: CreanceMainContentProps): JSX
             <Grid templateColumns='repeat(1, 1fr)' gap={data.fields.length!=0? 4 : 0}   overflowX={"scroll"} >
                 { data.fields.length!=0 && <CreanceInputsView repeatGridValue={data.columCount??2} fields={data.fields} />}
                 <Box h="20px" />
-                {data.tabs && <CreanceTabsView  state={data.state} tabs={data.tabs} />}
+                {data.tabs && <CreanceTabsView  state={data.state} children={data.children} tabs={data.tabs} />}
             </Grid>
         </StyledCreanceMainContent>
     );
