@@ -15,7 +15,7 @@ export const fraisFacturePaiementSelectItem: AdditionnalContentType[] = [
 },
   
   {
-        label: 'Paiement sans frais',
+        label: 'Paiement par cheque',
         child: <ComponentBuilder label="Paiement" fields={SfraisFacturePaiementData} />
     },
     {

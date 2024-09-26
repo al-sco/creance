@@ -12,22 +12,7 @@ export const FraisVisiteTerrainPaiementSelectItem: AdditionnalContentType[] = [
 
 
 export const FraisVisiteTerrainPaiementComponentData: ComponentBuilderType[] = [
-    {
-        label:'Groupe Creance',
-        fields:[
-            {
-                name: "Groupe Creance",
-                key: "numRecu",
-                state: acCreanceProvider.getState(),
-                inputItem: {
-                    isEditable: true,
-                    placeholder: "numero",
-                    inputType: InputType.text,
-                },
-            },
-        
-    
-]}, 
+   
 {
     label:'Info du client',
     fields:[

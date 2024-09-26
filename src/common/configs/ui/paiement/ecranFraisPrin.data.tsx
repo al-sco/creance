@@ -61,6 +61,7 @@ export const ecranFraisPaiementComponentData: ComponentBuilderType[] = [
                 name: "Type",
                 key: "type",
                 state: acCreanceProvider.getState(),
+                selectItems: acCreanceProvider.getDebiteursItems,
                      inputItem: {
                     isEditable: true,
                     placeholder: "Libelle",

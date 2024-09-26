@@ -47,7 +47,7 @@ export type AdditionnalContentType = {
 }
 
 export type CreanceTabType = {
-  tabName: string;
+  tabName?: string;
   tabTitle?:string
   key: string
   rowCount?: number;

@@ -8,6 +8,7 @@ import { virementPaiementComponentData, virementPaiementSelectItem } from "./vir
 import { fraisCreancePaiementSelectItem, fraisCreanceComponentData } from "./fraisCreancePaiement.data";
 import { fraisFacturePaiementSelectItem, fraisFacturePaiementComponentData } from "./fraisFacturePaiement.data";
 import { ecranFraisPaiementComponentData, ecranFraisPaiementSelectItem } from "./ecranFraisPrin.data";
+import { FraisVisiteTerrainPaiementComponentData } from "./ecranFraisVisiteTerrain.data";
 
 export const especePaiementData: PaiementType = {
     child: <PaiementComponent selectItem={especePaiementSelectItem} data={especePaiementComponentData} />

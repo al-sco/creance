@@ -62,7 +62,7 @@ import acCompteOperProvider from "../../../../states/signals/parameter_providers
 import ListableSearchableItemComponent from "../../../../components/listable-searchable-item/listable-searchable-item";
 import CreanceMainContent from "../../../../components/creance/creance-main-content";
 import acEntiteProvider from "../../../../states/signals/parameter_providers/AcEntite.state";
-import { fraisCreationData, mainCreanceDatas } from "../creance/main-creance.data";
+import { fraisCreationData, mainCreanceDatas, VisiteTerrainCreationData } from "../creance/main-creance.data";
 import { debiteursDatas } from "../creance/debiteur.data";
 import acDebiteurProvider from "../../../../states/signals/creances_providers/AcDebiteur.state";
 import PaiementMainContent from "../../../../components/paiement/paiement_main_content";
@@ -1962,6 +1962,11 @@ const menuItemsData: Array<MenuItemType> = [
         name:"Creation de  Frais",
         render: () => <CreanceMainContent data={fraisCreationData} />
       },
+
+      {
+        name:"Visite de terrain",
+        render: () => <CreanceMainContent data={VisiteTerrainCreationData} />
+      },
       {
         name:"Autre frais",
         render: () => <PaiementMainContent data={ecranFraisPaiementData} />
@@ -1971,11 +1976,7 @@ const menuItemsData: Array<MenuItemType> = [
       //   parentId:3,
       //   render: () => <CreanceMainContent data={mainCreanceDatas} />
       // },
-      // {
-      //   name:"Visite de terrain",
-      //   parentId:3,
-      //   render: () => <CreanceMainContent data={mainCreanceDatas} />
-      // }
+    
     ]
   },
   {
@@ -2000,11 +2001,11 @@ const menuItemsData: Array<MenuItemType> = [
         render: () => <PaiementMainContent data={factureEspPaiementData} />
       },
       {
-        name: "Paiemt. de Creances",
+        name: "Paiemt. de cheque de Creances",
         render: () => <PaiementMainContent data={fraisCreancePaiementData} />
       },
       {
-        name: "Paiemt. de Factures",
+        name: "Paiemt. de cheque de Factures",
         render: () => <PaiementMainContent data={fraisFacturePaiementData} />
       },
       {

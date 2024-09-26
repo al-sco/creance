@@ -1,3 +1,5 @@
+import ComponentBuilder from "../../../../components/paiement/component_builder";
+import PaiementComponent from "../../../../components/paiement/paiement_component";
 import acCreanceProvider, {
   booleanProvider,
   classCreanceProvider,
@@ -7,6 +9,13 @@ import acGroupeCreanceProvider from "../../../../states/signals/parameter_provid
 import acObjetCreanceProvider from "../../../../states/signals/parameter_providers/AcObjetCreances.state";
 import acPeriodiciteProvider from "../../../../states/signals/parameter_providers/AcPeriodicite.state";
 import acTypeDomicilProvider from "../../../../states/signals/parameter_providers/AcTypeDomicil.state";
+import { ecranCreanceFraisRecapulatif } from "../paiement/additionnal-paiement-data/ecranCreanceFraisRecapulatif.data";
+import { FraisLogement } from "../paiement/additionnal-paiement-data/ecranFraisLogement.data";
+import { FraisPremierAcquereur } from "../paiement/additionnal-paiement-data/ecranFraisPremierAcquereur.data";
+import { FraisTerrain } from "../paiement/additionnal-paiement-data/ecranFraisTerrain.data";
+import { factureFraisPaiementData } from "../paiement/additionnal-paiement-data/factureFrais.data";
+import { ecranFraisPaiementSelectItem, ecranFraisPaiementComponentData } from "../paiement/ecranFraisPrin.data";
+import { FraisVisiteTerrainPaiementComponentData } from "../paiement/ecranFraisVisiteTerrain.data";
 import { detailGarantisAditionnalData, detailLogementAditionnalData, detailTerrainAditionnalData } from "./additionnal-content/aditionnal-data";
 import { GarantiesPersonnellesAdditionnalContent } from "./additionnal-content/garanties-personnelles-additionnal-content";
 import { GarantiesReellesAdditionnalContentContent } from "./additionnal-content/garanties-reelles-adtitionnal-content";
@@ -721,193 +730,299 @@ const creanceTabs: CreanceTabType[] = [
 ];
 
 const fraisTabs: CreanceTabType[] = [
-  {
-    tabName: "Creance",
-    key: "piece",
-    tableHeaders: [
-      "Type Piece",
-      "Référence",
-      "Libellé",
-      "Date Emission",
-      "Date Reception",
-    ],
+  
+    {
+      tabName: "Creance",
+      tabTitle: "Creance",
+      children: [
+        {
+          child:  <ComponentBuilder label="Recaputulatif" fields={ecranCreanceFraisRecapulatif} />
+        },
+        {
+          child: <PaiementComponent  data={ecranFraisPaiementComponentData} />
+        }
+      ],
+      fields: [
+        {
+          name: "Code",
+          key: 'numAssu',
+          state: acDebiteurProvider.getState(),
+          inputItem: {
+            inputType: InputType.text,
+            isEditable: true,
+            placeholder: "Code de creance",
+          },
+          selectItems: acDebiteurProvider.getSelectItems(acTypeDomicilProvider),
+        },
+        {
+          name: "Debiteur",
+          key: 'numAssu',
+          state: acDebiteurProvider.getState(),
+          inputItem: {
+            inputType: InputType.text,
+            isEditable: true,
+          },
+        },
+        {
+          name: "Grpe Créance",
+          key: 'numAssu',
+          state: acDebiteurProvider.getState(),
+          inputItem: {
+            inputType: InputType.text,
+            isEditable: true,
+            placeholder: "Grpp de creance",
+          },
+        },
 
-  },
+        {
+          name: "Entité",
+          key: 'numAssu',
+          state: acDebiteurProvider.getState(),
+          inputItem: {
+            inputType: InputType.text,
+            isEditable: true,
+          },
+        },
+
+        {
+          name: "Type d'Objet",
+          key: 'numAssu',
+          state: acDebiteurProvider.getState(),
+          inputItem: {
+            inputType: InputType.text,
+            isEditable: true,
+          },
+        },
+
+        {
+          name: "Objet",
+          key: 'numAssu',
+          state: acDebiteurProvider.getState(),
+          inputItem: {
+            inputType: InputType.text,
+            isEditable: true,
+          },
+        },
+
+        {
+          name: "Capitale Initiale",
+          key: 'numAssu',
+          state: acDebiteurProvider.getState(),
+          inputItem: {
+            inputType: InputType.text,
+            isEditable: true,
+          },
+        },
+
+        {
+          name: "Mont. Du",
+          key: 'numAssu',
+          state: acDebiteurProvider.getState(),
+          inputItem: {
+            inputType: InputType.text,
+            isEditable: true,
+          },
+        },
+
+        {
+          name: "Mont. Décaissé",
+          key: 'numAssu',
+          state: acDebiteurProvider.getState(),
+          inputItem: {
+            inputType: InputType.text,
+            isEditable: true,
+          },
+        },
+
+        {
+          name: "Code Prec",
+          key: 'numAssu',
+          state: acDebiteurProvider.getState(),
+          inputItem: {
+            inputType: InputType.text,
+            isEditable: true,
+          },
+        },
+
+        {
+          name: "Périodicité",
+          key: 'numAssu',
+          state: acDebiteurProvider.getState(),
+          inputItem: {
+            inputType: InputType.text,
+            isEditable: true,
+          },
+        },
+
+        {
+          name: "Taux Int. conv",
+          key: 'numAssu',
+          state: acDebiteurProvider.getState(),
+          inputItem: {
+            inputType: InputType.text,
+            isEditable: true,
+          },
+        },
+
+        {
+          name: "Mont. Déjà Remb.",
+          key: 'numAssu',
+          state: acDebiteurProvider.getState(),
+          inputItem: {
+            inputType: InputType.text,
+            isEditable: true,
+          },
+        },
+
+        {
+          name: "Date 1ère Ech",
+          key: 'numAssu',
+          state: acDebiteurProvider.getState(),
+          inputItem: {
+            inputType: InputType.text,
+            isEditable: true,
+          },
+        },
+
+        {
+          name: "Encours",
+          key: 'numAssu',
+          state: acDebiteurProvider.getState(),
+          inputItem: {
+            inputType: InputType.text,
+            isEditable: true,
+          },
+        },
+
+        {
+          name: "Mont. Int. à recouv",
+          key: 'numAssu',
+          state: acDebiteurProvider.getState(),
+          inputItem: {
+            inputType: InputType.text,
+            isEditable: true,
+          },
+        },
+
+        {
+          name: "Frais",
+          key: 'numAssu',
+          state: acDebiteurProvider.getState(),
+          inputItem: {
+            inputType: InputType.text,
+            isEditable: true,
+          },
+        },
+
+      ],
+      key: ""
+    },
+ 
   {
     tabName: "Mutation",
-    tabTitle: "xxxxx",
+    tabTitle: "Mutation",
     children: [
+
+
       {
-        label: "Child",
-        child: <>Child content here</>
-      }
-    ],
-    additionnalContents: [
-      {
-        label: "xxxxx",
-        child: <>Hello</>
-      }
+        child:  <ComponentBuilder label="Logement" fields={FraisLogement} />
+    },
+
+    {
+      child:  <ComponentBuilder label="Terrain" fields={FraisTerrain} />
+  },
+  
+  {
+    child:  <ComponentBuilder label="Premier Acquereur" fields={FraisPremierAcquereur} />
+},
+       {
+          child: <PaiementComponent  data={ecranFraisPaiementComponentData} />
+        }
     ],
     fields: [
       {
         name: "Code",
-        key: 'numAssu',
-        state: acDebiteurProvider.getState(),
+        key: "libelle",
+        state: acCreanceProvider.getState(),
+        selectItems: acCreanceProvider.getDebiteursItems,
         inputItem: {
-          inputType: InputType.text,
-          isEditable: true,
-          placeholder: "registre de commerce",
+            isEditable: true,
+            placeholder: "Code",
+            inputType: InputType.text,
         },
-        selectItems: acDebiteurProvider.getSelectItems(acTypeDomicilProvider),
+    },
+    {
+        name: "Proprietaire",
+        key: "libelle",
+        state: acCreanceProvider.getState(),
+        inputItem: {
+            isEditable: true,
+            placeholder: "Code",
+            inputType: InputType.text,
+        },
+    },
+    {
+        name: "Gestionnaire",
+        key: "type",
+        state: acCreanceProvider.getState(),
+        inputItem: {
+          isEditable: true,
+          placeholder: "Montant",
+          inputType: InputType.text,
+        },
+      },
+      {
+        name: "Date de creation",
+        key: "type",
+        state: acCreanceProvider.getState(),
+        inputItem: {
+          isEditable: true,
+          placeholder: "Montant",
+          inputType: InputType.date,
+        },
+      },
+      {
+        name: "Gestionnaire",
+        key: "type",
+        state: acCreanceProvider.getState(),
+        inputItem: {
+          isEditable: true,
+          placeholder: "Montant",
+          inputType: InputType.text,
+        },
       },
     ],
     key: ""
   },
+];
+
+const visiteTerrainTabs: CreanceTabType[] = [
   {
-    tabName: "Garanties Réelles",
-    key: "garaniesReelles",
-    additionnalContents: [
-      {
-        label: 'Details Logement',
-        child: <GarantiesReellesAdditionnalContentContent data={detailLogementAditionnalData} />,
-      },
-      {
-        label: 'Details Terrain',
-        child: <GarantiesReellesAdditionnalContentContent data={detailTerrainAditionnalData} />,
-      }
-    ],
-    tableHeaders: [
-      "Type",
-      "N°Garantie",
-      "Date Inscript",
-      "Obj Montant",
-      "Libelle",
-      "Terrain",
-      "Logement",
-      "Code",
-    ],
-    hasAddButton: true,
-    tableContent: [
-      {
-        name: "Type",
-        key: "type",
-        state: acDebiteurProvider.getState(),
-        selectItems: acDebiteurProvider.getSelectItems(acTypeDomicilProvider),
-      },
-      {
-        name: "N°Garantie",
-        key: "numGarant",
-        state: acDebiteurProvider.getState(),
-        inputItem: {
-          inputType: InputType.text,
-          isEditable: true,
-          placeholder: "numGarant",
-        },
-      },
-      {
-        name: "Date Inscript",
-        key: "dateIns",
-        state: acDebiteurProvider.getState(),
-        inputItem: {
-          inputType: InputType.date,
-        },
-      },
-      {
-        name: "Obj Montant",
-        key: "objMontant",
-        state: acDebiteurProvider.getState(),
-        inputItem: {
-          inputType: InputType.text,
-          isEditable: true,
-          placeholder: "Obj montant",
-        },
-      },
-      {
-        name: "Libelle",
-        key: "libelle",
-        state: acDebiteurProvider.getState(),
-        inputItem: {
-          inputType: InputType.text,
-          isEditable: true,
-          placeholder: "libelle",
-        },
-      },
-      {
-        name: "Terrain",
-        key: "terrain",
-        state: acDebiteurProvider.getState(),
-        selectItems: acDebiteurProvider.getSelectItems(acTypeDomicilProvider),
-      },
-      {
-        name: "Logement",
-        key: "logement",
-        state: acDebiteurProvider.getState(),
-        selectItems: acDebiteurProvider.getSelectItems(acTypeDomicilProvider),
-      },
-      {
-        name: "Code",
-        key: "code",
-        state: acDebiteurProvider.getState(),
-        inputItem: {
-          inputType: InputType.text,
-          isEditable: false
-        }
-      },
-    ],
-  },
-  {
-    tabName: "Assurance",
-    key: 'A',
-    rowCount: 1,
+    tabName: "Visite de terreain",
+    tabTitle: "Groupe Creance",
     fields: [
       {
-        name: "Code",
+        name: "Groupe de Creance",
         key: 'numAssu',
         state: acDebiteurProvider.getState(),
         inputItem: {
           inputType: InputType.text,
           isEditable: true,
+          placeholder: "Grpe de Creance",
         },
         selectItems: acDebiteurProvider.getSelectItems(acTypeDomicilProvider),
       },
-      {
-        name: "Police",
-        key: 'police',
-        state: acDebiteurProvider.getState(),
-        inputItem: {
-          inputType: InputType.text,
-          placeholder: "police",
-          isEditable: true,
-        },
-      },
-      {
-        name: "Date début",
-        key: 'dateDebut',
-        state: acDebiteurProvider.getState(),
-        inputItem: {
-          inputType: InputType.date,
-        },
-      },
-      {
-        name: "Prime",
-        key: 'prime',
-        state: acDebiteurProvider.getState(),
-        inputItem: {
-          inputType: InputType.text,
-          placeholder: "prime",
-          isEditable: true,
-        },
-      },
-      {
-        name: "Date Signature",
-        key: 'dateSign',
-        state: acDebiteurProvider.getState(),
-        inputItem: {
-          inputType: InputType.date,
-        },
-      },
     ],
-  }
+
+    children:[
+      {
+        child:<PaiementComponent data={FraisVisiteTerrainPaiementComponentData}/>
+    },    ],
+
+    key: ""
+  },
+ 
+ 
 ];
 
 export const mainCreanceDatas: CreanceDataType = {
@@ -919,8 +1034,17 @@ export const mainCreanceDatas: CreanceDataType = {
   tabs: creanceTabs,
 };
 
-export const fraisCreationData: CreanceDataType = {
+export const VisiteTerrainCreationData: CreanceDataType = {
   title: "Creation De Frais",
+  fields: [],  
+  hasAddbutton: true,
+  create: acCreanceProvider.create,
+  state: acCreanceProvider.getState(),
+  tabs: visiteTerrainTabs,
+};
+
+export const fraisCreationData: CreanceDataType = {
+  title: "Visite de terrain",
   fields: [],  
   hasAddbutton: true,
   create: acCreanceProvider.create,

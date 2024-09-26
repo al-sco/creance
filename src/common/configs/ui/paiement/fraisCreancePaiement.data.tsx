@@ -27,8 +27,8 @@ export const fraisCreancePaiementSelectItem: AdditionnalContentType[] = [
   },
 
   {
-    label:'Paiement sans frais', 
-      child: <NormalEffetPaiementComponents selectItem={creance_SfraisPaiementData} />
+    label:'Paiement en espece', 
+      child: <NormalEffetPaiementComponents hasNoPaidButton={true} selectItem={creance_SfraisPaiementData} />
      },
 ]
 
@@ -36,7 +36,7 @@ export const fraisCreancePaiementSelectItem: AdditionnalContentType[] = [
 export const fraisCreanceComponentData: ComponentBuilderType[] = [
 
     {
-        label:'CONTRAT',
+        label:'Creance',
         fields:paiementCreanceViewData
     },
     {
