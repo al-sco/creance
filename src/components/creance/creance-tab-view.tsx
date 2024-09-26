@@ -286,6 +286,8 @@ const CreanceTabsView = ({ tabs, state }: CreanceTabsViewProps) => {
               ))}
             </TabList>
             {buildTableContent(filteredTabs)}
+<Box p={4} />
+<>Hello</>
           </Tabs>
         )}
       </GridItem>
