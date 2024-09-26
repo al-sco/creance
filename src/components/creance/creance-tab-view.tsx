@@ -34,7 +34,6 @@ import { useState } from "react";
 
 type CreanceTabsViewProps = {
   tabs?: CreanceTabType[];
-  children: JSX.Element[];
   state: Signal<{}>;
 };
 
@@ -79,7 +78,7 @@ const BuildTabContent = ({
   tabTitle
 }: {
   index: number;
-  tabTitle: string;
+  tabTitle: string|undefined;
   hasAddButton?: boolean;
   handleSave?: (data: any[]) => void
   tableHeaders: string[] | undefined;
@@ -219,7 +218,7 @@ const CustomTab = (props: any) => {
   );
 };
 
-const CreanceTabsView = ({ tabs, state, children }: CreanceTabsViewProps) => {
+const CreanceTabsView = ({ tabs, state }: CreanceTabsViewProps) => {
   useSignals();
 
   const buildTableContent = (tabs: CreanceTabType[]): JSX.Element => {
@@ -286,13 +285,7 @@ const CreanceTabsView = ({ tabs, state, children }: CreanceTabsViewProps) => {
                 <CustomTab key={index}>{tabName}</CustomTab>
               ))}
             </TabList>
-            {buildTableContent(filteredTabs)}
-<Box p={4} />
-{
-
-children.lenght!=0 && children.map((child)=> child)
-
-}
+            {buildTableContent(filteredTabs)}         
           </Tabs>
         )}
       </GridItem>

@@ -735,7 +735,13 @@ const fraisTabs: CreanceTabType[] = [
   },
   {
     tabName: "Mutation",
-    tabTitle: "Xxxxx",
+    tabTitle: "xxxxx",
+    additionnalContents: [
+      {
+        label: "xxxxx",
+        child: <>Hello</>
+      }
+    ],
     fields: [
       {
         name: "Code",
