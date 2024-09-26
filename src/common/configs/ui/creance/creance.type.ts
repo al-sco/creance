@@ -57,6 +57,7 @@ export type CreanceTabType = {
   hasAddButton?: boolean
   fields?: CreanceFieldType[];
   additionnalContents?: AdditionnalContentType[]
+  children?: AdditionnalContentType[]
 };
 
 export type CreanceStaticDataType = {

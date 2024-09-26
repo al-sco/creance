@@ -30,7 +30,8 @@ import { useSignals } from "@preact/signals-react/runtime";
 import { Signal } from "@preact/signals-react";
 import { DrawerComponent } from "../drawler";
 import { AcDebiteurStateProvider } from "../../states/signals/creances_providers/AcDebiteur.state";
-import { useState } from "react";
+import { Children, useState } from "react";
+import ComponentBuilder from "../paiement/component_builder";
 
 type CreanceTabsViewProps = {
   tabs?: CreanceTabType[];
@@ -75,6 +76,7 @@ const BuildTabContent = ({
   hasAddButton,
   tableHeaders,
   handleSave,
+  children,
   tabTitle
 }: {
   index: number;
@@ -85,6 +87,7 @@ const BuildTabContent = ({
   tableContent: CreanceColumnType[] | CreanceFieldType[] | undefined;
   fields: CreanceFieldType[] | undefined;
   rowCount: number | undefined;
+  children?: AdditionnalContentType[]
   additionnalContents:
   | AdditionnalContentType[]
   | undefined;
@@ -187,12 +190,17 @@ const BuildTabContent = ({
           </Table>
         </TableContainer>
       </BaseStyledTable>
-      <AdditionnalButtonStyled>
-        {additionnalContents &&
-          additionnalContents.map((e) => {
+      <Box p={4} />
+        {
+          children && children.map((child) => {
+            return <ComponentBuilder label={child.label} child={child.child} />
+          })
+        }
+     { additionnalContents && <AdditionnalButtonStyled>
+        { additionnalContents.map((e) => {
             return <DrawerComponent child={e.child!} title={e.label!} />;
           })}
-      </AdditionnalButtonStyled>
+      </AdditionnalButtonStyled>}
     </TabPanel>
   );
 };
@@ -234,6 +242,7 @@ const CreanceTabsView = ({ tabs, state }: CreanceTabsViewProps) => {
               tabTitle,
               additionnalContents,
               hasAddButton,
+              children,
               handleTabRowSave
             }: CreanceTabType,
             index
@@ -241,6 +250,7 @@ const CreanceTabsView = ({ tabs, state }: CreanceTabsViewProps) => {
             <BuildTabContent
               index={index}
               tabTitle={tabTitle}
+              children={children}
               handleSave={handleTabRowSave}
               tableHeaders={tableHeaders}
               tableContent={tableContent}

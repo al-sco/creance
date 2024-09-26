@@ -5,7 +5,7 @@ import styled from "styled-components"
 
 export type ComponentBuilderType = {
     label?: string
-    child?: CreanceFieldType[]
+    child?: CreanceFieldType[]|JSX.Element
 }
 
 const TitleStyle = styled.h1`
@@ -14,11 +14,17 @@ const TitleStyle = styled.h1`
 `
 
 const ComponentBuilder = ({ label, child }: ComponentBuilderType) => {
+
+    const buildBody = (child: any) => {
+       return (child as CreanceFieldType).name != undefined? 
+        <CreanceInputsView fields={child!} /> : child
+    }
+
     return (
         <Box>
             <TitleStyle>{label}</TitleStyle>
             <Box p={2} />
-            <CreanceInputsView fields={child!} />
+            { buildBody(child) }
         </Box>
     )
 }
