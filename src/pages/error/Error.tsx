@@ -8,7 +8,7 @@ const StyledDiv = styled.div`
     justify-content: center;
     align-content: center;
     height: 100%;
-    widgth: 100%
+    width: 100%
 `;
 
 const StyledH1 = styled.h1`
@@ -25,7 +25,7 @@ const ErrorPage = () => {
     return (
         <StyledDiv>
             <Image src={NetworkIssue} />
-            <StyledH1>Oups, une erreur c’est produite</StyledH1>
+            <StyledH1>Oups, une erreur s’est produite</StyledH1>
             <StyledP>{error.statusText || error.message}</StyledP>
         </StyledDiv>
     )

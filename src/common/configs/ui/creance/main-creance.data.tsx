@@ -105,16 +105,6 @@ const defaultGarantiesPersonnells = [
 ]
 const creanceFields: CreanceFieldType[] = [
   {
-    name: "N°Créance",
-    key: "creanCode",
-    state: acCreanceProvider.getState(),
-    inputItem: {
-      isEditable: false,
-      placeholder: "numéro creance",
-      inputType: InputType.text,
-    },
-  },
-  {
     name: "Débiteur",
     key: "debCode",
     state: acCreanceProvider.getState(),
@@ -126,21 +116,8 @@ const creanceFields: CreanceFieldType[] = [
     onInsert: acCreanceProvider.simpleInsert,
     selectItems: acCreanceProvider.getDebiteursItems,
   },
-
   {
-    name: "Périodicité",
-    key: "periodCode",
-    onInsert: acCreanceProvider.simpleInsert,
-    selectItems: acCreanceProvider.getSelectItems(acPeriodiciteProvider),
-    state: acCreanceProvider.getState(),
-    inputItem: {
-      isEditable: false,
-      inputType: InputType.number,
-      placeholder: "périodicité",
-    },
-  },
-  {
-    name: "Grpe Creance",
+    name: "Grpe Créance",
     key: "grpCreanCode",
     state: acCreanceProvider.getState(),
     onInsert: acCreanceProvider.simpleInsert,
@@ -148,6 +125,122 @@ const creanceFields: CreanceFieldType[] = [
     inputItem: {
       isEditable: false,
       placeholder: "grpe creance",
+      inputType: InputType.text,
+    },
+  },
+  {
+    name: "Type d'Objet",
+    key: "objCreanCode",
+    state: acCreanceProvider.getState(),
+    onInsert: acCreanceProvider.simpleInsert,
+
+    inputItem: {
+      isEditable: false,
+      inputType: InputType.text,
+      placeholder: "grpe creance",
+    },
+    selectItems: acCreanceProvider.getSelectItems(acObjetCreanceProvider),
+  },
+  {
+    name: "Capital Initial",
+    key: "creanCapitInit",
+    state: acCreanceProvider.getState(),
+    onInsert: acCreanceProvider.simpleInsert,
+    inputItem: {
+      isEditable: true,
+      inputType: InputType.number,
+      placeholder: "capital initial",
+    },
+  },
+  {
+    name: "Mont. Décaissé",
+    key: "creanMontDebloq",
+    state: acCreanceProvider.getState(),
+    onInsert: acCreanceProvider.simpleInsert,
+
+    inputItem: {
+      isEditable: true,
+      inputType: InputType.number,
+      placeholder: "montant décaissé",
+    },
+  },
+  {
+    name: "Sté Caution",
+    key: "creanCommStecaut",
+    state: acCreanceProvider.getState(),
+    onInsert: acCreanceProvider.simpleInsert,
+    inputItem: {
+      isEditable: true,
+      inputType: InputType.number,
+      placeholder: "ste caution",
+    },
+  },
+  {
+    name: "Stat Recouv.",
+    key: "creanStatrecouv",
+    state: acCreanceProvider.getState(),
+    selectItems: booleanProvider,
+    onInsert: acCreanceProvider.simpleInsert,
+  },
+  {
+    name: "N° Précédent",
+    key: "creanCodePrec",
+    state: acCreanceProvider.getState(),
+    onInsert: acCreanceProvider.simpleInsert,
+
+    inputItem: {
+      isEditable: true,
+      placeholder: "numéro précédent",
+      inputType: InputType.number,
+    },
+  },
+  {
+    name: "N° Ancien",
+    key: "creanCodeAnc",
+    state: acCreanceProvider.getState(),
+    onInsert: acCreanceProvider.simpleInsert,
+
+    inputItem: {
+      isEditable: true,
+      placeholder: "numéro ancien",
+      inputType: InputType.number,
+    },
+  },
+  {
+    name: "Type Structure",
+    key: "typeStructOrgcode",
+    state: acCreanceProvider.getState(),
+    onInsert: acCreanceProvider.simpleInsert,
+    inputItem: {
+      isEditable: false,
+      placeholder: "numéro ancien",
+      inputType: InputType.number,
+    },
+  },
+  {
+    name: "Class Créance",
+    key: "creanClasse",
+    state: acCreanceProvider.getState(),
+    onInsert: acCreanceProvider.simpleInsert,
+    selectItems: classCreanceProvider,
+  },
+  {
+    name: "N°Créance",
+    key: "creanCode",
+    state: acCreanceProvider.getState(),
+    inputItem: {
+      isEditable: false,
+      placeholder: "numéro creance",
+      inputType: InputType.text,
+    },
+  },
+  {
+    name: "Entité",
+    key: "entiteLib",
+    state: acCreanceProvider.getState(),
+    inputItem: {
+      isEditable: false,
+      placeholder: "entité",
       inputType: InputType.text,
     },
   },
@@ -164,83 +257,15 @@ const creanceFields: CreanceFieldType[] = [
     },
   },
   {
-    name: "Type d'Objet",
-    key: "objCreanCode",
-    state: acCreanceProvider.getState(),
+    name: "Périodicité",
+    key: "periodCode",
     onInsert: acCreanceProvider.simpleInsert,
-
-    inputItem: {
-      isEditable: false,
-      inputType: InputType.text,
-      placeholder: "grpe creance",
-    },
-    selectItems: acCreanceProvider.getSelectItems(acObjetCreanceProvider),
-  },
-
-  {
-    name: "Capital Initial",
-    key: "creanCapitInit",
-    state: acCreanceProvider.getState(),
-    onInsert: acCreanceProvider.simpleInsert,
-    inputItem: {
-      isEditable: true,
-      inputType: InputType.number,
-      placeholder: "capital initial",
-    },
-  },
-  {
-    name: "Mont. Dû",
-    key: "creanMontDu",
-    state: acCreanceProvider.getState(),
-    onInsert: acCreanceProvider.simpleInsert,
-    inputItem: {
-      isEditable: true,
-      inputType: InputType.number,
-      placeholder: "montant dû",
-    },
-  },
-
-  {
-    name: "Entité",
-    key: "entiteLib",
-    state: acCreanceProvider.getState(),
-    inputItem: {
-      isEditable: false,
-      placeholder: "entité",
-      inputType: InputType.text,
-    },
-  },
-  {
-    name: "Mont. Décaissé",
-    key: "creanMontDebloq",
-    state: acCreanceProvider.getState(),
-    onInsert: acCreanceProvider.simpleInsert,
-
-    inputItem: {
-      isEditable: true,
-      inputType: InputType.number,
-      placeholder: "montant décaissé",
-    },
-  },
-  {
-    name: "Total Dû",
-    key: "totalDu ?",
+    selectItems: acCreanceProvider.getSelectItems(acPeriodiciteProvider),
     state: acCreanceProvider.getState(),
     inputItem: {
       isEditable: false,
       inputType: InputType.number,
-      placeholder: "total dû",
-    },
-  },
-  {
-    name: "Mont. Déja Remb.",
-    key: "creanDejRemb",
-    state: acCreanceProvider.getState(),
-    onInsert: acCreanceProvider.simpleInsert,
-    inputItem: {
-      isEditable: true,
-      inputType: InputType.number,
-      placeholder: "montant déja remboursse",
+      placeholder: "périodicité",
     },
   },
   {
@@ -255,27 +280,6 @@ const creanceFields: CreanceFieldType[] = [
     },
   },
   {
-    name: "Mont. Impayé",
-    key: "creanMontImpaye",
-    state: acCreanceProvider.getState(),
-    inputItem: {
-      isEditable: false,
-      inputType: InputType.text,
-      placeholder: "montant impayé",
-    },
-  },
-  {
-    name: "Sté Caution",
-    key: "creanCommStecaut",
-    state: acCreanceProvider.getState(),
-    onInsert: acCreanceProvider.simpleInsert,
-    inputItem: {
-      isEditable: true,
-      inputType: InputType.number,
-      placeholder: "ste caution",
-    },
-  },
-  {
     name: "Date Reconnais.",
     key: "creanDatrec",
     state: acCreanceProvider.getState(),
@@ -285,6 +289,49 @@ const creanceFields: CreanceFieldType[] = [
       inputType: InputType.date,
       placeholder: "date reconnaissance",
     },
+  },
+  {
+    name: "Date 1ere Ech.",
+    key: "creanDateft",
+    state: acCreanceProvider.getState(),
+    onInsert: acCreanceProvider.simpleInsert,
+    inputItem: {
+      inputType: InputType.date,
+    },
+  },
+  {
+    name: "Date Dern Ech",
+    key: "creanDatech",
+    state: acCreanceProvider.getState(),
+    onInsert: acCreanceProvider.simpleInsert,
+    inputItem: {
+      inputType: InputType.date,
+    },
+  },
+  {
+    name: "Date d'Octroi",
+    key: "creanDatoctroi",
+    state: acCreanceProvider.getState(),
+    onInsert: acCreanceProvider.simpleInsert,
+    inputItem: {
+      inputType: InputType.date,
+    },
+  },
+  {
+    name: "Date 1er Precompte.",
+    key: "date1erPrecompt ?",
+    state: acCreanceProvider.getState(),
+    onInsert: acCreanceProvider.simpleInsert,
+    inputItem: {
+      inputType: InputType.date,
+    },
+  },
+  {
+    name: "Crean Sold Avt Liq",
+    key: "creanSoldAvantLiq",
+    state: acCreanceProvider.getState(),
+    onInsert: acCreanceProvider.simpleInsert,
+    selectItems: booleanProvider,
   },
   {
     name: "Commission",
@@ -298,33 +345,6 @@ const creanceFields: CreanceFieldType[] = [
     },
   },
   {
-    name: "Divers Frais",
-    key: "creanFrais",
-    state: acCreanceProvider.getState(),
-    onInsert: acCreanceProvider.simpleInsert,
-    inputItem: {
-      isEditable: true,
-      inputType: InputType.number,
-      placeholder: "divers frais",
-    },
-  },
-  {
-    name: "Date 1ere Ech.",
-    key: "creanDateft",
-    state: acCreanceProvider.getState(),
-    onInsert: acCreanceProvider.simpleInsert,
-    inputItem: {
-      inputType: InputType.date,
-    },
-  },
-  {
-    name: "Stat Recouv.",
-    key: "creanStatrecouv",
-    state: acCreanceProvider.getState(),
-    selectItems: booleanProvider,
-    onInsert: acCreanceProvider.simpleInsert,
-  },
-  {
     name: "Mont Ass.",
     key: "creanMontAss",
     state: acCreanceProvider.getState(),
@@ -336,81 +356,6 @@ const creanceFields: CreanceFieldType[] = [
     },
   },
   {
-    name: "Date Dern Ech",
-    key: "creanDatech",
-    state: acCreanceProvider.getState(),
-    onInsert: acCreanceProvider.simpleInsert,
-    inputItem: {
-      inputType: InputType.date,
-    },
-  },
-  {
-    name: "Encours",
-    key: "creanEncours",
-    state: acCreanceProvider.getState(),
-    onInsert: acCreanceProvider.simpleInsert,
-    inputItem: {
-      isEditable: true,
-      placeholder: "encours",
-      inputType: InputType.number,
-    },
-  },
-  {
-    name: "N° Précédent",
-    key: "creanCodePrec",
-    state: acCreanceProvider.getState(),
-    onInsert: acCreanceProvider.simpleInsert,
-
-    inputItem: {
-      isEditable: true,
-      placeholder: "numéro précédent",
-      inputType: InputType.number,
-    },
-  },
-  {
-    name: "Date d'Octroie.",
-    key: "creanDatoctroi",
-    state: acCreanceProvider.getState(),
-    onInsert: acCreanceProvider.simpleInsert,
-    inputItem: {
-      inputType: InputType.date,
-    },
-  },
-
-  {
-    name: "Date 1er Precompte.",
-    key: "date1erPrecompt ?",
-    state: acCreanceProvider.getState(),
-    onInsert: acCreanceProvider.simpleInsert,
-    inputItem: {
-      inputType: InputType.date,
-    },
-  },
-  {
-    name: "N° Ancien",
-    key: "creanCodeAnc",
-    state: acCreanceProvider.getState(),
-    onInsert: acCreanceProvider.simpleInsert,
-
-    inputItem: {
-      isEditable: true,
-      placeholder: "numéro ancien",
-      inputType: InputType.number,
-    },
-  },
-
-  {
-    name: "Type Structure",
-    key: "typeStructOrgcode",
-    state: acCreanceProvider.getState(),
-    onInsert: acCreanceProvider.simpleInsert,
-    inputItem: {
-      isEditable: false,
-      placeholder: "numéro ancien",
-      inputType: InputType.number,
-    },
-  },
-  {
     name: "Int. conv. %",
     key: "creanMontIc",
     state: acCreanceProvider.getState(),
@@ -418,6 +363,17 @@ const creanceFields: CreanceFieldType[] = [
     inputItem: {
       isEditable: true,
       placeholder: "int conv",
+      inputType: InputType.number,
+    },
+  },
+  {
+    name: "Mont. Inv Conv. Payé",
+    onInsert: acCreanceProvider.simpleInsert,
+    key: "creanMontIcPaye",
+    state: acCreanceProvider.getState(),
+    inputItem: {
+      isEditable: true,
+      placeholder: "montant int conv payé",
       inputType: InputType.number,
     },
   },
@@ -433,14 +389,90 @@ const creanceFields: CreanceFieldType[] = [
     },
   },
   {
-    name: "Mont. Inv Conv. Payé",
+    name: "Ordonnateur",
+    key: "ordonnateur",
+    state: acCreanceProvider.getState(),
     onInsert: acCreanceProvider.simpleInsert,
-    key: "creanMontIcPaye",
+    selectItems: acCreanceProvider.getDebiteursItems,
+    inputItem: {
+      isEditable: false,
+      placeholder: "Ordonnateur",
+      inputType: InputType.text,
+    },
+  },
+
+  {
+    name: "Mont à Remb.",
+    key: "montARemb ?",
     state: acCreanceProvider.getState(),
     inputItem: {
+      isEditable: false,
+      inputType: InputType.text,
+      placeholder: "montant a rembourssé",
+    },
+  },
+  {
+    name: "Mont. Dû",
+    key: "creanMontDu",
+    state: acCreanceProvider.getState(),
+    onInsert: acCreanceProvider.simpleInsert,
+    inputItem: {
       isEditable: true,
-      placeholder: "montant int conv payé",
       inputType: InputType.number,
+      placeholder: "montant dû",
+    },
+  },
+  {
+    name: "Mont. Déja Remb.",
+    key: "creanDejRemb",
+    state: acCreanceProvider.getState(),
+    onInsert: acCreanceProvider.simpleInsert,
+    inputItem: {
+      isEditable: true,
+      inputType: InputType.number,
+      placeholder: "montant déja remboursse",
+    },
+  },
+  {
+    name: "Mont. Impayé",
+    key: "creanMontImpaye",
+    state: acCreanceProvider.getState(),
+    inputItem: {
+      isEditable: false,
+      inputType: InputType.text,
+      placeholder: "montant impayé",
+    },
+  },
+  {
+    name: "Divers Frais",
+    key: "creanFrais",
+    state: acCreanceProvider.getState(),
+    onInsert: acCreanceProvider.simpleInsert,
+    inputItem: {
+      isEditable: true,
+      inputType: InputType.number,
+      placeholder: "divers frais",
+    },
+  },
+  {
+    name: "Encours",
+    key: "creanEncours",
+    state: acCreanceProvider.getState(),
+    onInsert: acCreanceProvider.simpleInsert,
+    inputItem: {
+      isEditable: true,
+      placeholder: "encours",
+      inputType: InputType.number,
+    },
+  },
+  {
+    name: "Total Dû",
+    key: "totalDu ?",
+    state: acCreanceProvider.getState(),
+    inputItem: {
+      isEditable: false,
+      inputType: InputType.number,
+      placeholder: "total dû",
     },
   },
   {
@@ -461,30 +493,6 @@ const creanceFields: CreanceFieldType[] = [
       isEditable: false,
       placeholder: "total a recouvrer",
       inputType: InputType.number,
-    },
-  },
-  {
-    name: "Crean Sold Avt Liq",
-    key: "creanSoldAvantLiq",
-    state: acCreanceProvider.getState(),
-    onInsert: acCreanceProvider.simpleInsert,
-    selectItems: booleanProvider,
-  },
-  {
-    name: "Class Créance",
-    key: "creanClasse",
-    state: acCreanceProvider.getState(),
-    onInsert: acCreanceProvider.simpleInsert,
-    selectItems: classCreanceProvider,
-  },
-  {
-    name: "Mont à Remb.",
-    key: "montARemb ?",
-    state: acCreanceProvider.getState(),
-    inputItem: {
-      isEditable: false,
-      inputType: InputType.text,
-      placeholder: "montant a rembourssé",
     },
   },
 ];
