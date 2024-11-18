@@ -22,6 +22,8 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
+  "typeRoots": ["node_modules/@types", "src/types"],
+  "types": ["node_modules/primereact"],
   "include": [
     "src",
     "src/states/signals/parameter_providers/.state.ts"

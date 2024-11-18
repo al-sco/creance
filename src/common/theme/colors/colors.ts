@@ -30,7 +30,8 @@ const colors: Colors = {
     lightGreen:'#EDF7EF',
     bleu: '#3182CE',
     red: '#E53E3E',
-    background: '#DBDFEB'
+    background: '#DBDFEB',
+
 }
 
 export default colors;

@@ -6,8 +6,6 @@ import MenuItemComponent from "../menu-item/menu-item";
 import { menuItems } from "../../common/configs/ui/menus/menu.data";
 import colors from "../../common/theme/colors/colors";
 import { MenuItem } from "../../common/configs/ui/menus/menus.type";
-import { signal } from "@preact/signals-react";
-
 
 const StyledSideBarMenu = styled.div`
   padding: 50px 0 18px 10px;
@@ -47,7 +45,7 @@ const SideBarMenu = () => {
     const [isClose, setIsClose] = useState<boolean>(true);
 
     useEffect(()=>{
-        let currentMenu=menuItems.find((menuItem)=>window.location.pathname.startsWith(menuItem.path))        
+        let currentMenu : any =menuItems.find((menuItem)=>window.location.pathname.startsWith(menuItem.path))        
         if(currentMenu){
             setCurrentItem(()=>currentMenu.id)
         }
