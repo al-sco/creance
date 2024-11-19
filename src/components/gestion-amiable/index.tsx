@@ -8,18 +8,20 @@ import { AccordionTab } from "primereact/accordion"
 import { CardHeader } from "../compound-component/CardHeader"
 import { ListeDesActes } from "./liste-des-acte"
 import { GestionLogements } from "./partials/creance-item"
+import { useGestionAmiableStores } from "./use-gestion-amiable-stores"
 
 
 export function GestionAmiable() {
+    const stores = useGestionAmiableStores();
 
     return (
         <PageWrapper>
-            <CardHeader title="Gestion amiables" subTitle="Gestion amiables des créances" />
+            <CardHeader title="Gestion amiables des actes" subTitle="Programme de saisi d'un acte amiable" />
             <AcordionStyled>
             <AccordionTab header="Gestion des actes" >
                    <ListeDesActes />
                 </AccordionTab>
-                <AccordionTab header="Gestion des logments" >
+                <AccordionTab header={stores.accordionLib} >
                    <GestionLogements />
                 </AccordionTab>
             </AcordionStyled>

@@ -15,14 +15,18 @@ export function useListeActeController() {
     const [actes, setActes] = useState<ActeModel[]>(data as any[]);
     const [visible, setVisible] = useState(false);
     const [acteCode, setActeCode] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
    
 
     const fetchActes = async () => {
         try {
+            setIsLoading(true);
             const result = await acteRepository.getListActes();
             result && setActes(result);
         } catch (error) {
             console.log(error);
+        }finally{
+            setIsLoading(false);
         }
     }
 
@@ -64,7 +68,9 @@ export function useListeActeController() {
         closeCreateFormDIalog,
         acteCode,
         visible,
-        deleteActe
+        deleteActe,
+        refreshData: fetchActes,
+        isLoading
 
     }
 }

@@ -9,7 +9,7 @@ import { InputField } from "../controller";
 interface Props {
     form: UseFormReturn<InputField, any>
 }
-export function CreanceDialog({form}: Props) {
+export function CreanceDialog({ form }: Props) {
     const ctrl = useCreanceController(form);
     return (
         <div className="m-2">
@@ -19,7 +19,13 @@ export function CreanceDialog({form}: Props) {
                         <Controller name="codeCreance" control={form.control}
                             render={({ field, fieldState }) =>
                                 <SeletectField label="Code" options={ctrl.creances || []} optionLabel="creanCode" optionValue="creanCode"
-                                    placeholder="Selectionnée" id="codeCreance" {...field} error={fieldState.error?.message}/>} />
+                                    placeholder="Selectionnée" id="codeCreance" {...field}
+                                    onChange={(event) => {
+                                        field.onChange(event)
+                                        ctrl.handleChangeCreance(event)
+                                    }}
+                                    value={ctrl.creanceCode}
+                                    error={fieldState.error?.message} />} />
                     </span>
                 </Col>
                 <Col xs={4} md={4}>

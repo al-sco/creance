@@ -20,7 +20,7 @@ const InputsTextarea = forwardRef(({ id, label, error, description, required, di
     return (
         <div className={`d-flex flex-column gap-2 ${containerClassName}`} ref={ref}>
             <NdInputLabel id={id} label={label} required={required} />
-            <InputTextarea id={id} aria-describedby={`${id}-help`} className={`p-inputtext-sm ${error && 'p-invalid'} border border-blue-200 `}
+            <InputTextarea id={id} aria-describedby={`${id}-help`} className={`p-inputtext-sm ${error && 'p-invalid'} border border-green-300 `}
                 required={required} disabled={disabled} rows={row ? row : 5} cols={cols ? cols : 30} {...rest} />
             {description && <small id={`${id}-help`} >
                 {description}

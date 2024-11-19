@@ -48,7 +48,7 @@ interface CustomCalendarProps {
             <div className="p-inputgroup">
                 {before}
                 <Calendar id={id} aria-describedby={`${id}-help`} selectionMode={selectionMode}
-                    className={`w-full p-inputtext-sm" ${error && 'p-invalid'} border border-blue-200 mt-1 ${disabled && "bg-gray-300"}`} dateFormat={dateFormat}
+                    className={`w-full p-inputtext-sm" ${error && 'p-invalid'} border border-green-300 mt-1 ${disabled && "bg-gray-300"}`} dateFormat={dateFormat}
                     required={required} readOnlyInput={readonly}
                     viewDate={viewDate} disabled={disabled}
                     value={value && new Date(value)}

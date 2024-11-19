@@ -44,9 +44,11 @@ export interface CreerActeModel {
     acteAutRefGest?: string;
     acteRefNot?: string;
     actePoste?: string;
+    typeActeLibelle?: string;
 }
 
 export interface ActeModel {
+    id?: string;
     acterCode?: string;
     logeCode?: string;
     codeCreance?: string;
@@ -92,4 +94,5 @@ export interface ActeModel {
     acteAutRefGest?: string;
     acteRefNot?: string;
     actePoste?: string;
+    typeLib?: string;
 }

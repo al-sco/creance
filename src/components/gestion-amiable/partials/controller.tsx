@@ -12,7 +12,7 @@ import { useEffect } from "react";
 export interface InputField {
     acterCode?: string;
     logeCode?: string;
-    codeCreance: string;
+    codeCreance?: string;
     typacteCode?: string;
     gestCode?: string;
     auxiCode?: string;
@@ -56,6 +56,7 @@ export interface InputField {
     acteRefNot?: string;
     actePoste?: string;
     terCode?: string;
+    typeActeLibelle?: string;
 
     debiteur?: string;
     groupeCreance?: string;
@@ -68,13 +69,13 @@ export interface InputField {
     montantDebloque?: string;
     nbEcheance?: string;
     dateFinEcheance?: string;
+  
 
 }
-const schema = yup.object({
-    codeCreance: yup.string().required("Ce champ est obligatoire !")
-});
+const schema = yup.object({});
 
-export function useCreateActesController(acteCode?: string) {
+export function useCreateActesController(acteCode?: string, onHide?:()=> void, visible?: boolean) {
+    const delay = (milliseconds: any) => new Promise(resolve => setTimeout(resolve, milliseconds));
     const alerts = useAlerts();
     const acteRepository = new ActeRepository();
  
@@ -127,6 +128,7 @@ export function useCreateActesController(acteCode?: string) {
         actePoste: "",
         cesCode: "",
         terCode:"" ,
+        typeActeLibelle:'',
 
         debiteur: "",
         groupeCreance: "",
@@ -192,7 +194,7 @@ export function useCreateActesController(acteCode?: string) {
                 acteAutRefGest: result.acteAutRefGest,
                 acteRefNot: result.acteRefNot,
                 acteCout: result.acteCout?.toString(),
-                actePoste: result.actePoste
+                actePoste: result.actePoste,
             })
         } catch (error) {
             console.log(error)
@@ -201,11 +203,13 @@ export function useCreateActesController(acteCode?: string) {
 
     useEffect(()=>{
         getActeDetail();
-    }, [acteCode]);
+    }, [acteCode, visible]);
 
     const createActes = async (command: CreerActeModel) => {
         await acteRepository.createActes(command);
         alerts.openSuccessAlert("L'acte a été créé avec succès.");
+        await delay(5000)
+        onHide && onHide();
     }
 
     const onSubmit = async (data: InputField) => {
@@ -253,6 +257,7 @@ export function useCreateActesController(acteCode?: string) {
                 acteRefNot: data.acteRefNot,
                 acteCout: data.acteCout ? parseInt(data.acteCout) : 0,
                 actePoste: data.actePoste,
+                typeActeLibelle: data.typeActeLibelle
 
             })
         } catch (error) {

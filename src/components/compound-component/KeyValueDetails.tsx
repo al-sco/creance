@@ -9,7 +9,7 @@ interface KeyDetailProps {
 
 function KeyDetail({ label }: KeyDetailProps) {
     return (
-        <div className={'text-sm opacity-70'}>{label}</div>
+        <div className={'text-sm opacity-70 mb-4'}>{label}</div>
     );
 }
 

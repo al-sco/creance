@@ -1,5 +1,4 @@
 import { Dialog } from "primereact/dialog";
-// import {Button} from "primereact/button";
 import { Button, Image } from "react-bootstrap";
 
 interface AtlErrorDialogProps {
@@ -23,7 +22,7 @@ function ErrorDialog({ children, onHide, visible }: AtlErrorDialogProps) {
                     <h2 className="fw-bold fs-2">Erreur</h2>
                     <p className="m-0">{children}</p>
                 </div>
-                <Button variant="danger" onClick={onHide} id="AtlErrorDialogButton">
+                <Button className="bg-red-300 border-none" onClick={onHide} id="AtlErrorDialogButton">
                     Fermer
                 </Button>
             </div>

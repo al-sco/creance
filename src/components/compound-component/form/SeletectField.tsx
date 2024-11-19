@@ -44,7 +44,7 @@ export const  SeletectField = forwardRef(({
                     optionLabel={optionLabel} optionValue={optionValue} defaultValue={defaultValue}
                     filter={true} filterBy={filterBy || optionLabel || 'label'}
                     showClear={value} 
-                    placeholder={placeholder} className={`w-full p-inputtext-sm ${error && 'p-invalid'} border border-blue-200 mt-1`}
+                    placeholder={placeholder} className={`w-full p-inputtext-sm ${error && 'p-invalid'} border border-green-300 mt-1`}
                     id={id} aria-describedby={`${id}-help`}
                     required={required} disabled={disabled}/>
                 {after}

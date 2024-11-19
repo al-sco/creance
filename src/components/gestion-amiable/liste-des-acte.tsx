@@ -17,6 +17,7 @@ import { MenuItemCommandEvent } from "primereact/menuitem";
 import Alerts from "../compound-component/Alerts";
 import { useGestionAmiableStores } from "./use-gestion-amiable-stores";
 import { Checkbox } from "primereact/checkbox";
+import { ProgressSpinners } from "../compound-component/ProgressSpinners";
 
 export  function ListeDesActes() {
     const acteStores = useGestionAmiableStores();
@@ -28,13 +29,15 @@ export  function ListeDesActes() {
         setSelectedActeCode(prev => (prev === acteCode ? null : acteCode));
        acteStores.setActeCode(acteCode);
     }
+  
 
     return (
         <>
         <Alerts {...ctrl.alerts} />
           <CardContent>
             <PageTitle title="Lite des actes" />
-            <SerchAndAddButton onAdd={ctrl.openCreateFormDialog} />
+            { ctrl.isLoading && <ProgressSpinners />}
+            <SerchAndAddButton onAdd={ctrl.openCreateFormDialog} onClick={ctrl.refreshData} />
             <Tables value={ctrl.actes}
                 expandedRows={expandedRows} onRowToggle={(e: DataTableRowToggleEvent) => setExpandedRows(e.data)}
                 rowExpansionTemplate={(data: any) => <LogementDetails details={data} />}
@@ -42,16 +45,16 @@ export  function ListeDesActes() {
             >
                 <Column expander className={'w-1'} />
                 <Column header="#" body={(data)=><Checkbox className=" border-orange-300 border-1" 
-                checked={data.acteCode === selectedActeCode} onClick={()=> checkedActe(data.acteCode)}/>} />
-                <Column field={'acteCode'} header={'Code'} />
-                <Column field={'bloc'} header={'Bloc'} />
-                <Column field={'lot'} header={'Lot'} />
-                <Column field={'nPorte'} header={'N° de porte'} />
+                checked={data.id === selectedActeCode} onClick={()=> checkedActe(data.id)}/>} />
+                <Column field={'id'} header={'Code'} />
+                <Column field="typeLib" header={'Type acte'} />
+                <Column field={'acteCout'} header={'Coût'} />
+                <Column field={'acteDelai'} header={'Délai'} />
                 <Column header={'Options'} align={'right'} body={(data: ActeModel) =>
                         <MoreActions accent items={[
                             {
                                 label: 'Modifié', command() {
-                                   ctrl.openUpdateFormDIalog(data.acterCode);
+                                   ctrl.openUpdateFormDIalog(data.id);
                                 }
                             },
                             {

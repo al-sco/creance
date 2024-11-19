@@ -56,7 +56,7 @@ const InputField = forwardRef((props: InputProps, ref?: any) => {
         <Form.Control
           id={id}
           aria-describedby={`${id}-help`}
-          className={`p-inputtext-sm ${error ? 'isInvalid' : ''} border-blue-200`}
+          className={`p-inputtext-sm ${error ? 'isInvalid' : ''}  border-green-300`}
           required={required}
           onChange={onChange}
           value={value}

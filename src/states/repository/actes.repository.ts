@@ -5,19 +5,20 @@ import { ActeModel, CreerActeModel } from "../model/actes.model";
 
 export class ActeRepository{
     async createActes(command: CreerActeModel): Promise<void>{
-        return (await axios.post(getUrl(`/acte`), command))?.data;
+        console.log("command: " + command.codeCreance)
+        return (await axios.post(getUrl(`/ac-acte/creer`), command))?.data;
     }
 
     async getActeByCode(codeCreance: string): Promise<ActeModel>{
-        return (await axios.get<ActeModel>(getUrl(`/creance/${codeCreance}`)))?.data;
+        return (await axios.get<ActeModel>(getUrl(`/ac-acte/${codeCreance}`)))?.data;
     }
 
     async getListActes(): Promise<ActeModel[]>{
-        return (await axios.get<ActeModel[]>(getUrl(`/acte`)))?.data;
+        return (await axios.get<ActeModel[]>(getUrl(`/ac-acte/liste-acte`)))?.data;
     }
 
     async deleteActe(code: string): Promise<void>{
-        return (await axios.delete(getUrl(`/acte/${code}`)))?.data;
+        return (await axios.delete(getUrl(`/ac-acte/${code}`)))?.data;
     }
 }
 

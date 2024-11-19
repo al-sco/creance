@@ -29,9 +29,9 @@ export function useCreanceController( form: UseFormReturn<InputField, any>) {
         setCreanceCode(event.target.value)
     }
 
-    const getCreanceDetail = async () => {
+    const getCreanceDetail =  () => {
         try {
-            const resut = await creanceRepository.getCreanceByCodeCreance(creanceCode);
+            const resut =  creances.find((item: CreanceModel) => item.creanCode == creanceCode);
             if (resut) {
                 form.reset({
                     debiteur: resut.debCode,
@@ -46,6 +46,7 @@ export function useCreanceController( form: UseFormReturn<InputField, any>) {
                     nbEcheance: "",
                     dateFinEcheance: resut.creanDatfin,
                 })
+                form.setValue("codeCreance", creanceCode)
             }
         } catch (error) {
             console.log(error);
@@ -61,6 +62,7 @@ export function useCreanceController( form: UseFormReturn<InputField, any>) {
         creances,
         alerts,
         form,
-        handleChangeCreance
+        handleChangeCreance,
+        creanceCode
     }
 }

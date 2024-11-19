@@ -10,8 +10,10 @@ import { GarantiePersonnels } from "./garantie-personnels";
 import { GarantieReelle } from "./garanti-reels";
 import { AutreAxiliaireJustice } from "./autre-auxiliaire-justice";
 import TabsContent from "../../../compound-component/TabsContent";
+import { useGestionAmiableStores } from "../../use-gestion-amiable-stores";
 
 export function GestionLogements() {
+    const stores = useGestionAmiableStores();
     const [activeIndex, setAciveIndex] = useState(0)
     const onTabChange = (event: any) => {
         setAciveIndex(event.index)
@@ -29,37 +31,44 @@ export function GestionLogements() {
                 <Button onClick={() => setAciveIndex(6)} className={`w-2rem h-2rem p-0 border-orange-500 border-1 rounded mr-2 ${activeIndex === 6 && 'bg-orange-300 rounded'}`} rounded outlined={activeIndex !== 6} label="7" />
             </div>}   >
                 <TabView activeIndex={activeIndex} onTabChange={onTabChange}>
-                    <TabPanel header={<span className={`${activeIndex === 0 && 'border-bottom-3 border-orange-500'} pb-1`}>LOGEMENT</span>} >
+                    <TabPanel header={<span className={`${activeIndex === 0 && 'border-bottom-3 border-orange-500'} pb-1`} 
+                    onClick={()=> stores.setAccordionLib("Gestion des logemments")}>LOGEMENT</span>} >
                         <p className="m-0">
                             <LogementForm />
                         </p>
                     </TabPanel>
-                    <TabPanel header={<span className={`${activeIndex === 1 && 'border-bottom-3 border-orange-500'} pb-1`}>TERRAIN</span>}>
+                    <TabPanel header={<span className={`${activeIndex === 1 && 'border-bottom-3 border-orange-500'} pb-1`}  
+                    onClick={()=> stores.setAccordionLib("Gestion des terrains")}>TERRAIN</span>}>
                         <p className="m-0">
                             <Terrain />
                         </p>
                     </TabPanel>
-                    <TabPanel header={<span className={`${activeIndex === 2 && 'border-bottom-3 border-orange-500'} pb-1`}>MUTATION</span>}>
+                    <TabPanel header={<span className={`${activeIndex === 2 && 'border-bottom-3 border-orange-500'} pb-1`}  
+                    onClick={()=> stores.setAccordionLib("Gestion des mutations")}>MUTATION</span>}>
                         <p className="m-0">
                             <Mutations />
                         </p>
                     </TabPanel>
-                    <TabPanel header={<span className={`${activeIndex === 3 && 'border-bottom-3 border-orange-500'} pb-1`}>OVP</span>}>
+                    <TabPanel header={<span className={`${activeIndex === 3 && 'border-bottom-3 border-orange-500'} pb-1`}
+                     onClick={()=> stores.setAccordionLib("Gestion des OVP")}>OVP</span>}>
                         <p className="m-0">
                             <Ovp />
                         </p>
                     </TabPanel>
-                    <TabPanel header={<span className={`${activeIndex === 4 && 'border-bottom-3 border-orange-500'} pb-1`}>Garantie Personnelle</span>}>
+                    <TabPanel header={<span className={`${activeIndex === 4 && 'border-bottom-3 border-orange-500'} pb-1`}
+                     onClick={()=> stores.setAccordionLib("Gestion des garantie Personnelle")}>Garantie Personnelle</span>}>
                         <p className="m-0">
                             <GarantiePersonnels />
                         </p>
                     </TabPanel>
-                    <TabPanel header={<span className={`${activeIndex === 5 && 'border-bottom-3 border-orange-500'} pb-1`}>Garantie Réelle</span>}>
+                    <TabPanel header={<span className={`${activeIndex === 5 && 'border-bottom-3 border-orange-500'} pb-1`}
+                     onClick={()=> stores.setAccordionLib("Gestion des garantie Réelle")}>Garantie Réelle</span>}>
                         <p className="m-0">
                             <GarantieReelle />
                         </p>
                     </TabPanel>
-                    <TabPanel header={<span className={`${activeIndex === 6 && 'border-bottom-3 border-orange-500'} pb-1`}>Autres Auxiliaire de justice</span>}>
+                    <TabPanel header={<span className={`${activeIndex === 6 && 'border-bottom-3 border-orange-500'} pb-1`} 
+                    onClick={()=> stores.setAccordionLib("Gestion des autres Auxiliaire de justice")}>Autres Auxiliaire de justice</span>}>
                         <p className="m-0">
                             <AutreAxiliaireJustice />
                         </p>

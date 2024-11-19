@@ -4,10 +4,10 @@ import { CreanceModel } from "../model/creance.model";
 
 export class CreanceRepository{
     async getCreance(): Promise<CreanceModel[]>{
-        return (await axios.get<CreanceModel[]>(getUrl(`/creance`)))?.data;
+        return (await axios.get<CreanceModel[]>(getUrl(`/ac-creance`)))?.data;
     }
 
     async getCreanceByCodeCreance(codeCreance: string): Promise<CreanceModel>{
-        return (await axios.get<CreanceModel>(getUrl(`/creance/${codeCreance}`)))?.data;
+        return (await axios.get<CreanceModel>(getUrl(`/ac-creance/${codeCreance}`)))?.data;
     }
 }
