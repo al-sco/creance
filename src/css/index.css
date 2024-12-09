@@ -1,3 +1,4 @@
+
 * {
     font-family: "Inter", sans-serif;
 }
@@ -10,4 +11,61 @@ body {
 #root {
     height: 100vh;
     width: 100vw;
+}
+
+.refresh_button_progress_sprinner {
+    position: absolute;
+    z-index: 99;
+    text-align: center;
+    top: 50%;
+    left: 50%;
+}
+
+.refresh_button_progress_sprinner_text {
+    position: absolute;
+    z-index: 99;
+    text-align: center;
+    bottom: 2rem;
+    right: 2rem;
+}
+
+.shadow-round {
+    -webkit-box-shadow: 0 10px 8px -8px #848282;
+    -moz-box-shadow: 0 10px 8px -8px #848282;
+    box-shadow: 0 10px 8px -8px #848282 !important;
+    border-radius: 15px !important;
+
+}
+
+.stepper-header {
+    pointer-events: none; /* Désactiver les clics sur les labels */
+}
+
+.upldiv {
+    display: flex;
+    flex-direction: column;
+}
+.handbook_ph1{
+    width: auto;
+    height: 14px;
+
+    /* Big help text 2 */
+
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 16px;
+    text-align: center;
+
+    /* Black 2 */
+
+    color: #32373C;
+
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 1;
+    flex-grow: 0;
 }

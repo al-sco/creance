@@ -32,7 +32,7 @@ const MenuItemComponent = ({ menu, isSelected, onPressed, isClose }: MenuItemPro
     useEffect(() => {
         if (menu.subMenus) {
 
-            let currentMenu = menu.subMenus.find((subMenu) => window.location.pathname.includes(encodeURI(subMenu.path)))
+            let currentMenu: any = menu.subMenus.find((subMenu) => window.location.pathname.includes(encodeURI(subMenu.path)))
             if (currentMenu) {
                 setSubMenuItem(() => currentMenu.id)
             }

@@ -14,7 +14,7 @@ type MainContentProps = {
 
 
 const StyledMainContent = styled.div`
-    background-color: ${colors.background};
+     background-color: ${colors.background};
 `;
 
 const MainContent = ({ subMenus, title, render, parrentPath }: MainContentProps) => {
@@ -26,9 +26,11 @@ const MainContent = ({ subMenus, title, render, parrentPath }: MainContentProps)
 
   return (
     <StyledMainContent>
-      {render && render()}
+      <>
+        {render && render()}
       <MainContentWrapper handleHidden={handleHidden} isHidden={isHidden} subMenus={subMenus} title={title} parrentPath={parrentPath} />
-    </StyledMainContent >
+      </>
+     </StyledMainContent >
   )
 }
 

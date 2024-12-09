@@ -29,7 +29,7 @@ const BaseParameterView = () => {
                     <Input placeholder='Code' size='lg' width='auto' />
                     <Input placeholder='Libellé' size='lg' />
                 </Stack>
-                <Button variant='outline' _hover={{color: colors.white, backgroundColor: colors.bleu}} _active={colors.green} size="lg" color={colors.bleu} bg={colors.background} border={`1.5px solid ${colors.bleu}`} >Ajouter</Button>
+                <Button variant='outline' _hover={{color: colors.white, backgroundColor: colors.bleu}} _active={colors.green as any} size="lg" color={colors.bleu} bg={colors.background} border={`1.5px solid ${colors.bleu}`} >Ajouter</Button>
             </Stack>
             <Box h="24px" />
             <BaseTable subMenu={{

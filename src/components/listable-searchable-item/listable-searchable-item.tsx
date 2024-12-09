@@ -7,6 +7,7 @@ import { useRef, useState } from "react"
 import { useSignals } from "@preact/signals-react/runtime"
 import { SelectItem } from "../../common/configs/ui/creance/creance.type"
 import SearchResultBuilder from "../search-result-item.tsx/search-result-builder"
+import React from "react"
 
 const SearchStyled = styled.div`
   width: 100%;
