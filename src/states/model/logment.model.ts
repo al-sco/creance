@@ -1,0 +1,32 @@
+export interface LogementModel {
+    logeCode?: string;
+    contCode?: string;
+    circonsCode?: string;
+    sectCadCode?: string;
+    tfCode?: string;
+    gareelCode?: string;
+    typeLogeCode?: string;
+    operatCode?: string;
+    contVteCode?: string;
+    modacCode?: string;
+    creanCode?: string;
+    logePorteNum?: string;
+    logeNbpiece?: string;
+    logeLotNum?: string;
+    logeIlotNum?: string;
+    logeBlocNum?: string;
+    logeDesign?: string;
+    logeDatmpatrim?: string;
+    logeValeur?: string;
+    logeTerValeur?: string;
+    logeDatjou?: string;
+    quartCode?: string;
+    propCode?: string;
+    logeBlocLib?: string;
+    logeCodeCharg?: string;
+    logeStanding?: string;
+    logeContAnc?: string;
+    ancCreanCode?: string;
+    logeMotif?: string;
+    logeMotifDat?: string;
+}
