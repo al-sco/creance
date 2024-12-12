@@ -19,7 +19,7 @@ export function useExportFileDialogController(actId?: number, onHide?: () => voi
     }
 
     const downloadFile = async (bold: any) => {
-        const url = window.URL.createObjectURL(new Blob([bold], { type: "application/word" }));
+        const url = window.URL.createObjectURL(new Blob([bold], { type: "application/pdf" }));
         await delay(3000)
         setIsLoading(false)
         onHide && onHide();
