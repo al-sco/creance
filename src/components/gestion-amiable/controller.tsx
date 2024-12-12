@@ -1,33 +1,27 @@
 import { useEffect, useState } from "react";
 import { ActeRepository } from "../../states/repository/actes.repository";
 import { useAlerts } from "../compound-component/Alerts/useAlerts";
-import { ActeModel } from "../../states/model/actes.model";
-
-const data = [
-    { acteCode: "code 01", bloc: "bloc 01", lot: "lot 01", nPorte: "0125365M" },
-    { acteCode: "code 02", bloc: "bloc 02", lot: "lot 03", nPorte: "0125365M" },
-    { acteCode: "code 03", bloc: "bloc 03", lot: "lot 02", nPorte: "0125365M" }
-]
+import { useGestionAmiableStores } from "./use-gestion-amiable-stores";
 
 export function useListeActeController() {
     const alerts = useAlerts();
     const acteRepository = new ActeRepository();
-    const [actes, setActes] = useState<ActeModel[]>(data as any[]);
     const [visible, setVisible] = useState(false);
     const [acteCode, setActeCode] = useState("");
-    const [isLoading, setIsLoading] = useState(false);
-    const [isPdfShow, setIsPadfShow] = useState(false)
-   
+     const [actId, setActId] = useState<any>();
+     const [exportFileVisible, setExportFileVisible] = useState(false)
+    const stores = useGestionAmiableStores();
+
 
     const fetchActes = async () => {
         try {
-            setIsLoading(true);
+            stores.setActeLoading(true);
             const result = await acteRepository.getListActes();
-            result && setActes(result);
+            result && stores.setActes(result);
         } catch (error) {
             console.log(error);
         }finally{
-            setIsLoading(false);
+            stores.setActeLoading(false);
         }
     }
 
@@ -39,9 +33,11 @@ export function useListeActeController() {
         setVisible(true);
     }
 
-    const openUpdateFormDIalog = (id?: string) => {
+    const openUpdateFormDIalog = (data?: any) => {
         setVisible(true);
-        setActeCode(id ?? "");
+        setActeCode(data.id ?? "");
+        stores.setCodeCreance(data?.codeCreande);
+        stores.setActId(data.id ?? "")
     }
 
     const closeCreateFormDIalog = () => {
@@ -61,8 +57,20 @@ export function useListeActeController() {
         }
     }
 
+    const openExportFileDialog =(id?: string, typeActCode?: string) =>{
+        if(typeActCode !== "60" && typeActCode !== "55"){
+            alerts.openErrorAlert("ce type de fichier est en cours de conception !");
+            return false
+        }
+        setActId(id);
+        setExportFileVisible(true)
+    }
+
+    const closeExportFileDialog =() =>{
+        setActId("");
+        setExportFileVisible(false)
+    }
     return {
-        actes,
         alerts,
         openCreateFormDialog,
         openUpdateFormDIalog,
@@ -71,9 +79,9 @@ export function useListeActeController() {
         visible,
         deleteActe,
         refreshData: fetchActes,
-        isLoading,
-        setIsPadfShow,
-        isPdfShow
-
+        openExportFileDialog,
+        closeExportFileDialog,
+        actId,
+        exportFileVisible
     }
 }

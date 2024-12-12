@@ -1,36 +1,42 @@
 import { Col, Row } from "react-bootstrap";
 import KeyValueDetails from "../../compound-component/KeyValueDetails";
+import { ActeModel } from "../../../states/model/actes.model";
 
 interface LogementDetailsProps {
-  details: any;
+  details: ActeModel;
 }
 export function LogementDetails({ details }: LogementDetailsProps) {
   return (
     <Row>
-      <Col sx={3} md={3}>
+      <Col sx={4} md={4}>
         <KeyValueDetails label="Code de l'acte" value={details.id} />
-        <KeyValueDetails label="Type" value={details.acteLib} />
+        <KeyValueDetails label="Type d'a" value={details.typeLib} />
         <KeyValueDetails
-          label="Date de la creacne"
+          label="Date de créaction"
           date
-          value={details.acteCout}
+          value={details.acteDatecrea}
         />
       </Col>
-      <Col sx={3} md={3}>
+      <Col sx={4} md={4}>
         <KeyValueDetails
-          label="Date de la creacne"
-          date
-          value={details.acteCout}
+          label="Nom du debuteur"
+          value={details.nomDebiteur}
         />
         <KeyValueDetails
-          label="Date de réaction"
+          label="Date de réaction "
           date
-          value={details.acteUserCode}
+          value={details.creanDatrea}
+        />
+        <KeyValueDetails
+          label="Numéro de la créance "
+          date
+          value={details.numCreance}
         />
       </Col>
-      <Col sx={3} md={3}>
-        <KeyValueDetails label="Ville" value={details.villeCode} />
-        <KeyValueDetails label="Nom du débituer" value={details.acteDateCtl} />
+      <Col sx={4} md={4}>
+        <KeyValueDetails label="Logement" value={details.logeCode} />
+        <KeyValueDetails label="Terrain" value={details.terCode} />
+        <KeyValueDetails label="Mutation" value={details.mutaLib} />
       </Col>
     </Row>
   );

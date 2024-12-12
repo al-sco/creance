@@ -10,6 +10,7 @@ import SeletectField from "../../../../compound-component/form/SeletectField";
 import { PageTitle } from "../../../../compound-component/PageTitle";
 import { Controller } from "react-hook-form";
 import { useTerrainController } from "./controller";
+import Alerts from "../../../../compound-component/Alerts";
 
 
 
@@ -17,6 +18,7 @@ export function Terrain() {
     const ctrl = useTerrainController()
     return (
         <CardContent>
+            <Alerts {...ctrl.alerts} />
             <CardForm>
                 <PageTitle title="Ajouter un terrain" />
                 <Row className="g-2">
@@ -25,6 +27,7 @@ export function Terrain() {
                             onChange={(event: any) => {
                                 ctrl.handleChangeTerrain(event)
                             }}
+                            value={ctrl.codeTerrain}
                             placeholder="Saisir le code" id="code" />
                     </Col>
                     <Col xs={6} md={6}>
@@ -51,7 +54,7 @@ export function Terrain() {
                     </Col>
                 </Row>
                 <div className="d-flex justify-content-end">
-                    <FormActions />
+                <FormActions onSave={ctrl.formTer.handleSubmit(ctrl.onSUbmit)} />
                 </div>
             </CardForm>
         </CardContent>

@@ -6,8 +6,8 @@ import { InputField } from "../controller";
 export function useActeController(form: UseFormReturn<InputField, any>){
     const typeActeRepository = new TypeActeRepository();
     const [typeActes, setTypeActes] = useState<TypeActeModel[]>([]);
-    const [typeActeCode, setTypeActeCode] = useState("");
-    const [typeActeLibelle, setTypeActeLibelle] = useState("");
+    const [typeActeCode, setTypeActeCode] = useState<any>("");
+    const [typeActeLibelle, setTypeActeLibelle] = useState<any>("");
   
 
     const fetchTypeActes = async()=>{
@@ -24,12 +24,15 @@ export function useActeController(form: UseFormReturn<InputField, any>){
     },[]);
 
     const getTypeActesDetails = ()=>{
+        const typeCode = form.getValues().typacteCode ? form.getValues().typacteCode : typeActeCode
         try {
-            const result = typeActes.find((item: TypeActeModel) => item.typeActeCode === typeActeCode);
+            const result = typeActes.find((item: TypeActeModel) => item.typeActeCode === typeCode);
             if(result){
                 form.setValue("acteDelai", result.typacteDelai);
                 setTypeActeLibelle(result.typacteLib ?? "");
                 form.setValue("typeActeLibelle", result.typacteLib);
+                form.setValue("acterCode", typeActeCode)
+                form.setValue("typacteOrdEmis", result.typacteOrdEmis)
             };
         } catch (error) {
             console.log(error);
@@ -37,9 +40,12 @@ export function useActeController(form: UseFormReturn<InputField, any>){
     };
 
     useEffect(()=>{
+        fetchTypeActes();
         getTypeActesDetails();
-    },[typeActeCode]);
+        setTypeActeCode(form.getValues().typacteCode)
+    },[typeActeCode,form.getValues().typacteCode]);
 
+   
     const handleChangeTypeActe =(event: any)=>{
         setTypeActeCode(event.target.value)
   

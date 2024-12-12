@@ -18,7 +18,6 @@ export function GestionLogements() {
     setAciveIndex(event.index);
   };
 
-  console.log(stores.accordionLib);
 
   return (
     <>

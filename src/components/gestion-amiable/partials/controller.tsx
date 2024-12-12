@@ -9,7 +9,6 @@ import { useAlerts } from "../../compound-component/Alerts/useAlerts";
 import { useEffect } from "react";
 import { useGestionAmiableStores } from "../use-gestion-amiable-stores";
 
-
 export interface InputField {
     id?: string;
     acterCode?: string;
@@ -70,6 +69,8 @@ export interface InputField {
     montantDebloque?: string;
     nbEcheance?: string;
     dateFinEcheance?: string;
+    initialGestionnaire?: string;
+    typacteOrdEmis?: string;
 }
 const schema = yup.object({});
 
@@ -77,7 +78,19 @@ export function useCreateActesController(acteCode?: string, onHide?:()=> void, v
     const delay = (milliseconds: any) => new Promise(resolve => setTimeout(resolve, milliseconds));
     const alerts = useAlerts();
     const acteRepository = new ActeRepository();
-    const stores = useGestionAmiableStores()
+    const stores = useGestionAmiableStores();
+
+    const fetchActes = async () => {
+        try {
+            stores.setActeLoading(true);
+            const result = await acteRepository.getListActes();
+            result && stores.setActes(result);
+        } catch (error) {
+            console.log(error);
+        }finally{
+            stores.setActeLoading(false);
+        }
+    }
  
     const initialValues: InputField = Object.assign({}, {
         id:"",
@@ -142,6 +155,8 @@ export function useCreateActesController(acteCode?: string, onHide?:()=> void, v
         montantDebloque: "",
         nbEcheance: "",
         dateFinEcheance: "",
+        initialGestionnaire:"",
+        typacteOrdEmis:""
     });
 
     const form: UseFormReturn<InputField, any> = useForm<InputField>({
@@ -150,54 +165,56 @@ export function useCreateActesController(acteCode?: string, onHide?:()=> void, v
     });
 
     const getActeDetail = async()=>{
+        const code = stores.actId ? stores.actId : acteCode
         try {
-            const result = await acteRepository.getActeByCode(acteCode ?? "");
-            form.reset({
-                id: result.id,
-                acterCode: result.acterCode,
-                logeCode: result.logeCode,
-                codeCreance: result.codeCreance,
-                typacteCode: result.typacteCode,
-                gestCode: result.gestCode,
-                auxiCode: result.auxiCode,
-                ovpCode: result.ovpCode,
-                gareelCode: result.gareelCode,
-                mutCode: result.mutCode,
-                acteDatecrea: result.acteDatecrea,
-                acteDemand: result.acteDemand,
-                acteDelai: result.acteDelai? result.acteDelai.toString() : '',
-                acteRang: result.acteRang? result.acteRang.toString() : '',
-                acteDatrem: result.acteDatrem,
-                acteRef: result.acteRef,
-                saisCode: result.saisCode,
-                acteCodeGlob: result.acteCodeGlob?.toString(),
-                acteLib: result.acteLib,
-                agentPours: result.agentPours,
-                acteDatreact: result.acteDatreact,
-                actionJustice: result.actionJustice,
-                acteUserCode: result.acteUserCode,
-                acteDateCtl: result.acteDateCtl,
-                villeCode: result.villeCode,
-                actJustChambre: result.actJustChambre,
-                actRg: result.actRg,
-                propCode: result.propCode?.toString(),
-                acteDateSignat: result.acteDateSignat,
-                acteNatReact: result.acteNatReact,
-                acteDatrecepAgsuivi: result.acteDatrecepAgsuivi,
-                acteDatdepAgsuivi: result.acteDatdepAgsuivi,
-                acteRepDateRetrait: result.acteRepDateRetrait,
-                actRepRemGest: result.actRepRemGest,
-                acteDateExecut: result.acteDateExecut,
-                acteSuiteExecut: result.acteSuiteExecut,
-                acteMontLettre: result.acteMontLettre,
-                acteRefAccc: result.acteRefAccc,
-                pcCode: result.pcCode,
-                destCode: result.destCode,
-                acteAutRefGest: result.acteAutRefGest,
-                acteRefNot: result.acteRefNot,
-                acteCout: result.acteCout?.toString(),
-                actePoste: result.actePoste,
-            })
+            const result = await acteRepository.getActeByCode(code ?? "");
+            if(result){
+                form.reset({
+                    id: result.id,
+                    acterCode: result.typActeCode,
+                    logeCode: result.logeCode,
+                    typacteCode: result.typActeCode,
+                    gestCode: result.gestCode,
+                    auxiCode: result.auxiCode,
+                    ovpCode: result.ovpCode,
+                    gareelCode: result.gareelCode,
+                    mutCode: result.mutCode,
+                    acteDatecrea: result.acteDatecrea,
+                    acteDemand: result.acteDemand,
+                    acteDelai: result.acteDelai? result.acteDelai.toString() : '',
+                    acteRang: result.acteRang? result.acteRang.toString() : '',
+                    acteDatrem: result.acteDatrem,
+                    acteRef: result.acteRef,
+                    saisCode: result.saisCode,
+                    acteCodeGlob: result.acteCodeGlob?.toString(),
+                    acteLib: result.acteLib,
+                    agentPours: result.agentPours,
+                    acteDatreact: result.acteDatreact,
+                    actionJustice: result.actionJustice,
+                    acteUserCode: result.acteUserCode,
+                    acteDateCtl: result.acteDateCtl,
+                    villeCode: result.villeCode,
+                    actJustChambre: result.actJustChambre,
+                    actRg: result.actRg,
+                    propCode: result.propCode?.toString(),
+                    acteDateSignat: result.acteDateSignat,
+                    acteNatReact: result.acteNatReact,
+                    acteDatrecepAgsuivi: result.acteDatrecepAgsuivi,
+                    acteDatdepAgsuivi: result.acteDatdepAgsuivi,
+                    acteRepDateRetrait: result.acteRepDateRetrait,
+                    actRepRemGest: result.actRepRemGest,
+                    acteDateExecut: result.acteDateExecut,
+                    acteSuiteExecut: result.acteSuiteExecut,
+                    acteMontLettre: result.acteMontLettre,
+                    acteRefAccc: result.acteRefAccc,
+                    pcCode: result.pcCode,
+                    destCode: result.destCode,
+                    acteAutRefGest: result.acteAutRefGest,
+                    acteRefNot: result.acteRefNot,
+                    acteCout: result.acteCout?.toString(),
+                    actePoste: result.actePoste,
+                })
+            }
         } catch (error) {
             console.log(error)
         }
@@ -205,12 +222,12 @@ export function useCreateActesController(acteCode?: string, onHide?:()=> void, v
 
     useEffect(()=>{
         getActeDetail();
-    }, [acteCode, visible]);
+    }, [acteCode, visible, stores.actId]);
 
     const createActes = async (command: CreerActeModel) => {
         await acteRepository.createActes(command);
         alerts.openSuccessAlert("L'acte a été créé avec succès.");
-        await delay(5000)
+        await delay(3000)
         onHide && onHide();
     }
 
@@ -234,20 +251,24 @@ export function useCreateActesController(acteCode?: string, onHide?:()=> void, v
             }
         } catch (error) {
            alerts.openErrorAlert(error)
+        }finally{
+            await fetchActes();
         }
     }
 
     const getCommande = (data: any)=>{
+        console.log("data.acteDatecrea", data.acteDatecrea)
         return{
             acterCode: data.acterCode,
+            terCode: form.getValues('terCode'),
             logeCode: data.logeCode,
             codeCreance: data.codeCreance,
             typacteCode: data.typacteCode,
             gestCode: data.gestCode,
-            auxiCode: data.auxiCode,
+            auxiCode: form.getValues("auxiCode"),
             ovpCode: data.ovpCode,
-            gareelCode: data.gareelCode,
-            mutCode: data.mutCode,
+            gareelCode: data?.gareelCode,// .gform.getValues("gareelCode"),
+            mutCode: form.getValues("mutCode"),
             acteDatecrea: data.acteDatecrea,
             acteDemand: data.acteDemand,
             acteDelai: data.acteDelai ? parseInt(data.acteDelai) : 0,

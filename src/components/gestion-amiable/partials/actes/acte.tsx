@@ -87,7 +87,7 @@ export function Acte({ form }: Props) {
           <Row>
             <Col xs={8} md={8}>
               <Controller
-                name="acteDatecrea"
+                name="initialGestionnaire"
                 control={form.control}
                 render={({ field }) => (
                   <InputText
@@ -106,7 +106,7 @@ export function Acte({ form }: Props) {
             </Col>
             <Col xs={4} md={4}>
               <Controller
-                name="acteDatecrea"
+                name="initialGestionnaire"
                 control={form.control}
                 render={({ field }) => (
                   <InputText label="Nombre de pièce" id="bloc" {...field} />
@@ -116,23 +116,23 @@ export function Acte({ form }: Props) {
           </Row>
           <Row className="g-2">
             <Col xs={6} md={6}>
-              <SeletectField
+              {/* <SeletectField
                 options={[]}
                 label="Acte lié (procédure)"
                 placeholder="Selectionnée"
                 id="bloc"
                 dropdownClassName="mt-3"
                 labelStyles={300}
-              />
+              /> */}
             </Col>
           </Row>
           <Row>
             <Col xs={6} md={6}>
               <Controller
-                name="acteRang"
+                name="typacteOrdEmis"
                 control={form.control}
                 render={({ field }) => (
-                  <InputText label="Rang de l'acte" id="acteRang" {...field} />
+                  <InputText label="Rang de l'acte" id="acteRang" disabled {...field} />
                 )}
               />
             </Col>

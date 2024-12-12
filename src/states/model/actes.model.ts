@@ -9,7 +9,7 @@ export interface CreerActeModel {
     ovpCode?: string;
     gareelCode?: string;
     mutCode?: string;
-    acteDatecrea?: string;
+    acteDatecrea?: Date;
     acteDemand?: string;
     acteDelai?: number;
     acteCout?: number;
@@ -50,10 +50,11 @@ export interface CreerActeModel {
 
 export interface ActeModel {
     id?: string;
+    terCode?: string;
     acterCode?: string;
     logeCode?: string;
-    codeCreance?: string;
-    typacteCode?: string;
+    creanCode?: string;
+    typActeCode?: string;
     gestCode?: string;
     auxiCode?: string;
     ovpCode?: string;
@@ -96,4 +97,8 @@ export interface ActeModel {
     acteRefNot?: string;
     actePoste?: string;
     typeLib?: string;
+    nomDebiteur?: string;
+    numCreance?: number;
+    creanDatrea?: string;
+    mutaLib?: string;
 }

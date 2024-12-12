@@ -19,7 +19,6 @@ export function GestionActeFormDialog({
   acteCode,
 }: LogementFormDialogProps) {
   const ctrl = useCreateActesController(acteCode, onHide);
-
   const stepperRef = useRef<any>(null);
 
   return (

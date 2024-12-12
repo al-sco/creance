@@ -27,6 +27,7 @@ export function useTerrainController(){
     const fetchTerrains = async()=>{
         try {
             const result = await terrianRepisitory.getTerrains();
+            console
             result && setTerrains(result);
         } catch (error) {
             console.log(error);
@@ -78,6 +79,8 @@ export function useTerrainController(){
         onSUbmit: ctrl.onSubmit,
         handleChangeTerrain,
         codeTerrain,
-        form
+        form,
+        formTer: ctrl.form,
+        alerts: ctrl.alerts
     }
 }

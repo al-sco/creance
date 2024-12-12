@@ -9,9 +9,10 @@ interface AtlErrorDialogProps {
 
 
 function ErrorDialog({ children, onHide, visible }: AtlErrorDialogProps) {
+    // visible={visible} className={"w-1/3 sm:w-1/2 md:w-1/3"} onHide={() => onHide && onHide()}
     return (
         <Dialog
-            visible={visible} className={"w-2/3 sm:w-1/2 md:w-1/3"} onHide={() => onHide && onHide()}
+            visible={visible}  onHide={() => onHide && onHide()} style={{width: "20vw"}}
 
         >
             <div className="d-flex flex-column gap-4 text-center">

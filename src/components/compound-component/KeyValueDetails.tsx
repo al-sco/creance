@@ -62,7 +62,7 @@ function KeyValueDetails(
                 {!noIcon && getIcon()}
                 <div>
                     {!forTable && keySens === 'top' && <KeyDetail label={label} />}
-                    <div className={`${!forTable && 'font-bold'}   ${classContent}`}>{getValue()}</div>
+                    <div className={`${!forTable && 'font-bold'}   ${classContent}`} style={{marginTop: -8, marginBottom: 8}}>{getValue()}</div>
                     {!forTable && keySens === 'bottom' && <KeyDetail label={label} />}
                 </div>
             </div>
