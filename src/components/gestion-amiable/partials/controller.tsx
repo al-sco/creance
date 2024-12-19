@@ -67,10 +67,18 @@ export interface InputField {
     duree?: string;
     periodicite?: string;
     montantDebloque?: string;
-    nbEcheance?: string;
     dateFinEcheance?: string;
     initialGestionnaire?: string;
     typacteOrdEmis?: string;
+    debCode?: string;
+    grpCreanceLib?: string;
+    objCreanCode?: string;
+    obCreanceLib?: string;
+    creanNbech?: string;
+    creanDatech?: string;
+    garphysCodeUser?: string;
+    periodiciteLib?: string;
+    creanDejRemb?: string;
 }
 const schema = yup.object({});
 
@@ -91,7 +99,7 @@ export function useCreateActesController(acteCode?: string, onHide?:()=> void, v
             stores.setActeLoading(false);
         }
     }
- 
+
     const initialValues: InputField = Object.assign({}, {
         id:"",
         acterCode: "",
@@ -143,7 +151,7 @@ export function useCreateActesController(acteCode?: string, onHide?:()=> void, v
         cesCode: "",
         terCode:"" ,
         typeActeLibelle:'',
-
+        debCode:"",
         debiteur: "",
         groupeCreance: "",
         objet: "",
@@ -153,10 +161,18 @@ export function useCreateActesController(acteCode?: string, onHide?:()=> void, v
         duree: "",
         periodicite: "",
         montantDebloque: "",
-        nbEcheance: "",
         dateFinEcheance: "",
         initialGestionnaire:"",
-        typacteOrdEmis:""
+        typacteOrdEmis:"",
+        grpCreanceLib: "",
+        objCreanCode: "",
+        obCreanceLib:"",
+        creanNbech:"",
+        creanDatech:"",
+        acteCodeGlob:"",
+        garphysCodeUser:"",
+        creanDejRemb:"",
+        periodiciteLib:""
     });
 
     const form: UseFormReturn<InputField, any> = useForm<InputField>({
@@ -212,7 +228,7 @@ export function useCreateActesController(acteCode?: string, onHide?:()=> void, v
                     acteAutRefGest: result.acteAutRefGest,
                     acteRefNot: result.acteRefNot,
                     acteCout: result.acteCout?.toString(),
-                    actePoste: result.actePoste,
+                    actePoste: result.actePoste
                 })
             }
         } catch (error) {
@@ -222,20 +238,26 @@ export function useCreateActesController(acteCode?: string, onHide?:()=> void, v
 
     useEffect(()=>{
         getActeDetail();
+        if(!visible){
+            form.reset(initialValues)
+            stores.setActId("")
+        }
     }, [acteCode, visible, stores.actId]);
-
+  
     const createActes = async (command: CreerActeModel) => {
         await acteRepository.createActes(command);
         alerts.openSuccessAlert("L'acte a été créé avec succès.");
-        await delay(3000)
+        await delay(2000)
         onHide && onHide();
+        form.reset(initialValues)
     }
 
     const modifier = async (command: CreerActeModel) => {
         await acteRepository.modifierActe(command);
         alerts.openSuccessAlert("L'acte a été modifié avec succès.");
-        await delay(5000)
+        await delay(2000)
         onHide && onHide();
+        form.reset(initialValues)
     }
 
     const onSubmit = async (data: InputField) => {
@@ -250,6 +272,7 @@ export function useCreateActesController(acteCode?: string, onHide?:()=> void, v
                 await createActes(commande)
             }
         } catch (error) {
+            console.log("error", error)
            alerts.openErrorAlert(error)
         }finally{
             await fetchActes();
@@ -257,7 +280,6 @@ export function useCreateActesController(acteCode?: string, onHide?:()=> void, v
     }
 
     const getCommande = (data: any)=>{
-        console.log("data.acteDatecrea", data.acteDatecrea)
         return{
             acterCode: data.acterCode,
             terCode: form.getValues('terCode'),
@@ -302,7 +324,8 @@ export function useCreateActesController(acteCode?: string, onHide?:()=> void, v
             acteRefNot: data.acteRefNot,
             acteCout: data.acteCout ? parseInt(data.acteCout) : 0,
             actePoste: data.actePoste,
-            typeActeLibelle: data.typeActeLibelle
+            typeActeLibelle: data.typeActeLibelle,
+            garphysCodeUser: form.getValues("garphysCodeUser")
         }
     }
 

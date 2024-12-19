@@ -13,12 +13,19 @@ export function useExportFileDialogController(actId?: number, onHide?: () => voi
     const delay = (milliseconds: any) => new Promise(resolve => setTimeout(resolve, milliseconds));
 
     const exporter = async (command: ExportFileModel) => {
+        command.typeFichier = stores.typeActes
         const bold: any = await exportRepository.exportFile(command)
         alerts.openSuccessAlert("Fichier générer avec succès !");
-        downloadFile(bold);
+        stores.setFormatFichiers(command.format);
+        if(command.format === "WORD"){
+            downloadFileWord(bold);
+        }else{
+            downloadFilePdf(bold)
+        }
+       
     }
 
-    const downloadFile = async (bold: any) => {
+    const downloadFilePdf = async (bold: any) => {
         const url = window.URL.createObjectURL(new Blob([bold], { type: "application/pdf" }));
         await delay(3000)
         setIsLoading(false)
@@ -27,6 +34,13 @@ export function useExportFileDialogController(actId?: number, onHide?: () => voi
         stores.setPreviewFile(true)
     }
 
+    const downloadFileWord = async (bold: any) => {
+        await delay(3000)
+        setIsLoading(false)
+        onHide && onHide();
+        stores.setFirlUrl(bold);
+        stores.setPreviewFile(true)
+    }
     const handleChangeFormat = (evnt: any) => {
         setFormatFile(evnt.target.value)
     }
@@ -39,7 +53,7 @@ export function useExportFileDialogController(actId?: number, onHide?: () => voi
         try {
             setIsLoading(true)
             await exporter({
-                actetId: actId, format: formatFile ? formatFile : "PDF"
+                actetId: actId, format: formatFile ? formatFile : "PDF", typeFichier: "CONVOCATION"
             })
         } catch (error) {
 

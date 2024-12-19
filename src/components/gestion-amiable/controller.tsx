@@ -29,6 +29,12 @@ export function useListeActeController() {
         fetchActes();
     }, []);
 
+    useEffect(()=>{
+        if(!visible){
+            setActeCode("")
+        }
+    },[acteCode])
+
     const openCreateFormDialog = () => {
         setVisible(true);
     }
@@ -57,14 +63,23 @@ export function useListeActeController() {
         }
     }
 
-    const openExportFileDialog =(id?: string, typeActCode?: string) =>{
-        if(typeActCode !== "60" && typeActCode !== "55"){
-            alerts.openErrorAlert("ce type de fichier est en cours de conception !");
-            return false
-        }
+    const openExportFileDialog =(id?: string, typActeLib?: string) =>{
+        setTypaActes(typActeLib)
         setActId(id);
         setExportFileVisible(true)
     }
+
+    const setTypaActes =(typeActe?: string) =>{
+        if(typeActe?.toUpperCase()?.includes("CONVOCATION")){
+            stores.setTypeActes("CONVOCATION")
+        }else if(typeActe?.includes("RAPPEL")){
+            stores.setTypeActes("LETTRE_RAPPEL")
+        }else if(typeActe?.toUpperCase().includes("DEMEURE")){
+            stores.setTypeActes("MISE_EN_DEMEURE")
+        }else if(typeActe?.toUpperCase().includes("SOMMATION")){
+            stores.setTypeActes("SOMMATION_DE_PAYER")
+        }
+     }
 
     const closeExportFileDialog =() =>{
         setActId("");

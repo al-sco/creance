@@ -46,6 +46,7 @@ export interface CreerActeModel {
     acteRefNot?: string;
     actePoste?: string;
     typeActeLibelle?: string;
+    garphysCodeUser?: string;
 }
 
 export interface ActeModel {

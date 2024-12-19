@@ -7,62 +7,91 @@ import {  UseFormReturn } from "react-hook-form";
 import { InputField } from "../controller";
 import { useGestionAmiableStores } from "../../use-gestion-amiable-stores";
 
-export function useCreanceController( form: UseFormReturn<InputField, any>) {
+let codeCreance: any = []
+export function useCreanceController( form: UseFormReturn<InputField, any>, visible?: boolean) {
     const alerts = useAlerts()
     const creanceRepository = new CreanceRepository();
     const [creances, setCreances] = useState<CreanceModel[]>([]);
     const [creanceCode, setCreanceCode] = useState("");
-    const stores = useGestionAmiableStores()
+    const stores = useGestionAmiableStores();
+
     const fetchCreance = async () => {
         try {
             const resut = await creanceRepository.getCreance();
             setCreances(resut);
         } catch (error) {
-            console.log(error);
         }
     }
+
+    useEffect(()=>{
+        if(codeCreance.length > 0){
+            setCreanceCode(codeCreance[0] ?? "")
+        }
+    },[codeCreance[0]])
 
     useEffect(() => {
         fetchCreance();
     }, []);
 
+    useEffect(()=>{
+        if(!visible){
+            codeCreance.splice(0, codeCreance.length)
+        }
+    }, [visible])
+
     const handleChangeCreance = (event: any) => {
-        setCreanceCode(event.target.value)
+        if(codeCreance.length > 0){
+            codeCreance.splice(0, codeCreance.length)
+        }
+        setCreanceCode(event.target.value);
+        codeCreance.push(event.target.value)
     }
 
     const getCreanceDetail = async () => {
         try {
             const code = stores.codeCreance ? stores.codeCreance : creanceCode
-                const resut =  await creanceRepository.getCreanceByCodeCreance(code ?? "");;
-                if (resut) {
-                    form.setValue("debiteur", resut.debCode)
-                    form.setValue("groupeCreance", resut.grpCreanCode)
-                    form.setValue("capitalInitial", resut.creanCapitInit)
-                    form.setValue("DatePremiereEcheance", resut.creanDatrec)
-                    form.setValue("dateOctroi", resut.creanDatoctroi)
-                    form.setValue("duree", resut.creanDuree)
-                    form.setValue("periodicite", resut.periodCode)
-                    form.setValue("montantDebloque", resut.periodCode)
-                    form.setValue("dateFinEcheance", resut.creanDatfin)
+                const result =  await creanceRepository.getCreanceByCodeCreance(code ?? "");;
+                if (result) {
+                    form.setValue("debCode", result.debCode)
+                    form.setValue("debiteur", result.nomDebiteurs)
+                    form.setValue("groupeCreance", result.grpCreanCode)
+                    form.setValue("capitalInitial", result.creanCapitInit)
+                    form.setValue("DatePremiereEcheance", result.creanDatrec)
+                    form.setValue("dateOctroi", result.creanDatoctroi)
+                    form.setValue("duree", result.creanDuree)
+                    form.setValue("periodicite", result.periodCode)
+                    form.setValue("montantDebloque", result.periodCode)
+                    form.setValue("dateFinEcheance", result.creanDatfin)
+                    form.setValue("grpCreanceLib", result.grpCreanceLib)
+                    form.setValue("objCreanCode", result.objCreanCode);
+                    form.setValue("obCreanceLib", result.objCreanceLib);
+                    form.setValue("creanNbech", result.creanNbech);
+                    form.setValue("creanDatech", result.creanDatech);
+                    form.setValue("periodiciteLib", result.periodiciteLib)
+                    form.setValue("creanDejRemb", result.creanDejRemb)
                 }
                 code && setCreanceCode(code);
                 form.setValue("codeCreance", code)
            
         } catch (error) {
-            console.log(error);
+            alerts.openErrorAlert(error)
         }
     }
 
-    useEffect(() => {
-        getCreanceDetail();
-    }, [creanceCode, stores.codeCreance ])
+    // useEffect(() => {
+    //     getCreanceDetail();
+    // }, [])
 
 
+    const afficher = async ()=>{
+      await  getCreanceDetail();
+    }
     return {
         creances,
         alerts,
         form,
         handleChangeCreance,
-        creanceCode
+        creanceCode,
+        afficher
     }
 }

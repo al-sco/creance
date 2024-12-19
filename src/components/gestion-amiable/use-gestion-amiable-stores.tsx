@@ -13,8 +13,8 @@ interface Props {
   actId: string;
   setActId: (actId: string) => void;
 
-  fileUrl : any;
-  setFirlUrl:(fileUrl: any) => void;
+  fileUrl: any;
+  setFirlUrl: (fileUrl: any) => void;
   previewFile: boolean,
   setPreviewFile: (previewFile: boolean) => void;
 
@@ -22,6 +22,11 @@ interface Props {
   setActes: (actes: ActeModel[]) => void;
   acteLoading: boolean;
   setActeLoading: (acteLoading: boolean) => void;
+
+  formatFichiers: "PDF" | "EXCEL" | "HTML" | "WORD";
+  setFormatFichiers: (formatFichiers: "PDF" | "EXCEL" | "HTML" | "WORD") => void;
+  typeActes: "CONVOCATION" | "LETTRE_RAPPEL" | "MISE_EN_DEMEURE" | "SOMMATION_DE_PAYER";
+  setTypeActes: (typeActes: "CONVOCATION" | "LETTRE_RAPPEL" | "MISE_EN_DEMEURE" | "SOMMATION_DE_PAYER") => void;
 }
 
 export const useGestionAmiableStores = create<Props>((set) => ({
@@ -41,24 +46,32 @@ export const useGestionAmiableStores = create<Props>((set) => ({
   setCodeCreance: (codeCreance: string) => {
     set({ codeCreance })
   },
-  actId:"",
-  setActId: (actId: string) =>{
-    set({actId})
+  actId: "",
+  setActId: (actId: string) => {
+    set({ actId })
   },
   fileUrl: "",
-  setFirlUrl: (fileUrl: any)=>{
-    set({ fileUrl})
+  setFirlUrl: (fileUrl: any) => {
+    set({ fileUrl })
   },
   previewFile: false,
-  setPreviewFile: (previewFile: boolean)=>{
-    set({ previewFile})
+  setPreviewFile: (previewFile: boolean) => {
+    set({ previewFile })
   },
   acteLoading: false,
-  setActeLoading: (acteLoading: boolean) =>{
-    set({ acteLoading})
+  setActeLoading: (acteLoading: boolean) => {
+    set({ acteLoading })
   },
   actes: [],
-  setActes:(actes: ActeModel[]) =>{
+  setActes: (actes: ActeModel[]) => {
     set({ actes })
+  },
+  formatFichiers: "PDF",
+  setFormatFichiers: (formatFichiers: "PDF" | "EXCEL" | "HTML" | "WORD") => {
+    set({ formatFichiers })
+  },
+  typeActes: "CONVOCATION",
+  setTypeActes: (typeActes: "CONVOCATION" | "LETTRE_RAPPEL" | "MISE_EN_DEMEURE" | "SOMMATION_DE_PAYER") => {
+    set({ typeActes })
   }
 }));

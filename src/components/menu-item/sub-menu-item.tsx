@@ -5,8 +5,6 @@ import { Stack } from "@chakra-ui/react"
 import { ChevronRightIcon } from "@chakra-ui/icons"
 import { SubMenuItem } from "../../common/configs/ui/menus/menus.type"
 import styled from "styled-components"
-import { useState } from "react"
-
 
 type SubMenuItemProps = {
     subMenu: SubMenuItem,

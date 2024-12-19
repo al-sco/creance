@@ -22,7 +22,7 @@ type MainContentWrapperProps = {
     hasSubMenusInSideBar?: boolean
 }
 
-const MainContentWrapper = ({ subMenus, isHidden, handleHidden, title, parrentPath }: MainContentWrapperProps): JSX.Element => {
+const MainContentWrapper = ({ subMenus, isHidden }: MainContentWrapperProps): JSX.Element => {
     const navigation = useNavigation()
     useSignals()
     

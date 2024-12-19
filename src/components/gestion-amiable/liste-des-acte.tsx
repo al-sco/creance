@@ -21,6 +21,7 @@ import { ProgressSpinners } from "../compound-component/ProgressSpinners";
 import ExportFile from "./partials/previsualise";
 import { ExportFileDialog } from "./partials/exportFileDialog";
 import { useTableGlobalFilter } from "../compound-component/table/GlobalFilter";
+import KeyValueDetails from "../compound-component/KeyValueDetails";
 
 export  function ListeDesActes() {
     const globalFilter = useTableGlobalFilter()
@@ -59,9 +60,10 @@ export  function ListeDesActes() {
                 <Column field={'typActeLib'} header={'Type de l\'acte'} />
                 <Column field={'nomDebiteur'} header={'Nom du débiteur'} />
                 <Column field={'numCreance'} header={'Numéro de créance'} />
-                <Column field={'acteDatecrea'} header={'Date de création'} />
-                <Column field={'acteDateSignat'} header={'Date de signature'} />
-                <Column field={'creanDatrea'} header={'Date de réaction'} />
+                <Column header={'Date de création'} body={(data) => <KeyValueDetails date value={data.acteDatecrea} />} />
+                <Column field="acteDateSignat" header={'Date de signature'}/>
+                <Column field={'notificaion'} header={'Date de notification'} />
+                <Column  header={'Date de réaction'}  body={(data) => <KeyValueDetails date value={data.creanDatrea} />}/>
                 <Column header={'Options'} align={'right'} body={(data: ActeModel) =>
                         <MoreActions accent items={[
                             {
@@ -71,7 +73,7 @@ export  function ListeDesActes() {
                             },
                             {
                                 label: 'Exporter', command() {
-                                    ctrl.openExportFileDialog(data.id, data.typActeCode)
+                                    ctrl.openExportFileDialog(data.id, data.typeLib)
                                 }
                             },
                               {

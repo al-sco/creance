@@ -5,6 +5,8 @@ import SeletectField from "../../../compound-component/form/SeletectField";
 import { Controller, UseFormReturn } from "react-hook-form";
 import { useActeController } from "./controller";
 import { InputField } from "../controller";
+import { useGestionAmiableStores } from "../../use-gestion-amiable-stores";
+import emptyImage from "../../../../assets/empty3.png";
 
 interface Props {
   form: UseFormReturn<InputField, any>;
@@ -12,6 +14,7 @@ interface Props {
 
 export function Acte({ form }: Props) {
   const ctrl = useActeController(form);
+  const stores = useGestionAmiableStores();
 
   return (
     <div className="m-2">
@@ -116,14 +119,16 @@ export function Acte({ form }: Props) {
           </Row>
           <Row className="g-2">
             <Col xs={6} md={6}>
-              {/* <SeletectField
-                options={[]}
+            <Controller name="acteCodeGlob" control={form.control}
+            render={({field}) =>
+            <SeletectField
+                options={stores.actes || []} optionLabel="id" optionValue="id"
                 label="Acte lié (procédure)"
                 placeholder="Selectionnée"
                 id="bloc"
                 dropdownClassName="mt-3"
-                labelStyles={300}
-              /> */}
+                labelStyles={300} {...field}
+              />} />
             </Col>
           </Row>
           <Row>
@@ -140,91 +145,95 @@ export function Acte({ form }: Props) {
         </Col>
 
         <Col md={5} className="">
-          {!ctrl.typeActeLibelle.includes("CONVOCATION") && (
-            <>
-              <div className="card m-1 p-2 m-">
-                <div className="card border-1 m-1 p-2">
-                  <b className="text-orange-500">Auxiliaire de justice</b>
-                  <Row>
-                    {/* <SectionTitle title="" subTitle="Ajouter un auxiliaire de justice" /> */}
-                    <Row className="g-2">
-                      <Col xs={4} md={4}>
-                        <SeletectField
-                          options={[]}
-                          label="Code"
-                          placeholder="Selectionnée"
-                          id="bloc"
-                        />
-                      </Col>
-                      <Col xs={4} md={4}>
-                        <InputText
-                          label="Type auxiliaire"
-                          disabled
-                          id="nPorte"
-                        />
-                      </Col>
-                      <Col xs={4} md={4}>
-                        <InputText
-                          placeholder="L'initial de l'auxiliaire"
-                          disabled
-                          id="bloc"
-                        />
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col xs={4} md={4}>
-                        <InputText label="Nom" disabled id="bloc" />
-                      </Col>
-                      <Col xs={8} md={8}>
-                        <InputText
-                          placeholder="L'initial du nom "
-                          disabled
-                          id="bloc"
-                        />
-                      </Col>
-                    </Row>
-                  </Row>
-                </div>
-                {/* <SectionTitle title="" subTitle="Ajouter un agent de justice" className="pb-1" /> */}
-                <div className="card m-1 p-2">
-                  <b className="text-orange-500">Agent de poursuite</b>
-                  <Row className="g-2 ">
-                    <Col xs={4} md={4}>
-                      <SeletectField
-                        options={[]}
-                        label="Code"
-                        placeholder="Selectionnée"
-                        id="bloc"
-                      />
-                    </Col>
+          {!ctrl.typeActeLibelle.includes("CONVOCATION") ?
+          <>
+          <div className="card m-1 p-2 m-">
+            <div className="card border-1 m-1 p-2">
+              <b className="text-orange-500">Auxiliaire de justice</b>
+              <Row>
+                {/* <SectionTitle title="" subTitle="Ajouter un auxiliaire de justice" /> */}
+                <Row className="g-2">
+                  <Col xs={4} md={4}>
+                    <SeletectField
+                      options={[]}
+                      label="Code"
+                      placeholder="Selectionnée"
+                      id="bloc"
+                    />
+                  </Col>
+                  <Col xs={4} md={4}>
+                    <InputText
+                      label="Type auxiliaire"
+                      disabled
+                      id="nPorte"
+                    />
+                  </Col>
+                  <Col xs={4} md={4}>
+                    <InputText
+                      placeholder="L'initial de l'auxiliaire"
+                      disabled
+                      id="bloc"
+                    />
+                  </Col>
+                </Row>
+                <Row>
+                  <Col xs={4} md={4}>
+                    <InputText label="Nom" disabled id="bloc" />
+                  </Col>
+                  <Col xs={8} md={8}>
+                    <InputText
+                      placeholder="L'initial du nom "
+                      disabled
+                      id="bloc"
+                    />
+                  </Col>
+                </Row>
+              </Row>
+            </div>
+            {/* <SectionTitle title="" subTitle="Ajouter un agent de justice" className="pb-1" /> */}
+            <div className="card m-1 p-2">
+              <b className="text-orange-500">Agent de poursuite</b>
+              <Row className="g-2 ">
+                <Col xs={4} md={4}>
+                  <SeletectField
+                    options={[]}
+                    label="Code"
+                    placeholder="Selectionnée"
+                    id="bloc"
+                  />
+                </Col>
 
-                    <Col xs={4} md={4}>
-                      <InputText label="Type Agent" disabled id="nPorte" />
-                    </Col>
-                    <Col xs={4} md={4}>
-                      <InputText
-                        placeholder="L'initial de l'agent de poursuite"
-                        disabled
-                        id="bloc"
-                      />
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col xs={4} md={4}>
-                      <InputText label="Nom" disabled id="bloc" />
-                    </Col>
-                    <Col xs={8} md={8}>
-                      <InputText
-                        placeholder="L'initial du nom"
-                        disabled
-                        id="bloc"
-                      />
-                    </Col>
-                  </Row>
-                </div>
-              </div>
-            </>
-          )}
+                <Col xs={4} md={4}>
+                  <InputText label="Type Agent" disabled id="nPorte" />
+                </Col>
+                <Col xs={4} md={4}>
+                  <InputText
+                    placeholder="L'initial de l'agent de poursuite"
+                    disabled
+                    id="bloc"
+                  />
+                </Col>
+              </Row>
+              <Row>
+                <Col xs={4} md={4}>
+                  <InputText label="Nom" disabled id="bloc" />
+                </Col>
+                <Col xs={8} md={8}>
+                  <InputText
+                    placeholder="L'initial du nom"
+                    disabled
+                    id="bloc"
+                  />
+                </Col>
+              </Row>
+            </div>
+          </div>
+        </>
+        :
+          <div className="ml-5 justify-items-center align-items-center">
+             <img src={emptyImage} alt="Image" style={{width: "60%", marginLeft: "20%"}}/>
+          </div>
+                }
         </Col>
       </Row>
     </div>

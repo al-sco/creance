@@ -13,8 +13,7 @@ import { ecranCreanceFraisRecapulatif } from "../paiement/additionnal-paiement-d
 import { FraisLogement } from "../paiement/additionnal-paiement-data/ecranFraisLogement.data";
 import { FraisPremierAcquereur } from "../paiement/additionnal-paiement-data/ecranFraisPremierAcquereur.data";
 import { FraisTerrain } from "../paiement/additionnal-paiement-data/ecranFraisTerrain.data";
-import { factureFraisPaiementData } from "../paiement/additionnal-paiement-data/factureFrais.data";
-import { ecranFraisPaiementSelectItem, ecranFraisPaiementComponentData } from "../paiement/ecranFraisPrin.data";
+import { ecranFraisPaiementComponentData } from "../paiement/ecranFraisPrin.data";
 import { FraisVisiteTerrainPaiementComponentData } from "../paiement/ecranFraisVisiteTerrain.data";
 import { detailGarantisAditionnalData, detailLogementAditionnalData, detailTerrainAditionnalData } from "./additionnal-content/aditionnal-data";
 import { GarantiesPersonnellesAdditionnalContent } from "./additionnal-content/garanties-personnelles-additionnal-content";

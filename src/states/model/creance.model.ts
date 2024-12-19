@@ -1,7 +1,9 @@
 export interface CreanceModel{
+    nomDebiteurs?: string;
+    grpCreanceLib?: string;
     creanCode?: string;
     periodCode?:string
-    objCreanCode?:string
+    objCreanceLib?:string
     creanCodeGlo?:string
     debCode?:string
     creanCapitInit?:string
@@ -55,7 +57,11 @@ export interface CreanceModel{
     creanIdentAgtresor?: string
     creanStab?: string
     creanSoldAvantLiq?: string
-    grpCreanCode?:string
+    grpCreanCode?:string;
+    obCreanceLib?: string;
+    objCreanCode?: string;
+    creanNbech?: string;
+    periodiciteLib?: string;
 }
 
 export interface CreerCreanceModel{

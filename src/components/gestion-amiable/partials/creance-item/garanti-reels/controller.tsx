@@ -72,8 +72,6 @@ export function useGarantieReelController(){
         setCode(event.target.value);
         ctrl.form.setValue("gareelCode", event.target.value);
     }
-
-    console.log(ctrl.form.getValues())
     return {
         garantieRels,
         onSUbmit: ctrl.onSubmit,

@@ -69,3 +69,8 @@ body {
     order: 1;
     flex-grow: 0;
 }
+
+  .p-stepper-header {
+     display: none;
+  }
+  

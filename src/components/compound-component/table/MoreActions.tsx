@@ -10,7 +10,7 @@ interface TableActionsProps {
     accent?: boolean;
 }
 
-function MoreActions({items, label, accent}: TableActionsProps) {
+function MoreActions({items, accent}: TableActionsProps) {
     const menuRight = useRef(null);
     let severity: any = 'primary';
     if (accent) severity = 'info';

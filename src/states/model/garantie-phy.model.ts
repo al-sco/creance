@@ -1,0 +1,41 @@
+export interface GarantiePhyModel {
+    id?: string;
+    profesCode?: string;
+    typgarPhysCode?: string;
+    empCode?: string;
+    statsalCode?: string;
+    quartCode?: string;
+    fonctCode?: string;
+    // private Long debCode;
+    garphysNom?: string;
+    garphysPren?: string;
+    garphysDatnaiss?: string;
+    garphysLieunaiss?: string;
+    garphysDatdec?: string;
+    garphysAdrpost?: string;
+    garphysSalbrut?: string;
+    garphysTeldom?: string;
+    garphysCel?: string;
+    garphysEmail?: string;
+    garphysRue?: string;
+    garphysTelbur?: string;
+    garphysSitmat?: string;
+    garphysSexe?: string;
+    garphysSalNet?: string;
+    garphysDatRetr?: string;
+    garphysMatric?: string;
+    garphysNompere?: string;
+    garphysNommere?: string;
+    garphysNatpident?: string;
+    garphysNumpident?: string;
+    garphysLieuetab?: string;
+    garphysDatevalidit?: string;
+    garphysDatetablt?: string;
+    garphysDateCtl?: string;
+    garphysCharg?: string;
+    indic?: string;
+    natCode?: string;
+    civCode?: string;
+    garphysCodeUser?: string;
+
+}
