@@ -58,7 +58,7 @@ function KeyValueDetails(
 
     return (
         <>
-            <div className={"d-flex items-center gap-4"}>
+            <div className={"d-flex align-items-center gap-4"}>
                 {!noIcon && getIcon()}
                 <div>
                     {!forTable && keySens === 'top' && <KeyDetail label={label} />}

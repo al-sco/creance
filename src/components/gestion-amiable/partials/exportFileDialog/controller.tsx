@@ -57,6 +57,8 @@ export function useExportFileDialogController(actId?: number, onHide?: () => voi
             })
         } catch (error) {
 
+        }finally{
+            setIsLoading(false)
         }
     }
 

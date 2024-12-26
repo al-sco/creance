@@ -20,31 +20,21 @@ export function CreanceDialog({ form, visible }: Props) {
       <Row className=" border-1 p-2">
         <Col md={9} className="card m-2 border-1 ">
           <b className="text-orange-500">Creance</b>
-    
-              <div className="pt-4 d-flex align-items-center">
-                <Controller
-                  name="codeCreance"
-                  control={form.control}
-                  render={({ field, fieldState }) => (
-                    <InputText
-                    label="Code créance"
-                    placeholder="Saisir le code créance"
-                    id="codeCreance"
-                    {...field}
-                    onChange={(event) => {
-                      field.onChange(event);
-                      ctrl.handleChangeCreance(event);
-                    }}
-                    className="w-full"
-                    value={ctrl.creanceCode}
-                    error={fieldState.error?.message}
-                  />
-                  )}
-                />
-                <Button className="ml-2 border-none" onClick={ctrl.afficher}>Afficher</Button>
-              </div>
-            
-        
+          <span className="text-green-500 font-bold"><i>- Saisir le code de la créance et cliquez sur entré ou le bouton afficher</i></span>
+          <form onSubmit={ctrl.formik.handleSubmit}>
+            <div className="pt-4 d-flex align-items-center">
+              <InputText
+                name="creanceCode"
+                label="Code créance"
+                placeholder="Saisir le code créance"
+                id="codeCreance"
+                onChange={ctrl.formik.handleChange}
+                className="w-full"
+                value={!ctrl.formik.values.creanceCode ? ctrl.creanceCode: ctrl.formik.values.creanceCode}
+              />
+              <Button className="ml-2 border-none" type="submit" >Afficher</Button>
+            </div>
+          </form>
           <Row className="m-2">
             <Col xs={4} md={4} lg={4} sm={6}>
               <Controller
@@ -132,22 +122,22 @@ export function CreanceDialog({ form, visible }: Props) {
               />
             </Col>
             <Col xs={6} md={6} lg={6} sm={6}>
-            <Controller
+              <Controller
                 name="creanDatech"
                 control={form.control}
                 render={({ field }) => (
-              <Calendars
-                label="Date de 1ère Echt"
-                placeholder="JJ/MM/AA"
-                disabled
-                id="creanDatech"
-                {...field}
-                />
-              )}
-            />
+                  <Calendars
+                    label="Date de 1ère Echt"
+                    placeholder="JJ/MM/AA"
+                    disabled
+                    id="creanDatech"
+                    {...field}
+                  />
+                )}
+              />
             </Col>
-            </Row>
-            <Row className="g-2 algin-items-center m-2">
+          </Row>
+          <Row className="g-2 algin-items-center m-2">
             <Col xs={6} md={6} lg={6} sm={6}>
               <Controller
                 name="dateOctroi"
@@ -174,7 +164,7 @@ export function CreanceDialog({ form, visible }: Props) {
             </Col>
           </Row>
           <Row>
-          {/* <Col xs={2} md={2} lg={2} sm={2}>
+            {/* <Col xs={2} md={2} lg={2} sm={2}>
               <Controller
                 name="duree"
                 control={form.control}
@@ -190,7 +180,7 @@ export function CreanceDialog({ form, visible }: Props) {
                 render={({ field }) => (
                   <InputText
                     disabled
-                    label="code périodicité"
+                    label="Périodicité"
                     id="periodicite"
                     {...field}
                   />
@@ -204,7 +194,6 @@ export function CreanceDialog({ form, visible }: Props) {
                 render={({ field }) => (
                   <InputText
                     disabled
-                    label="Périodicité"
                     id="periodiciteLib"
                     {...field}
                   />

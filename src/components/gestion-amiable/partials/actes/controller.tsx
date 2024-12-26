@@ -23,10 +23,6 @@ export function useActeController(form: UseFormReturn<InputField, any>){
         fetchTypeActes();
     },[]);
 
-    // useEffect(()=>{
-    //     form.setValue("acteDatecrea",( new Date()).toDateString())
-    // })
-
     const getTypeActesDetails = ()=>{
         const typeCode = form.getValues().typacteCode ? form.getValues().typacteCode : typeActeCode
         try {

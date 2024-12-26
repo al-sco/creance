@@ -3,7 +3,7 @@ import { CreanceRepository } from "../../../../states/repository/creance.reposit
 import { CreanceModel } from "../../../../states/model/creance.model";
 import { useAlerts } from "../../../compound-component/Alerts/useAlerts";
 import {  UseFormReturn } from "react-hook-form";
-
+import { useFormik } from "formik"
 import { InputField } from "../controller";
 import { useGestionAmiableStores } from "../../use-gestion-amiable-stores";
 
@@ -23,6 +23,50 @@ export function useCreanceController( form: UseFormReturn<InputField, any>, visi
         }
     }
 
+    const formik = useFormik({
+        initialValues:{
+            creanceCode: ""
+        },
+        onSubmit:async(values)=>{
+            try {
+                const code = stores.codeCreance ? stores.codeCreance : values.creanceCode
+                if(!code){
+                    alerts.openErrorAlert("Veuillez saisir le champ : code créance !")
+                    return false
+                }
+                    const result =  await creanceRepository.getCreanceByCodeCreance(code ?? "");
+                    if (result) {
+                        form.setValue("debCode", result.debCode)
+                        form.setValue("debiteur", result.nomDebiteurs)
+                        form.setValue("groupeCreance", result.grpCreanCode)
+                        form.setValue("capitalInitial", result.creanCapitInit)
+                        form.setValue("DatePremiereEcheance", result.creanDatrec)
+                        form.setValue("dateOctroi", result.creanDatoctroi)
+                        form.setValue("duree", result.creanDuree)
+                        form.setValue("periodicite", result.periodCode)
+                        form.setValue("montantDebloque", result.periodCode)
+                        form.setValue("dateFinEcheance", result.creanDatfin)
+                        form.setValue("grpCreanceLib", result.grpCreanceLib)
+                        form.setValue("objCreanCode", result.objCreanCode);
+                        form.setValue("obCreanceLib", result.objCreanceLib);
+                        form.setValue("creanNbech", result.creanNbech);
+                        form.setValue("creanDatech", result.creanDatech);
+                        form.setValue("periodiciteLib", result.periodiciteLib)
+                        form.setValue("creanDejRemb", result.creanDejRemb);
+                        form.setValue("ovpCode", result.creanOp)
+                    }
+                     setCreanceCode(code);
+                    form.setValue("codeCreance", code);
+                    codeCreance.push(code)
+               
+            } catch (error) {
+                alerts.openErrorAlert(error)
+            }finally{
+                codeCreance.splice(0, codeCreance.length);
+            }
+        }
+    })
+
     useEffect(()=>{
         if(codeCreance.length > 0){
             setCreanceCode(codeCreance[0] ?? "")
@@ -35,7 +79,7 @@ export function useCreanceController( form: UseFormReturn<InputField, any>, visi
 
     useEffect(()=>{
         if(!visible){
-            codeCreance.splice(0, codeCreance.length)
+            codeCreance.splice(0, codeCreance.length);
         }
     }, [visible])
 
@@ -50,7 +94,10 @@ export function useCreanceController( form: UseFormReturn<InputField, any>, visi
     const getCreanceDetail = async () => {
         try {
             const code = stores.codeCreance ? stores.codeCreance : creanceCode
-                const result =  await creanceRepository.getCreanceByCodeCreance(code ?? "");;
+            if(!code){
+                return false
+            }
+                const result =  await creanceRepository.getCreanceByCodeCreance(code ?? "");
                 if (result) {
                     form.setValue("debCode", result.debCode)
                     form.setValue("debiteur", result.nomDebiteurs)
@@ -68,7 +115,8 @@ export function useCreanceController( form: UseFormReturn<InputField, any>, visi
                     form.setValue("creanNbech", result.creanNbech);
                     form.setValue("creanDatech", result.creanDatech);
                     form.setValue("periodiciteLib", result.periodiciteLib)
-                    form.setValue("creanDejRemb", result.creanDejRemb)
+                    form.setValue("creanDejRemb", result.creanDejRemb);
+                    form.setValue("ovpCode", result.creanOp)
                 }
                 code && setCreanceCode(code);
                 form.setValue("codeCreance", code)
@@ -78,9 +126,9 @@ export function useCreanceController( form: UseFormReturn<InputField, any>, visi
         }
     }
 
-    // useEffect(() => {
-    //     getCreanceDetail();
-    // }, [])
+    useEffect(() => {
+        visible && getCreanceDetail();
+    }, [visible])
 
 
     const afficher = async ()=>{
@@ -92,6 +140,7 @@ export function useCreanceController( form: UseFormReturn<InputField, any>, visi
         form,
         handleChangeCreance,
         creanceCode,
-        afficher
+        afficher,
+        formik
     }
 }

@@ -12,8 +12,8 @@ export class ActeRepository{
         return (await axios.post(getUrl(`/ac-acte/modifier`), command))?.data;
     }
 
-    async getActeByCode(codeCreance: string): Promise<ActeModel>{
-        return (await axios.get<ActeModel>(getUrl(`/ac-acte/${codeCreance}`)))?.data;
+    async getActeByCode(code: string): Promise<ActeModel>{
+        return (await axios.get<ActeModel>(getUrl(`/ac-acte/${code}`)))?.data;
     }
 
     async getListActes(): Promise<ActeModel[]>{

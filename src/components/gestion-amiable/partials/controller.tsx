@@ -79,6 +79,7 @@ export interface InputField {
     garphysCodeUser?: string;
     periodiciteLib?: string;
     creanDejRemb?: string;
+    notification?: string // a revoir
 }
 const schema = yup.object({});
 
@@ -172,7 +173,7 @@ export function useCreateActesController(acteCode?: string, onHide?:()=> void, v
         acteCodeGlob:"",
         garphysCodeUser:"",
         creanDejRemb:"",
-        periodiciteLib:""
+        periodiciteLib:"",
     });
 
     const form: UseFormReturn<InputField, any> = useForm<InputField>({
@@ -182,8 +183,11 @@ export function useCreateActesController(acteCode?: string, onHide?:()=> void, v
 
     const getActeDetail = async()=>{
         const code = stores.actId ? stores.actId : acteCode
+        if(!code){
+            return false;
+        }
         try {
-            const result = await acteRepository.getActeByCode(code ?? "");
+            const result = await acteRepository.getActeByCode(code);
             if(result){
                 form.reset({
                     id: result.id,
@@ -232,15 +236,15 @@ export function useCreateActesController(acteCode?: string, onHide?:()=> void, v
                 })
             }
         } catch (error) {
-            console.log(error)
         }
     }
 
     useEffect(()=>{
-        getActeDetail();
+        visible && getActeDetail();
         if(!visible){
             form.reset(initialValues)
             stores.setActId("")
+            stores.setCodeCreance("")
         }
     }, [acteCode, visible, stores.actId]);
   
@@ -272,7 +276,6 @@ export function useCreateActesController(acteCode?: string, onHide?:()=> void, v
                 await createActes(commande)
             }
         } catch (error) {
-            console.log("error", error)
            alerts.openErrorAlert(error)
         }finally{
             await fetchActes();

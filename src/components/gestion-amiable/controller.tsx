@@ -18,9 +18,7 @@ export function useListeActeController() {
             stores.setActeLoading(true);
             const result = await acteRepository.getListActes();
             result && stores.setActes(result);
-        } catch (error) {
-            console.log(error);
-        }finally{
+        } catch (error) {}finally{
             stores.setActeLoading(false);
         }
     }
@@ -32,6 +30,7 @@ export function useListeActeController() {
     useEffect(()=>{
         if(!visible){
             setActeCode("")
+            stores.setActId("")
         }
     },[acteCode])
 
@@ -40,9 +39,9 @@ export function useListeActeController() {
     }
 
     const openUpdateFormDIalog = (data?: any) => {
-        setVisible(true);
         setActeCode(data.id ?? "");
         stores.setCodeCreance(data?.codeCreande);
+        setVisible(true);
         stores.setActId(data.id ?? "")
     }
 

@@ -4,7 +4,6 @@ import { LogementForm } from "./logements";
 import { useState } from "react";
 import { Terrain } from "./terrain";
 import { Mutations } from "./mutations";
-import { Ovp } from "./ovp";
 import { GarantiePersonnels } from "./garantie-personnels";
 import { GarantieReelle } from "./garanti-reels";
 import { AutreAxiliaireJustice } from "./autre-auxiliaire-justice";
@@ -78,7 +77,7 @@ export function GestionLogements() {
               outlined={activeIndex !== 5}
               label="6"
             />
-            <Button
+            {/* <Button
               onClick={() => setAciveIndex(6)}
               className={`w-2rem h-2rem p-0 border-orange-500 border-1 rounded mr-2 ${
                 activeIndex === 6 && "bg-orange-300 rounded"
@@ -86,7 +85,7 @@ export function GestionLogements() {
               rounded
               outlined={activeIndex !== 6}
               label="7"
-            />
+            /> */}
           </div>
         }
       >
@@ -139,7 +138,7 @@ export function GestionLogements() {
               <Mutations />
             </p>
           </TabPanel>
-          <TabPanel
+          {/* <TabPanel
             header={
               <span
                 className={`${
@@ -154,12 +153,12 @@ export function GestionLogements() {
             <p className="m-0">
               <Ovp />
             </p>
-          </TabPanel>
+          </TabPanel> */}
           <TabPanel
             header={
               <span
                 className={`${
-                  activeIndex === 4 && "border-bottom-3 border-orange-500"
+                  activeIndex === 3 && "border-bottom-3 border-orange-500"
                 } pb-1`}
                 onClick={() => stores.setAccordionLib("GARANTIE PERSONNELLE")}
               >
@@ -175,7 +174,7 @@ export function GestionLogements() {
             header={
               <span
                 className={`${
-                  activeIndex === 5 && "border-bottom-3 border-orange-500"
+                  activeIndex === 4 && "border-bottom-3 border-orange-500"
                 } pb-1`}
                 onClick={() => stores.setAccordionLib("GARRANITE REEL")}
               >
@@ -191,7 +190,7 @@ export function GestionLogements() {
             header={
               <span
                 className={`${
-                  activeIndex === 6 && "border-bottom-3 border-orange-500"
+                  activeIndex === 5 && "border-bottom-3 border-orange-500"
                 } pb-1`}
                 onClick={() => stores.setAccordionLib("AUXILIAIRE DE JUSTICE")}
               >
