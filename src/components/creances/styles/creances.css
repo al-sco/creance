@@ -1,0 +1,410 @@
+/* ================ Styles Généraux ================ */
+.creance-container {
+  padding: 1rem;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: white;
+  overflow-y: auto;
+  height: calc(100vh - 120px);
+}
+
+.main-title {
+  color: #f97316;
+  font-size: 1.8rem;
+  margin: 0 0 1rem 0;
+  padding-bottom: 0.5rem;
+  border-bottom: 3px solid #f97316;
+  width: 100%;
+  text-align: left;
+  position: sticky;
+  top: 0;
+  background: white;
+  z-index: 1;
+}
+
+.main-sub-separator {
+  border-top: 2px solid #f97316;
+  margin: 1.5rem 0;
+}
+
+/* ================ Formulaire & Grille ================ */
+.form-grid {
+  padding: 1rem;
+  display: grid;
+  gap: 0.8rem;
+  flex: 1;
+  padding-bottom: 4rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.form-row.merged {
+  border-bottom: none !important;
+  margin-bottom: 0;
+}
+
+.form-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  width: 140px;
+  text-align: right;
+  font-weight: 600;
+  color: #2d3748;
+}
+
+.input-group {
+  display: flex;
+  gap: 0.5rem;
+  flex: 1;
+}
+
+/* ================ Éléments de Formulaire ================ */
+.p-inputtext,
+.p-inputnumber,
+.p-dropdown,
+.p-calendar {
+  padding: 0.4rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.code { width: 80px; }
+.name { width: 120px; }
+.currency { width: 150px; }
+.percentage { width: 100px; }
+.date { width: 160px; }
+.number { width: 100px; }
+.dropdown { width: 180px; }
+.text { width: 150px; }
+
+/* ================ Onglets Personnalisés ================ */
+.custom-tabs {
+  margin-top: 1.5rem;
+}
+
+.tab-header {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.tab-btn {
+  padding: 0.5rem 1.5rem;
+  border: none;
+  background: #f3f4f6;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+
+.tab-btn.active {
+  background: #f97316;
+  color: white;
+}
+
+/* ================ Sous-sections Encadrées ================ */
+.subtitle-box {
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  margin: 1rem 0;
+}
+
+.subtitle-header {
+  background: #f8fcf9;
+  padding: 0.8rem 1rem;
+  border-bottom: 2px solid #e2e8f0;
+  color: #2d3748;
+  font-weight: 600;
+}
+
+.subtitle-content {
+  padding: 1rem;
+}
+
+/* ================ Boutons ================ */
+.save-button {
+  background: #f97316;
+  color: white;
+  padding: 0.6rem 1.8rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background 0.2s ease;
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.save-button:hover {
+  background: #e56712;
+}
+
+.p-button-success {
+  background: #22c55e !important;
+  border: 1px solid #16a34a !important;
+}
+
+.p-button-success:hover {
+  background: #16a34a !important;
+}
+
+/* ================ Popups ================ */
+.p-dialog-mask {
+  background-color: rgba(0, 0, 0, 0.4) !important;
+}
+
+.p-dialog {
+  border-radius: 8px;
+}
+
+.p-dialog .form-group label {
+  min-width: 180px !important;
+  font-weight: 500;
+  color: #4a5568;
+}
+
+.p-dialog .form-row:not(:last-child) {
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 1.5rem;
+}
+
+/* ================ Responsive ================ */
+@media (max-width: 768px) {
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+  
+  .form-group {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+  }
+  
+  .form-group label {
+    width: 100%;
+    text-align: left;
+  }
+  
+  .input-group {
+    width: 100%;
+  }
+  
+  .code,
+  .name,
+  .currency,
+  .percentage,
+  .date,
+  .number,
+  .dropdown,
+  .text {
+    width: 100%;
+  }
+  
+  .save-button {
+    width: 100%;
+    position: static;
+    margin-top: 1rem;
+  }
+}
+
+/* ================ Sous-écrans Créance ================ */
+
+
+/* Conteneur des sous-écrans */
+.sub-screen-container {
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  margin: 1rem 0;
+  padding: 1rem;
+}
+
+/* Styles des onglets */
+.p-tabview-nav {
+  background: #1a723a !important; /* Vert par défaut */
+  border-radius: 6px;
+}
+
+.p-tabview-nav-link {
+  color: white !important;
+  transition: all 0.3s;
+}
+
+.p-tabview-nav-link:hover {
+  background: #1a723a !important; /* Vert plus foncé au survol */
+}
+
+.p-highlight .p-tabview-nav-link {
+  background: #f97316 !important; /* Orange pour l'onglet actif */
+}
+
+/* Bouton "Détail Garanties Pers." */
+.custom-detail-button {
+  background: #1a723a !important; 
+  color: white !important;
+  border: none !important;
+  padding: 0.6rem 1.8rem;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  margin-right: auto; /* Alignement à gauche */
+}
+
+
+/* Encadrement principal */
+.main-content-box {
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-top: 1rem;
+}
+
+/* Onglets verts */
+.green-tab {
+  background: #22c55e !important;
+  color: white !important;
+  border-radius: 4px !important;
+}
+
+.green-tab.active {
+  background: #f97316 !important;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Section améliorée */
+.enhanced-section {
+  padding: 1rem;
+  background: #f8fafc;
+  border-radius: 6px;
+  margin-bottom: 1.5rem;
+}
+
+/* Transition douce pour les changements d'onglets */
+.tab-btn {
+  transition: all 0.3s ease-in-out !important;
+}
+
+/* Feedback visuel pour la catégorie sélectionnée */
+.dropdown-toggle::after {
+  margin-left: 0.5rem;
+  transition: transform 0.2s;
+}
+
+.show .dropdown-toggle::after {
+  transform: rotate(180deg);
+}
+
+/* Espacement amélioré */
+.form-grid {
+  display: grid;
+  gap: 1.5rem; /* Augmentation de l'espacement */
+  padding: 1rem 0;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem; /* Espacement entre les colonnes */
+}
+
+.form-group {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem; /* Espacement entre label et input */
+}
+
+/* Taille réduite des champs de libellé */
+.libelle { 
+  width: 180px; /* Réduction de la largeur */
+}
+
+/* Alignement des labels */
+.form-group label {
+  min-width: 120px;
+  text-align: right;
+  margin-right: 0.5rem; /* Espacement supplémentaire */
+}
+
+/* Ajustement des groupes d'inputs */
+.input-group {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.input-group .p-inputtext {
+  flex: 1;
+  max-width: 180px; /* Limite la largeur maximale */
+}
+
+/* Espacement supplémentaire pour les sections */
+.main-content-box {
+  padding: 2rem; /* Plus d'espace autour du contenu */
+}
+
+/* Conteneur principal */
+.piece-container {
+  padding: 1rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  margin-top: 1rem;
+}
+
+/* Modification clé : Alignement horizontal */
+.piece-row .form-group {
+  display: flex;
+  align-items: center;    /* Alignement vertical */
+  gap: 0.8rem;           /* Espace entre label et input */
+  margin-bottom: 1rem;
+}
+
+.piece-row .form-group label {
+  min-width: 100px;      /* Largeur fixe pour les labels */
+  text-align: right;     /* Alignement à droite */
+  margin: 0;
+}
+
+/* Ajustement des inputs */
+.piece-row .p-dropdown,
+.piece-row .p-inputtext {
+  flex: 1;               /* Prend l'espace restant */
+  max-width: 200px;      /* Limite la largeur max */
+}
+
+/* Bouton Ajouter amélioré */
+.add-button {
+  border-radius: 6px;
+  padding: 0.6rem 1.2rem !important;
+  background: #22c55e !important;
+  transition: all 0.2s;
+  align-self: center;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .piece-row .form-group {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .piece-row .form-group label {
+    text-align: left;
+    min-width: auto;
+  }
+  
+  .p-inputtext, .p-dropdown {
+    width: 100% !important;
+    max-width: none !important;
+  }
+}

@@ -68,8 +68,8 @@ import acDebiteurProvider from "../../../../states/signals/creances_providers/Ac
 import PaiementMainContent from "../../../../components/paiement/paiement_main_content";
 import { ecranFraisPaiementData, especePaiementData, factureEspPaiementData, fraisCreancePaiementData, fraisFacturePaiementData, virementPaiementData } from "../paiement/main-paiement.data";
 import { GestionAmiable } from "../../../../components/gestion-amiable";
-
-
+import { GestionCreanceForm } from "../../../../components/creances/components/creance/GestionCreanceForm";
+import { GestionDebiteurForm } from "../../../../components/creances/components/debiteur/GestionDebiteurForm";
 export type SubMenuType = {
   name: string;
   nameHeader?: string
@@ -1975,6 +1975,15 @@ const menuItemsData: Array<MenuItemType> = [
       {
         name:"Gestion amiable",
         render: () => <GestionAmiable  />
+      },
+     
+      {
+        name: "Gestion des Créances",
+        render: () => <GestionCreanceForm />
+      },
+      {
+        name: "Gestion des Debiteurs",
+        render: () => <GestionDebiteurForm />
       },
       // {
       //   name:"Frais de Mutation", 
