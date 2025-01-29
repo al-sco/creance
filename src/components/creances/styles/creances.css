@@ -197,6 +197,8 @@
     width: 100%;
     text-align: left;
   }
+
+  
   
   .input-group {
     width: 100%;
@@ -407,4 +409,76 @@
     width: 100% !important;
     max-width: none !important;
   }
+}
+
+/* Disposition en trois colonnes */
+.three-column-layout {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  padding: 1rem 0;
+}
+
+.form-column {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.blue-label {
+  width: 120px;
+  color: #1e40af;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.full-width {
+  width: 100% !important;
+}
+
+.calendar-group .p-calendar {
+  width: 100%;
+}
+
+.disabled .p-inputtext {
+  background-color: #f3f4f6 !important;
+  color: #6b7280 !important;
+}
+
+.red-text input {
+  color: #dc2626 !important;
+  font-weight: bold;
+}
+
+.form-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+
+
+.p-button-secondary.select-button {
+  width: 2.5rem !important;
+  height: 2.3rem !important;
+  padding: 0 !important;
+  border-radius: 4px !important;
+  background: #f3f4f6 !important;
+  border: 1px solid #e2e8f0 !important;
+  margin-left: -1px !important;
+}
+
+.p-button-secondary.select-button:hover {
+  background: #e5e7eb !important;
+  border-color: #cbd5e1 !important;
+}
+
+.p-button-secondary.select-button .pi {
+  font-size: 0.8rem;
+  color: #4b5563;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
 }

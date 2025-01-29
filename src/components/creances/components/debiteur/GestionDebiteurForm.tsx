@@ -6,32 +6,50 @@ import { PhysiqueSection } from "./SubSections/PhysiqueSection";
 import { DomiciliationSection } from "./SubSections/DomiciliationSection";
 import { SensibiliteSection } from "./SubSections/SensibiliteSection";
 import "../../styles/creances.css";
+import { Column } from "primereact/column";
+import { DataTable } from "primereact/datatable";
+import { Dialog } from "primereact/dialog";
 
 export function GestionDebiteurForm() {
-  const [type, setType] = useState<{ code: string; libelle: string } | null>(null);
-  const [garPhys, setGarPhys] = useState<{ code: string; libelle: string }>({ code: '', libelle: '' });
-  const [activeTab, setActiveTab] = useState<'physique' | 'domiciliation' | 'Morale'>('physique');
-
   const typeOptions = [
     { code: 'P', libelle: 'Physique' },
     { code: 'M', libelle: 'Morale' }
   ];
 
-  useEffect(() => {
-    if (type?.code === 'P') setActiveTab('physique');
-    if (type?.code === 'M') setActiveTab('Morale');
-  }, [type]);
+  // États
+  const [type, setType] = useState<{ code: string; libelle: string } | null>(null);
+  const [garPhys, setGarPhys] = useState<{ code: string; libelle: string }>({ code: '', libelle: '' });
+  const [activeTab, setActiveTab] = useState<'physique' | 'domiciliation' | 'Morale'>('physique');
+  const [visible, setVisible] = useState<boolean>(false);
+  const [categories, setCategories] = useState<Array<{ code: string; libelle: string }>>([
+    { code: 'CAT1', libelle: 'Catégorie 1' },
+    { code: 'CAT2', libelle: 'Catégorie 2' },
+  ]);
+  const [selectedCategories, setSelectedCategories] = useState<Array<{ code: string; libelle: string }>>([]);
 
-  const handleGarPhysSelection = () => {
-    console.log('Sélectionner Gar.Phys');
+  // Gestionnaires d'événements
+  const handleCategorySelect = (e: { value: { code: string; libelle: string } }) => {
+    setSelectedCategories([e.value]);
+    setGarPhys(e.value);
+  };
+  const [globalFilter, setGlobalFilter] = useState('');
+
+  const handleValidate = () => {
+    setVisible(false);
+    if (selectedCategories.length > 0) {
+      setGarPhys(selectedCategories[0]);
+    }
   };
 
   return (
     <div className="creance-container">
+      
       <div className="main-content-box">
+        
         <h1 className="main-title">Débiteur</h1>
 
         <div className="form-row">
+          
           <div className="form-group">
             <label>Catégorie :</label>
             <div className="input-group">
@@ -39,23 +57,54 @@ export function GestionDebiteurForm() {
                 value={garPhys.code}
                 placeholder="Code"
                 className="code"
+                readOnly
               />
               <InputText
                 value={garPhys.libelle}
                 placeholder="Libellé"
                 className="libelle"
+                readOnly
               />
-              <Button
-                icon="pi pi-search"
-                className="p-button-secondary"
-                onClick={handleGarPhysSelection}
-              />
+           <Button 
+  icon="pi pi-chevron-circle-down"
+  className="p-button-secondary select-button"
+  aria-label="Sélectionner"
+  onClick={() => setVisible(true)}
+/>
+
+<Dialog 
+  header="Sélection catégorie" 
+  visible={visible} 
+  className="catdeb-dialog"
+  onHide={() => setVisible(false)}
+>
+  <div className="p-input-icon-left mb-3">
+    <i className="pi pi-search" />
+    <InputText
+      value={globalFilter}
+      onChange={(e) => setGlobalFilter(e.target.value)}
+      placeholder="Rechercher..."
+      className="w-full"
+    />
+  </div>
+  <DataTable 
+    value={categories}
+    selection={selectedCategories[0]}
+    onSelectionChange={(e) => {
+      handleCategorySelect(e);
+      setVisible(false); // Fermeture automatique après sélection
+    }}
+    selectionMode="single"
+    globalFilter={globalFilter}
+    emptyMessage="Aucune catégorie trouvée"
+  >
+    <Column selectionMode="single" style={{width: '3rem'}} />
+    <Column field="code" header="Code" style={{width: '40%'}} />
+    <Column field="libelle" header="Libellé" />
+  </DataTable>
+</Dialog>
             </div>
           </div>
-        </div>
-
-        {/* Section Type */}
-        <div className="form-row">
           <div className="form-group">
             <label>Type:</label>
             <div className="input-group">
@@ -67,16 +116,12 @@ export function GestionDebiteurForm() {
                 onChange={(e) => setType(e.value)}
                 className="dropdown"
               />
-              <InputText
-                value={type?.libelle || ''}
-                placeholder="Libellé"
-                className="libelle"
-                disabled
-              />
             </div>
           </div>
         </div>
-
+      
+         
+<br />
         <div className="form-row">
           <div className="form-group">
             <label>Propriétaire:</label>
@@ -94,14 +139,12 @@ export function GestionDebiteurForm() {
               <Button
                 icon="pi pi-search"
                 className="p-button-secondary"
-                onClick={handleGarPhysSelection}
+                onClick={() => setVisible(true)}
               />
             </div>
           </div>
-        </div>
 
-        {/* Section Gar.Phys */}
-        <div className="form-row">
+
           <div className="form-group">
             <label>Gar.Phys :</label>
             <div className="input-group">
@@ -118,11 +161,13 @@ export function GestionDebiteurForm() {
               <Button
                 icon="pi pi-search"
                 className="p-button-secondary"
-                onClick={handleGarPhysSelection}
+                onClick={() => setVisible(true)}
               />
             </div>
           </div>
+
         </div>
+
 
         {/* Section Coordonnées */}
        {/* Section Coordonnées */}
