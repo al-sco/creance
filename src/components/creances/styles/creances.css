@@ -475,10 +475,21 @@
 
 .p-button-secondary.select-button .pi {
   font-size: 0.8rem;
-  color: #4b5563;
+  color: #4b6357;
 }
 
 .input-group {
   display: flex;
   align-items: center;
+}
+
+
+.p-button-secondary.select-button .pi {
+  font-size: 1rem !important;
+  color: #4b5563 !important;
+}
+
+/* Ajout d'un effet au survol */
+.p-button-secondary.select-button:hover .pi {
+  color: #1f2937 !important;
 }
