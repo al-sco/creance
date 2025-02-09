@@ -1,32 +1,87 @@
-import { Calendar } from "primereact/calendar";
-import { InputText } from "primereact/inputtext";
+import { useEffect } from 'react';
+import { InputText } from 'primereact/inputtext';
+import { Calendar } from 'primereact/calendar';
+import { Dropdown } from 'primereact/dropdown';
+import { useDebiteurStore } from '../../../stores/useDebiteurStore';
+import { Domiciliation } from '../../../model/debiteur.model';
 
 export function DomiciliationSection() {
-    return (
-      <div className="subtitle-content">
-        <div className="form-grid">
-          <div className="form-row">
-            <div className="form-group">
-              <label>Adresse complète :</label>
-              <InputText placeholder="Ex: 12 Rue de la Paix" />
-            </div>
-            
-            <div className="form-group">
-              <label>Code postal :</label>
-              <InputText placeholder="75000" />
-            </div>
+  const { currentDomiciliation, updateCurrentDomiciliation } = useDebiteurStore();
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    updateCurrentDomiciliation({ [name]: value });
+  };
+
+  const handleDateChange = (value: Date | null, fieldName: string) => {
+    updateCurrentDomiciliation({ [fieldName]: value });
+  };
+
+  return (
+    <div className="sub-screen">
+      <div className="form-grid">
+        <div className="form-row">
+          <div className="form-group">
+            <label>Banque :</label>
+            <InputText
+              name="banqueCode"
+              value={currentDomiciliation?.banqueCode || ''}
+              onChange={handleInputChange}
+              className="p-inputtext"
+            />
           </div>
-  
-          <div className="form-row">
-            <div className="form-group">
-              <label>Date d'emménagement :</label>
-              <Calendar 
-                dateFormat="dd/mm/yy" 
-                placeholder="jj/mm/aaaa"
-              />
-            </div>
+          <div className="form-group">
+            <label>Agence :</label>
+            <InputText
+              name="agenceCode"
+              value={currentDomiciliation?.agenceCode || ''}
+              onChange={handleInputChange}
+              className="p-inputtext"
+            />
+          </div>
+        </div>
+
+        <div className="form-row">
+          <div className="form-group">
+            <label>Numéro de compte :</label>
+            <InputText
+              name="domNumcompte"
+              value={currentDomiciliation?.domNumcompte || ''}
+              onChange={handleInputChange}
+              className="p-inputtext"
+            />
+          </div>
+          <div className="form-group">
+            <label>Date d'ouverture :</label>
+            <Calendar
+              value={currentDomiciliation?.domDateouv ? new Date(currentDomiciliation.domDateouv) : null}
+              onChange={(e) => handleDateChange(e.value as Date, 'domDateouv')}
+              dateFormat="dd/mm/yy"
+            />
+          </div>
+        </div>
+
+        <div className="form-row">
+          <div className="form-group">
+            <label>Type de compte :</label>
+            <InputText
+              name="domTypecompte"
+              value={currentDomiciliation?.domTypecompte || ''}
+              onChange={handleInputChange}
+              className="p-inputtext"
+            />
+          </div>
+          <div className="form-group">
+            <label>Statut du compte :</label>
+            <InputText
+              name="domStatutcompte"
+              value={currentDomiciliation?.domStatutcompte || ''}
+              onChange={handleInputChange}
+              className="p-inputtext"
+            />
           </div>
         </div>
       </div>
-    );
-  }
+    </div>
+  );
+}

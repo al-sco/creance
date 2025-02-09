@@ -1,0 +1,219 @@
+/* Conteneur spécifique au formulaire Débiteur */
+.debiteur-form {
+  /* Vous pouvez reprendre ici certains aspects de .form-grid si besoin */
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  /* Ajoutez d'autres styles propres au formulaire Débiteur si nécessaire */
+}
+
+/* Élément regroupant une ligne de champs afin de pouvoir les repositionner */
+.debiteur-form .debiteur-form-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;  /* Espace entre les éléments; modifiable */
+  margin-bottom: 0.07rem; /* Même espacement que dans creances.css par exemple */
+}
+
+/* Style des groupes de champs */
+.debiteur-form .debiteur-form-group {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+/* Style des labels dans le formulaire Débiteur */
+.debiteur-form .debiteur-form-group label {
+  min-width: 120px;
+  text-align: right;
+  margin-right: 0.5rem;
+  font-weight: 600;
+  color: #2d3748;
+}
+
+/* Style commun aux champs de saisie, basé sur .p-inputtext dans creances.css */
+.debiteur-form .debiteur-input {
+  padding: 0.4rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+/* Styles spécifiques aux champs de catégorie */
+.debiteur-category-code {
+  width: 60px; /* reprise de .code */
+}
+
+.debiteur-category-libelle {
+  width: 180px; /* reprise de .libelle */
+}
+
+/* Exemple de classe pour des champs en pleine largeur */
+.debiteur-full-width {
+  width: 100%;
+}
+
+/* Classes pour contrôler individuellement le positionnement 
+   Vous pourrez ajuster margin, padding ou même utiliser flex order pour repositionner chaque champ */
+.debiteur-field-container {
+  margin: 0.5rem;
+  padding: 0.2rem;
+}
+
+/* Exemples d'aide au positionnement individuel */
+.debiteur-field-left {
+  order: 1;
+}
+.debiteur-field-center {
+  order: 2;
+}
+.debiteur-field-right {
+  order: 3;
+}
+
+
+
+
+.debiteur-form  .debiteur-form-row.decalEmail{
+    margin-left: 50%; /* Ajustez la valeur selon votre besoin */
+  }
+
+
+
+
+/* STRUCTURES DES CHAMPS DEBITEUR */
+
+
+  /* Styles spécifiques aux champs de catégorie */
+.debiteur-category-code {
+  width: 60px;
+  background-color: #f8f9fa; /* Fond légèrement grisé */
+  border: 2px solid #cbd5e0; /* Bordure plus épaisse */
+  font-weight: 500; /* Texte un peu plus gras */
+}
+
+.debiteur-category-libelle {
+  width: 180px;
+  background-color: #f8f9fa;
+  border: 2px solid #cbd5e0;
+  font-weight: 500;
+}
+
+.debiteur-adresse {
+  width: 100%;                    /* Prend toute la largeur disponible */
+  background-color: #f8f9fa;      /* Couleur de fond de l'input */
+  border: 2px solid #cbd5e0;      /* Épaisseur et couleur de la bordure */
+  font-weight: 500;               /* Épaisseur du texte */
+  margin-left: 5px;              /* Déplace l'input vers la droite */
+  margin-right: 20px;             /* Espace à droite de l'input */
+}
+
+/* Style pour le champ Email */
+.debiteur-email {
+  width: 30%;                     /* Prend la moitié de la largeur disponible */
+  background-color: #f8f9fa;      /* Couleur de fond différente */
+  border: 2px solid #cbd5e0;      /* Bordure plus foncée */
+  font-weight: 500; 
+  margin-left: 5px;              /* Déplace l'input vers la droite */
+  margin-right: 20px;               /* Épaisseur du texte */
+}
+
+/* Pour déplacer la ligne entière d'Email */
+.debiteur-form .debiteur-form-row.decalEmail {
+  margin-left: 0.5%;               /* Déplace moins vers la droite que l'email */
+  margin-top: -25px;               /* Moins d'espace en haut */
+  margin-bottom: 10px;            /* Ajoute de l'espace en bas */
+}
+
+/* Pour déplacer la ligne entière d'Adresse */
+.debiteur-form .debiteur-form-row.decal-adr {
+  margin-left: 0.5%;               /* Déplace moins vers la droite que l'email */
+  margin-top: -5px;               /* Moins d'espace en haut */
+  margin-bottom: 10px;            /* Moins d'espace en bas */
+}
+
+/* Pour changer la couleur au survol */
+.debiteur-adresse:hover {
+  background-color: #fff;         /* Fond blanc au survol */
+  border-color: #2684ff;          /* Bordure bleue au survol */
+}
+
+.debiteur-email:hover {
+  background-color: #fff;         /* Fond blanc au survol */
+  border-color: #2684ff;          /* Bordure bleue au survol */
+}
+
+.debiteur-form .debiteur-form-row.decalCel{
+  margin-left: 0.3%;               /* Déplace toute la ligne vers la droite */
+  margin-top: -9px;               /* Ajoute de l'espace en haut */
+  margin-bottom: 1px;            /* Ajoute de l'espace en bas */
+}
+
+.debiteur-cel{
+  width: 100%;                     /* Prend la moitié de la largeur disponible */
+  background-color: #f8f9fa;      /* Couleur de fond différente */
+  border: 2px solid #cbd5e0;      /* Bordure plus foncée */
+  font-weight: 500; 
+  margin-left: 5px;              /* Déplace l'input vers la droite */
+  margin-right: 20px;               /* Épaisseur du texte */
+}
+
+.debiteur-cel:hover {
+  background-color: #fff;         /* Fond blanc au survol */
+  border-color: #2684ff;          /* Bordure bleue au survol */
+}
+
+.debiteur-form .debiteur-form-row.decalTel{
+  margin-left: 100%;               /* Déplace toute la ligne vers la droite */
+  margin-top: 1px;               /* Ajoute de l'espace en haut */
+  margin-bottom: 1px;            /* Ajoute de l'espace en bas */
+}
+
+.debiteur-tel{
+  width: 100%;                    /* Prend toute la largeur disponible */
+  background-color: #f8f9fa;      /* Couleur de fond de l'input */
+  border: 2px solid #cbd5e0;      /* Épaisseur et couleur de la bordure */
+  font-weight: 500;               /* Épaisseur du texte */
+  margin-left: 5px;              /* Déplace l'input vers la droite */
+  margin-right: 20px;               /* Épaisseur du texte */
+}
+
+.debiteur-tel:hover {
+  background-color: #fff;         /* Fond blanc au survol */
+  border-color: #2684ff;          /* Bordure bleue au survol */
+}
+
+.debiteur-form .debiteur-form-row.decalFax{
+  margin-left: 0.3%;               /* Déplace toute la ligne vers la droite */
+  margin-top: 1px;               /* Ajoute de l'espace en haut */
+  margin-bottom: 1px;            /* Ajoute de l'espace en bas */
+}
+
+.debiteur-fax{
+  width: 100%;                     /* Prend la moitié de la largeur disponible */
+  background-color: #f8f9fa;      /* Couleur de fond différente */
+  border: 2px solid #cbd5e0;      /* Bordure plus foncée */
+  font-weight: 500; 
+  margin-left: 5px;              /* Déplace l'input vers la droite */
+  margin-right: 20px;               /* Épaisseur du texte */
+}
+
+.debiteur-fax:hover {
+  background-color: #fff;         /* Fond blanc au survol */
+  border-color: #2684ff;          /* Bordure bleue au survol */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

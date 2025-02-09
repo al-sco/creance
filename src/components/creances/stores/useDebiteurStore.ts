@@ -23,6 +23,10 @@ interface DebiteurStore {
         moral?: DebiteurMoral;
         domiciliation?: Domiciliation;
     }) => Promise<void>;
+    updateCurrentPhysique: (data: Partial<DebiteurPhysique>) => void;
+    updateCurrentMoral: (data: Partial<DebiteurMoral>) => void;
+    updateCurrentDomiciliation: (data: Partial<Domiciliation>) => void;
+    resetStore: () => void;
 }
 
 export const useDebiteurStore = create<DebiteurStore>((set) => {
@@ -69,12 +73,88 @@ export const useDebiteurStore = create<DebiteurStore>((set) => {
                 set({ loading: true, error: null });
                 const result = await repository.saveDebiteurComplet(data);
                 set({ currentDebiteur: result });
+                return result;
             } catch (error) {
-                set({ error: "Erreur lors de l'enregistrement" });
+                set({ error: "Erreur lors de l'enregistrement du débiteur" });
                 throw error;
             } finally {
                 set({ loading: false });
             }
+        },
+
+        updateCurrentPhysique: (data: Partial<DebiteurPhysique>) => {
+            set((state) => {
+                const currentPhysique: DebiteurPhysique = state.currentPhysique ?? {
+                    debCode: 0,
+                    quartCode: '',
+                    profesCode: '',
+                    natCode: '',
+                    empCode: '',
+                    statsalCode: '',
+                    fonctCode: '',
+                    debNom: '',
+                    debPren: '',
+                    debDatnaiss: null, // ou '' si vous préférez une chaîne
+                    debLieunaiss: '',
+                    debDatdec: null,
+                    teldom: '',
+                    debNatpident: '',
+                    debNumpident: '',
+                    debDatetpident: null,
+                    debLieuetpident: '',
+                    debSitmatri: '',
+                    debRue: '',
+                    debNmere: '',
+                    debPrmere: '',
+                    debNpere: '',
+                    debPrpere: '',
+                    debNbrEnf: '',
+                    debSexe: '',
+                    debMatric: '',
+                    civCode: '',
+                    debCjNom: '',
+                    debCjPren: '',
+                    debCjDatnaiss: null,
+                    debCjTel: '',
+                    debCjAdr: '',
+                    debCjNumpident: '',
+                };
+        
+                return {
+                    ...state,
+                    currentPhysique: { ...currentPhysique, ...data },
+                };
+            });
+        },
+
+        updateCurrentMoral: (data) => {
+            set((state) => {
+                const currentMoral = state.currentMoral || {} as DebiteurMoral;
+                return {
+                    ...state,
+                    currentMoral: { ...currentMoral, ...data as DebiteurMoral }
+                };
+            });
+        },
+
+        updateCurrentDomiciliation: (data) => {
+            set((state) => {
+                const currentDomiciliation = state.currentDomiciliation || {} as Domiciliation;
+                return {
+                    ...state,
+                    currentDomiciliation: { ...currentDomiciliation, ...data as Domiciliation }
+                };
+            });
+        },
+
+        resetStore: () => {
+            set({
+                currentDebiteur: null,
+                currentPhysique: null,
+                currentMoral: null,
+                currentDomiciliation: null,
+                error: null
+            });
         }
     };
 });

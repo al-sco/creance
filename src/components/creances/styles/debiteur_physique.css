@@ -1,0 +1,294 @@
+/* Conteneur spécifique au formulaire Physique */
+.physique-form {
+    display: flex;                          /* Organise les éléments en colonne */
+    flex-direction: column;                 /* Les éléments s'empilent verticalement */
+    gap: 1rem;                              /* Espace entre les éléments */
+  }
+  
+  /* Élément regroupant une ligne de champs */
+  .physique-form .physique-form-row {
+    display: flex;                          /* Organisation en ligne */
+    align-items: center;                    /* Alignement vertical centré */
+    gap: 1rem;                              /* Espace entre les éléments de la ligne */
+    margin-bottom: 0.7rem;                  /* Marge en bas de la ligne */
+  }
+
+  .physique-grid {
+    display: flex;
+    gap: 1rem;       /* Espace entre les colonnes */
+  }
+
+  /* Groupe de champs */
+  .physique-form .physique-form-group {
+    display: flex;                          /* Permet d'aligner label et input sur une ligne */
+    align-items: center;                    /* Alignement vertical des éléments */
+    gap: 0.5rem;                            /* Espace entre le label et l'input */
+  }
+  
+  /* Style des labels (comme les textes descriptifs devant chaque champ) */
+  .physique-form .physique-form-group label {
+    min-width: 120px;                       /* Largeur minimale pour aligner les labels */
+    text-align: right;                      /* Texte aligné à droite pour les labels */
+    margin-right: 0.5rem;                     /* Espace entre label et champ */
+    font-weight: 600;                       /* Texte en gras */
+    color: #2d3748;                         /* Couleur du texte */
+  }
+  
+  /* Style commun aux champs de saisie */
+  .physique-form .physique-input {
+    padding: 0.4rem;                        /* Espace intérieur de l'input */
+    border: 1px solid #e2e8f0;               /* Bordure grise claire */
+    border-radius: 4px;                     /* Coins arrondis */
+    font-size: 0.9rem;                      /* Taille du texte */
+  }
+  
+  /* Exemple de style spécifique pour le champ Civilité (ou similaire) */
+  .physique-form .physique-civilite-input {
+    background-color: #f8f9fa;              /* Fond légèrement grisé */
+    border: 2px solid #cbd5e0;              /* Bordure plus épaisse */
+    font-weight: 500;                       /* Texte un peu plus gras */
+  }
+  
+  /* Effet au survol pour tous les champs de saisie */
+  .physique-form .physique-input:hover {
+    border-color: #2684ff;                  /* Changement de couleur de bordure au survol */
+    background-color: #fff;                 /* Fond blanc au survol */
+  }
+
+
+  /* Specifique des champs */
+
+  .physique-form .form-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;           /* Espace entre les éléments */
+    margin-bottom: 0.07rem; /* Même marge qu'en debiteur.css */
+  }
+  
+  /* Groupe de champs (label + input) */
+  .physique-form .form-group {
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+  }
+  
+  /* Style des labels identique à debiteur.css */
+  .physique-form .form-group label {
+    min-width: 120px;      /* Largeur minimale pour aligner tous les labels */
+    text-align: right;
+    margin-right: 0.5rem;
+    font-weight: 600;
+    color: #2d3748;
+  }
+  
+  /* Style commun aux champs de saisie identique à debiteur.css */
+  .physique-form .physique-input {
+    padding: 0.4rem;              /* Même padding que debiteur-input */
+    border: 1px solid #e2e8f0;     /* Bordure grise claire */
+    border-radius: 4px;           /* Coins arrondis */
+    font-size: 0.9rem;
+  }
+  
+  /* (Optionnel) Style survol identique */
+  .physique-form .physique-input:hover {
+    background-color: #fff;
+    border-color: #2684ff;
+  }
+  
+  /* Pour les boutons de recherche dans les groupes d'inputs */
+  .physique-form .input-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: nowrap;
+  }
+  .input-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: nowrap;
+  }
+
+
+
+  
+  .physique-civilite-code {
+    width: 60px;             /* même largeur que pour Catégorie */
+    background-color: #f8f9fa;
+    border: 2px solid #cbd5e0;
+    border-radius: 4px;
+    padding: 0.4rem;
+    flex-shrink: 0; 
+  }
+  
+  .physique-civilite-libelle {
+    width: 180px;
+    background-color: #f8f9fa;
+    border: 2px solid #cbd5e0;
+    border-radius: 4px;
+    padding: 0.4rem;
+    flex-shrink: 0; 
+  }
+
+  .debiteur-input.nom
+{
+    margin-bottom: -1px;
+    margin-top: 4px;
+    background-color: #f8f9fa;      /* Couleur de fond différente */
+    border: 2px solid #cdd5dd; 
+}
+
+.debiteur-input.prenomPERE{
+  margin-bottom: -1px;
+  margin-top: 10px;
+  background-color: #f8f9fa;      /* Couleur de fond différente */
+  border: 2px solid #cdd5dd; 
+}
+
+.decalageGeneral{
+  margin-left: 10%;
+}
+
+
+.ps-form-group.test{
+  margin-right: 50%;
+}
+
+.ps-form-row.decalSituat{
+  margin-left: 50px;
+}
+
+
+.ps-form-row.decalNbEnf{
+  margin-left: 79px;
+}
+
+.ps-form-row.decalNmConj{
+  margin-left: 100px;
+}
+
+.ps-form-row.decalPieceConj{
+margin-left: 30px;
+}
+
+
+ .debiteur-input.piece-conjoint{
+  margin-bottom: -1px;
+  margin-top: 11px;
+  
+  background-color: #f8f9fa;      /* Couleur de fond différente */
+  border: 2px solid #cdd5dd; 
+}
+
+.debiteur-input.lieuEtabli
+{
+    margin-bottom: -1px;
+    margin-top: 4px;
+    background-color: #f8f9fa;      /* Couleur de fond différente */
+    border: 2px solid #cdd5dd; 
+}
+.debiteur-input.date{
+    background-color: #f8f9fa;      /* Couleur de fond différente */
+    border: 2px solid #cdd5dd; 
+}
+.form-row.decalDateNaiss{
+  margin-left: 20px;
+}
+
+.ps-input.lieu{
+  width: 200px;
+  background-color: #f8f9fa;      /* Couleur de fond différente */
+  border: 2px solid #cdd5dd; 
+  padding: 0.4rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  margin-top: -10px;
+  margin-bottom: -10px;
+  margin-left: 1px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* Formulaire Physique dédié */
+.ps-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Ligne du formulaire (chaque groupe de champs) */
+.ps-form-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.7rem;
+}
+
+/* Groupe (label + input) */
+.ps-form-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Style des labels */
+.ps-form-group label {
+  min-width: 120px;    /* Ajustez selon vos besoins */
+  text-align: right;
+  margin-right: 0.5rem;
+  font-weight: 600;
+  color: #2d3748;
+  white-space: nowrap; /* Empêche le saut de ligne si le texte est long */
+}
+
+/* Style commun aux inputs */
+.ps-input {
+  padding: 0.4rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  background-color: #f8f9fa;
+}
+
+/* Champs spécifiques Civilité */
+.ps-civilite-code {
+  width: 60px;
+  border: 2px solid #cbd5e0;
+  flex-shrink: 0;
+}
+
+.ps-civilite-libelle {
+  width: 180px;
+  border: 2px solid #cbd5e0;
+  flex-shrink: 0;
+}
+
+/* Boutons de recherche, etc. dans un groupe */
+.ps-input-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: nowrap;
+}
+
+/* Effet au survol pour les inputs */
+.ps-input:hover {
+  background-color: #fff;
+  border-color: #2684ff;
+}
+
+
+
+/* Optionnel : ajustement spécifique pour les dates */
+.ps-input.date {
+  border: 2px solid #cdd5dd;
+}

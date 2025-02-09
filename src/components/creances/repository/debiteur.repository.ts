@@ -4,6 +4,7 @@ import { CategorieDebiteur, DebiteurMoral, DebiteurPhysique, Domiciliation, Type
 const BASE_URL = 'http://localhost:8281/api/v1';
 
 export class DebiteurRepository {
+    // Méthodes pour Catégorie et Type
     async getCategories(): Promise<CategorieDebiteur[]> {
         const response = await axios.get(`${BASE_URL}/ac-categorie-debiteur`);
         return response.data;
@@ -14,6 +15,51 @@ export class DebiteurRepository {
         return response.data;
     }
 
+    async getQuartiers() {
+        // Implement the API call to fetch quartiers data
+        const response = await axios.get(`${BASE_URL}/ac-quartier`);
+        return response.data;
+    }
+
+    async getNationalites() {
+        // Implement the API call to fetch nationalites data
+        const response = await axios.get(`${BASE_URL}/ac-nationalite`);
+        return response.data;
+    }
+
+    async getProfessions() {
+        // Implement the API call to fetch professions data
+        const response = await axios.get(`${BASE_URL}/ac-profession`);
+        return response.data;
+    }
+
+    async getFonctions() {
+        // Implement the API call to fetch fonctions data
+        const response = await axios.get(`${BASE_URL}/ac-fonction`);
+        return response.data;
+    }
+
+    // Ajout de la méthode pour récupérer les civilités
+    async getCivilites(): Promise<{ civCode: string; civLib: string }[]> {
+        const response = await axios.get(`${BASE_URL}/ac-civilite`);
+        return response.data;
+    }
+
+    async getEmployeurs() {
+        // Implement the API call to fetch employeurs data
+        const response = await axios.get(`${BASE_URL}/ac-employeur`);
+        return response.data;
+    }
+
+  async StatutSalaries() {
+    // Implement the API call to fetch statutSalaries data
+    const response = await axios.get(`${BASE_URL}/ac-statut-salarie`);
+    return response.data;
+    }
+
+
+
+    // Méthodes Débiteur Physique
     async createDebiteurPhysique(data: DebiteurPhysique): Promise<DebiteurPhysique> {
         const response = await axios.post(`${BASE_URL}/ac-debiteur-physique`, data);
         return response.data;
@@ -29,7 +75,7 @@ export class DebiteurRepository {
         return response.data;
     }
 
-    
+    // Méthodes Débiteur Moral
     async createDebiteurMoral(data: DebiteurMoral): Promise<DebiteurMoral> {
         const response = await axios.post(`${BASE_URL}/ac-debiteur-moral`, data);
         return response.data;
@@ -56,23 +102,12 @@ export class DebiteurRepository {
         return response.data;
     }
 
-    async getDomiciliations(): Promise<Domiciliation[]> {
-        const response = await axios.get(`${BASE_URL}/ac-domiciliation`);
-        return response.data;
-    }
-
     async updateDomiciliation(id: string, data: Domiciliation): Promise<Domiciliation> {
         const response = await axios.put(`${BASE_URL}/ac-domiciliation/${id}`, data);
         return response.data;
     }
- 
-    
 
-    async createDebiteur(data: any) {
-        const response = await axios.post(`${BASE_URL}/debiteurs`, data);
-        return response.data;
-    }
-
+    // Méthode principale pour sauvegarder un débiteur complet
     async saveDebiteurComplet(data: {
         debiteur: any;
         type: string;
@@ -82,19 +117,19 @@ export class DebiteurRepository {
     }) {
         try {
             // 1. Créer le débiteur principal
-            const debiteurResponse = await this.createDebiteur(data.debiteur);
-            const debCode = debiteurResponse.id;
+            const debiteurResponse = await axios.post(`${BASE_URL}/debiteurs`, data.debiteur);
+            const debiteurId = debiteurResponse.data.id;
 
-            // 2. Créer le sous-type en fonction du type
+            // 2. Créer les données spécifiques selon le type
             if (data.type === 'P' && data.physique) {
                 await this.createDebiteurPhysique({
                     ...data.physique,
-                    debCode: debCode
+                    debCode: debiteurId
                 });
             } else if (data.type === 'M' && data.moral) {
                 await this.createDebiteurMoral({
                     ...data.moral,
-                    debCode: debCode
+                    debCode: debiteurId
                 });
             }
 
@@ -102,14 +137,14 @@ export class DebiteurRepository {
             if (data.domiciliation) {
                 await this.createDomiciliation({
                     ...data.domiciliation,
-                    debCode: debCode
+                    debCode: debiteurId
                 });
             }
 
-            return debiteurResponse;
+            return debiteurResponse.data;
         } catch (error) {
-            console.error('Erreur lors de la sauvegarde:', error);
-            throw new Error('Erreur lors de la sauvegarde du débiteur');
+            console.error('Erreur lors de la sauvegarde du débiteur:', error);
+            throw error;
         }
     }
 }
