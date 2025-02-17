@@ -292,3 +292,73 @@ margin-left: 30px;
 .ps-input.date {
   border: 2px solid #cdd5dd;
 }
+
+
+
+
+
+
+
+.button-group {
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.btn-modify {
+  background-color: #11805b;
+  border-color: #10B981;
+  padding: 0.4%;
+  margin-right: 90%;
+  margin-top: 28%;
+  position: relative;  /* Changement ici */
+  z-index: 1; 
+}
+
+.btn-modify:hover {
+  background-color: #059669;
+  border-color: #059669;
+}
+
+
+
+
+
+.search-dialog {
+  position: fixed !important;
+  z-index: 1000 !important;
+}
+
+.search-dialog .p-dialog-content {
+  padding: 1.5rem;
+  overflow: visible;
+}
+
+.search-dialog .dialog-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  padding-top: 1rem;
+}
+
+.search-dialog .p-dialog-mask {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+/* Assurez-vous que le dialog est toujours au-dessus des autres éléments */
+.p-dialog-mask {
+  z-index: 9999 !important;
+}
+
+.search-field {
+  margin-bottom: 1rem;
+}
+
+.search-field label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.search-field .p-inputnumber {
+  width: 100%;
+}

@@ -54,15 +54,23 @@ export interface DebiteurCompletCreationDTO {
   debCjTel?: string;
   debCjAdr?: string;
   debCjNumpident?: string;
+
+  civCode?: string;
+  quartCode?: string;
+  profesCode?: string;
+  natCode?: string;
+  empCode?: string;
+  statsalCode?: string;
+  fonctCode?: string;
 }
 
 
 export interface AcDebiteurPhysique {
   // Informations personnelles obligatoires
-  debNom: string;
-  debPren: string;
-  debDatnaiss: Date;
-  debLieunaiss: string;
+  debNom?: string;
+  debPren?: string;
+  debDatnaiss?: Date;
+  debLieunaiss?: string;
   
   // Informations personnelles optionnelles
   debNatpident?: string;

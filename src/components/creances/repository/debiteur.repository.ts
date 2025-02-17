@@ -36,6 +36,16 @@ export class DebiteurRepository {
         }
     }
 
+    async getDebiteurByCode(debCode: number): Promise<DebiteurCompletCreationDTO> {
+        try {
+          const response = await axios.get(`${this.apiUrl}/${debCode}`);
+          return response.data;
+        } catch (error) {
+          console.error('Erreur récupération débiteur:', error);
+          throw error;
+        }
+      }
+
     // Ajout de la méthode de récupération
     async getDebiteurComplet(debCode: string): Promise<DebiteurCompletCreationDTO> {
         try {

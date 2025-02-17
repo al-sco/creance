@@ -3,7 +3,8 @@ import { DebiteurRepository } from '../repository/debiteur.repository';
 import { 
     AcDebiteur,
     AcDebiteurPhysique,
-    DebiteurCompletDTO,
+    
+    DebiteurCompletCreationDTO,
     CategorieDebiteur,
     TypeDebiteur
 } from '../model/debiteur.model';
@@ -20,10 +21,11 @@ interface DebiteurStore {
     // Actions
     fetchCategories: () => Promise<void>;
     fetchTypes: () => Promise<void>;
-    saveDebiteurComplet: (data: DebiteurCompletDTO) => Promise<any>;
+    saveDebiteurComplet: (data: DebiteurCompletCreationDTO) => Promise<any>;  // Changement ici
     updateCurrentDebiteur: (data: Partial<AcDebiteur>) => void;
     updateCurrentPhysique: (data: Partial<AcDebiteurPhysique>) => void;
     resetStore: () => void;
+    fetchDebiteurByCode: (debCode: number) => Promise<DebiteurCompletCreationDTO>;
 }
 
 export const useDebiteurStore = create<DebiteurStore>((set) => {
@@ -53,19 +55,19 @@ export const useDebiteurStore = create<DebiteurStore>((set) => {
 
         fetchTypes: async () => {
             try {
-              set({ loading: true, error: null });
-              const types = await repository.getTypes();
-              set({ types, loading: false });
+                set({ loading: true, error: null });
+                const types = await repository.getTypes();
+                set({ types, loading: false });
             } catch (error) {
-              set({ 
-                error: "Erreur lors du chargement des types", 
-                loading: false 
-              });
-              console.error('Erreur fetchTypes:', error);
+                set({ 
+                    error: "Erreur lors du chargement des types", 
+                    loading: false 
+                });
+                console.error('Erreur fetchTypes:', error);
             }
-          },
+        },
 
-        saveDebiteurComplet: async (data: DebiteurCompletDTO) => {
+        saveDebiteurComplet: async (data: DebiteurCompletCreationDTO) => {
             try {
                 set({ loading: true, error: null });
                 const response = await repository.createDebiteurComplet(data);
@@ -75,6 +77,66 @@ export const useDebiteurStore = create<DebiteurStore>((set) => {
                 throw error;
             } finally {
                 set({ loading: false });
+            }
+        },
+
+        fetchDebiteurByCode: async (debCode: number): Promise<DebiteurCompletCreationDTO> => {
+            try {
+                set({ loading: true, error: null });
+                const result = await repository.getDebiteurByCode(debCode);
+                
+                // Mise à jour du state
+                set({
+                    currentDebiteur: {
+                        categDebCode: result.categDebCode,
+                        typdebCode: result.typdebCode,
+                        debAdrpost: result.debAdrpost || '',
+                        debEmail: result.debEmail || '',
+                        debTelbur: result.debTelbur || '',
+                        debFax: result.debFax || '',
+                        debCel: result.debCel || '',
+                        debTeldom: result.debTeldom || '',
+                        debLocalisat: result.debLocalisat || ''
+                    },
+                    loading: false,
+                    error: null
+                });
+
+                // Mise à jour conditionnelle pour débiteur physique
+                if (result.typdebCode === 'P') {
+                    set({
+                        currentPhysique: {
+                            // ... vos propriétés existantes
+                            debNom: result.debNom,
+                            debPren: result.debPren,
+                            debDatnaiss: result.debDatnaiss,
+                            debLieunaiss: result.debLieunaiss,
+                            civCode: result.civCode,
+                            quartCode: result.quartCode,
+                            profesCode: result.profesCode,
+                            natCode: result.natCode,
+                            empCode: result.empCode,
+                            statsalCode: result.statsalCode,
+                            fonctCode: result.fonctCode,
+                            debNmere: result.debNmere,
+                            debPrmere: result.debPrmere,
+                            debNpere: result.debNpere,
+                            debPrpere: result.debPrpere,
+                            debNbrEnf: result.debNbrEnf,
+                            debCjNom: result.debCjNom,
+                            debCjPren: result.debCjPren,
+                            debCjDatnaiss: result.debCjDatnaiss,
+                            debCjTel: result.debCjTel,
+                            debCjAdr: result.debCjAdr,
+                            debCjNumpident: result.debCjNumpident
+                        }
+                    });
+                }
+
+                return result;
+            } catch (error) {
+                set({ error: "Erreur lors de la récupération du débiteur", loading: false });
+                throw error;
             }
         },
 

@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { InputText } from "primereact/inputtext";
 import { Dropdown } from "primereact/dropdown";
 import { Button } from "primereact/button";
@@ -8,9 +8,11 @@ import { DataTable } from "primereact/datatable";
 import { ProgressSpinner } from "primereact/progressspinner";
 import { Toast } from 'primereact/toast';
 import { useDebiteurStore } from "../../stores/useDebiteurStore";
+
 import { 
   TypeDebiteur, 
   CategorieDebiteur, 
+
   AcDebiteur, 
   DebiteurCompletCreationDTO
 } from "../../model/debiteur.model";
@@ -19,6 +21,7 @@ import { DomiciliationSection } from "./SubSections/DomiciliationSection";
 import { AcDebiteurMoralSection } from "./SubSections/AcDebiteurMoralSection";
 import "../../styles/creances.css";
 import "../../styles/debiteur.css";
+import { InputNumber } from "primereact/inputnumber";
 
 export function GestionDebiteurForm() {
   const toast = useRef<Toast>(null);
@@ -37,6 +40,10 @@ export function GestionDebiteurForm() {
     debLocalisat: ''
   });
 
+
+  // Ajout des états pour le dialog de recherche
+const [showSearchDialog, setShowSearchDialog] = useState(false);
+const [searchDebCode, setSearchDebCode] = useState<number | null>(null);
 
 
   const resetForm = () => {
@@ -130,6 +137,25 @@ export function GestionDebiteurForm() {
   const [activeTab, setActiveTab] = useState<'physique' | 'domiciliation' | 'morale'>('physique');
   const [visible, setVisible] = useState<boolean>(false);
   const [globalFilter, setGlobalFilter] = useState<string>('');
+  const [isSearching, setIsSearching] = useState(false);
+
+
+  const { 
+    fetchDebiteurByCode,
+    categories, 
+    types, 
+    loading, 
+    error, 
+    fetchCategories, 
+    fetchTypes, 
+    saveDebiteurComplet, 
+    currentPhysique,
+    updateCurrentPhysique,
+    
+  currentDebiteur,
+
+  } = useDebiteurStore();
+
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -152,18 +178,85 @@ export function GestionDebiteurForm() {
   };
 
 
+  const handleCloseDialog = useCallback(() => {
+    // Force la réinitialisation de tous les états liés au dialog
+    setShowSearchDialog(false);
+    setSearchDebCode(null);
+    setIsSearching(false);
+    
+    // Force le focus sur le composant parent
+    document.body.click();
+  }, []);
 
-  const { 
-    categories, 
-    types, 
-    loading, 
-    error, 
-    fetchCategories, 
-    fetchTypes, 
-    saveDebiteurComplet, 
-    currentPhysique,
-    updateCurrentPhysique 
-  } = useDebiteurStore();
+
+
+  // Ajoutez la fonction handleSearch
+  const handleSearch = useCallback(async () => {
+    if (!searchDebCode) {
+      toast.current?.show({
+        severity: 'error',
+        summary: 'Erreur',
+        detail: 'Veuillez saisir un code débiteur'
+      });
+      return;
+    }
+
+    try {
+      setIsSearching(true);
+      await fetchDebiteurByCode(searchDebCode);
+      
+      // Mise à jour des champs avec les données reçues
+      if (currentDebiteur) {
+        // Mise à jour du type
+        const foundType = types.find(t => t.typdebCode === currentDebiteur.typdebCode);
+        setSelectedType(foundType || null);
+
+        // Mise à jour de la catégorie
+        const foundCategorie = categories.find(c => c.categDebCode === currentDebiteur.categDebCode);
+        setSelectedCategorie(foundCategorie || null);
+
+        // Mise à jour du formulaire principal
+        setFormData({
+          categDebCode: currentDebiteur.categDebCode,
+          typdebCode: currentDebiteur.typdebCode,
+          debAdrpost: currentDebiteur.debAdrpost || '',
+          debEmail: currentDebiteur.debEmail || '',
+          debTelbur: currentDebiteur.debTelbur || '',
+          debFax: currentDebiteur.debFax || '',
+          debCel: currentDebiteur.debCel || '',
+          debTeldom: currentDebiteur.debTeldom || '',
+          debLocalisat: currentDebiteur.debLocalisat || '',
+          propCode: currentDebiteur.propCode || '',
+          garphysCode: currentDebiteur.garphysCode || '',
+          debCodeCharg: currentDebiteur.debCodeCharg || ''
+        });
+
+        // Si c'est un débiteur physique, définir l'onglet approprié
+        if (currentDebiteur.typdebCode === 'P') {
+          setActiveTab('physique');
+        }
+
+      
+
+        handleCloseDialog();
+      
+        toast.current?.show({
+          severity: 'success',
+          summary: 'Succès',
+          detail: 'Débiteur trouvé'
+        });
+      }
+    } catch (error) {
+      toast.current?.show({
+        severity: 'error',
+        summary: 'Erreur',
+        detail: 'Débiteur non trouvé'
+      });
+    } finally {
+      setIsSearching(false);
+    }
+  }, [searchDebCode, fetchDebiteurByCode, currentDebiteur, handleCloseDialog]);
+  
 
   useEffect(() => {
     const loadData = async () => {
@@ -179,7 +272,7 @@ export function GestionDebiteurForm() {
     };
     
     loadData();
-  }, [fetchCategories, fetchTypes]);
+  }, [fetchCategories, fetchTypes, toast]);
 
   const handleSave = async () => {
     try {
@@ -473,6 +566,63 @@ export function GestionDebiteurForm() {
 >
     {loading ? 'Enregistrement...' : 'Enregistrer'}
 </button>
+
+<Button 
+    label="Modifier"
+    icon="pi pi-pencil"
+    className="p-button btn-modify"
+    onClick={() => setShowSearchDialog(true)}
+  />
+
+
+
+<Dialog 
+        
+        header="Rechercher un débiteur"
+        visible={showSearchDialog}
+        className="search-dialog"
+        style={{ width: '450px', zIndex: 1000 }} // Ajout d'un z-index explicite
+        modal={true}
+        closable={true}              // Permet la fermeture avec la croix
+        closeOnEscape={true}         // Permet la fermeture avec Escape
+        dismissableMask={true}       // Permet la fermeture en cliquant à l'extérieur
+        onHide={handleCloseDialog}   // Utilisation de la fonction modifiée
+        draggable={false}
+        resizable={false}
+        blockScroll={true}
+      
+        footer={
+          <div>
+            <Button
+              label="Annuler"
+              icon="pi pi-times"
+              className="p-button-text"
+              onClick={handleCloseDialog}
+              disabled={isSearching}
+            />
+            <Button
+              label="Rechercher"
+              icon="pi pi-search"
+              className="p-button"
+              onClick={handleSearch}
+              loading={isSearching}
+              disabled={isSearching}
+            />
+          </div>
+        }
+      >
+        <div className="search-field">
+          <label htmlFor="debCode">Code débiteur</label>
+          <InputNumber
+  id="debCode"
+  value={searchDebCode}
+  onValueChange={(e) => setSearchDebCode(e.value ?? null)} // Utilisation de l'opérateur de coalescence nulle
+  useGrouping={false}
+  placeholder="Entrez le code débiteur"
+  disabled={isSearching}
+/>
+        </div>
+      </Dialog>
     </div>
   );
 }
