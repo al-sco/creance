@@ -54,6 +54,7 @@ export interface DebiteurCompletCreationDTO {
   debCjTel?: string;
   debCjAdr?: string;
   debCjNumpident?: string;
+  debDatdec?: Date;
 
   civCode?: string;
   quartCode?: string;

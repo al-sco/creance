@@ -178,101 +178,153 @@ const [searchDebCode, setSearchDebCode] = useState<number | null>(null);
   };
 
 
-  const handleCloseDialog = useCallback(() => {
-    // Force la réinitialisation de tous les états liés au dialog
-    setShowSearchDialog(false);
-    setSearchDebCode(null);
-    setIsSearching(false);
-    
-    // Force le focus sur le composant parent
-    document.body.click();
-  }, []);
+const handleCloseDialog = useCallback(() => {
+  console.log('handleCloseDialog appelé - Début');
+  setShowSearchDialog(false);
+  setSearchDebCode(null);
+  setIsSearching(false);
+  console.log('handleCloseDialog terminé - États réinitialisés');
+
+}, []);
+
+const handleSearch = useCallback(async () => {
+  console.log('Début handleSearch avec code:', searchDebCode);
+
+  if (!searchDebCode) {
+    console.log('Code débiteur manquant');
+    toast.current?.show({
+      severity: 'error',
+      summary: 'Erreur',
+      detail: 'Veuillez saisir un code débiteur'
+    });
+    return;
+  }
+
+  try {
+    console.log('Début recherche - setIsSearching(true)');
+
+    setIsSearching(true);
+
+    console.log('Appel fetchDebiteurByCode...');
+    const result = await fetchDebiteurByCode(searchDebCode);
+    console.log('Résultat fetchDebiteurByCode:', result);
+
+    if (result) {
+      console.log('Résultat trouvé, mise à jour des données');
 
 
+      console.log('Mise à jour du formData avec:', result);
 
-  // Ajoutez la fonction handleSearch
-  const handleSearch = useCallback(async () => {
-    if (!searchDebCode) {
-      toast.current?.show({
-        severity: 'error',
-        summary: 'Erreur',
-        detail: 'Veuillez saisir un code débiteur'
-      });
-      return;
-    }
-
-    try {
-      setIsSearching(true);
-      await fetchDebiteurByCode(searchDebCode);
-      
-      // Mise à jour des champs avec les données reçues
-      if (currentDebiteur) {
-        // Mise à jour du type
-        const foundType = types.find(t => t.typdebCode === currentDebiteur.typdebCode);
-        setSelectedType(foundType || null);
-
-        // Mise à jour de la catégorie
-        const foundCategorie = categories.find(c => c.categDebCode === currentDebiteur.categDebCode);
-        setSelectedCategorie(foundCategorie || null);
-
-        // Mise à jour du formulaire principal
         setFormData({
-          categDebCode: currentDebiteur.categDebCode,
-          typdebCode: currentDebiteur.typdebCode,
-          debAdrpost: currentDebiteur.debAdrpost || '',
-          debEmail: currentDebiteur.debEmail || '',
-          debTelbur: currentDebiteur.debTelbur || '',
-          debFax: currentDebiteur.debFax || '',
-          debCel: currentDebiteur.debCel || '',
-          debTeldom: currentDebiteur.debTeldom || '',
-          debLocalisat: currentDebiteur.debLocalisat || '',
-          propCode: currentDebiteur.propCode || '',
-          garphysCode: currentDebiteur.garphysCode || '',
-          debCodeCharg: currentDebiteur.debCodeCharg || ''
+          categDebCode: result.categDebCode,
+          typdebCode: result.typdebCode,
+          debAdrpost: result.debAdrpost || '',
+          debEmail: result.debEmail || '',
+          debTelbur: result.debTelbur || '',
+          debFax: result.debFax || '',
+          debCel: result.debCel || '',
+          debTeldom: result.debTeldom || '',
+          debLocalisat: result.debLocalisat || '',
+          
         });
+        console.log('FormData mis à jour');
 
-        // Si c'est un débiteur physique, définir l'onglet approprié
-        if (currentDebiteur.typdebCode === 'P') {
-          setActiveTab('physique');
-        }
+        const foundType = types.find(t => t.typdebCode === result.typdebCode);
+      const foundCategorie = categories.find(c => c.categDebCode === result.categDebCode);
+      console.log('Type trouvé:', foundType);
+      console.log('Catégorie trouvée:', foundCategorie);
 
-      
 
-        handleCloseDialog();
-      
+      setSelectedType(foundType || null);
+      setSelectedCategorie(foundCategorie || null);
+      console.log('Sélections mises à jour - Type:', foundType, 'Catégorie:', foundCategorie);
+
+      if (result.typdebCode === 'P') {
+        console.log('Débiteur physique détecté, mise à jour des données physiques');
+
+        updateCurrentPhysique({
+          debNom: result.debNom || '',
+          debPren: result.debPren || '',
+          debDatnaiss: result.debDatnaiss,
+          debLieunaiss: result.debLieunaiss || '',
+          civCode: result.civCode || '',
+          quartCode: result.quartCode || '',
+          profesCode: result.profesCode || '',
+          natCode: result.natCode || '',
+          empCode: result.empCode || '',
+          statsalCode: result.statsalCode || '',
+          fonctCode: result.fonctCode || '',
+          debNmere: result.debNmere || '',
+          debPrmere: result.debPrmere || '',
+          debNpere: result.debNpere || '',
+          debPrpere: result.debPrpere || '',
+          debNbrEnf: result.debNbrEnf,
+          debCjNom: result.debCjNom || '',
+          debCjPren: result.debCjPren || '',
+          debCjDatnaiss: result.debCjDatnaiss,
+          debCjTel: result.debCjTel || '',
+          debCjAdr: result.debCjAdr || '',
+          debCjNumpident: result.debCjNumpident || '',
+          debDatdec: result.debDatdec
+        });
+        
+        console.log('Données physiques mises à jour');
+        setActiveTab('physique');
+        console.log('Onglet physique activé');
+      }
+        
+        // Message de succès
         toast.current?.show({
           severity: 'success',
           summary: 'Succès',
           detail: 'Débiteur trouvé'
         });
-      }
-    } catch (error) {
-      toast.current?.show({
-        severity: 'error',
-        summary: 'Erreur',
-        detail: 'Débiteur non trouvé'
-      });
-    } finally {
-      setIsSearching(false);
-    }
-  }, [searchDebCode, fetchDebiteurByCode, currentDebiteur, handleCloseDialog]);
-  
 
-  useEffect(() => {
-    const loadData = async () => {
-      try {
-        await Promise.all([fetchCategories(), fetchTypes()]);
-      } catch (error) {
-        toast.current?.show({
-          severity: 'error',
-          summary: 'Erreur',
-          detail: 'Erreur lors du chargement des données de référence'
-        });
-      }
-    };
+        console.log('Début fermeture dialog');
+      console.log('Dialog fermé');
+
+      console.log('Début fermeture dialog');
+      setTimeout(() => {
+        console.log('Fermeture dialog');
+        setIsSearching(false);
+        setSearchDebCode(null);
+        setShowSearchDialog(false);
+      }, 100);
     
-    loadData();
-  }, [fetchCategories, fetchTypes, toast]);
+    }
+  } catch (error) {
+    console.error('Erreur complète:', error);
+    toast.current?.show({
+      severity: 'error',
+      summary: 'Erreur',
+      detail: 'Erreur lors de la recherche'
+    });
+  } finally {
+    console.log('Finally - Réinitialisation des états');
+    setIsSearching(false);
+  }
+}, [searchDebCode, fetchDebiteurByCode, types, categories, updateCurrentPhysique, setActiveTab, handleCloseDialog, toast]);
+
+
+useEffect(() => {
+  const loadData = async () => {
+    console.log('Début chargement des données');
+    try {
+      const [categoriesResult, typesResult] = await Promise.all([
+        fetchCategories(),
+        fetchTypes()
+      ]);
+      console.log('Résultats chargement:', {
+        categories: categoriesResult,
+        types: typesResult
+      });
+    } catch (error) {
+      console.error('Erreur détaillée chargement:', error);
+    }
+  };
+  
+  loadData();
+}, [fetchCategories, fetchTypes, toast]);
 
   const handleSave = async () => {
     try {
@@ -373,6 +425,7 @@ const [searchDebCode, setSearchDebCode] = useState<number | null>(null);
 
   return (
     <div className="creance-container">
+      
       <Toast ref={toast} />
       <div className="main-content-box">
         <h1 className="main-title">Débiteur</h1>
@@ -581,16 +634,10 @@ const [searchDebCode, setSearchDebCode] = useState<number | null>(null);
         header="Rechercher un débiteur"
         visible={showSearchDialog}
         className="search-dialog"
-        style={{ width: '450px', zIndex: 1000 }} // Ajout d'un z-index explicite
+        style={{ width: '450px' }}
         modal={true}
-        closable={true}              // Permet la fermeture avec la croix
-        closeOnEscape={true}         // Permet la fermeture avec Escape
-        dismissableMask={true}       // Permet la fermeture en cliquant à l'extérieur
-        onHide={handleCloseDialog}   // Utilisation de la fonction modifiée
-        draggable={false}
-        resizable={false}
-        blockScroll={true}
-      
+        closable={!isSearching}
+        onHide={() => !isSearching && handleCloseDialog()}
         footer={
           <div>
             <Button
@@ -614,13 +661,14 @@ const [searchDebCode, setSearchDebCode] = useState<number | null>(null);
         <div className="search-field">
           <label htmlFor="debCode">Code débiteur</label>
           <InputNumber
-  id="debCode"
-  value={searchDebCode}
-  onValueChange={(e) => setSearchDebCode(e.value ?? null)} // Utilisation de l'opérateur de coalescence nulle
-  useGrouping={false}
-  placeholder="Entrez le code débiteur"
-  disabled={isSearching}
-/>
+            id="debCode"
+            value={searchDebCode}
+            onValueChange={(e) => setSearchDebCode(e.value ?? null)}
+            useGrouping={false}
+            placeholder="Entrez le code débiteur"
+            disabled={isSearching}
+            autoFocus
+          />
         </div>
       </Dialog>
     </div>
