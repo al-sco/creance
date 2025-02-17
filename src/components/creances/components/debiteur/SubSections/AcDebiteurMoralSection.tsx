@@ -3,22 +3,22 @@ import { InputText } from 'primereact/inputtext';
 import { Calendar } from 'primereact/calendar';
 import { InputNumber } from 'primereact/inputnumber';
 import { useDebiteurStore } from '../../../stores/useDebiteurStore';
-import { DebiteurMoral } from '../../../model/debiteur.model';
+// import { DebiteurMoral } from '../../../model/debiteur.model';
 
 export function AcDebiteurMoralSection() {
-  const { currentMoral, updateCurrentMoral } = useDebiteurStore();
+  // const { currentMoral, updateCurrentMoral } = useDebiteurStore();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    updateCurrentMoral({ [name]: value });
-  };
+  //   const { name, value } = e.target;
+  //   updateCurrentMoral({ [name]: value });
+  // };
 
-  const handleDateChange = (value: Date | null, fieldName: string) => {
-    updateCurrentMoral({ [fieldName]: value });
-  };
+  // const handleDateChange = (value: Date | null, fieldName: string) => {
+  //   updateCurrentMoral({ [fieldName]: value });
+  // };
 
-  const handleNumberChange = (value: number | null, fieldName: string) => {
-    updateCurrentMoral({ [fieldName]: value });
+  // const handleNumberChange = (value: number | null, fieldName: string) => {
+  //   updateCurrentMoral({ [fieldName]: value });
   };
 
   return (
@@ -29,7 +29,7 @@ export function AcDebiteurMoralSection() {
             <label>Raison Sociale :</label>
             <InputText
               name="debRaisSociale"
-              value={currentMoral?.debRaisSociale || ''}
+              // value={currentMoral?.debRaisSociale || ''}
               onChange={handleInputChange}
               className="p-inputtext"
             />
@@ -38,7 +38,7 @@ export function AcDebiteurMoralSection() {
             <label>Registre de Commerce :</label>
             <InputText
               name="debRegistcom"
-              value={currentMoral?.debRegistcom || ''}
+              // value={currentMoral?.debRegistcom || ''}
               onChange={handleInputChange}
               className="p-inputtext"
             />
@@ -49,8 +49,8 @@ export function AcDebiteurMoralSection() {
           <div className="form-group">
             <label>Date de création :</label>
             <Calendar
-              value={currentMoral?.debDatcreat ? new Date(currentMoral.debDatcreat) : null}
-              onChange={(e) => handleDateChange(e.value as Date, 'debDatcreat')}
+              // value={currentMoral?.debDatcreat ? new Date(currentMoral.debDatcreat) : null}
+              // onChange={(e) => handleDateChange(e.value as Date, 'debDatcreat')}
               dateFormat="dd/mm/yy"
             />
           </div>
@@ -58,8 +58,8 @@ export function AcDebiteurMoralSection() {
             <label>Capital Social :</label>
             <InputNumber
               name="debCapitsocial"
-              value={currentMoral?.debCapitsocial || null}
-              onValueChange={(e) => handleNumberChange(e.value, 'debCapitsocial')}
+              // value={currentMoral?.debCapitsocial || null}
+              // onValueChange={(e) => handleNumberChange(e.value, 'debCapitsocial')}
             />
           </div>
         </div>
@@ -69,7 +69,7 @@ export function AcDebiteurMoralSection() {
             <label>Forme Juridique :</label>
             <InputText
               name="debFormJurid"
-              value={currentMoral?.debFormJurid || ''}
+              // value={currentMoral?.debFormJurid || ''}
               onChange={handleInputChange}
               className="p-inputtext"
             />
@@ -78,7 +78,7 @@ export function AcDebiteurMoralSection() {
             <label>Domaine d'Activité :</label>
             <InputText
               name="debDomActiv"
-              value={currentMoral?.debDomActiv || ''}
+              // value={currentMoral?.debDomActiv || ''}
               onChange={handleInputChange}
               className="p-inputtext"
             />
@@ -90,7 +90,7 @@ export function AcDebiteurMoralSection() {
             <label>Siège Social :</label>
             <InputText
               name="debSiegSocial"
-              value={currentMoral?.debSiegSocial || ''}
+              // value={currentMoral?.debSiegSocial || ''}
               onChange={handleInputChange}
               className="p-inputtext"
             />
@@ -99,7 +99,7 @@ export function AcDebiteurMoralSection() {
             <label>Nom du Gérant :</label>
             <InputText
               name="debNomGerant"
-              value={currentMoral?.debNomGerant || ''}
+              // value={currentMoral?.debNomGerant || ''}
               onChange={handleInputChange}
               className="p-inputtext"
             />

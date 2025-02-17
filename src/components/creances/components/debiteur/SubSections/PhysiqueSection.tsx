@@ -20,11 +20,15 @@ export function PhysiqueSection() {
   const [showProfessionDialog, setShowProfessionDialog] = useState(false);
   const [showFonctionDialog, setShowFonctionDialog] = useState(false);
   const [showEmployeurDialog, setShowEmployeurDialog] = useState(false);
+  const [employeurFilter, setEmployeurFilter] = useState('');
   const [civiliteOptions, setCiviliteOptions] = useState<{ civCode: string; civLib: string }[]>([]);
   const [globalFilter, setGlobalFilter] = useState('');
   const [selectedCivilite, setSelectedCivilite] = useState<{ civCode: string; civLib: string } | null>(null);
-const [quartierFilter, setQuartierFilter] = useState('');
-const [nationaliteFilter, setNationaliteFilter] = useState('');
+  const [quartierFilter, setQuartierFilter] = useState('');
+  const [nationaliteFilter, setNationaliteFilter] = useState('');
+  const [fonctionFilter, setFonctionFilter] = useState('');
+  const [professionFilter, setProfessionFilter] = useState('');
+  const [statutSalaireFilter, setStatutSalaireFilter] = useState('');
 
   // Chargement des civilités depuis la base de données
   useEffect(() => {
@@ -95,8 +99,8 @@ const [selectedFonction, setSelectedFonction] = useState<{ fonctCode: string; fo
 const [professionOptions, setProfessionOptions] = useState<{ profesCode: string; profesLib: string }[]>([]);
 const [selectedProfession, setSelectedProfession] = useState<{ profesCode: string; profesLib: string } | null>(null);
 
-const [employeurOptions, setEmployeurOptions] = useState<{ empCode: string; empLib: string }[]>([]);
-const [selectedEmployeur, setSelectedEmployeur] = useState<{ empCode: string; empLib: string } | null>(null);
+const [employeurOptions, setEmployeurOptions] = useState<{ empCode: string; empNom: string }[]>([]);
+const [selectedEmployeur, setSelectedEmployeur] = useState<{ empCode: string; empNom: string } | null>(null);
 
 const [statutSalaireOptions, setStatutSalaireOptions] = useState<{ statsalCode: string; statsalLib: string }[]>([]);
 const [selectedStatutSalaire, setSelectedStatutSalaire] = useState<{ statsalCode: string; statsalLib: string } | null>(null);
@@ -161,15 +165,73 @@ const handleSelectQuartier = (selection: { quartCode: string; quartLib: string }
   
 
   const handleSelectStatutSalaire = (selection: { statsalCode: string; statsalLib: string }) => {
-    updateCurrentPhysique({
-      statsalCode: selection.statsalCode,
-      statsalLib: selection.statsalLib
-    });
-    setSelectedStatutSalaire(selection);
-    setShowStatutSalaireDialog(false);
-  };
-
+      updateCurrentPhysique({
+        statsalCode: selection.statsalCode,
+        statsalLib: selection.statsalLib
+      });
+      setSelectedStatutSalaire(selection);
+      setShowStatutSalaireDialog(false);
+    };
   
+useEffect(() => {
+  const fetchStatutSalaires = async () => {
+    try {
+      const repository = new DebiteurRepository();
+      const data = await repository.StatutSalaries();
+      setStatutSalaireOptions(data);
+    } catch (error) {
+      console.error('Erreur lors du chargement des statuts salaires', error);
+    }
+  }
+  fetchStatutSalaires()
+}, [])
+
+
+useEffect(() => {
+  const fetchProfessions = async () => {
+    try {
+      const repository = new DebiteurRepository();
+      const data = await repository.getProfessions();
+      setProfessionOptions(data);
+    } catch (error) {
+      console.error('Erreur lors du chargement des professions', error);
+    }
+  };
+  fetchProfessions();
+}, []);
+
+    const handleSelectProfession = (selection: { profesCode: string; profesLib: string }) => {
+      updateCurrentPhysique({
+        profesCode: selection.profesCode,
+        profesLib: selection.profesLib
+      });
+      setSelectedProfession(selection);
+      setShowProfessionDialog(false);
+    };
+
+    useEffect(() => {
+      const fetchEmployeurs = async () => {
+        try {
+          const repository = new DebiteurRepository();
+          const data = await repository.getEmployeurs();
+          setEmployeurOptions(data);
+        } catch (error) {
+          console.error('Erreur lors du chargement des employeurs', error);
+        }
+      };
+      fetchEmployeurs();
+    }, []);
+
+    const handleSelectEmployeur = (selection: { empCode: string; empNom: string }) => {
+      updateCurrentPhysique({
+        empCode: selection.empCode,
+        empNom: selection.empNom
+      });
+      setSelectedEmployeur(selection);
+      setShowEmployeurDialog(false);
+    };
+
+ 
 
   return (
     <div className="sub-screen">
@@ -392,8 +454,8 @@ const handleSelectQuartier = (selection: { quartCode: string; quartLib: string }
     className="physique-civilite-code"
   />
   <InputText
-    name="empLib"
-    value={currentPhysique?.empLib || ''}
+    name="empNom"
+    value={currentPhysique?.empNom || ''}
     onChange={handleInputChange}
     placeholder="Libellé"
     className="physique-civilite-libelle"
@@ -847,9 +909,198 @@ const handleSelectQuartier = (selection: { quartCode: string; quartLib: string }
     <Column field="natLib" header="Libellé" />
   </DataTable>
 </Dialog>
+
+
+<Dialog
+  header="Sélectionnez la Fonction"
+  visible={showFonctionDialog}
+  style={{ width: '30vw' }}
+  footer={
+    <div>
+      <Button
+        label="Annuler"
+        icon="pi pi-times"
+        onClick={() => {
+          setShowFonctionDialog(false);
+          setFonctionFilter(''); // Réinitialisation du filtre
+        }}
+        className="p-button-text"
+      />
     </div>
+  }
+  onHide={() => {
+    setShowFonctionDialog(false);
+    setFonctionFilter('');
+  }}
+>
+  <div className="p-input-icon-left mb-3">
+    <i className="pi pi-search" />
+    <InputText
+      value={fonctionFilter}
+      onChange={(e) => setFonctionFilter(e.target.value)}
+      placeholder="Rechercher..."
+      className="w-full"
+    />
+  </div>
+  <DataTable
+    value={fonctionOptions}
+    globalFilter={fonctionFilter}
+    emptyMessage="Aucune fonction trouvée"
+    selectionMode="single"
+    selection={selectedFonction}
+    onSelectionChange={(e) =>
+      handleSelectFonction(e.value as { fonctCode: string; fonctLib: string })
+    }
+  >
+    <Column field="fonctCode" header="Code" />
+    <Column field="fonctLib" header="Libellé" />
+  </DataTable>
+</Dialog>
 
 
+
+<Dialog
+  header="Sélectionnez la Profession"
+  visible={showProfessionDialog}
+  style={{ width: '30vw' }}
+  footer={
+    <div>
+      <Button
+        label="Annuler"
+        icon="pi pi-times"
+        onClick={() => {
+          setShowProfessionDialog(false);
+          setProfessionFilter(''); // Réinitialisation du filtre
+        }}
+        className="p-button-text"
+      />
+    </div>
+  }
+  onHide={() => {
+    setShowProfessionDialog(false);
+    setProfessionFilter('');
+  }}
+>
+  <div className="p-input-icon-left mb-3">
+    <i className="pi pi-search" />
+    <InputText
+      value={professionFilter}
+      onChange={(e) => setProfessionFilter(e.target.value)}
+      placeholder="Rechercher..."
+      className="w-full"
+    />
+  </div>
+  <DataTable
+    value={professionOptions}
+    globalFilter={professionFilter}
+    emptyMessage="Aucune profession trouvée"
+    selectionMode="single"
+    selection={selectedProfession}
+    onSelectionChange={(e) =>
+      handleSelectProfession(e.value as { profesCode: string; profesLib: string })
+    }
+  >
+    <Column field="profesCode" header="Code" />
+    <Column field="profesLib" header="Libellé" />
+  </DataTable>
+</Dialog>
+
+
+
+<Dialog
+  header="Sélectionnez l'Employeur"
+  visible={showEmployeurDialog}
+  style={{ width: '30vw' }}
+  footer={
+    <div>
+      <Button
+        label="Annuler"
+        icon="pi pi-times"
+        onClick={() => {
+          setShowEmployeurDialog(false);
+          setEmployeurFilter('') // Réinitialisation de la sélection
+        }}
+        className="p-button-text"
+      />
+    </div>
+  }
+  onHide={() => {
+    setShowEmployeurDialog(false);
+    setEmployeurFilter('')
+  }}
+>
+  <div className="p-input-icon-left mb-3">
+    <i className="pi pi-search" />
+    <InputText
+      value={employeurFilter}
+      onChange={(e) => setEmployeurFilter(e.target.value)}
+      placeholder="Rechercher..."
+      className="w-full"
+    />
+  </div>
+  <DataTable
+    value={employeurOptions}
+    globalFilter={employeurFilter}
+    emptyMessage="Aucun employeur trouvé"
+    selectionMode="single" 
+    selection={selectedEmployeur}
+    onSelectionChange={(e) =>
+      handleSelectEmployeur(e.value as { empCode: string; empNom: string })
+    }
+  >
+    <Column field="empCode" header="Code" />
+    <Column field="empNom" header="Libellé" />
+  </DataTable>
+</Dialog>
+
+
+<Dialog
+  header="Sélectionnez le Statut Salaire"
+  visible={showStatutSalaireDialog}
+  style={{ width: '30vw' }}
+  footer={
+    <div>
+      <Button
+        label="Annuler"
+        icon="pi pi-times"
+        onClick={() => {
+          setShowStatutSalaireDialog(false);
+          setStatutSalaireFilter('') // Réinitialisation de la sélection
+        }}
+        className="p-button-text"
+      />
+    </div>
+  }
+  onHide={() => {
+    setShowStatutSalaireDialog(false);
+    setStatutSalaireFilter('')
+  }}
+>
+  <div className="p-input-icon-left mb-3">
+    <i className="pi pi-search" />
+    <InputText
+      value={statutSalaireFilter}
+      onChange={(e) => setStatutSalaireFilter(e.target.value)}
+      placeholder="Rechercher..."
+      className="w-full"
+    />
+  </div>
+  <DataTable
+    value={statutSalaireOptions}
+    globalFilter={statutSalaireFilter}
+    emptyMessage="Aucun statut salaire trouvé"
+    selectionMode="single" 
+    selection={selectedStatutSalaire}
+    onSelectionChange={(e) =>
+      handleSelectStatutSalaire(e.value as { statsalCode: string; statsalLib: string })
+    }
+  >
+    <Column field="statsalCode" header="Code" />
+    <Column field="statsalLib" header="Libellé" />
+  </DataTable>
+</Dialog>
+
+    </div>
 
   );
 }

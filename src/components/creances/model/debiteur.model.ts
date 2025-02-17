@@ -1,19 +1,114 @@
-export interface DebiteurState {
-  id?: number;
-  categDebCode: string;
-  propCode: string;
-  garphysCode: string;
-  typdebCode: string;
+// Interfaces principales
+export interface AcDebiteur {
+  // Champs obligatoires
   debAdrpost: string;
-  debCel: string;
-  debEmail: string;
-  debTelbur: string;
-  debFax: string;
-  debCodeCharg: string;
-  debTeldom: string;
-  debLocalisat: string;
+  categDebCode: string;
+  typdebCode: string;
+  
+  // Champs optionnels
+  debCel?: string;
+  debEmail?: string;
+  debTelbur?: string;
+  debFax?: string;
+  debCodeCharg?: string;
+  debCodeAnc?: string;
+  debLocalisat?: string;
+  debTeldom?: string;
+  propCode?: string;
+  garphysCode?: string;
 }
 
+
+
+export interface DebiteurCompletCreationDTO {
+  // Informations débiteur (obligatoires)
+  typdebCode: string;         // "P" ou "M"
+  categDebCode: string;       // Code catégorie
+  debAdrpost: string;        // Adresse postale
+  
+  // Informations communes optionnelles
+  debEmail?: string;
+  debTelbur?: string;
+  debFax?: string;
+  debCel?: string;
+  debTeldom?: string;
+  debLocalisat?: string;
+
+  // Informations débiteur physique (si typdebCode = "P")
+  debNom?: string;
+  debPren?: string;
+  debDatnaiss?: Date;
+  debLieunaiss?: string;
+  
+  // Informations familiales
+  debNmere?: string;
+  debPrmere?: string;
+  debNpere?: string;
+  debPrpere?: string;
+  debNbrEnf?: string;
+  
+  // Informations conjoint
+  debCjNom?: string;
+  debCjPren?: string;
+  debCjDatnaiss?: Date;
+  debCjTel?: string;
+  debCjAdr?: string;
+  debCjNumpident?: string;
+}
+
+
+export interface AcDebiteurPhysique {
+  // Informations personnelles obligatoires
+  debNom: string;
+  debPren: string;
+  debDatnaiss: Date;
+  debLieunaiss: string;
+  
+  // Informations personnelles optionnelles
+  debNatpident?: string;
+  debNumpident?: string;
+  debDatetpident?: Date;
+  debLieuetpident?: string;
+  debSitmatri?: string;
+  debSexe?: string;
+  debMatric?: string;
+  debDatdec?: Date;
+
+  // Adresse et famille
+  debRue?: string;
+  debNmere?: string;
+  debPrmere?: string;
+  debNpere?: string;
+  debPrpere?: string;
+  debNbrEnf?: string;
+
+  // Informations conjoint
+  debCjNom?: string;
+  debCjPren?: string;
+  debCjDatnaiss?: Date;
+  debCjTel?: string;
+  debCjAdr?: string;
+  debCjNumpident?: string;
+
+  // Relations
+  quartCode?: string;
+  quartLib?: string;
+  profesCode?: string;
+  profesLib?: string;
+  natCode?: string;
+  natLib?: string;
+  empCode?: string;
+  empNom?: string;
+  statsalCode?: string;
+  statsalLib?: string;
+  fonctCode?: string;
+  civCode?: string;
+  civLib?: string;
+  fonctLib?: string;
+}
+
+
+// Interfaces de référence
 export interface TypeDebiteur {
   typdebCode: string;
   typdebLib: string;
@@ -24,87 +119,7 @@ export interface CategorieDebiteur {
   categDebLib: string;
 }
 
-export interface DebiteurMoral {
+// Interface de réponse
+export interface DebiteurResponse {
   debCode: number;
-  debRaisSociale: string;
-  debRegistcom: string;
-  debDatcreat: Date;
-  debCapitsocial: number;
-  debFormJurid: string;
-  debDomActiv: string;
-  debSiegSocial: string;
-  debNomGerant: string;
-  ancCiv?: string;
-  debCodeCharg?: string;
-  debCpteContrib?: string;
-  civGerant?: string;
-  debTel?: string;
-  debFax?: string;
-  debEmail?: string;
-  debAdr?: string;
-  debVille?: string;
-  debPays?: string;
-  debBp?: string;
-}
-
-export interface Domiciliation {
-  domCode: string;
-  bqagCode: string;
-  typdomCode: string;
-  garphysCode: number;
-  debCode: number;
-  domLib: string;
-  domDateCtl: Date;
-  ancAg?: string;
-  villeCode: string;
-  numBenef?: number;
-  domMont: number;
-  domDatDeb: Date;
-  domDatFin: Date;
-  domStatut: string;
-  domMotif?: string;
-  domObs?: string;
-}
-
-export interface DebiteurPhysique {
-  debCode: number;
-  quartCode: string;
-  quartLib?: string;
-  profesCode: string;
-  profesLib?: string;
-  natCode: string;
-  natLib?: string;
-  empCode: string;
-  empLib?: string;
-  statsalCode: string;
-  statsalLib?: string;
-  fonctCode: string;
-  fonctLib?: string;
-  debNom: string;
-  debPren: string;
-  debDatnaiss: Date | null;
-  debLieunaiss: string;
-  debDatdec?: Date | null;
-  teldom: string;
-  debNatpident: string;
-  debNumpident: string;
-  debDatetpident?: Date | null;
-  debLieuetpident: string;
-  debSitmatri: string;
-  debRue: string;
-  debNmere: string;
-  debPrmere: string;
-  debNpere: string;
-  debPrpere: string;
-  debNbrEnf: string;
-  debSexe: string;
-  debMatric: string;
-  civCode: string;
-  civLib?: string;
-  debCjNom: string;
-  debCjPren: string;
-  debCjDatnaiss?: Date | null;
-  debCjTel: string;
-  debCjAdr: string;
-  debCjNumpident: string;
 }

@@ -1,0 +1,134 @@
+Je vais vous expliquer la structure complète pour l'enregistrement d'un débiteur et débiteur physique :
+
+1. Structure du Backend:
+graph TD
+    A[Controller] --> B[CasUtilisation]
+    B --> C[Port]
+    C --> D[Adapteur]
+    D --> E[Repository]
+
+Dans le dossier Debiteur, nous avons :
+Debiteur/
+├── adapteur/
+│   └── OracleDebiteurCompletAdapteur.java
+├── casutilisation/
+│   └── DebiteurCompletCasUtilisation.java
+├── dto/
+│   ├── commande/
+│   │   └── DebiteurCompletCreationDTO.java
+│   └── vm/
+│       └── DebiteurCompletVM.java
+├── port/
+│   └── DebiteurCompletPort.java
+└── rest/
+    └── DebiteurCompletController.java
+
+
+GitHub Copilot
+Recherche de Debiteur Debiteur effectuée
+
+Je vais vous expliquer la structure complète pour l'enregistrement d'un débiteur et débiteur physique :
+
+1. Structure du Backend
+Dans le dossier Debiteur, nous avons :
+
+2. Format des Données
+// Format attendu par l'API
+interface DebiteurCreationDTO {
+  // Informations débiteur (obligatoires)
+  typdebCode: string;         // "P" (Physique) ou "M" (Moral)
+  categDebCode: string;       // Code catégorie (ex: "06")
+  
+  // Informations communes
+  debAdrpost?: string;       // Adresse postale
+  debEmail?: string;         // Email
+  debTelbur?: string;        // Téléphone bureau
+  debFax?: string;           // Fax
+  debCel?: string;           // Cellulaire
+  debTeldom?: string;        // Téléphone domicile
+  debLocalisat?: string;     // Localisation
+
+  // Informations débiteur physique (si typdebCode = "P")
+  debNom?: string;           // Nom
+  debPren?: string;          // Prénom
+  debDatnaiss?: Date;        // Date naissance
+  debLieunaiss?: string;     // Lieu naissance
+  
+  // Informations familiales
+  debNmere?: string;         // Nom mère
+  debPrmere?: string;        // Prénom mère
+  debNpere?: string;         // Nom père
+  debPrpere?: string;        // Prénom père
+  debNbrEnf?: string;        // Nombre enfants
+  
+  // Informations conjoint
+  debCjNom?: string;         // Nom conjoint
+  debCjPren?: string;        // Prénom conjoint
+  debCjDatnaiss?: Date;      // Date naissance conjoint
+  debCjTel?: string;         // Téléphone conjoint
+  debCjAdr?: string;         // Adresse conjoint
+  debCjNumpident?: string;   // Numéro pièce identité conjoint
+}
+
+3. Exemple d'Utilisation API
+// 1. Création d'un débiteur physique
+const nouveauDebiteur = {
+  typdebCode: "P",
+  categDebCode: "06",
+  debAdrpost: "123 Rue Example",
+  debNom: "Doe",
+  debPren: "John",
+  // ... autres champs
+};
+
+// 2. Appel API
+try {
+  const response = await axios.post('/api/v1/debiteurs-complet', nouveauDebiteur);
+  console.log('Débiteur créé:', response.data);
+} catch (error) {
+  console.error('Erreur:', error.response?.data);
+}
+
+4. Flux de Traitement Backend
+Controller (DebiteurCompletController.java):
+@PostMapping
+public ResponseEntity<DebiteurCompletVM> creer(@RequestBody DebiteurCompletCreationDTO dto) {
+    return ResponseEntity.ok(debiteurCompletPort.creer(dto));
+}
+
+Adapteur (OracleDebiteurCompletAdapteur.java):
+@Transactional
+public DebiteurCompletVM creer(DebiteurCompletCreationDTO dto) {
+    // 1. Validation du type débiteur
+    if (dto.getTypdebCode() == null) {
+        throw new IllegalArgumentException("Le type de débiteur est obligatoire");
+    }
+
+    // 2. Création débiteur
+    AcDebiteur debiteur = new AcDebiteur();
+    // ... configuration débiteur
+
+    // 3. Sauvegarde débiteur
+    debiteur = debiteurRepository.save(debiteur);
+
+    // 4. Création débiteur physique si nécessaire
+    if (dto.getDebNom() != null || dto.getDebPren() != null) {
+        AcDebiteurPhysique debiteurPhysique = new AcDebiteurPhysique();
+        // ... configuration physique
+        debiteurPhysique = debiteurPhysiqueRepository.save(debiteurPhysique);
+        return new DebiteurCompletVM(debiteur, debiteurPhysique);
+    }
+
+    return new DebiteurCompletVM(debiteur, null);
+}
+
+5. Points Importants
+Validation :
+
+typdebCode est obligatoire ("P" ou "M")
+Les champs physiques ne sont requis que si typdebCode = "P"
+Transaction :
+
+La création est transactionnelle (tout ou rien)
+La création du débiteur physique est liée au débiteur principal
+

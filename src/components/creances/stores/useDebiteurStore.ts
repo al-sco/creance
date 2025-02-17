@@ -1,6 +1,12 @@
 import { create } from 'zustand';
 import { DebiteurRepository } from '../repository/debiteur.repository';
-import { CategorieDebiteur, TypeDebiteur, DebiteurPhysique, DebiteurMoral, Domiciliation } from '../model/debiteur.model';
+import { 
+    AcDebiteur,
+    AcDebiteurPhysique,
+    DebiteurCompletDTO,
+    CategorieDebiteur,
+    TypeDebiteur
+} from '../model/debiteur.model';
 
 interface DebiteurStore {
     // États
@@ -8,24 +14,15 @@ interface DebiteurStore {
     types: TypeDebiteur[];
     loading: boolean;
     error: string | null;
-    currentDebiteur: any | null;
-    currentPhysique: DebiteurPhysique | null;
-    currentMoral: DebiteurMoral | null;
-    currentDomiciliation: Domiciliation | null;
+    currentDebiteur: AcDebiteur | null;
+    currentPhysique: AcDebiteurPhysique | null;
 
     // Actions
     fetchCategories: () => Promise<void>;
     fetchTypes: () => Promise<void>;
-    saveDebiteurComplet: (data: {
-        debiteur: any;
-        type: string;
-        physique?: DebiteurPhysique;
-        moral?: DebiteurMoral;
-        domiciliation?: Domiciliation;
-    }) => Promise<void>;
-    updateCurrentPhysique: (data: Partial<DebiteurPhysique>) => void;
-    updateCurrentMoral: (data: Partial<DebiteurMoral>) => void;
-    updateCurrentDomiciliation: (data: Partial<Domiciliation>) => void;
+    saveDebiteurComplet: (data: DebiteurCompletDTO) => Promise<any>;
+    updateCurrentDebiteur: (data: Partial<AcDebiteur>) => void;
+    updateCurrentPhysique: (data: Partial<AcDebiteurPhysique>) => void;
     resetStore: () => void;
 }
 
@@ -40,8 +37,6 @@ export const useDebiteurStore = create<DebiteurStore>((set) => {
         error: null,
         currentDebiteur: null,
         currentPhysique: null,
-        currentMoral: null,
-        currentDomiciliation: null,
 
         // Actions
         fetchCategories: async () => {
@@ -58,22 +53,23 @@ export const useDebiteurStore = create<DebiteurStore>((set) => {
 
         fetchTypes: async () => {
             try {
-                set({ loading: true, error: null });
-                const types = await repository.getTypes();
-                set({ types });
+              set({ loading: true, error: null });
+              const types = await repository.getTypes();
+              set({ types, loading: false });
             } catch (error) {
-                set({ error: "Erreur lors du chargement des types" });
-            } finally {
-                set({ loading: false });
+              set({ 
+                error: "Erreur lors du chargement des types", 
+                loading: false 
+              });
+              console.error('Erreur fetchTypes:', error);
             }
-        },
+          },
 
-        saveDebiteurComplet: async (data) => {
+        saveDebiteurComplet: async (data: DebiteurCompletDTO) => {
             try {
                 set({ loading: true, error: null });
-                const result = await repository.saveDebiteurComplet(data);
-                set({ currentDebiteur: result });
-                return result;
+                const response = await repository.createDebiteurComplet(data);
+                return response;
             } catch (error) {
                 set({ error: "Erreur lors de l'enregistrement du débiteur" });
                 throw error;
@@ -82,77 +78,26 @@ export const useDebiteurStore = create<DebiteurStore>((set) => {
             }
         },
 
-        updateCurrentPhysique: (data: Partial<DebiteurPhysique>) => {
-            set((state) => {
-                const currentPhysique: DebiteurPhysique = state.currentPhysique ?? {
-                    debCode: 0,
-                    quartCode: '',
-                    profesCode: '',
-                    natCode: '',
-                    empCode: '',
-                    statsalCode: '',
-                    fonctCode: '',
-                    debNom: '',
-                    debPren: '',
-                    debDatnaiss: null, // ou '' si vous préférez une chaîne
-                    debLieunaiss: '',
-                    debDatdec: null,
-                    teldom: '',
-                    debNatpident: '',
-                    debNumpident: '',
-                    debDatetpident: null,
-                    debLieuetpident: '',
-                    debSitmatri: '',
-                    debRue: '',
-                    debNmere: '',
-                    debPrmere: '',
-                    debNpere: '',
-                    debPrpere: '',
-                    debNbrEnf: '',
-                    debSexe: '',
-                    debMatric: '',
-                    civCode: '',
-                    debCjNom: '',
-                    debCjPren: '',
-                    debCjDatnaiss: null,
-                    debCjTel: '',
-                    debCjAdr: '',
-                    debCjNumpident: '',
-                };
-        
-                return {
-                    ...state,
-                    currentPhysique: { ...currentPhysique, ...data },
-                };
-            });
+        updateCurrentDebiteur: (data: Partial<AcDebiteur>) => {
+            set((state) => ({
+                currentDebiteur: state.currentDebiteur 
+                    ? { ...state.currentDebiteur, ...data }
+                    : data as AcDebiteur
+            }));
         },
 
-        updateCurrentMoral: (data) => {
-            set((state) => {
-                const currentMoral = state.currentMoral || {} as DebiteurMoral;
-                return {
-                    ...state,
-                    currentMoral: { ...currentMoral, ...data as DebiteurMoral }
-                };
-            });
-        },
-
-        updateCurrentDomiciliation: (data) => {
-            set((state) => {
-                const currentDomiciliation = state.currentDomiciliation || {} as Domiciliation;
-                return {
-                    ...state,
-                    currentDomiciliation: { ...currentDomiciliation, ...data as Domiciliation }
-                };
-            });
+        updateCurrentPhysique: (data: Partial<AcDebiteurPhysique>) => {
+            set((state) => ({
+                currentPhysique: state.currentPhysique 
+                    ? { ...state.currentPhysique, ...data }
+                    : data as AcDebiteurPhysique
+            }));
         },
 
         resetStore: () => {
             set({
                 currentDebiteur: null,
                 currentPhysique: null,
-                currentMoral: null,
-                currentDomiciliation: null,
                 error: null
             });
         }

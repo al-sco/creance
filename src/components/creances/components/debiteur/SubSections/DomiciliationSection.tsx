@@ -3,19 +3,18 @@ import { InputText } from 'primereact/inputtext';
 import { Calendar } from 'primereact/calendar';
 import { Dropdown } from 'primereact/dropdown';
 import { useDebiteurStore } from '../../../stores/useDebiteurStore';
-import { Domiciliation } from '../../../model/debiteur.model';
+// import { Domiciliation } from '../../../model/debiteur.model';
 
 export function DomiciliationSection() {
-  const { currentDomiciliation, updateCurrentDomiciliation } = useDebiteurStore();
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    updateCurrentDomiciliation({ [name]: value });
-  };
+  // const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const { name, value } = e.target;
+  //   updateCurrentDomiciliation({ [name]: value });
+  // };
 
-  const handleDateChange = (value: Date | null, fieldName: string) => {
-    updateCurrentDomiciliation({ [fieldName]: value });
-  };
+  // const handleDateChange = (value: Date | null, fieldName: string) => {
+  //   updateCurrentDomiciliation({ [fieldName]: value });
+  // };
 
   return (
     <div className="sub-screen">
@@ -25,8 +24,8 @@ export function DomiciliationSection() {
             <label>Banque :</label>
             <InputText
               name="banqueCode"
-              value={currentDomiciliation?.banqueCode || ''}
-              onChange={handleInputChange}
+              
+              // onChange={handleInputChange}
               className="p-inputtext"
             />
           </div>
@@ -34,8 +33,8 @@ export function DomiciliationSection() {
             <label>Agence :</label>
             <InputText
               name="agenceCode"
-              value={currentDomiciliation?.agenceCode || ''}
-              onChange={handleInputChange}
+              
+              // onChange={handleInputChange}
               className="p-inputtext"
             />
           </div>
@@ -46,16 +45,15 @@ export function DomiciliationSection() {
             <label>Numéro de compte :</label>
             <InputText
               name="domNumcompte"
-              value={currentDomiciliation?.domNumcompte || ''}
-              onChange={handleInputChange}
+              // onChange={handleInputChange}
               className="p-inputtext"
             />
           </div>
           <div className="form-group">
             <label>Date d'ouverture :</label>
             <Calendar
-              value={currentDomiciliation?.domDateouv ? new Date(currentDomiciliation.domDateouv) : null}
-              onChange={(e) => handleDateChange(e.value as Date, 'domDateouv')}
+              
+              // onChange={(e) => handleDateChange(e.value as Date, 'domDateouv')}
               dateFormat="dd/mm/yy"
             />
           </div>
@@ -66,8 +64,8 @@ export function DomiciliationSection() {
             <label>Type de compte :</label>
             <InputText
               name="domTypecompte"
-              value={currentDomiciliation?.domTypecompte || ''}
-              onChange={handleInputChange}
+              
+              // onChange={handleInputChange}
               className="p-inputtext"
             />
           </div>
@@ -75,8 +73,8 @@ export function DomiciliationSection() {
             <label>Statut du compte :</label>
             <InputText
               name="domStatutcompte"
-              value={currentDomiciliation?.domStatutcompte || ''}
-              onChange={handleInputChange}
+              
+              // onChange={handleInputChange}
               className="p-inputtext"
             />
           </div>
