@@ -79,7 +79,18 @@ export function GestionDebiteurForm() {
       debCjDatnaiss: undefined,
       debCjTel: '',
       debCjAdr: '',
-      debCjNumpident: ''
+      debCjNumpident: '',
+      quartCode: '',
+      civCode: '',
+      profesCode: '',
+      natCode: '',
+      empCode: '',
+      statsalCode: '',
+      fonctCode: '',
+      debDatdec: undefined,
+    
+
+
     });
   };
 
@@ -187,12 +198,12 @@ export function GestionDebiteurForm() {
         typdebCode: selectedType.typdebCode,
         categDebCode: selectedCategorie.categDebCode,
         debAdrpost: formData.debAdrpost,
-        debEmail: formData.debEmail,
-        debTelbur: formData.debTelbur,
-        debFax: formData.debFax,
-        debCel: formData.debCel,
-        debTeldom: formData.debTeldom,
-        debLocalisat: formData.debLocalisat
+        debEmail: formData.debEmail || undefined,
+        debTelbur: formData.debTelbur || undefined,
+        debFax: formData.debFax || undefined,
+        debCel: formData.debCel || undefined,
+        debTeldom: formData.debTeldom || undefined,
+        debLocalisat: formData.debLocalisat || undefined
       };
   
       // Si c'est un débiteur physique
@@ -206,17 +217,32 @@ export function GestionDebiteurForm() {
           return;
         }
   
-        // Ajout des informations physiques directement dans le DTO
+        // Ajout des informations physiques avec les codes des clés étrangères
         Object.assign(debiteurDTO, {
+          // Informations personnelles
           debNom: currentPhysique.debNom,
           debPren: currentPhysique.debPren,
           debDatnaiss: currentPhysique.debDatnaiss,
           debLieunaiss: currentPhysique.debLieunaiss,
+          
+          // Codes des clés étrangères (ajout des codes existants)
+          civCode: currentPhysique.civCode,          // Code civilité
+          quartCode: currentPhysique.quartCode,      // Code quartier
+          profesCode: currentPhysique.profesCode,    // Code profession
+          natCode: currentPhysique.natCode,          // Code nationalité
+          empCode: currentPhysique.empCode,          // Code employeur
+          statsalCode: currentPhysique.statsalCode,  // Code statut salarié
+          fonctCode: currentPhysique.fonctCode,      // Code fonction
+          
+          // Autres informations physiques
           debNmere: currentPhysique.debNmere,
+          debDateDeces: currentPhysique.debDatdec,
           debPrmere: currentPhysique.debPrmere,
           debNpere: currentPhysique.debNpere,
           debPrpere: currentPhysique.debPrpere,
           debNbrEnf: currentPhysique.debNbrEnf,
+          
+          // Informations conjoint
           debCjNom: currentPhysique.debCjNom,
           debCjPren: currentPhysique.debCjPren,
           debCjDatnaiss: currentPhysique.debCjDatnaiss,
@@ -228,7 +254,7 @@ export function GestionDebiteurForm() {
   
       console.log('DTO à envoyer:', debiteurDTO);
       const response = await saveDebiteurComplet(debiteurDTO);
-      
+  
       toast.current?.show({
         severity: 'success',
         summary: 'Succès',
