@@ -16,11 +16,14 @@ export interface AcDebiteur {
   debTeldom?: string;
   propCode?: string;
   garphysCode?: string;
+  debCode?: number;
 }
 
 
 
 export interface DebiteurCompletCreationDTO {
+
+  debCode?: number;
   // Informations débiteur (obligatoires)
   typdebCode: string;         // "P" ou "M"
   categDebCode: string;       // Code catégorie

@@ -47,6 +47,9 @@ const [searchDebCode, setSearchDebCode] = useState<number | null>(null);
 
 
   const resetForm = () => {
+
+    setIsEditMode(false);
+  setSearchDebCode(null);
     // Réinitialisation des états du formulaire
     setFormData({
       categDebCode: '',
@@ -138,7 +141,7 @@ const [searchDebCode, setSearchDebCode] = useState<number | null>(null);
   const [visible, setVisible] = useState<boolean>(false);
   const [globalFilter, setGlobalFilter] = useState<string>('');
   const [isSearching, setIsSearching] = useState(false);
-
+  const [isEditMode, setIsEditMode] = useState(false);
 
   const { 
     fetchDebiteurByCode,
@@ -204,18 +207,28 @@ const handleSearch = useCallback(async () => {
     console.log('Début recherche - setIsSearching(true)');
 
     setIsSearching(true);
+    console.log('Appel fetchDebiteurByCode...');
+
 
     console.log('Appel fetchDebiteurByCode...');
     const result = await fetchDebiteurByCode(searchDebCode);
     console.log('Résultat fetchDebiteurByCode:', result);
 
+
+   
+
     if (result) {
-      console.log('Résultat trouvé, mise à jour des données');
+      const debCodeToKeep = result.debCode;
+      setIsEditMode(true);
+      
+      // Log pour debug
+      console.log('Code débiteur trouvé:', debCodeToKeep);
+      
+      // Mettre à jour le code débiteur
+      setSearchDebCode(debCodeToKeep || null);
 
-
-      console.log('Mise à jour du formData avec:', result);
-
-        setFormData({
+      setFormData(prevData => ({
+        ...prevData,
           categDebCode: result.categDebCode,
           typdebCode: result.typdebCode,
           debAdrpost: result.debAdrpost || '',
@@ -225,8 +238,8 @@ const handleSearch = useCallback(async () => {
           debCel: result.debCel || '',
           debTeldom: result.debTeldom || '',
           debLocalisat: result.debLocalisat || '',
-          
-        });
+          debCode: debCodeToKeep
+        }));
         console.log('FormData mis à jour');
 
         const foundType = types.find(t => t.typdebCode === result.typdebCode);
@@ -238,6 +251,15 @@ const handleSearch = useCallback(async () => {
       setSelectedType(foundType || null);
       setSelectedCategorie(foundCategorie || null);
       console.log('Sélections mises à jour - Type:', foundType, 'Catégorie:', foundCategorie);
+
+      if (!foundType || !foundCategorie) {
+        console.warn('Type ou catégorie non trouvé:', {
+            typeRecherché: result.typdebCode,
+            categorieRecherchée: result.categDebCode,
+            typesDisponibles: types,
+            categoriesDisponibles: categories
+        });
+    }
 
       if (result.typdebCode === 'P') {
         console.log('Débiteur physique détecté, mise à jour des données physiques');
@@ -287,17 +309,18 @@ const handleSearch = useCallback(async () => {
       setTimeout(() => {
         console.log('Fermeture dialog');
         setIsSearching(false);
-        setSearchDebCode(null);
+        
         setShowSearchDialog(false);
       }, 100);
     
     }
   } catch (error) {
     console.error('Erreur complète:', error);
-    toast.current?.show({
-      severity: 'error',
-      summary: 'Erreur',
-      detail: 'Erreur lors de la recherche'
+    console.log('Début handleSave');
+    console.log('État de modification:', {
+      isEditMode,
+      searchDebCode: searchDebCode,
+      formDataDebCode: formData.debCode
     });
   } finally {
     console.log('Finally - Réinitialisation des états');
@@ -306,30 +329,63 @@ const handleSearch = useCallback(async () => {
 }, [searchDebCode, fetchDebiteurByCode, types, categories, updateCurrentPhysique, setActiveTab, handleCloseDialog, toast]);
 
 
+// Dans GestionDebiteurForm.tsx
+// Dans GestionDebiteurForm.tsx
+
+
+// Nouvelle version corrigée
 useEffect(() => {
-  const loadData = async () => {
-    console.log('Début chargement des données');
+    const loadData = async () => {
+    console.log('Début chargement des données de base');
     try {
-      const [categoriesResult, typesResult] = await Promise.all([
-        fetchCategories(),
-        fetchTypes()
-      ]);
-      console.log('Résultats chargement:', {
-        categories: categoriesResult,
-        types: typesResult
-      });
+      // Vérifier si les données sont déjà chargées
+      if (!categories.length || !types.length) {
+        // Charger les données seulement si nécessaire
+        await Promise.all([
+          fetchCategories(),
+          fetchTypes()
+        ]);
+
+        console.log('Données chargées avec succès');
+      }
     } catch (error) {
-      console.error('Erreur détaillée chargement:', error);
+      console.error('Erreur chargement données:', error);
+      toast.current?.show({
+        severity: 'error',
+        summary: 'Erreur',
+        detail: 'Erreur lors du chargement des données de base'
+      });
     }
   };
-  
+
   loadData();
+// Ne garder que les dépendances nécessaires
 }, [fetchCategories, fetchTypes, toast]);
+
+
+
 
   const handleSave = async () => {
     try {
+      console.log('Début handleSave - État actuel:', {
+        isEditMode,
+        searchDebCode,
+        formData: {
+          debCode: formData.debCode,
+          typdebCode: selectedType?.typdebCode,
+          categDebCode: selectedCategorie?.categDebCode
+        }
+      });
+
+      
       // Validation des champs obligatoires
       if (!selectedType?.typdebCode || !selectedCategorie?.categDebCode || !formData.debAdrpost) {
+        console.log('Validation échouée:', { 
+          type: selectedType?.typdebCode, 
+          categorie: selectedCategorie?.categDebCode, 
+          adresse: formData.debAdrpost 
+        });
+        
         toast.current?.show({
           severity: 'error',
           summary: 'Erreur',
@@ -338,75 +394,97 @@ useEffect(() => {
         return;
       }
   
+      console.log('Début sauvegarde/modification...');
+      console.log('Mode:', searchDebCode ? 'Modification' : 'Création');
+
+
+
+
+      
       // Construction du DTO selon le format attendu par le backend
       const debiteurDTO: DebiteurCompletCreationDTO = {
+        // Informations de base avec nettoyage
+        ...(isEditMode && { debCode: formData.debCode }), // Changement ici
         typdebCode: selectedType.typdebCode,
         categDebCode: selectedCategorie.categDebCode,
-        debAdrpost: formData.debAdrpost,
-        debEmail: formData.debEmail || undefined,
-        debTelbur: formData.debTelbur || undefined,
-        debFax: formData.debFax || undefined,
-        debCel: formData.debCel || undefined,
-        debTeldom: formData.debTeldom || undefined,
-        debLocalisat: formData.debLocalisat || undefined
-      };
+        debAdrpost: formData.debAdrpost.trim(),
+    
+        // Champs optionnels avec nettoyage
+        ...(formData.debEmail?.trim() && { debEmail: formData.debEmail.trim() }),
+        ...(formData.debTelbur?.trim() && { debTelbur: formData.debTelbur.trim() }),
+        ...(formData.debFax?.trim() && { debFax: formData.debFax.trim() }),
+        ...(formData.debCel?.trim() && { debCel: formData.debCel.trim() }),
+        ...(formData.debTeldom?.trim() && { debTeldom: formData.debTeldom.trim() }),
+        ...(formData.debLocalisat?.trim() && { debLocalisat: formData.debLocalisat.trim() })
+    };
+
+    console.log('Mode opération:', isEditMode ? 'MODIFICATION' : 'CRÉATION');
+    console.log('Code débiteur utilisé:', searchDebCode);
+    console.log('DTO final:', debiteurDTO);
+
+
   
       // Si c'est un débiteur physique
-      if (selectedType.typdebCode === 'P') {
-        if (!currentPhysique?.debNom || !currentPhysique?.debPren) {
-          toast.current?.show({
-            severity: 'error',
-            summary: 'Erreur',
-            detail: 'Nom et prénom sont obligatoires pour un débiteur physique'
-          });
-          return;
-        }
-  
-        // Ajout des informations physiques avec les codes des clés étrangères
-        Object.assign(debiteurDTO, {
-          // Informations personnelles
-          debNom: currentPhysique.debNom,
-          debPren: currentPhysique.debPren,
-          debDatnaiss: currentPhysique.debDatnaiss,
-          debLieunaiss: currentPhysique.debLieunaiss,
-          
-          // Codes des clés étrangères (ajout des codes existants)
-          civCode: currentPhysique.civCode,          // Code civilité
-          quartCode: currentPhysique.quartCode,      // Code quartier
-          profesCode: currentPhysique.profesCode,    // Code profession
-          natCode: currentPhysique.natCode,          // Code nationalité
-          empCode: currentPhysique.empCode,          // Code employeur
-          statsalCode: currentPhysique.statsalCode,  // Code statut salarié
-          fonctCode: currentPhysique.fonctCode,      // Code fonction
-          
-          // Autres informations physiques
-          debNmere: currentPhysique.debNmere,
-          debDateDeces: currentPhysique.debDatdec,
-          debPrmere: currentPhysique.debPrmere,
-          debNpere: currentPhysique.debNpere,
-          debPrpere: currentPhysique.debPrpere,
-          debNbrEnf: currentPhysique.debNbrEnf,
-          
-          // Informations conjoint
-          debCjNom: currentPhysique.debCjNom,
-          debCjPren: currentPhysique.debCjPren,
-          debCjDatnaiss: currentPhysique.debCjDatnaiss,
-          debCjTel: currentPhysique.debCjTel,
-          debCjAdr: currentPhysique.debCjAdr,
-          debCjNumpident: currentPhysique.debCjNumpident
-        });
+        // Ajout des informations physiques si nécessaire
+    if (selectedType.typdebCode === 'P' && currentPhysique) {
+      console.log('Ajout des informations physiques:', currentPhysique);
+
+      if (!currentPhysique.debNom || !currentPhysique.debPren) {
+        throw new Error('Nom et prénom sont obligatoires pour un débiteur physique');
       }
   
+      
+        Object.assign(debiteurDTO, {
+            // Informations personnelles obligatoires
+            debNom: currentPhysique.debNom.trim(),
+            debPren: currentPhysique.debPren.trim(),
+    
+            // Informations personnelles optionnelles
+            ...(currentPhysique.debDatnaiss && { debDatnaiss: currentPhysique.debDatnaiss }),
+            ...(currentPhysique.debLieunaiss?.trim() && { debLieunaiss: currentPhysique.debLieunaiss.trim() }),
+    
+            // Codes de référence
+            ...(currentPhysique.civCode && { civCode: currentPhysique.civCode }),
+            ...(currentPhysique.quartCode && { quartCode: currentPhysique.quartCode }),
+            ...(currentPhysique.profesCode && { profesCode: currentPhysique.profesCode }),
+            ...(currentPhysique.natCode && { natCode: currentPhysique.natCode }),
+            ...(currentPhysique.empCode && { empCode: currentPhysique.empCode }),
+            ...(currentPhysique.statsalCode && { statsalCode: currentPhysique.statsalCode }),
+            ...(currentPhysique.fonctCode && { fonctCode: currentPhysique.fonctCode }),
+    
+            // Autres informations
+            ...(currentPhysique.debNmere?.trim() && { debNmere: currentPhysique.debNmere.trim() }),
+            ...(currentPhysique.debPrmere?.trim() && { debPrmere: currentPhysique.debPrmere.trim() }),
+            ...(currentPhysique.debNpere?.trim() && { debNpere: currentPhysique.debNpere.trim() }),
+            ...(currentPhysique.debPrpere?.trim() && { debPrpere: currentPhysique.debPrpere.trim() }),
+            ...(currentPhysique.debNbrEnf && { debNbrEnf: currentPhysique.debNbrEnf }),
+            
+            // Informations conjoint
+            ...(currentPhysique.debCjNom?.trim() && { debCjNom: currentPhysique.debCjNom.trim() }),
+            ...(currentPhysique.debCjPren?.trim() && { debCjPren: currentPhysique.debCjPren.trim() }),
+            ...(currentPhysique.debCjDatnaiss && { debCjDatnaiss: currentPhysique.debCjDatnaiss }),
+            ...(currentPhysique.debCjTel?.trim() && { debCjTel: currentPhysique.debCjTel.trim() }),
+            ...(currentPhysique.debCjAdr?.trim() && { debCjAdr: currentPhysique.debCjAdr.trim() }),
+            ...(currentPhysique.debCjNumpident?.trim() && { debCjNumpident: currentPhysique.debCjNumpident.trim() })
+        });
+    }
       console.log('DTO à envoyer:', debiteurDTO);
       const response = await saveDebiteurComplet(debiteurDTO);
-  
+      console.log('Réponse du serveur:', response);
+
+
       toast.current?.show({
         severity: 'success',
         summary: 'Succès',
-        detail: 'Débiteur enregistré avec succès'
+        detail: searchDebCode ? 'Débiteur modifié avec succès' : 'Débiteur enregistré avec succès'
       });
   
-      resetForm();
+      if (response) {
+        resetForm();
+        setIsEditMode(false);
+        setSearchDebCode(null);
+      }
+  
     } catch (error: any) {
       console.error('Erreur détaillée:', error);
       toast.current?.show({
@@ -617,8 +695,7 @@ useEffect(() => {
     onClick={handleSave}
     disabled={loading} // Désactiver pendant le chargement
 >
-    {loading ? 'Enregistrement...' : 'Enregistrer'}
-</button>
+{loading ? 'Enregistrement...' : isEditMode ? 'Modifier' : 'Enregistrer'}</button>
 
 <Button 
     label="Modifier"
@@ -637,14 +714,23 @@ useEffect(() => {
         style={{ width: '450px' }}
         modal={true}
         closable={!isSearching}
-        onHide={() => !isSearching && handleCloseDialog()}
+        onHide={() => {
+    if (!isSearching) {
+      setShowSearchDialog(false);
+    }
+  }}
         footer={
           <div>
             <Button
               label="Annuler"
               icon="pi pi-times"
               className="p-button-text"
-              onClick={handleCloseDialog}
+              onClick={() => {
+                // Modification ici : Ne réinitialiser que si on n'est pas en train de chercher
+                if (!isSearching) {
+                  setShowSearchDialog(false);
+                }
+              }}
               disabled={isSearching}
             />
             <Button
@@ -653,8 +739,8 @@ useEffect(() => {
               className="p-button"
               onClick={handleSearch}
               loading={isSearching}
-              disabled={isSearching}
-            />
+              disabled={isSearching || !searchDebCode} // Ajout de la validation du searchDebCode
+              />
           </div>
         }
       >

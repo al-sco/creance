@@ -70,10 +70,11 @@ export const useDebiteurStore = create<DebiteurStore>((set) => {
         saveDebiteurComplet: async (data: DebiteurCompletCreationDTO) => {
             try {
                 set({ loading: true, error: null });
-                const response = await repository.createDebiteurComplet(data);
+                // Utiliser saveDebiteurComplet au lieu de createDebiteurComplet
+                const response = await repository.saveDebiteurComplet(data);
                 return response;
             } catch (error) {
-                set({ error: "Erreur lors de l'enregistrement du débiteur" });
+                set({ error: "Erreur lors de l'enregistrement/modification du débiteur" });
                 throw error;
             } finally {
                 set({ loading: false });
