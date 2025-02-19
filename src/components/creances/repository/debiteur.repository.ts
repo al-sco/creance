@@ -112,22 +112,22 @@ async saveDebiteurComplet(data: DebiteurCompletCreationDTO): Promise<any> {
         return response.data;
     }
 
-    async getQuartiers() {
+    async getQuartiers(): Promise<{ quartCode: string; quartLib: string }[]> {
         const response = await axios.get(`${this.BASE_URL}/ac-quartier`);
         return response.data;
     }
 
-    async getNationalites() {
+    async getNationalites(): Promise<{ natCode: string; natLib: string }[]> {
         const response = await axios.get(`${this.BASE_URL}/ac-nationalite`);
         return response.data;
     }
 
-    async getProfessions() {
+    async getProfessions(): Promise<{ profesCode: string; profesLib: string }[]> {
         const response = await axios.get(`${this.BASE_URL}/ac-profession`);
         return response.data;
     }
 
-    async getFonctions() {
+    async getFonctions(): Promise<{ fonctCode: string; fonctLib: string }[]> {
         const response = await axios.get(`${this.BASE_URL}/ac-fonction`);
         return response.data;
     }
@@ -137,12 +137,12 @@ async saveDebiteurComplet(data: DebiteurCompletCreationDTO): Promise<any> {
         return response.data;
     }
 
-    async getEmployeurs() {
+    async getEmployeurs(): Promise<{ empCode: string; empNom: string }[]> {
         const response = await axios.get(`${this.BASE_URL}/ac-employeur`);
         return response.data;
     }
 
-    async StatutSalaries() {
+    async StatutSalaries() : Promise<{ statsalCode: string; statsalLib: string }[]> {
         const response = await axios.get(`${this.BASE_URL}/ac-statut-salarie`);
         return response.data;
     }

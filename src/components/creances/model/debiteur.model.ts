@@ -58,13 +58,37 @@ export interface DebiteurCompletCreationDTO {
   debCjAdr?: string;
   debCjNumpident?: string;
   debDatdec?: Date;
+  debDatcreat?: Date;
+  debCjNatpident?: string;
+  
+
+  debSexe?: string;
+  debSitmatri?: string;
+  
+
+  debMatric?: string;
+  debNumpident?: string;
+  debSitFam?: string;
+  debNatpident?: string;
+  debDatetpident?: Date;
+
+  debLieuetpident?: string;
+  debNatio?: string;
+  debRue?: string;
 
   civCode?: string;
+  civLib?: string;
   quartCode?: string;
+  quartLib?: string;
   profesCode?: string;
+  profesLib?: string;
   natCode?: string;
+  natLib?: string;
   empCode?: string;
+  empNom?: string;
   statsalCode?: string;
+  statsalLib?: string;
+  fonctLib?: string;
   fonctCode?: string;
 }
 
@@ -85,6 +109,7 @@ export interface AcDebiteurPhysique {
   debSexe?: string;
   debMatric?: string;
   debDatdec?: Date;
+  debDatcreat?: Date;
 
   // Adresse et famille
   debRue?: string;
@@ -93,6 +118,7 @@ export interface AcDebiteurPhysique {
   debNpere?: string;
   debPrpere?: string;
   debNbrEnf?: string;
+  
 
   // Informations conjoint
   debCjNom?: string;
@@ -101,6 +127,11 @@ export interface AcDebiteurPhysique {
   debCjTel?: string;
   debCjAdr?: string;
   debCjNumpident?: string;
+
+  debSitFam?: string;
+  debNatio?: string;
+  debCjNatpident?: string;
+  debTeldom?: string;
 
   // Relations
   quartCode?: string;

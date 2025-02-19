@@ -22,6 +22,7 @@ import { AcDebiteurMoralSection } from "./SubSections/AcDebiteurMoralSection";
 import "../../styles/creances.css";
 import "../../styles/debiteur.css";
 import { InputNumber } from "primereact/inputnumber";
+import { DebiteurRepository } from "../../repository/debiteur.repository";
 
 export function GestionDebiteurForm() {
   const toast = useRef<Toast>(null);
@@ -75,33 +76,55 @@ const [searchDebCode, setSearchDebCode] = useState<number | null>(null);
     
     // Réinitialisation du débiteur physique via le store
     updateCurrentPhysique({
-      debNom: '',
-      debPren: '',
-      debDatnaiss: undefined,
-      debLieunaiss: '',
-      debNmere: '',
-      debPrmere: '',
-      debNpere: '',
-      debPrpere: '',
-      debNbrEnf: undefined,
-      debCjNom: '',
-      debCjPren: '',
-      debCjDatnaiss: undefined,
-      debCjTel: '',
-      debCjAdr: '',
-      debCjNumpident: '',
-      quartCode: '',
-      civCode: '',
-      profesCode: '',
-      natCode: '',
-      empCode: '',
-      statsalCode: '',
-      fonctCode: '',
-      debDatdec: undefined,
+     // Données de base
+    debNom: '',
+    debPren: '',
+    debDatnaiss: undefined,
+    debLieunaiss: '',
     
-
-
-    });
+    // Codes et libellés
+    civCode: '',
+    civLib: '',
+    quartCode: '',
+    quartLib: '',
+    natCode: '',
+    natLib: '',
+    profesCode: '',
+    profesLib: '',
+    fonctCode: '',
+    fonctLib: '',
+    empCode: '',
+    empNom: '',
+    statsalCode: '',
+    statsalLib: '',
+    
+    // Informations personnelles
+    debSexe: '',
+    debSitmatri: '',
+    debMatric: '',
+    debNumpident: '',
+    debNatpident: '',
+    debDatetpident: undefined,
+    debLieuetpident: '',
+    debNatio: '',
+    debRue: '',
+    debDatdec: undefined,
+    
+    // Informations familiales
+    debNmere: '',
+    debPrmere: '',
+    debNpere: '',
+    debPrpere: '',
+    debNbrEnf: undefined,
+    
+    // Informations conjoint
+    debCjNom: '',
+    debCjPren: '',
+    debCjDatnaiss: undefined,
+    debCjTel: '',
+    debCjAdr: '',
+    debCjNumpident: ''
+  });
   };
 
 
@@ -155,6 +178,7 @@ const [searchDebCode, setSearchDebCode] = useState<number | null>(null);
     currentPhysique,
     updateCurrentPhysique,
     
+    
   currentDebiteur,
 
   } = useDebiteurStore();
@@ -205,130 +229,180 @@ const handleSearch = useCallback(async () => {
 
   try {
     console.log('Début recherche - setIsSearching(true)');
-
     setIsSearching(true);
-    console.log('Appel fetchDebiteurByCode...');
-
 
     console.log('Appel fetchDebiteurByCode...');
     const result = await fetchDebiteurByCode(searchDebCode);
     console.log('Résultat fetchDebiteurByCode:', result);
 
-
-   
-
-    if (result) {
-      const debCodeToKeep = result.debCode;
-      setIsEditMode(true);
-      
-      // Log pour debug
-      console.log('Code débiteur trouvé:', debCodeToKeep);
-      
-      // Mettre à jour le code débiteur
-      setSearchDebCode(debCodeToKeep || null);
-
-      setFormData(prevData => ({
-        ...prevData,
-          categDebCode: result.categDebCode,
-          typdebCode: result.typdebCode,
-          debAdrpost: result.debAdrpost || '',
-          debEmail: result.debEmail || '',
-          debTelbur: result.debTelbur || '',
-          debFax: result.debFax || '',
-          debCel: result.debCel || '',
-          debTeldom: result.debTeldom || '',
-          debLocalisat: result.debLocalisat || '',
-          debCode: debCodeToKeep
-        }));
-        console.log('FormData mis à jour');
-
-        const foundType = types.find(t => t.typdebCode === result.typdebCode);
-      const foundCategorie = categories.find(c => c.categDebCode === result.categDebCode);
-      console.log('Type trouvé:', foundType);
-      console.log('Catégorie trouvée:', foundCategorie);
-
-
-      setSelectedType(foundType || null);
-      setSelectedCategorie(foundCategorie || null);
-      console.log('Sélections mises à jour - Type:', foundType, 'Catégorie:', foundCategorie);
-
-      if (!foundType || !foundCategorie) {
-        console.warn('Type ou catégorie non trouvé:', {
-            typeRecherché: result.typdebCode,
-            categorieRecherchée: result.categDebCode,
-            typesDisponibles: types,
-            categoriesDisponibles: categories
-        });
+    if (!result) {
+      throw new Error('Débiteur non trouvé');
     }
 
-      if (result.typdebCode === 'P') {
-        console.log('Débiteur physique détecté, mise à jour des données physiques');
+    const debCodeToKeep = result.debCode;
+    console.log('Code débiteur trouvé:', debCodeToKeep);
 
+    // Activation du mode édition
+    setIsEditMode(true);
+    setSearchDebCode(debCodeToKeep || null);
+    console.log('Mode édition activé');
+
+    // Mise à jour du formData
+    setFormData(prevData => ({
+      ...prevData,
+      debCode: debCodeToKeep,
+      categDebCode: result.categDebCode,
+      typdebCode: result.typdebCode,
+      debAdrpost: result.debAdrpost || '',
+      debEmail: result.debEmail || '',
+      debTelbur: result.debTelbur || '',
+      debFax: result.debFax || '',
+      debCel: result.debCel || '',
+      debTeldom: result.debTeldom || '',
+      debLocalisat: result.debLocalisat || '',
+    }));
+    console.log('FormData mis à jour');
+
+    // Recherche et mise à jour du type et de la catégorie
+    const foundType = types.find(t => t.typdebCode === result.typdebCode);
+    const foundCategorie = categories.find(c => c.categDebCode === result.categDebCode);
+    console.log('Type trouvé:', foundType);
+    console.log('Catégorie trouvée:', foundCategorie);
+
+    setSelectedType(foundType || null);
+    setSelectedCategorie(foundCategorie || null);
+    console.log('Sélections mises à jour - Type:', foundType, 'Catégorie:', foundCategorie);
+
+    // Gestion du débiteur physique
+    if (result.typdebCode === 'P') {
+      console.log('Débiteur physique détecté, mise à jour des données physiques');
+      
+      const repository = new DebiteurRepository();
+      
+      try {
+        // Chargement des données de référence
+        const [
+          civilites,
+          quartiers,
+          nationalites,
+          professions,
+          fonctions,
+          employeurs,
+          statutSalaires
+        ] = await Promise.all([
+          repository.getCivilites(),
+          repository.getQuartiers(),
+          repository.getNationalites(),
+          repository.getProfessions(),
+          repository.getFonctions(),
+          repository.getEmployeurs(),
+          repository.StatutSalaries()
+        ]);
+
+        // Recherche des libellés
+        const civLib = civilites.find(c => c.civCode === result.civCode)?.civLib || '';
+        const quartLib = quartiers.find(q => q.quartCode === result.quartCode)?.quartLib || '';
+        const natLib = nationalites.find(n => n.natCode === result.natCode)?.natLib || '';
+        const profesLib = professions.find(p => p.profesCode === result.profesCode)?.profesLib || '';
+        const fonctLib = fonctions.find(f => f.fonctCode === result.fonctCode)?.fonctLib || '';
+        const empNom = employeurs.find(e => e.empCode === result.empCode)?.empNom || '';
+        const statsalLib = statutSalaires.find(s => s.statsalCode === result.statsalCode)?.statsalLib || '';
+
+        // Mise à jour des données physiques
         updateCurrentPhysique({
+          // Données de base
           debNom: result.debNom || '',
           debPren: result.debPren || '',
           debDatnaiss: result.debDatnaiss,
           debLieunaiss: result.debLieunaiss || '',
+
+          // Codes et libellés
           civCode: result.civCode || '',
+          civLib,
           quartCode: result.quartCode || '',
-          profesCode: result.profesCode || '',
+          quartLib,
           natCode: result.natCode || '',
-          empCode: result.empCode || '',
-          statsalCode: result.statsalCode || '',
+          natLib,
+          profesCode: result.profesCode || '',
+          profesLib,
           fonctCode: result.fonctCode || '',
+          fonctLib,
+          empCode: result.empCode || '',
+          empNom,
+          statsalCode: result.statsalCode || '',
+          statsalLib,
+
+          // Informations personnelles
+          debSexe: result.debSexe || '',
+          debSitmatri: result.debSitmatri || '',
+          debMatric: result.debMatric || '',
+          debNumpident: result.debNumpident || '',
+          debNatpident: result.debNatpident || '',
+          debDatetpident: result.debDatetpident,
+          debLieuetpident: result.debLieuetpident || '',
+          debNatio: result.debNatio || '',
+          debRue: result.debRue || '',
+          debDatdec: result.debDatdec,
+
+          // Informations familiales
           debNmere: result.debNmere || '',
           debPrmere: result.debPrmere || '',
           debNpere: result.debNpere || '',
           debPrpere: result.debPrpere || '',
           debNbrEnf: result.debNbrEnf,
+
+          // Informations conjoint
           debCjNom: result.debCjNom || '',
           debCjPren: result.debCjPren || '',
           debCjDatnaiss: result.debCjDatnaiss,
           debCjTel: result.debCjTel || '',
           debCjAdr: result.debCjAdr || '',
           debCjNumpident: result.debCjNumpident || '',
-          debDatdec: result.debDatdec
+          debCjNatpident: result.debCjNatpident || '',
         });
-        
+
         console.log('Données physiques mises à jour');
         setActiveTab('physique');
         console.log('Onglet physique activé');
+
+      } catch (error) {
+        console.error('Erreur lors du chargement des données de référence:', error);
       }
-        
-        // Message de succès
-        toast.current?.show({
-          severity: 'success',
-          summary: 'Succès',
-          detail: 'Débiteur trouvé'
-        });
-
-        console.log('Début fermeture dialog');
-      console.log('Dialog fermé');
-
-      console.log('Début fermeture dialog');
-      setTimeout(() => {
-        console.log('Fermeture dialog');
-        setIsSearching(false);
-        
-        setShowSearchDialog(false);
-      }, 100);
-    
     }
+
+    // Message de succès et fermeture
+    toast.current?.show({
+      severity: 'success',
+      summary: 'Succès',
+      detail: 'Débiteur trouvé'
+    });
+
+    console.log('Début fermeture dialog');
+    setTimeout(() => {
+      setShowSearchDialog(false);
+      console.log('Dialog fermé');
+    }, 100);
+
   } catch (error) {
-    console.error('Erreur complète:', error);
-    console.log('Début handleSave');
-    console.log('État de modification:', {
-      isEditMode,
-      searchDebCode: searchDebCode,
-      formDataDebCode: formData.debCode
+    console.error('Erreur recherche débiteur:', error);
+    toast.current?.show({
+      severity: 'error',
+      summary: 'Erreur',
+      detail: 'Erreur lors de la recherche du débiteur'
     });
   } finally {
-    console.log('Finally - Réinitialisation des états');
+    console.log('Finally - Réinitialisation des états de recherche');
     setIsSearching(false);
   }
-}, [searchDebCode, fetchDebiteurByCode, types, categories, updateCurrentPhysique, setActiveTab, handleCloseDialog, toast]);
-
-
+}, [
+  searchDebCode,
+  fetchDebiteurByCode,
+  types,
+  categories,
+  updateCurrentPhysique,
+  setActiveTab,
+  toast
+]);
 // Dans GestionDebiteurForm.tsx
 // Dans GestionDebiteurForm.tsx
 
@@ -408,6 +482,8 @@ useEffect(() => {
         typdebCode: selectedType.typdebCode,
         categDebCode: selectedCategorie.categDebCode,
         debAdrpost: formData.debAdrpost.trim(),
+  
+
     
         // Champs optionnels avec nettoyage
         ...(formData.debEmail?.trim() && { debEmail: formData.debEmail.trim() }),
@@ -444,20 +520,38 @@ useEffect(() => {
             ...(currentPhysique.debLieunaiss?.trim() && { debLieunaiss: currentPhysique.debLieunaiss.trim() }),
     
             // Codes de référence
-            ...(currentPhysique.civCode && { civCode: currentPhysique.civCode }),
-            ...(currentPhysique.quartCode && { quartCode: currentPhysique.quartCode }),
-            ...(currentPhysique.profesCode && { profesCode: currentPhysique.profesCode }),
-            ...(currentPhysique.natCode && { natCode: currentPhysique.natCode }),
-            ...(currentPhysique.empCode && { empCode: currentPhysique.empCode }),
-            ...(currentPhysique.statsalCode && { statsalCode: currentPhysique.statsalCode }),
-            ...(currentPhysique.fonctCode && { fonctCode: currentPhysique.fonctCode }),
-    
+            ...(currentPhysique.civCode?.trim() && { civCode: currentPhysique.civCode.trim() }),
+            ...(currentPhysique.civLib?.trim() && { civLib: currentPhysique.civLib.trim() }),
+            ...(currentPhysique.quartCode?.trim() && { quartCode: currentPhysique.quartCode.trim() }),
+            ...(currentPhysique.quartLib?.trim() && { quartLib: currentPhysique.quartLib.trim() }),
+            ...(currentPhysique.profesCode?.trim() && { profesCode: currentPhysique.profesCode.trim() }),
+            ...(currentPhysique.profesLib?.trim() && { profesLib: currentPhysique.profesLib.trim() }),
+            ...(currentPhysique.natCode?.trim() && { natCode: currentPhysique.natCode.trim() }),
+            ...(currentPhysique.natLib?.trim() && { natLib: currentPhysique.natLib.trim() }),
+            ...(currentPhysique.empCode?.trim() && { empCode: currentPhysique.empCode.trim() }),
+            ...(currentPhysique.empNom?.trim() && { empNom: currentPhysique.empNom.trim() }),
+            ...(currentPhysique.statsalCode?.trim() && { statsalCode: currentPhysique.statsalCode.trim() }),
+            ...(currentPhysique.statsalLib?.trim() && { statsalLib: currentPhysique.statsalLib.trim() }),
+            ...(currentPhysique.fonctCode?.trim() && { fonctCode: currentPhysique.fonctCode.trim() }),
+            ...(currentPhysique.fonctLib?.trim() && { fonctLib: currentPhysique.fonctLib.trim() }),   
             // Autres informations
             ...(currentPhysique.debNmere?.trim() && { debNmere: currentPhysique.debNmere.trim() }),
             ...(currentPhysique.debPrmere?.trim() && { debPrmere: currentPhysique.debPrmere.trim() }),
             ...(currentPhysique.debNpere?.trim() && { debNpere: currentPhysique.debNpere.trim() }),
             ...(currentPhysique.debPrpere?.trim() && { debPrpere: currentPhysique.debPrpere.trim() }),
             ...(currentPhysique.debNbrEnf && { debNbrEnf: currentPhysique.debNbrEnf }),
+            ...(currentPhysique.debSexe?.trim() && { debSexe: currentPhysique.debSexe.trim() }),
+            ...(currentPhysique.debSitmatri?.trim() && { debSitmatri: currentPhysique.debSitmatri.trim() }),
+            ...(currentPhysique.debMatric?.trim() && { debMatric: currentPhysique.debMatric.trim() }),
+            ...(currentPhysique.debNumpident?.trim() && { debNumpident: currentPhysique.debNumpident.trim() }),
+            ...(currentPhysique.debNatpident?.trim() && { debNatpident: currentPhysique.debNatpident.trim() }),
+            ...(currentPhysique.debDatetpident && { debDatetpident: currentPhysique.debDatetpident }),
+            ...(currentPhysique.debLieuetpident?.trim() && { debLieuetpident: currentPhysique.debLieuetpident.trim() }),
+            ...(currentPhysique.debDatdec && { debDatdec: currentPhysique.debDatdec }),
+            ...(currentPhysique.debNatio?.trim() && { debNatio: currentPhysique.debNatio.trim() }),
+            ...(currentPhysique.debRue?.trim() && { debRue: currentPhysique.debRue.trim() }),
+            ...(currentPhysique.debCjNatpident?.trim() && { debCjNatpident: currentPhysique.debCjNatpident.trim() }),
+            ...(currentPhysique.debDatcreat && { debDatcreat: currentPhysique.debDatcreat }),
             
             // Informations conjoint
             ...(currentPhysique.debCjNom?.trim() && { debCjNom: currentPhysique.debCjNom.trim() }),
@@ -594,8 +688,8 @@ useEffect(() => {
                 <div className="debiteur-form-group decalFax">
               <label>Fax :</label>
               <InputText
-                name="debTelbur"
-                value={formData.debTelbur}
+                name="debFax"
+                value={formData.debFax}
                 onChange={handleInputChange}
                 className="debiteur-input debiteur-fax"
               />
