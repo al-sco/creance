@@ -3,82 +3,91 @@ import { InputText } from 'primereact/inputtext';
 import { Calendar } from 'primereact/calendar';
 import { InputNumber } from 'primereact/inputnumber';
 import { useDebiteurStore } from '../../../stores/useDebiteurStore';
-// import { DebiteurMoral } from '../../../model/debiteur.model';
+import { AcDebiteurMoral } from '../../../model/debiteur.model';
 
 export function AcDebiteurMoralSection() {
-  // const { currentMoral, updateCurrentMoral } = useDebiteurStore();
+  const { currentMoral, updateCurrentMoral } = useDebiteurStore();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   const { name, value } = e.target;
-  //   updateCurrentMoral({ [name]: value });
-  // };
-
-  // const handleDateChange = (value: Date | null, fieldName: string) => {
-  //   updateCurrentMoral({ [fieldName]: value });
-  // };
-
-  // const handleNumberChange = (value: number | null, fieldName: string) => {
-  //   updateCurrentMoral({ [fieldName]: value });
+    const { name, value } = e.target;
+    console.log('[MoralSection] Input change:', { name, value });
+    updateCurrentMoral({ [name]: value });
   };
+
+  const handleDateChange = (value: Date | null, fieldName: string) => {
+    console.log('[MoralSection] Date change:', { fieldName, value });
+    updateCurrentMoral({ [fieldName]: value });
+  };
+
+  const handleNumberChange = (value: number | null, fieldName: string) => {
+    console.log('[MoralSection] Number change:', { fieldName, value });
+    updateCurrentMoral({ [fieldName]: value });
+  };
+
+  // Log initial state
+  useEffect(() => {
+    console.log('[MoralSection] Initial moral data:', currentMoral);
+  }, []);
 
   return (
     <div className="sub-screen">
       <div className="form-grid">
         <div className="form-row">
           <div className="form-group">
-            <label>Raison Sociale :</label>
+            <label htmlFor="debRaisSociale">Raison Sociale* :</label>
             <InputText
+              id="debRaisSociale"
               name="debRaisSociale"
-              // value={currentMoral?.debRaisSociale || ''}
+              value={currentMoral?.debRaisSociale || ''}
               onChange={handleInputChange}
               className="p-inputtext"
+              required
             />
           </div>
           <div className="form-group">
-            <label>Registre de Commerce :</label>
+            <label htmlFor="debRegistcom">Registre de Commerce* :</label>
             <InputText
+              id="debRegistcom"
               name="debRegistcom"
-              // value={currentMoral?.debRegistcom || ''}
+              value={currentMoral?.debRegistcom || ''}
               onChange={handleInputChange}
               className="p-inputtext"
+              required
             />
           </div>
         </div>
 
         <div className="form-row">
+          
           <div className="form-group">
-            <label>Date de création :</label>
-            <Calendar
-              // value={currentMoral?.debDatcreat ? new Date(currentMoral.debDatcreat) : null}
-              // onChange={(e) => handleDateChange(e.value as Date, 'debDatcreat')}
-              dateFormat="dd/mm/yy"
-            />
-          </div>
-          <div className="form-group">
-            <label>Capital Social :</label>
+            <label htmlFor="debCapitsocial">Capital Social :</label>
             <InputNumber
-              name="debCapitsocial"
-              // value={currentMoral?.debCapitsocial || null}
-              // onValueChange={(e) => handleNumberChange(e.value, 'debCapitsocial')}
+              id="debCapitsocial"
+              value={currentMoral?.debCapitsocial || null}
+              onValueChange={(e) => handleNumberChange(e.value, 'debCapitsocial')}
+              mode="decimal"
+              minFractionDigits={0}
             />
           </div>
         </div>
 
         <div className="form-row">
           <div className="form-group">
-            <label>Forme Juridique :</label>
+            <label htmlFor="debFormJurid">Forme Juridique :</label>
             <InputText
+              id="debFormJurid"
               name="debFormJurid"
-              // value={currentMoral?.debFormJurid || ''}
+              value={currentMoral?.debFormJurid || ''}
               onChange={handleInputChange}
               className="p-inputtext"
             />
           </div>
           <div className="form-group">
-            <label>Domaine d'Activité :</label>
+            <label htmlFor="debDomActiv">Domaine d'Activité :</label>
             <InputText
+              id="debDomActiv"
               name="debDomActiv"
-              // value={currentMoral?.debDomActiv || ''}
+              value={currentMoral?.debDomActiv || ''}
               onChange={handleInputChange}
               className="p-inputtext"
             />
@@ -87,19 +96,21 @@ export function AcDebiteurMoralSection() {
 
         <div className="form-row">
           <div className="form-group">
-            <label>Siège Social :</label>
+            <label htmlFor="debSiegSocial">Siège Social :</label>
             <InputText
+              id="debSiegSocial"
               name="debSiegSocial"
-              // value={currentMoral?.debSiegSocial || ''}
+              value={currentMoral?.debSiegSocial || ''}
               onChange={handleInputChange}
               className="p-inputtext"
             />
           </div>
           <div className="form-group">
-            <label>Nom du Gérant :</label>
+            <label htmlFor="debNomGerant">Nom du Gérant :</label>
             <InputText
+              id="debNomGerant"
               name="debNomGerant"
-              // value={currentMoral?.debNomGerant || ''}
+              value={currentMoral?.debNomGerant || ''}
               onChange={handleInputChange}
               className="p-inputtext"
             />

@@ -90,6 +90,33 @@ export interface DebiteurCompletCreationDTO {
   statsalLib?: string;
   fonctLib?: string;
   fonctCode?: string;
+
+
+
+
+
+
+
+  debRaisSociale?: string;
+  debRegistcom?: string;
+  debCapitsocial?: number;
+  debFormJurid?: string;
+  debDomActiv?: string;
+  debSiegSocial?: string;
+  debNomGerant?: string;
+  
+}
+
+export interface AcDebiteurMoral {
+  // Informations spécifiques au débiteur moral
+  debRaisSociale: string;
+  debRegistcom: string;
+  debCapitsocial?: number;
+  debFormJurid?: string;
+  debDomActiv?: string;
+  debSiegSocial?: string;
+  debNomGerant?: string;
+  debDatcreat?: Date;
 }
 
 

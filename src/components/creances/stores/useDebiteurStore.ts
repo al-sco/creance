@@ -3,7 +3,7 @@ import { DebiteurRepository } from '../repository/debiteur.repository';
 import { 
     AcDebiteur,
     AcDebiteurPhysique,
-    
+    AcDebiteurMoral,
     DebiteurCompletCreationDTO,
     CategorieDebiteur,
     TypeDebiteur
@@ -17,6 +17,7 @@ interface DebiteurStore {
     error: string | null;
     currentDebiteur: AcDebiteur | null;
     currentPhysique: AcDebiteurPhysique | null;
+    currentMoral: AcDebiteurMoral | null;
 
     // Actions
     fetchCategories: () => Promise<void>;
@@ -24,6 +25,7 @@ interface DebiteurStore {
     saveDebiteurComplet: (data: DebiteurCompletCreationDTO) => Promise<any>;  // Changement ici
     updateCurrentDebiteur: (data: Partial<AcDebiteur>) => void;
     updateCurrentPhysique: (data: Partial<AcDebiteurPhysique>) => void;
+    updateCurrentMoral: (data: Partial<AcDebiteurMoral>) => void;
     resetStore: () => void;
     fetchDebiteurByCode: (debCode: number) => Promise<DebiteurCompletCreationDTO>;
 }
@@ -39,6 +41,7 @@ export const useDebiteurStore = create<DebiteurStore>((set) => {
         error: null,
         currentDebiteur: null,
         currentPhysique: null,
+        currentMoral: null,
 
         // Actions
         fetchCategories: async () => {
@@ -157,10 +160,21 @@ export const useDebiteurStore = create<DebiteurStore>((set) => {
             }));
         },
 
+        updateCurrentMoral: (data: Partial<AcDebiteurMoral>) => {
+            console.log('Updating moral data:', data);
+            set((state) => ({
+                currentMoral: state.currentMoral 
+                    ? { ...state.currentMoral, ...data }
+                    : data as AcDebiteurMoral
+            }));
+        },
+
         resetStore: () => {
+            console.log('Resetting store including moral data');
             set({
                 currentDebiteur: null,
                 currentPhysique: null,
+                currentMoral: null,
                 error: null
             });
         }

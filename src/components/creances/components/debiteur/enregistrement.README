@@ -1,134 +1,103 @@
-Je vais vous expliquer la structure complète pour l'enregistrement d'un débiteur et débiteur physique :
-
-1. Structure du Backend:
-graph TD
-    A[Controller] --> B[CasUtilisation]
-    B --> C[Port]
-    C --> D[Adapteur]
-    D --> E[Repository]
-
-Dans le dossier Debiteur, nous avons :
-Debiteur/
-├── adapteur/
-│   └── OracleDebiteurCompletAdapteur.java
-├── casutilisation/
-│   └── DebiteurCompletCasUtilisation.java
-├── dto/
-│   ├── commande/
-│   │   └── DebiteurCompletCreationDTO.java
-│   └── vm/
-│       └── DebiteurCompletVM.java
-├── port/
-│   └── DebiteurCompletPort.java
-└── rest/
-    └── DebiteurCompletController.java
-
-
-GitHub Copilot
-Recherche de Debiteur Debiteur effectuée
-
-Je vais vous expliquer la structure complète pour l'enregistrement d'un débiteur et débiteur physique :
-
-1. Structure du Backend
-Dans le dossier Debiteur, nous avons :
-
-2. Format des Données
-// Format attendu par l'API
-interface DebiteurCreationDTO {
-  // Informations débiteur (obligatoires)
-  typdebCode: string;         // "P" (Physique) ou "M" (Moral)
-  categDebCode: string;       // Code catégorie (ex: "06")
-  
-  // Informations communes
-  debAdrpost?: string;       // Adresse postale
-  debEmail?: string;         // Email
-  debTelbur?: string;        // Téléphone bureau
-  debFax?: string;           // Fax
-  debCel?: string;           // Cellulaire
-  debTeldom?: string;        // Téléphone domicile
-  debLocalisat?: string;     // Localisation
-
-  // Informations débiteur physique (si typdebCode = "P")
-  debNom?: string;           // Nom
-  debPren?: string;          // Prénom
-  debDatnaiss?: Date;        // Date naissance
-  debLieunaiss?: string;     // Lieu naissance
-  
-  // Informations familiales
-  debNmere?: string;         // Nom mère
-  debPrmere?: string;        // Prénom mère
-  debNpere?: string;         // Nom père
-  debPrpere?: string;        // Prénom père
-  debNbrEnf?: string;        // Nombre enfants
-  
-  // Informations conjoint
-  debCjNom?: string;         // Nom conjoint
-  debCjPren?: string;        // Prénom conjoint
-  debCjDatnaiss?: Date;      // Date naissance conjoint
-  debCjTel?: string;         // Téléphone conjoint
-  debCjAdr?: string;         // Adresse conjoint
-  debCjNumpident?: string;   // Numéro pièce identité conjoint
+Documentation API - Débiteur Moral et Domiciliation
+1. Gestion des Débiteurs Moraux
+Endpoints
+Création d'un débiteur moral
+POST /api/v1/ac-debiteur-moral
+Corps de la requête :
+{     //elle est pareil a celui de Debiteur qui est déjà géré
+    "debAdrpost": "Adresse postale",
+    "debCel": "Téléphone cellulaire",
+    "debEmail": "email@example.com",
+    "debTelbur": "Téléphone bureau",
+    "debFax": "Numéro fax",
+    "debCodeCharg": "CODE_CHARG",
+    "debCodeAnc": "CODE_ANC",
+    "debLocalisat": "Localisation",
+    "debTeldom": "Téléphone domicile",
+    "categDebCode": "CAT1",
+    "propCode": "PROP1",
+    "garphysCode": "GAR1",
+    "typdebCode": "M", si le Type selectionner est M
+    
+    //les champs de l'écran de Moral
+    "debRaisSociale": "Raison sociale",
+    "debRegistcom": "Numéro RC",
+    "debCapitsocial": 1000000,
+    "debFormJurid": "SARL",
+    "debDomActiv": "Domaine d'activité",
+    "debSiegSocial": "Siège social",
+    "debNomGerant": "Nom du gérant",
+    
 }
 
-3. Exemple d'Utilisation API
-// 1. Création d'un débiteur physique
-const nouveauDebiteur = {
-  typdebCode: "P",
-  categDebCode: "06",
-  debAdrpost: "123 Rue Example",
-  debNom: "Doe",
-  debPren: "John",
-  // ... autres champs
-};
+Récupération d'un débiteur moral
+GET /api/v1/ac-debiteur-moral/{debCode}
+Modification d'un débiteur moral
+PUT /api/v1/ac-debiteur-moral/{debCode}
 
-// 2. Appel API
-try {
-  const response = await axios.post('/api/v1/debiteurs-complet', nouveauDebiteur);
-  console.log('Débiteur créé:', response.data);
-} catch (error) {
-  console.error('Erreur:', error.response?.data);
+2. Gestion des Domiciliations
+Endpoints
+Liste des domiciliations d'un débiteur
+GET /api/v1/debiteurs/{debCode}/domiciliations
+
+Corps de la requête :
+{
+    "domCode": "DOM001",
+    "domLib": "Libellé domiciliation",   
+    
+    "bqagCode": "CODE_AGENCE",
+    "bqagLib": "Libellé agence",
+    "bqCode": "BQ001",
+    "bqLib": "Libellé banque",
+    
+    "typdomCode": "1",
+    "typdomLib": "Type domiciliation",
+ 
 }
 
-4. Flux de Traitement Backend
-Controller (DebiteurCompletController.java):
-@PostMapping
-public ResponseEntity<DebiteurCompletVM> creer(@RequestBody DebiteurCompletCreationDTO dto) {
-    return ResponseEntity.ok(debiteurCompletPort.creer(dto));
-}
 
-Adapteur (OracleDebiteurCompletAdapteur.java):
-@Transactional
-public DebiteurCompletVM creer(DebiteurCompletCreationDTO dto) {
-    // 1. Validation du type débiteur
-    if (dto.getTypdebCode() == null) {
-        throw new IllegalArgumentException("Le type de débiteur est obligatoire");
-    }
+Modification d'une domiciliation
+PUT /api/v1/debiteurs/{debCode}/domiciliations/{domCode}
 
-    // 2. Création débiteur
-    AcDebiteur debiteur = new AcDebiteur();
-    // ... configuration débiteur
+Associations et Relations
+Agence Bancaire (bqagCode)
 
-    // 3. Sauvegarde débiteur
-    debiteur = debiteurRepository.save(debiteur);
+Affiche automatiquement :
+Le libellé de l'agence (bqagLib)
+Le code de la banque (bqCode)
+Le libellé de la banque (bqLib)
+Type de Domiciliation (typdomCode)
 
-    // 4. Création débiteur physique si nécessaire
-    if (dto.getDebNom() != null || dto.getDebPren() != null) {
-        AcDebiteurPhysique debiteurPhysique = new AcDebiteurPhysique();
-        // ... configuration physique
-        debiteurPhysique = debiteurPhysiqueRepository.save(debiteurPhysique);
-        return new DebiteurCompletVM(debiteur, debiteurPhysique);
-    }
+Affiche automatiquement :
+Le libellé du type (typdomLib)
+3. Workflow Frontend
+Création d'un Débiteur Moral
 
-    return new DebiteurCompletVM(debiteur, null);
-}
+Saisir les informations du débiteur
+POST vers /api/v1/ac-debiteur-moral
+Récupérer le debCode généré
+Ajout d'une Domiciliation
 
-5. Points Importants
-Validation :
+Utiliser le debCode récupéré
+Sélectionner l'agence bancaire (bqagCode)
+Les informations banque s'affichent automatiquement
+Sélectionner le type de domiciliation
+POST vers /api/v1/debiteurs/{debCode}/domiciliations
+Modification
 
-typdebCode est obligatoire ("P" ou "M")
-Les champs physiques ne sont requis que si typdebCode = "P"
-Transaction :
+Les modifications du débiteur et de ses domiciliations sont indépendantes
+Possibilité de modifier les deux dans la même interface
+4. Points d'Attention
+Validations
 
-La création est transactionnelle (tout ou rien)
-La création du débiteur physique est liée au débiteur principal
+typdebCode doit être "M" pour débiteur moral
+domCode doit être unique
+bqagCode et typdomCode sont obligatoires
+Performance
 
+Les listes déroulantes (agences, types) doivent être chargées au démarrage
+Les informations bancaires sont chargées à la sélection de l'agence
+Gestion des Erreurs
+
+Codes HTTP standards (200, 201, 400, 404, 500)
+Messages d'erreur explicites dans la réponse
