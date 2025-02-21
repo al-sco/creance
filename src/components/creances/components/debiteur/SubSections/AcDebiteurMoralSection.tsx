@@ -14,11 +14,6 @@ export function AcDebiteurMoralSection() {
     updateCurrentMoral({ [name]: value });
   };
 
-  const handleDateChange = (value: Date | null, fieldName: string) => {
-    console.log('[MoralSection] Date change:', { fieldName, value });
-    updateCurrentMoral({ [fieldName]: value });
-  };
-
   const handleNumberChange = (value: number | null, fieldName: string) => {
     console.log('[MoralSection] Number change:', { fieldName, value });
     updateCurrentMoral({ [fieldName]: value });
@@ -64,7 +59,7 @@ export function AcDebiteurMoralSection() {
             <InputNumber
               id="debCapitsocial"
               value={currentMoral?.debCapitsocial || null}
-              onValueChange={(e) => handleNumberChange(e.value, 'debCapitsocial')}
+              onValueChange={(e) => handleNumberChange(e.value ?? null, 'debCapitsocial')}
               mode="decimal"
               minFractionDigits={0}
             />

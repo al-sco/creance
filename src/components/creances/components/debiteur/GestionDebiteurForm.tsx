@@ -9,6 +9,7 @@ import { ProgressSpinner } from "primereact/progressspinner";
 import { Toast } from 'primereact/toast';
 import { useDebiteurStore } from "../../stores/useDebiteurStore";
 
+
 import { 
   TypeDebiteur, 
   CategorieDebiteur, 
@@ -26,6 +27,8 @@ import { DebiteurRepository } from "../../repository/debiteur.repository";
 
 export function GestionDebiteurForm() {
   const toast = useRef<Toast>(null);
+  const { currentMoral, currentPhysique } = useDebiteurStore();
+
   const [formData, setFormData] = useState<AcDebiteur>({
     categDebCode: '',
     typdebCode: '',
@@ -175,9 +178,8 @@ const [searchDebCode, setSearchDebCode] = useState<number | null>(null);
     fetchCategories, 
     fetchTypes, 
     saveDebiteurComplet, 
-    currentPhysique,
     updateCurrentPhysique,
-    
+    updateCurrentMoral,
     
   currentDebiteur,
 
@@ -491,8 +493,28 @@ useEffect(() => {
         ...(formData.debFax?.trim() && { debFax: formData.debFax.trim() }),
         ...(formData.debCel?.trim() && { debCel: formData.debCel.trim() }),
         ...(formData.debTeldom?.trim() && { debTeldom: formData.debTeldom.trim() }),
-        ...(formData.debLocalisat?.trim() && { debLocalisat: formData.debLocalisat.trim() })
+        ...(formData.debLocalisat?.trim() && { debLocalisat: formData.debLocalisat.trim() }),
+
+      
+
+
+
+
+        // Ajouter les informations du débiteur moral si nécessaire
+        ...(selectedType.typdebCode === 'M' && currentMoral && {
+          debRaisSociale: currentMoral.debRaisSociale?.trim(),
+          debRegistcom: currentMoral.debRegistcom?.trim(),
+          debCapitsocial: currentMoral.debCapitsocial,
+          debFormJurid: currentMoral.debFormJurid?.trim(),
+          debDomActiv: currentMoral.debDomActiv?.trim(),
+          debSiegSocial: currentMoral.debSiegSocial?.trim(),
+          debNomGerant: currentMoral.debNomGerant?.trim()
+        })
     };
+
+    if (selectedType.typdebCode === 'M' && !currentMoral?.debRaisSociale) {
+      throw new Error('La raison sociale est obligatoire pour un débiteur moral');
+    }
 
     console.log('Mode opération:', isEditMode ? 'MODIFICATION' : 'CRÉATION');
     console.log('Code débiteur utilisé:', searchDebCode);

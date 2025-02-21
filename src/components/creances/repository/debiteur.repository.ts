@@ -26,37 +26,22 @@ export class DebiteurRepository {
             const isModification = Boolean(data.debCode);
             const isMoral = data.typdebCode === 'M';
             
-            console.log('Saving debtor:', {
-                isModification,
-                isMoral,
-                data
-            });
-
-            if (isModification) {
-                const url = isMoral 
-                    ? `${this.BASE_URL}/ac-debiteur-moral/${data.debCode}`
-                    : `${this.API_URL}/${data.debCode}`;
-                
-                return await axios.put(url, data, {
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json'
-                    }
-                });
-            } else {
-                const url = isMoral 
-                    ? `${this.BASE_URL}/ac-debiteur-moral`
-                    : this.API_URL;
-                
-                return await axios.post(url, data, {
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json'
-                    }
-                });
-            }
-        } catch (error: any) {
-            console.error('Error saving debtor:', error);
+            // Correction de l'URL selon la documentation
+            const url = isMoral 
+                ? `${this.BASE_URL}/debiteurs-moral${isModification ? `/${data.debCode}` : ''}`
+                : `${this.BASE_URL}/debiteurs-complet${isModification ? `/${data.debCode}` : ''}`;
+            
+            console.log('URL utilisée:', url);
+            console.log('Données envoyées:', data);
+            
+            const method = isModification ? 'put' : 'post';
+            const response = await axios[method](url, data);
+            
+            console.log('Réponse du serveur:', response.data);
+            return response.data;
+            
+        } catch (error) {
+            console.error('Erreur lors de la sauvegarde:', error);
             throw error;
         }
     }

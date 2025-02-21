@@ -2,7 +2,7 @@ Documentation API - Débiteur Moral et Domiciliation
 1. Gestion des Débiteurs Moraux
 Endpoints
 Création d'un débiteur moral
-POST /api/v1/ac-debiteur-moral
+POST /api/v1/debiteurs-moral
 Corps de la requête :
 {     //elle est pareil a celui de Debiteur qui est déjà géré
     "debAdrpost": "Adresse postale",
@@ -31,9 +31,9 @@ Corps de la requête :
 }
 
 Récupération d'un débiteur moral
-GET /api/v1/ac-debiteur-moral/{debCode}
+GET /api/v1/debiteurs-moral/{debCode}
 Modification d'un débiteur moral
-PUT /api/v1/ac-debiteur-moral/{debCode}
+PUT /api/v1/debiteurs-moral/{debCode}
 
 2. Gestion des Domiciliations
 Endpoints

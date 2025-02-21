@@ -19,6 +19,7 @@ interface DebiteurStore {
     currentPhysique: AcDebiteurPhysique | null;
     currentMoral: AcDebiteurMoral | null;
 
+
     // Actions
     fetchCategories: () => Promise<void>;
     fetchTypes: () => Promise<void>;
@@ -41,6 +42,7 @@ export const useDebiteurStore = create<DebiteurStore>((set) => {
         error: null,
         currentDebiteur: null,
         currentPhysique: null,
+        
         currentMoral: null,
 
         // Actions
@@ -135,7 +137,23 @@ export const useDebiteurStore = create<DebiteurStore>((set) => {
                             debCjNumpident: result.debCjNumpident
                         }
                     });
+                    
                 }
+                // Ajouter dans fetchDebiteurByCode après la condition du débiteur physique :
+        if (result.typdebCode === 'M') {
+    set({
+      currentMoral: {
+        debRaisSociale: result.debRaisSociale || '',
+        debRegistcom: result.debRegistcom || '',
+        debCapitsocial: result.debCapitsocial,
+        debFormJurid: result.debFormJurid || '',
+        debDomActiv: result.debDomActiv || '', 
+        debSiegSocial: result.debSiegSocial || '',
+        debNomGerant: result.debNomGerant || '',
+        debDatcreat: result.debDatcreat
+      }
+    });
+  }
 
                 return result;
             } catch (error) {
@@ -162,11 +180,13 @@ export const useDebiteurStore = create<DebiteurStore>((set) => {
 
         updateCurrentMoral: (data: Partial<AcDebiteurMoral>) => {
             console.log('Updating moral data:', data);
-            set((state) => ({
-                currentMoral: state.currentMoral 
+            set((state) => {
+                const updatedMoral = state.currentMoral 
                     ? { ...state.currentMoral, ...data }
-                    : data as AcDebiteurMoral
-            }));
+                    : data as AcDebiteurMoral;
+                console.log('Updated moral state:', updatedMoral);
+                return { currentMoral: updatedMoral };
+            });
         },
 
         resetStore: () => {
