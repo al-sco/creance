@@ -89,9 +89,19 @@ export const useDebiteurStore = create<DebiteurStore>((set) => {
         fetchDebiteurByCode: async (debCode: number): Promise<DebiteurCompletCreationDTO> => {
             try {
                 set({ loading: true, error: null });
-                const result = await repository.getDebiteurByCode(debCode);
+                let result;
+
+                // Premier appel pour vérifier le type
+                const checkResult = await repository.getDebiteurByCode(debCode);
                 
-                // Mise à jour du state
+                // Selon le type, appeler l'API appropriée
+                if (checkResult.typdebCode === 'M') {
+                    result = await repository.getDebiteurMoral(debCode);
+                } else {
+                    result = checkResult;
+                }
+
+                // Mise à jour du state selon le type
                 set({
                     currentDebiteur: {
                         categDebCode: result.categDebCode,
@@ -140,23 +150,9 @@ export const useDebiteurStore = create<DebiteurStore>((set) => {
                     
                 }
                 // Ajouter dans fetchDebiteurByCode après la condition du débiteur physique :
-                if (result.typdebCode === 'M') {
-                    // Mapping simplifié comme PhysiqueSection
-                    set({
-                      currentMoral: {
-                        debRaisSociale: result.debRaisSociale || '',
-                        debRegistcom: result.debRegistcom || '',
-                        debCapitsocial: result.debCapitsocial || 0,
-                        debFormJurid: result.debFormJurid || '',
-                        debDomActiv: result.debDomActiv || '',
-                        debSiegSocial: result.debSiegSocial || '',
-                        debNomGerant: result.debNomGerant || '',
-                      }
-                    });
-                    
-                    // Mise à jour des données communes au niveau du parent
-                    set({
-                      currentDebiteur: {
+                set({
+                    currentDebiteur: {
+                        debCode: result.debCode,
                         categDebCode: result.categDebCode,
                         typdebCode: result.typdebCode,
                         debAdrpost: result.debAdrpost || '',
@@ -166,17 +162,29 @@ export const useDebiteurStore = create<DebiteurStore>((set) => {
                         debCel: result.debCel || '',
                         debTeldom: result.debTeldom || '',
                         debLocalisat: result.debLocalisat || ''
-                      }
+                    }
+                });
+        
+                // Si c'est un débiteur moral
+                if (result.typdebCode === 'M') {
+                    set({
+                        currentMoral: {
+                            debRaisSociale: result.debRaisSociale || '',
+                            debRegistcom: result.debRegistcom || '',
+                            debCapitsocial: result.debCapitsocial || 0,
+                            debFormJurid: result.debFormJurid || '',
+                            debDomActiv: result.debDomActiv || '',
+                            debSiegSocial: result.debSiegSocial || '',
+                            debNomGerant: result.debNomGerant || '',
+                            debDatcreat: result.debDatcreat
+                        }
                     });
-                    
-                    console.log('Mapped moral data:', {
-                      currentMoral: result
-                    });
-                  }
+                }
+
                 set({ loading: false });
                 return result;
             } catch (error) {
-                set({ error: "Erreur lors de la récupération du débiteur", loading: false });
+                set({ loading: false, error: 'Erreur lors de la récupération du débiteur' });
                 throw error;
             }
         },

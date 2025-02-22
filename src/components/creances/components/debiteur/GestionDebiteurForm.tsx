@@ -244,9 +244,42 @@ const handleSearch = useCallback(async () => {
 
 // Redirection automatique selon le type de débiteur
 if (result.typdebCode === 'M') {
-  console.log('Débiteur moral détecté');
+  console.log('Débiteur moral détecté')
   setActiveTab('morale'); // Mise à jour de l'état activeTab
   setSelectedType({ typdebCode: 'M', typdebLib: 'Moral' });
+
+  updateCurrentMoral({
+    debRaisSociale: result.debRaisSociale || '',
+    debRegistcom: result.debRegistcom || '',
+    debCapitsocial: result.debCapitsocial || 0,
+    debFormJurid: result.debFormJurid || '',
+    debDomActiv: result.debDomActiv || '',
+    debSiegSocial: result.debSiegSocial || '',
+    debNomGerant: result.debNomGerant || '',
+    debDatcreat: result.debDatcreat
+  });
+
+  setFormData(prevData => ({
+    ...prevData,
+    debCode: result.debCode,
+    categDebCode: result.categDebCode,
+    typdebCode: result.typdebCode,
+    debAdrpost: result.debAdrpost || '',
+    debEmail: result.debEmail || '',
+    debTelbur: result.debTelbur || '',
+    debFax: result.debFax || '',
+    debCel: result.debCel || '',
+    debTeldom: result.debTeldom || '',
+    debLocalisat: result.debLocalisat || ''
+  }));
+
+  setIsEditMode(true);
+  setSearchDebCode(result.debCode ?? null);
+
+  const foundType = types.find(t => t.typdebCode === result.typdebCode);
+  const foundCategorie = categories.find(c => c.categDebCode === result.categDebCode);
+  setSelectedType(foundType || null);
+  setSelectedCategorie(foundCategorie || null);
 
   setTimeout(() => {
     setShowSearchDialog(false);
@@ -431,10 +464,10 @@ if (result.typdebCode === 'M') {
   categories,
   updateCurrentPhysique,
   setActiveTab,
+  updateCurrentMoral,
   toast
 ]);
-// Dans GestionDebiteurForm.tsx
-// Dans GestionDebiteurForm.tsx
+
 
 
 // Nouvelle version corrigée

@@ -162,14 +162,15 @@ export class DebiteurRepository {
         }
     }
 
-    async getDebiteurMoral(debCode: number): Promise<AcDebiteurMoral> {
+    async getDebiteurMoral(debCode: number): Promise<DebiteurCompletCreationDTO> {
         try {
-            console.log('Fetching moral debtor:', debCode);
-            const response = await axios.get(`${this.BASE_URL}/ac-debiteur-moral/${debCode}`);
+            // Correction de l'URL pour les débiteurs moraux
+            const response = await axios.get(`${this.BASE_URL}/debiteurs-moral/${debCode}`);
+            console.log('Données reçues du serveur:', response.data);
             return response.data;
-        } catch (error: any) {
-            console.error('Error fetching moral debtor:', error);
-            throw new Error(`Failed to fetch moral debtor: ${error.message}`);
+        } catch (error) {
+            console.error('Erreur getDebiteurMoral:', error);
+            throw error;
         }
     }
 }
