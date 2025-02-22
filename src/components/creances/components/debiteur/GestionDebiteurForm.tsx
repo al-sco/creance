@@ -183,6 +183,7 @@ const [searchDebCode, setSearchDebCode] = useState<number | null>(null);
     saveDebiteurComplet, 
     updateCurrentPhysique,
     updateCurrentMoral,
+    resetCurrentData,
     
   currentDebiteur,
 
@@ -234,7 +235,9 @@ const handleSearch = useCallback(async () => {
 
   try {
     console.log('Début recherche - setIsSearching(true)');
-    setIsSearching(true);
+    setIsSearching(true); 
+    
+    resetCurrentData();
 
     console.log('Appel fetchDebiteurByCode...');
     const result = await fetchDebiteurByCode(searchDebCode);
@@ -465,7 +468,8 @@ if (result.typdebCode === 'M') {
   updateCurrentPhysique,
   setActiveTab,
   updateCurrentMoral,
-  toast
+  toast,
+  // resetCurrentData()
 ]);
 
 

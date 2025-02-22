@@ -21,6 +21,7 @@ interface DebiteurStore {
 
 
     // Actions
+    resetCurrentData: () => void;
     fetchCategories: () => Promise<void>;
     fetchTypes: () => Promise<void>;
     saveDebiteurComplet: (data: DebiteurCompletCreationDTO) => Promise<any>;  // Changement ici
@@ -46,6 +47,20 @@ export const useDebiteurStore = create<DebiteurStore>((set) => {
         currentMoral: null,
 
         // Actions
+
+
+        resetCurrentData: () => {
+            set({
+                currentMoral: null,
+              currentPhysique: null,
+              currentDebiteur: null
+            });
+          },
+
+
+
+
+
         fetchCategories: async () => {
             try {
                 set({ loading: true, error: null });
