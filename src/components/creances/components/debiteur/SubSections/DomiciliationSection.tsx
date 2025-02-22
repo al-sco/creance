@@ -76,11 +76,18 @@ export function DomiciliationSection() {
           </div>
 
           {dom.id !== 1 && (
-            <Button 
-              icon="pi pi-times" 
-              className="p-button-danger" 
-              onClick={() => removeLine(dom.id)}
-            />
+            <div className="action-buttons">
+              <Button 
+                icon="pi pi-times" 
+                className="p-button-danger" 
+                onClick={() => removeLine(dom.id)}
+              />
+              <Button 
+                label="Annuler" 
+                className="cancel-button"
+                onClick={() => removeLine(dom.id)}
+              />
+            </div>
           )}
         </div>
       ))}
@@ -91,6 +98,7 @@ export function DomiciliationSection() {
         className="dom-add-button"
         onClick={addNewLine}
       />
+      
     </div>
   );
 }

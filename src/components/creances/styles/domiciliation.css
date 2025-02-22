@@ -50,6 +50,7 @@
   
   .p-button-danger {
     position: absolute;
+    color: red;
     top: 0.5rem;
     right: 0.5rem;
   }
@@ -59,4 +60,27 @@
    margin: 0.3rem;
     color: #e8e5e5;
     background-color: #267917;
+  }
+
+
+  .action-buttons {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    display: flex;
+    gap: 0.5rem;
+  }
+  
+  .cancel-button {
+    padding: 0.3rem;
+    margin: 0.3rem;
+    color: #e8e5e5;
+    background-color: #ea1f1f;
+  }
+  
+  /* Modifier le style du bouton danger */
+  .p-button-danger {
+    position: relative;
+    top: auto;
+    right: auto;
   }
