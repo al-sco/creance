@@ -24,10 +24,13 @@ import "../../styles/creances.css";
 import "../../styles/debiteur.css";
 import { InputNumber } from "primereact/inputnumber";
 import { DebiteurRepository } from "../../repository/debiteur.repository";
+import { TabView, TabPanel } from 'primereact/tabview';
 
 export function GestionDebiteurForm() {
   const toast = useRef<Toast>(null);
   const { currentMoral, currentPhysique } = useDebiteurStore();
+  const [activeTabIndex, setActiveTabIndex] = useState(0);
+
 
   const [formData, setFormData] = useState<AcDebiteur>({
     categDebCode: '',
@@ -236,6 +239,31 @@ const handleSearch = useCallback(async () => {
     console.log('Appel fetchDebiteurByCode...');
     const result = await fetchDebiteurByCode(searchDebCode);
     console.log('Résultat fetchDebiteurByCode:', result);
+
+
+
+// Redirection automatique selon le type de débiteur
+if (result.typdebCode === 'M') {
+  console.log('Débiteur moral détecté');
+  setActiveTab('morale'); // Mise à jour de l'état activeTab
+  setSelectedType({ typdebCode: 'M', typdebLib: 'Moral' });
+
+  setTimeout(() => {
+    setShowSearchDialog(false);
+    setIsSearching(false);
+  }, 100);
+
+} else if (result.typdebCode === 'P') {
+  console.log('Débiteur physique détecté');
+  setActiveTab('physique'); // Mise à jour de l'état activeTab
+  setSelectedType({ typdebCode: 'P', typdebLib: 'Physique' });
+}    
+
+
+
+
+
+
 
     if (!result) {
       throw new Error('Débiteur non trouvé');

@@ -21,6 +21,30 @@ export class DebiteurRepository {
         }
     }
 
+
+
+    async fetchDebiteurByCode(debCode: number): Promise<DebiteurCompletCreationDTO> {
+        try {
+          console.log('Fetching from URL:', `${this.BASE_URL}/debiteurs-moral/${debCode}`);
+          
+          const response = await axios.get(`${this.BASE_URL}/debiteurs-moral/${debCode}`);
+          console.log('API Response:', response.data);
+          
+          // Vérification et transformation des données
+          const data = response.data;
+          return {
+            ...data,
+            debCapitsocial: data.debCapitsocial ? Number(data.debCapitsocial) : 0,
+            debDatcreat: data.debDatcreat ? new Date(data.debDatcreat) : null
+          };
+        } catch (error) {
+          console.error('Error fetching debtor:', error);
+          throw error;
+        }
+      }
+
+
+
     async saveDebiteurComplet(data: DebiteurCompletCreationDTO): Promise<any> {
         try {
             const isModification = Boolean(data.debCode);

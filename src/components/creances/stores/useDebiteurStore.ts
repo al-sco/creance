@@ -140,21 +140,40 @@ export const useDebiteurStore = create<DebiteurStore>((set) => {
                     
                 }
                 // Ajouter dans fetchDebiteurByCode après la condition du débiteur physique :
-        if (result.typdebCode === 'M') {
-    set({
-      currentMoral: {
-        debRaisSociale: result.debRaisSociale || '',
-        debRegistcom: result.debRegistcom || '',
-        debCapitsocial: result.debCapitsocial,
-        debFormJurid: result.debFormJurid || '',
-        debDomActiv: result.debDomActiv || '', 
-        debSiegSocial: result.debSiegSocial || '',
-        debNomGerant: result.debNomGerant || '',
-        debDatcreat: result.debDatcreat
-      }
-    });
-  }
-
+                if (result.typdebCode === 'M') {
+                    // Mapping simplifié comme PhysiqueSection
+                    set({
+                      currentMoral: {
+                        debRaisSociale: result.debRaisSociale || '',
+                        debRegistcom: result.debRegistcom || '',
+                        debCapitsocial: result.debCapitsocial || 0,
+                        debFormJurid: result.debFormJurid || '',
+                        debDomActiv: result.debDomActiv || '',
+                        debSiegSocial: result.debSiegSocial || '',
+                        debNomGerant: result.debNomGerant || '',
+                      }
+                    });
+                    
+                    // Mise à jour des données communes au niveau du parent
+                    set({
+                      currentDebiteur: {
+                        categDebCode: result.categDebCode,
+                        typdebCode: result.typdebCode,
+                        debAdrpost: result.debAdrpost || '',
+                        debEmail: result.debEmail || '',
+                        debTelbur: result.debTelbur || '',
+                        debFax: result.debFax || '',
+                        debCel: result.debCel || '',
+                        debTeldom: result.debTeldom || '',
+                        debLocalisat: result.debLocalisat || ''
+                      }
+                    });
+                    
+                    console.log('Mapped moral data:', {
+                      currentMoral: result
+                    });
+                  }
+                set({ loading: false });
                 return result;
             } catch (error) {
                 set({ error: "Erreur lors de la récupération du débiteur", loading: false });
