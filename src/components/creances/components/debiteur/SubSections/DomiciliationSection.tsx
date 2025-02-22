@@ -1,85 +1,96 @@
-import { useEffect } from 'react';
+import { useState } from 'react';
 import { InputText } from 'primereact/inputtext';
-import { Calendar } from 'primereact/calendar';
-import { Dropdown } from 'primereact/dropdown';
-import { useDebiteurStore } from '../../../stores/useDebiteurStore';
-// import { Domiciliation } from '../../../model/debiteur.model';
+import { Button } from 'primereact/button';
+import '../../../styles/domiciliation.css';
+
+interface DomiciliationLine {
+  id: number;
+  typdomCode: string;
+  typdomLib: string;
+  domCode: string;
+  domLib: string;  
+  bqagCode: string;
+  bqagLib: string;
+  bqLib: string;
+}
 
 export function DomiciliationSection() {
+  const [domiciliations, setDomiciliations] = useState<DomiciliationLine[]>([{
+    id: 1,
+    typdomCode: '',
+    typdomLib: '',
+    domCode: '',
+    domLib: '',
+    bqagCode: '',
+    bqagLib: '',
+    bqLib: ''
+  }]);
 
-  // const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   const { name, value } = e.target;
-  //   updateCurrentDomiciliation({ [name]: value });
-  // };
+  const addNewLine = () => {
+    setDomiciliations([...domiciliations, {
+      id: domiciliations.length + 1,
+      typdomCode: '',
+      typdomLib: '',
+      domCode: '',
+      domLib: '',
+      bqagCode: '',
+      bqagLib: '',
+      bqLib: ''
+    }]);
+  };
 
-  // const handleDateChange = (value: Date | null, fieldName: string) => {
-  //   updateCurrentDomiciliation({ [fieldName]: value });
-  // };
+  const removeLine = (id: number) => {
+    setDomiciliations(domiciliations.filter(dom => dom.id !== id));
+  };
 
   return (
-    <div className="sub-screen">
-      <div className="form-grid">
-        <div className="form-row">
-          <div className="form-group">
-            <label>Banque :</label>
-            <InputText
-              name="banqueCode"
-              
-              // onChange={handleInputChange}
-              className="p-inputtext"
-            />
+    <div className="domiciliation-screen">
+      {domiciliations.map((dom) => (
+        <div key={dom.id} className="domiciliation-line">
+          <div className="domiciliation-group">
+            <div className="input-row">
+            <label>Type :</label>
+              <InputText className="dom-input" placeholder="Code" />
+              <InputText className="dom-input" placeholder="Libellé" />
+              <Button icon="pi pi-search" className="valider_button" />
+            </div>
           </div>
-          <div className="form-group">
-            <label>Agence :</label>
-            <InputText
-              name="agenceCode"
-              
-              // onChange={handleInputChange}
-              className="p-inputtext"
-            />
-          </div>
-        </div>
 
-        <div className="form-row">
-          <div className="form-group">
-            <label>Numéro de compte :</label>
-            <InputText
-              name="domNumcompte"
-              // onChange={handleInputChange}
-              className="p-inputtext"
-            />
+          <div className="domiciliation-group">
+            <div className="input-row">
+              <label>Code Domicile :</label>
+              <InputText className="dom-inputs" />
+              <label>Libellé Domicile :</label>
+              <InputText className="dom-inputs" />
+            </div>
           </div>
-          <div className="form-group">
-            <label>Date d'ouverture :</label>
-            <Calendar
-              
-              // onChange={(e) => handleDateChange(e.value as Date, 'domDateouv')}
-              dateFormat="dd/mm/yy"
-            />
-          </div>
-        </div>
 
-        <div className="form-row">
-          <div className="form-group">
-            <label>Type de compte :</label>
-            <InputText
-              name="domTypecompte"
-              
-              // onChange={handleInputChange}
-              className="p-inputtext"
-            />
+          <div className="domiciliation-group">
+            <div className="input-row">
+            <label>Infos banque :</label>
+              <InputText className="dom-input" placeholder="Code agence" />
+              <InputText className="dom-input" placeholder="Libellé agence" />
+              <InputText className="dom-input" placeholder="Libellé banque" />
+              <Button icon="pi pi-search" className="valider_button" />
+            </div>
           </div>
-          <div className="form-group">
-            <label>Statut du compte :</label>
-            <InputText
-              name="domStatutcompte"
-              
-              // onChange={handleInputChange}
-              className="p-inputtext"
+
+          {dom.id !== 1 && (
+            <Button 
+              icon="pi pi-times" 
+              className="p-button-danger" 
+              onClick={() => removeLine(dom.id)}
             />
-          </div>
+          )}
         </div>
-      </div>
+      ))}
+      
+      <Button 
+        label="Ajouter" 
+        icon="pi pi-plus" 
+        className="dom-add-button"
+        onClick={addNewLine}
+      />
     </div>
   );
 }

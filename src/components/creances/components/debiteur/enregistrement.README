@@ -1,47 +1,15 @@
-Documentation API - Débiteur Moral et Domiciliation
-1. Gestion des Débiteurs Moraux
-Endpoints
-Création d'un débiteur moral
-POST /api/v1/debiteurs-moral
-Corps de la requête :
-{     //elle est pareil a celui de Debiteur qui est déjà géré
-    "debAdrpost": "Adresse postale",
-    "debCel": "Téléphone cellulaire",
-    "debEmail": "email@example.com",
-    "debTelbur": "Téléphone bureau",
-    "debFax": "Numéro fax",
-    "debCodeCharg": "CODE_CHARG",
-    "debCodeAnc": "CODE_ANC",
-    "debLocalisat": "Localisation",
-    "debTeldom": "Téléphone domicile",
-    "categDebCode": "CAT1",
-    "propCode": "PROP1",
-    "garphysCode": "GAR1",
-    "typdebCode": "M", si le Type selectionner est M
-    
-    //les champs de l'écran de Moral
-    "debRaisSociale": "Raison sociale",
-    "debRegistcom": "Numéro RC",
-    "debCapitsocial": 1000000,
-    "debFormJurid": "SARL",
-    "debDomActiv": "Domaine d'activité",
-    "debSiegSocial": "Siège social",
-    "debNomGerant": "Nom du gérant",
-    
-}
+Documentation API -  Domiciliation
 
-Récupération d'un débiteur moral
-GET /api/v1/debiteurs-moral/{debCode}
-Modification d'un débiteur moral
-PUT /api/v1/debiteurs-moral/{debCode}
-
-2. Gestion des Domiciliations
+Gestion des Domiciliations
 Endpoints
 Liste des domiciliations d'un débiteur
 GET /api/v1/debiteurs/{debCode}/domiciliations
 
 Corps de la requête :
 {
+    "typdomCode": "1",
+    "typdomLib": "Type domiciliation",
+    
     "domCode": "DOM001",
     "domLib": "Libellé domiciliation",   
     
@@ -50,8 +18,6 @@ Corps de la requête :
     "bqCode": "BQ001",
     "bqLib": "Libellé banque",
     
-    "typdomCode": "1",
-    "typdomLib": "Type domiciliation",
  
 }
 

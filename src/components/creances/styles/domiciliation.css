@@ -1,0 +1,62 @@
+.domiciliation-screen {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1rem;
+  }
+  
+  .domiciliation-line {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    position: relative;
+  }
+  
+  .domiciliation-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .domiciliation-group label {
+    font-weight: 600;
+    color: #333;
+  }
+  
+  .input-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .dom-input {
+    min-width: 200px;
+    background-color: #e0e3e0;
+    opacity: 0.6;
+    pointer-events: none; /* Empêche toute interaction avec l'élément */
+  }
+  
+  .dom-add-button {
+    align-self: flex-start;
+    margin-top: 1rem;
+    padding: 0.3%;
+    
+    color: #e8e5e5;
+    background-color: #267917;
+  }
+  
+  .p-button-danger {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+  }
+
+  .valider_button{
+   padding: 0.3rem;
+   margin: 0.3rem;
+    color: #e8e5e5;
+    background-color: #267917;
+  }
