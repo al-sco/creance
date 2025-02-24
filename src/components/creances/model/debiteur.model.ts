@@ -193,3 +193,52 @@ export interface CategorieDebiteur {
 export interface DebiteurResponse {
   debCode: number;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+// Interface pour le type de domiciliation
+export interface TypeDomiciliation {
+  typdomCode: string;
+  typdomLib: string;
+}
+
+// Interface pour l'agence bancaire
+export interface BanqueAgence {
+  bqagCode: string;
+  bqagLib: string;
+  bqCode: {
+      bqCode: string;
+      bqLib: string;
+  };
+}
+
+// Interface pour la domiciliation
+export interface Domiciliation {
+  domCode: string;        // Clé primaire (saisie manuelle)
+  debCode: number;        // Clé étrangère vers le débiteur
+  typdomCode: string;     // Code type domiciliation
+  typdomLib: string;      // Libellé type domiciliation
+  domLib: string;        // Libellé domiciliation
+  bqagCode: string;      // Code agence bancaire
+  bqagLib: string;       // Libellé agence
+  bqCode: string;        // Code banque
+  bqLib: string;         // Libellé banque
+}
+
+// DTO pour la création/modification de domiciliation
+export interface DomiciliationDTO {
+  domCode: string;
+  debCode: number;
+  typdomCode: string;
+  domLib: string;
+  bqagCode: string;
+}

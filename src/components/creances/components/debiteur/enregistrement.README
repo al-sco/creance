@@ -1,69 +1,78 @@
-Documentation API -  Domiciliation
 
-Gestion des Domiciliations
-Endpoints
-Liste des domiciliations d'un débiteur
-GET /api/v1/debiteurs/{debCode}/domiciliations
+url de base:http://localhost:8281/api/v1
 
-Corps de la requête :
+POST /api/v1/debiteurs/{debCode}/domiciliations
+
+Important : Le domCode est saisi manuellement par l'utilisateur donc n'est pas générer automatiquement
+Champs obligatoires :
+domCode (saisi)
+bqagCode (sélectionné)
+typdomCode (sélectionné)
+domLib (saisi)
+2. Gestion des Relations
+Agence Bancaire
+L'utilisateur sélectionne une agence (bqagCode)
+Automatiquement s'affichent :
+Le libellé de l'agence (bqagLib)
+Le code de la banque (bqCode)
+Le nom de la banque (bqLib):
+// Réponse de GET /api/v1/ac-banque-agence
 {
-    "typdomCode": "1",
-    "typdomLib": "Type domiciliation",
+    "bqagCode": "AG001",      // Code de l'agence
+    "bqagLib": "Agence XYZ",  // Libellé de l'agence
+    "bqCode": {               // Objet banque associé
+        "bqCode": "BQ001",    // Code de la banque
+        "bqLib": "Banque ABC" // Libellé de la banque
+    }
+}.  Processus d'Affichage
+Quand l'utilisateur sélectionne une agence (bqagCode), le DomiciliationVM retourne :
+bqagCode et bqagLib de l'agence
+bqCode et bqLib de la banque associée
+Exemple de Flux:
+// Côté Frontend
+async function onSelectAgence(bqagCode) {
+    // 1. L'utilisateur sélectionne l'agence
+    // 2. Le backend retourne automatiquement les infos de la banque via les relations
+    const response = await fetch(`/api/v1/ac-banque-agence/${bqagCode}`);
+    const data = await response.json();
     
-    "domCode": "DOM001",
-    "domLib": "Libellé domiciliation",   
-    
-    "bqagCode": "CODE_AGENCE",
-    "bqagLib": "Libellé agence",
-    "bqCode": "BQ001",
-    "bqLib": "Libellé banque",
-    
- 
+    // Affichage des données
+    afficherInfosAgence(data.bqagLib);     // Nom de l'agence
+    afficherInfosBanque(data.bqCode.bqLib); // Nom de la banque
 }
 
 
-Modification d'une domiciliation
-PUT /api/v1/debiteurs/{debCode}/domiciliations/{domCode}
 
-Associations et Relations
-Agence Bancaire (bqagCode)
 
-Affiche automatiquement :
-Le libellé de l'agence (bqagLib)
-Le code de la banque (bqCode)
-Le libellé de la banque (bqLib)
-Type de Domiciliation (typdomCode)
+Type de Domiciliation
+L'utilisateur sélectionne un type (typdomCode)
+Le libellé du type (typdomLib) s'affiche automatiquement:GET /api/v1/ac-type-domiciliation
+3. Modifications
+Pour la modification on appel d'abord le debcode du Débiteur Moral ou Physique ensuite si celui ci est lié a une Domiciliation alors on fait apparaitre aussi ses donné. Exemple: Processus de Modification
+Modification du Débiteur: PUT /api/v1/debiteurs-moral/{debCode}; La modification du débiteur n'affecte pas directement les domiciliations
+La relation est maintenue via la clé étrangère DEB_CODE
+Consultation des Domiciliations Liées: GET /api/v1/debiteurs/{debCode}/domiciliations; Retourne toutes les domiciliations associées au débiteur
+La relation est préservée car basée sur le debCode
+3. Exemple de Flux Frontend: async function modifierDebiteur(debCode, donnees) {
+    // 1. Modifier le débiteur
+    await fetch(`/api/v1/debiteurs-moral/${debCode}`, {
+        method: 'PUT',
+        body: JSON.stringify(donnees)
+    });
 
-Affiche automatiquement :
-Le libellé du type (typdomLib)
-3. Workflow Frontend
-Création d'un Débiteur Moral
+    // 2. Les domiciliations restent liées car le debCode ne change pas
+    const domiciliations = await fetch(`/api/v1/debiteurs/${debCode}/domiciliations`);
+    // Les domiciliations sont toujours accessibles avec le même debCode
+}; Points Importants
+Intégrité des Données
+Le debCode ne change jamais lors d'une modification
+Les relations sont maintenues via les contraintes de clé étrangère
+Architecture Découplée
+Les modifications du débiteur et des domiciliations sont indépendantes
+Chaque entité a sa propre logique de modification. Lors de la modification d'une Domiciliation on affichera toutes ses donnés mais seul le typdomCode et son libellé qui peuvent etre changer, les autres champs ne peuvent pas etre changer. tu constatera aussi d'un Debiteur peut avoir plusieurs Domicilition alors prends cela en compte lors de la création et de la modification
 
-Saisir les informations du débiteur
-POST vers /api/v1/ac-debiteur-moral
-Récupérer le debCode généré
-Ajout d'une Domiciliation
 
-Utiliser le debCode récupéré
-Sélectionner l'agence bancaire (bqagCode)
-Les informations banque s'affichent automatiquement
-Sélectionner le type de domiciliation
-POST vers /api/v1/debiteurs/{debCode}/domiciliations
-Modification
+on procédera pas a pas code par code et fichiers par fichiers avec explication afin que je comprenne ce que tu fait tout en te basant sur les methodes de Physique ou Moral.
 
-Les modifications du débiteur et de ses domiciliations sont indépendantes
-Possibilité de modifier les deux dans la même interface
-4. Points d'Attention
-Validations
 
-typdebCode doit être "M" pour débiteur moral
-domCode doit être unique
-bqagCode et typdomCode sont obligatoires
-Performance
-
-Les listes déroulantes (agences, types) doivent être chargées au démarrage
-Les informations bancaires sont chargées à la sélection de l'agence
-Gestion des Erreurs
-
-Codes HTTP standards (200, 201, 400, 404, 500)
-Messages d'erreur explicites dans la réponse
+ok on peut commencé, j'ai déjà faire l'écran de Domiciliation que tu vas te basé dessus et l'améliora au fure et a mésure comme pour l'écran de Physique et concernant les Dialog de recherche utilise les meme méthode comme celui de Civilité dans l'écran de Physique
