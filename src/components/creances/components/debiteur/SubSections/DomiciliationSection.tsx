@@ -74,8 +74,19 @@ const [banqueAgenceFilter, setBanqueAgenceFilter] = useState('');
 
     // Chargement initial des données
     useEffect(() => {
-        fetchTypeDomiciliations();
-        fetchBanqueAgences();
+        const loadData = async () => {
+            try {
+                await Promise.all([
+                    fetchTypeDomiciliations(),
+                    fetchBanqueAgences()
+                ]);
+                console.log('Données chargées avec succès');
+            } catch (error) {
+                console.error('Erreur lors du chargement des données:', error);
+            }
+        };
+        
+        loadData();
     }, []);
 
     // Gestionnaires d'événements
@@ -89,30 +100,48 @@ const [banqueAgenceFilter, setBanqueAgenceFilter] = useState('');
     };
 
     const handleSelectType = (selection: TypeDomiciliation) => {
-      const index = domiciliations.findIndex(d => d.domCode === currentDomCode);
-      if (index !== -1) {
-          handleInputChange(index, 'typdomCode', selection.typdomCode);
-          handleInputChange(index, 'typdomLib', selection.typdomLib);
-      }
-      setSelectedTypeDomiciliation(selection);
-      setTypeDomFilter('');
-      setShowTypeDomDialog(false);
-  };
+        const index = domiciliations.findIndex(d => d.domCode === currentDomCode);
+        if (index !== -1) {
+            // Mise à jour du code et du libellé
+            const updatedDomiciliations = [...domiciliations];
+            updatedDomiciliations[index] = {
+                ...updatedDomiciliations[index],
+                typdomCode: selection.typdomCode,
+                typdomLib: selection.typdomLib
+            };
+            setDomiciliations(updatedDomiciliations);
+        }
+        setSelectedTypeDomiciliation(selection);
+        setTypeDomFilter('');
+        setShowTypeDomDialog(false);
+    };
+    
 
   const validateInputs = (dom: DomiciliationLine) => {
     return dom.domCode && dom.typdomCode && dom.bqagCode && dom.domLib;
 };
 
 const handleSelectBanque = (selection: BanqueAgence) => {
-  const index = domiciliations.findIndex(d => d.domCode === currentDomCode);
-  if (index !== -1) {
-      handleInputChange(index, 'bqagCode', selection.bqagCode);
-      handleInputChange(index, 'bqagLib', selection.bqagLib);
-      handleInputChange(index, 'bqLib', selection.bqCode.bqLib);
-  }
-  setSelectedBanqueAgence(selection);
-  setBanqueAgenceFilter('');
-  setShowBanqueAgenceDialog(false);
+    console.log('Sélection complète:', selection); // Debug
+    const index = domiciliations.findIndex(d => d.domCode === currentDomCode);
+    if (index !== -1) {
+        // Extraire le nom de la banque du libellé de l'agence
+        const bankName = selection.bqagLib.split(' ')[0]; // Par exemple, "SIB" de "SIB CAMPUS"
+        
+        const updatedDomiciliations = [...domiciliations];
+        updatedDomiciliations[index] = {
+            ...updatedDomiciliations[index],
+            bqagCode: selection.bqagCode,
+            bqagLib: selection.bqagLib,
+            bqLib: bankName // Utiliser le nom de la banque extrait
+        };
+        console.log('Mise à jour domiciliation:', updatedDomiciliations[index]); // Debug
+        setDomiciliations(updatedDomiciliations);
+    }
+    
+    setSelectedBanqueAgence(selection);
+    setBanqueAgenceFilter('');
+    setShowBanqueAgenceDialog(false);
 };
 
     return (
@@ -123,12 +152,11 @@ const handleSelectBanque = (selection: BanqueAgence) => {
                         <div className="input-row">
                             <label>Type :</label>
                             <InputText 
-                                className="dom-input" 
-                                value={dom.typdomCode}
-                                onChange={(e) => handleInputChange(index, 'typdomCode', e.target.value)}
-                                placeholder="Code" 
-                                readOnly 
-                            />
+                                        className="dom-input" 
+                                        value={dom.typdomCode}
+                                        placeholder="Code" 
+                                        readOnly 
+                                    />
                             <InputText 
                                 className="dom-input" 
                                 value={dom.typdomLib}
@@ -167,27 +195,34 @@ const handleSelectBanque = (selection: BanqueAgence) => {
                         <div className="input-row">
                             <label>Infos banque :</label>
                             <InputText 
-                                className="dom-input" 
-                                value={dom.bqagCode}
-                                placeholder="Code agence" 
-                                readOnly 
-                            />
-                            <InputText 
-                                className="dom-input" 
-                                value={dom.bqagLib}
-                                placeholder="Libellé agence" 
-                                readOnly 
-                            />
-                            <InputText 
-                                className="dom-input" 
-                                value={dom.bqLib}
-                                placeholder="Libellé banque" 
-                                readOnly 
-                            />
+                                        className="dom-input" 
+                                        value={dom.bqagCode}
+                                        placeholder="Code agence" 
+                                        readOnly 
+                                    />
+                                    <InputText 
+                                        className="dom-input" 
+                                        value={dom.bqagLib}
+                                        placeholder="Libellé agence" 
+                                        readOnly 
+                                    />
+                                    <InputText 
+                                        className="dom-input" 
+                                        value={dom.bqLib}
+                                        placeholder="Libellé banque" 
+                                        readOnly 
+                                    />
                             <Button 
                                 icon="pi pi-search" 
                                 className="valider_button"
                                 onClick={() => {
+                                    // Il faut vérifier si dom.domCode existe avant de l'utiliser
+                                    if (!dom.domCode) {
+                                        // Ajouter un message d'erreur ou une validation
+                                        console.warn('Le code domiciliation doit être saisi avant de sélectionner une banque');
+                                        return;
+                                    }
+                                    console.log('Current Dom:', dom); // Pour déboguer
                                     setCurrentDomCode(dom.domCode);
                                     setShowBanqueAgenceDialog(true);
                                 }}
@@ -303,17 +338,17 @@ const handleSelectBanque = (selection: BanqueAgence) => {
         />
     </div>
     <DataTable
-        value={banqueAgences}
-        globalFilter={banqueAgenceFilter}
-        emptyMessage="Aucune agence trouvée"
-        selectionMode="single"
-        selection={selectedBanqueAgence}
-        onSelectionChange={(e) => handleSelectBanque(e.value as BanqueAgence)}
-    >
-        <Column field="bqagCode" header="Code Agence" />
-        <Column field="bqagLib" header="Libellé Agence" />
-        <Column field="bqCode.bqLib" header="Banque" />
-    </DataTable>
+    value={banqueAgences}
+    globalFilter={banqueAgenceFilter}
+    emptyMessage="Aucune agence trouvée"
+    selectionMode="single"
+    selection={selectedBanqueAgence}
+    onSelectionChange={(e) => handleSelectBanque(e.value as BanqueAgence)}
+>
+    <Column field="bqagCode" header="Code Agence" />
+    <Column field="bqagLib" header="Libellé Agence" />
+    <Column field="bqCode.bqLib" header="Banque" />
+</DataTable>
 </Dialog>
         </div>
     );

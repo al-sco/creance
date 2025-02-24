@@ -35,13 +35,13 @@ export class DomiciliationRepository {
     async getBanqueAgences(): Promise<BanqueAgence[]> {
         try {
             const response = await axios.get(`${this.BASE_URL}/ac-banque-agence`);
+            console.log('Réponse API banques:', response.data); // Debug
             return response.data;
         } catch (error) {
             console.error('Erreur lors de la récupération des agences:', error);
             throw error;
         }
     }
-
     // Création d'une nouvelle domiciliation
     async createDomiciliation(data: DomiciliationDTO): Promise<Domiciliation> {
         try {

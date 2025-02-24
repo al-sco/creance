@@ -71,9 +71,12 @@ export const useDomiciliationStore = create<DomiciliationStore>((set) => {
         fetchBanqueAgences: async () => {
             try {
                 set({ loading: true, error: null });
+                const repository = new DomiciliationRepository();
                 const agences = await repository.getBanqueAgences();
+                console.log('Agences récupérées:', agences); // Debug
                 set({ banqueAgences: agences });
             } catch (error) {
+                console.error('Erreur lors du chargement des agences:', error);
                 set({ error: "Erreur lors du chargement des agences bancaires" });
             } finally {
                 set({ loading: false });
@@ -134,6 +137,9 @@ export const useDomiciliationStore = create<DomiciliationStore>((set) => {
                 set({ loading: false });
             }
         },
+
+
+      
 
         resetStore: () => {
             set({
