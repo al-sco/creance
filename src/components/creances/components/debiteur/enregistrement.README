@@ -1,78 +1,114 @@
-
-url de base:http://localhost:8281/api/v1
-
+Réponses concernant AcDomiciliation et la configuration backend
+1. Structure API
+L'URL exacte pour la sauvegarde d'une domiciliation est :
 POST /api/v1/debiteurs/{debCode}/domiciliations
 
-Important : Le domCode est saisi manuellement par l'utilisateur donc n'est pas générer automatiquement
-Champs obligatoires :
-domCode (saisi)
-bqagCode (sélectionné)
-typdomCode (sélectionné)
-domLib (saisi)
-2. Gestion des Relations
-Agence Bancaire
-L'utilisateur sélectionne une agence (bqagCode)
-Automatiquement s'affichent :
-Le libellé de l'agence (bqagLib)
-Le code de la banque (bqCode)
-Le nom de la banque (bqLib):
-// Réponse de GET /api/v1/ac-banque-agence
+Champs obligatoires d'après le modèle JPA :
+
+domCode (String, max 25 caractères) - Identifiant unique de la domiciliation
+bqagCode (String) - Code de l'agence bancaire (marqué comme non nullable)
+typdomCode (String) - Code du type de domiciliation (marqué comme non nullable)
+2. Format de requête
+Exemple d'une requête Postman fonctionnelle :
+POST http://localhost:8281/api/v1/debiteurs/12345/domiciliations
+Content-Type: application/json
+
 {
-    "bqagCode": "AG001",      // Code de l'agence
-    "bqagLib": "Agence XYZ",  // Libellé de l'agence
-    "bqCode": {               // Objet banque associé
-        "bqCode": "BQ001",    // Code de la banque
-        "bqLib": "Banque ABC" // Libellé de la banque
-    }
-}.  Processus d'Affichage
-Quand l'utilisateur sélectionne une agence (bqagCode), le DomiciliationVM retourne :
-bqagCode et bqagLib de l'agence
-bqCode et bqLib de la banque associée
-Exemple de Flux:
-// Côté Frontend
-async function onSelectAgence(bqagCode) {
-    // 1. L'utilisateur sélectionne l'agence
-    // 2. Le backend retourne automatiquement les infos de la banque via les relations
-    const response = await fetch(`/api/v1/ac-banque-agence/${bqagCode}`);
-    const data = await response.json();
+  "domCode": "DOM123456",
+  "bqagCode": "AG001",
+  "typdomCode": "TD001",
+  "domLib": "Domiciliation principale"
+}
+
+3. Logs backend
+Le backend produirait des logs similaires à ceux-ci en cas d'erreur :
+
+Si un champ requis est manquant :MethodArgumentNotValidException: La validation a échoué pour l'argument [0] dans la méthode...
+- Champ 'bqagCode': ne doit pas être null
+
+Si une relation est invalide :
+EntityNotFoundException: Impossible de trouver AcBanqueAgence avec code: AG999
+
+4. Vérification du debCode
+Le backend vérifie l'existence du debCode comme suit :
+@Transactional
+public DomiciliationCompletVM creer(Long debCode, DomiciliationCreationDTO dto) {
+    // Récupère le débiteur - lance une exception s'il n'existe pas
+    AcDebiteur debiteur = debiteurRepository.findById(debCode)
+        .orElseThrow(() -> new EntityNotFoundException("Débiteur non trouvé avec code: " + debCode));
     
-    // Affichage des données
-    afficherInfosAgence(data.bqagLib);     // Nom de l'agence
-    afficherInfosBanque(data.bqCode.bqLib); // Nom de la banque
+    // Continue le process si le débiteur existe
+    // ...
+}
+
+5. Format du DTO
+Le debCode est attendu dans l'URL uniquement, pas dans le corps de la requête.
+
+Le DTO attendu est structuré comme suit :
+public class DomiciliationCreationDTO {
+    @NotBlank
+    private String domCode;
+    
+    @NotBlank
+    private String bqagCode;
+    
+    @NotBlank
+    private String typdomCode;
+    
+    private String domLib;
+    // autres champs optionnels...
 }
 
 
+6. Transtypes
+debCode est traité comme un Long côté backend (numérique)
+domCode est traité comme un String
+Les dates (domDateCtl) doivent être au format ISO (YYYY-MM-DD)
+7. Contraintes d'unicité
+domCode est la clé primaire et doit être unique dans la table AC_DOMICILIATION
+Aucune contrainte composite n'est définie entre debCode et domCode
+8. Validation des données
+Le backend effectue ces validations :
+Vérification des annotations @NotBlank pour les champs obligatoires
+Vérification que les entités référencées existent (banqueAgence, typeDomicil)
+Vérification que le domCode n'existe pas déjà (c'est une clé primaire)
+Vérification des longueurs maximales (domCode: 25 caractères, domLib: 30 caractères, ancAg: 5 caractères)
+9. Réponse HTTP en cas d'échec
+400 Bad Request : Si les validations échouent:
 
+{
+  "timestamp": "2023-07-15T10:15:30Z",
+  "status": 400,
+  "error": "Bad Request",
+  "message": "Le champ bqagCode ne peut pas être vide",
+  "path": "/api/v1/debiteurs/12345/domiciliations"
+}
 
-Type de Domiciliation
-L'utilisateur sélectionne un type (typdomCode)
-Le libellé du type (typdomLib) s'affiche automatiquement:GET /api/v1/ac-type-domiciliation
-3. Modifications
-Pour la modification on appel d'abord le debcode du Débiteur Moral ou Physique ensuite si celui ci est lié a une Domiciliation alors on fait apparaitre aussi ses donné. Exemple: Processus de Modification
-Modification du Débiteur: PUT /api/v1/debiteurs-moral/{debCode}; La modification du débiteur n'affecte pas directement les domiciliations
-La relation est maintenue via la clé étrangère DEB_CODE
-Consultation des Domiciliations Liées: GET /api/v1/debiteurs/{debCode}/domiciliations; Retourne toutes les domiciliations associées au débiteur
-La relation est préservée car basée sur le debCode
-3. Exemple de Flux Frontend: async function modifierDebiteur(debCode, donnees) {
-    // 1. Modifier le débiteur
-    await fetch(`/api/v1/debiteurs-moral/${debCode}`, {
-        method: 'PUT',
-        body: JSON.stringify(donnees)
-    });
+404 Not Found : Si le débiteur n'existe pas:
+{
+  "timestamp": "2023-07-15T10:15:30Z",
+  "status": 404,
+  "error": "Not Found",
+  "message": "Débiteur non trouvé avec code: 12345",
+  "path": "/api/v1/debiteurs/12345/domiciliations"
+}
 
-    // 2. Les domiciliations restent liées car le debCode ne change pas
-    const domiciliations = await fetch(`/api/v1/debiteurs/${debCode}/domiciliations`);
-    // Les domiciliations sont toujours accessibles avec le même debCode
-}; Points Importants
-Intégrité des Données
-Le debCode ne change jamais lors d'une modification
-Les relations sont maintenues via les contraintes de clé étrangère
-Architecture Découplée
-Les modifications du débiteur et des domiciliations sont indépendantes
-Chaque entité a sa propre logique de modification. Lors de la modification d'une Domiciliation on affichera toutes ses donnés mais seul le typdomCode et son libellé qui peuvent etre changer, les autres champs ne peuvent pas etre changer. tu constatera aussi d'un Debiteur peut avoir plusieurs Domicilition alors prends cela en compte lors de la création et de la modification
+409 Conflict : Si le domCode existe déjà:
+{
+  "timestamp": "2023-07-15T10:15:30Z",
+  "status": 409,
+  "error": "Conflict",
+  "message": "Une domiciliation avec le code DOM123456 existe déjà",
+  "path": "/api/v1/debiteurs/12345/domiciliations"
+}
 
+10. Journalisation
+Pour activer une journalisation détaillée, ajoutez ceci au fichier application.properties :# Journalisation détaillée pour les requêtes JPA
+logging.level.org.hibernate.SQL=DEBUG
+logging.level.org.hibernate.type.descriptor.sql.BasicBinder=TRACE
 
-on procédera pas a pas code par code et fichiers par fichiers avec explication afin que je comprenne ce que tu fait tout en te basant sur les methodes de Physique ou Moral.
+# Journalisation pour le package spécifique
+logging.level.com.exias.migration_acc_web_api.Debiteur=DEBUG
 
-
-ok on peut commencé, j'ai déjà faire l'écran de Domiciliation que tu vas te basé dessus et l'améliora au fure et a mésure comme pour l'écran de Physique et concernant les Dialog de recherche utilise les meme méthode comme celui de Civilité dans l'écran de Physique
+# Format des logs avec timestamps
+logging.pattern.console=%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{36} - %msg%nCes informations devraient vous aider à identifier pourquoi l'enregistrement de la domiciliation ne fonctionne pas correctement dans votre application frontend.

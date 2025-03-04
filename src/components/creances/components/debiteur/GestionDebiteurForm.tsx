@@ -8,6 +8,8 @@ import { DataTable } from "primereact/datatable";
 import { ProgressSpinner } from "primereact/progressspinner";
 import { Toast } from 'primereact/toast';
 import { useDebiteurStore } from "../../stores/useDebiteurStore";
+import { useDomiciliationStore } from "../../stores/useDomiciliation";
+
 
 
 import { 
@@ -30,7 +32,10 @@ export function GestionDebiteurForm() {
   const toast = useRef<Toast>(null);
   const { currentMoral, currentPhysique } = useDebiteurStore();
   const [activeTabIndex, setActiveTabIndex] = useState(0);
+  const { resetDomiciliations } = useDomiciliationStore();
 
+
+const domiciliationRef = useRef<any>(null); // temporairement any
 
   const [formData, setFormData] = useState<AcDebiteur>({
     categDebCode: '',
@@ -51,6 +56,7 @@ export function GestionDebiteurForm() {
   // Ajout des états pour le dialog de recherche
 const [showSearchDialog, setShowSearchDialog] = useState(false);
 const [searchDebCode, setSearchDebCode] = useState<number | null>(null);
+const [savedDebiteur, setSavedDebiteur] = useState<AcDebiteur | null>(null);
 
 
   const resetForm = () => {
@@ -131,9 +137,13 @@ const [searchDebCode, setSearchDebCode] = useState<number | null>(null);
     debCjAdr: '',
     debCjNumpident: ''
   });
+
+  resetDomiciliations();
+  setSavedDebiteur(null);
+
   };
 
-
+  
 
 
   const handleCategorieSelect = (categorie: CategorieDebiteur) => {
@@ -297,10 +307,6 @@ if (result.typdebCode === 'M') {
 
 
 
-
-
-
-
     if (!result) {
       throw new Error('Débiteur non trouvé');
     }
@@ -312,6 +318,15 @@ if (result.typdebCode === 'M') {
     setIsEditMode(true);
     setSearchDebCode(debCodeToKeep || null);
     console.log('Mode édition activé');
+
+
+
+    
+
+
+
+
+
 
     // Mise à jour du formData
     setFormData(prevData => ({
@@ -508,6 +523,11 @@ useEffect(() => {
 
   const handleSave = async () => {
     try {
+
+      
+
+
+
       console.log('Début handleSave - État actuel:', {
         isEditMode,
         searchDebCode,
@@ -649,23 +669,81 @@ useEffect(() => {
             ...(currentPhysique.debCjNumpident?.trim() && { debCjNumpident: currentPhysique.debCjNumpident.trim() })
         });
     }
-      console.log('DTO à envoyer:', debiteurDTO);
-      const response = await saveDebiteurComplet(debiteurDTO);
-      console.log('Réponse du serveur:', response);
 
 
+
+    console.log('DTO à envoyer:', debiteurDTO);
+    const savedDebiteur = await saveDebiteurComplet(debiteurDTO);
+    console.log('Réponse du serveur:', savedDebiteur);
+    setSavedDebiteur(savedDebiteur);
+
+
+// Remplacer ce bloc de code dans handleSave
+// Remplacer ce bloc dans handleSave
+// Près de la fin de handleSave, remplacer ce bloc:
+if (savedDebiteur && savedDebiteur.debCode) {
+  if (domiciliationRef.current) {
+    console.log('Tentative de sauvegarde des domiciliations avec debCode:', savedDebiteur.debCode);
+    
+    try {
+      // Diagnostic
+      console.log('Données avant sauvegarde domiciliations:', savedDebiteur);
+      console.log('debCode à utiliser:', savedDebiteur.debCode, 'type:', typeof savedDebiteur.debCode);
+      
+      // 1. IMPORTANT: Attendre que le navigateur finisse de mettre à jour l'UI
+      // avant de tenter de sauvegarder les domiciliations
+      setTimeout(async () => {
+        try {
+          // 2. Convertir explicitement en nombre
+          const debCodeNumber = Number(savedDebiteur.debCode);
+          
+          // 3. Sauvegarder les domiciliations
+          const domSaveResult = await domiciliationRef.current.handleSave(debCodeNumber);
+          console.log('✅ Résultat sauvegarde domiciliations:', domSaveResult);
+          
+          // 4. Message de succès seulement si tout est OK
+          toast.current?.show({
+            severity: 'success',
+            summary: 'Succès',
+            detail: 'Débiteur et domiciliations enregistrés avec succès'
+          });
+          
+          // 5. SEULEMENT APRÈS, réinitialiser le formulaire
+          resetForm();
+          setIsEditMode(false);
+          setSearchDebCode(null);
+        } catch (error: any) {
+          console.error('❌ Erreur sauvegarde domiciliations:', error);
+          toast.current?.show({
+            severity: 'warn',
+            summary: 'Attention',
+            detail: 'Débiteur enregistré mais problème avec les domiciliations'
+          });
+        }
+      }, 100); // Délai court mais suffisant pour laisser l'UI se mettre à jour
+      
+    } catch (error: any) {
+      console.error('❌ Erreur:', error);
       toast.current?.show({
-        severity: 'success',
-        summary: 'Succès',
-        detail: searchDebCode ? 'Débiteur modifié avec succès' : 'Débiteur enregistré avec succès'
+        severity: 'error',
+        summary: 'Erreur',
+        detail: error.response?.data?.message || 'Erreur inattendue'
       });
-  
-      if (response) {
-        resetForm();
-        setIsEditMode(false);
-        setSearchDebCode(null);
-      }
-  
+    }
+  } else {
+    // Si pas de domiciliationRef, réinitialiser normalement
+    resetForm();
+  }
+} else {
+  console.error('❌ Pas de debCode dans la réponse:', savedDebiteur);
+  toast.current?.show({
+    severity: 'error',
+    summary: 'Erreur',
+    detail: 'Impossible de récupérer le code débiteur'
+  });
+}
+
+
     } catch (error: any) {
       console.error('Erreur détaillée:', error);
       toast.current?.show({
@@ -833,10 +911,17 @@ useEffect(() => {
                   )}
                 </div>
                 <div className="tab-content">
-                  {activeTab === 'physique' && <PhysiqueSection />}
-                  {activeTab === 'domiciliation' && <DomiciliationSection />}
-                  {activeTab === 'morale' && <AcDebiteurMoralSection />}
-                </div>
+    {activeTab === 'physique' && <PhysiqueSection />}
+                {activeTab === 'domiciliation' && (
+        <DomiciliationSection 
+            ref={domiciliationRef}
+            debCode={savedDebiteur?.debCode || (isEditMode && searchDebCode != null ? searchDebCode : undefined)} 
+            isEditMode={isEditMode}
+        />
+    )}
+    {activeTab === 'morale' && <AcDebiteurMoralSection />}
+</div>
+
               </div>
             </div>
           </div>

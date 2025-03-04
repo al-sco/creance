@@ -203,7 +203,11 @@ export interface DebiteurResponse {
 
 
 
-
+// Ajouter cette interface
+export interface DomiciliationUpdateDTO {
+  typdomCode: string;    // Champ obligatoire
+  typdomLib?: string;    // Champ optionnel
+}
 
 // Interface pour le type de domiciliation
 export interface TypeDomiciliation {

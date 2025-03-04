@@ -9,6 +9,7 @@ import {
 export class DebiteurRepository {
     private readonly BASE_URL = 'http://localhost:8281/api/v1';
     private readonly API_URL = `${this.BASE_URL}/debiteurs-complet`;
+    
 
     async createDebiteurComplet(data: DebiteurCompletCreationDTO): Promise<any> {
         try {

@@ -1,153 +1,238 @@
 import { create } from 'zustand';
 import { DomiciliationRepository } from '../repository/domiciliation.repository';
-import { 
-    Domiciliation,
-    TypeDomiciliation,
-    BanqueAgence,
-    DomiciliationDTO
-} from '../model/debiteur.model';
+import { BanqueAgence, DomiciliationDTO, TypeDomiciliation } from '../model/debiteur.model';
 
-interface DomiciliationStore {
-    // États
-    currentDomiciliations: Domiciliation[];
-    typeDomiciliations: TypeDomiciliation[];
-    banqueAgences: BanqueAgence[];
-    loading: boolean;
-    error: string | null;
-
-    // Actions
-    fetchDomiciliationsByDebiteur: (debCode: number) => Promise<void>;
-    fetchTypeDomiciliations: () => Promise<void>;
-    fetchBanqueAgences: () => Promise<void>;
-    saveDomiciliation: (data: DomiciliationDTO) => Promise<void>;
-    updateDomiciliation: (
-        debCode: number,
-        domCode: string, 
-        data: { 
-            typdomCode: string;
-            typdomLib?: string;
-        }
-    ) => Promise<void>;
-    deleteDomiciliation: (domCode: string) => Promise<void>;
-    resetStore: () => void;
+// Interface pour les données de domiciliation (reprise du composant)
+export interface DomiciliationLine {
+  domCode: string;
+  typdomCode: string;
+  typdomLib: string;
+  domLib: string;
+  bqagCode: string;
+  bqagLib: string;
+  bqLib: string;
 }
 
-export const useDomiciliationStore = create<DomiciliationStore>((set) => {
-    const repository = new DomiciliationRepository();
+interface DomiciliationStore {
+  // États existants
+  typeDomiciliations: TypeDomiciliation[];
+  banqueAgences: BanqueAgence[];
+  loading: boolean;
+  error: string | null;
+  
+  // NOUVEAU: État global des domiciliations
+  domiciliations: DomiciliationLine[];
+  
+  // Actions existantes
+  fetchTypeDomiciliations: () => Promise<void>;
+  fetchBanqueAgences: () => Promise<void>;
+  saveDomiciliation: (data: DomiciliationDTO) => Promise<any>;
+  fetchDomiciliationsByDebCode: (debCode: number) => Promise<void>;
 
-    return {
-        // États initiaux
-        currentDomiciliations: [],
-        typeDomiciliations: [],
-        banqueAgences: [],
-        loading: false,
-        error: null,
+  
+  // NOUVELLES actions pour manipuler les domiciliations
+  updateDomiciliation: (index: number, field: keyof DomiciliationLine, value: string) => void;
+  updateDomiciliationFull: (index: number, updates: Partial<DomiciliationLine>) => void;
+  setDomiciliations: (domiciliations: DomiciliationLine[]) => void;
+  addDomiciliationLine: () => void;
+  removeDomiciliationLine: (index: number) => void;
+  resetDomiciliations: () => void;
+  
+}
 
-        // Actions
-        fetchDomiciliationsByDebiteur: async (debCode: number) => {
-            try {
-                set({ loading: true, error: null });
-                const domiciliations = await repository.getDomiciliationsByDebiteur(debCode);
-                set({ currentDomiciliations: domiciliations });
-            } catch (error) {
-                set({ error: "Erreur lors du chargement des domiciliations" });
-            } finally {
-                set({ loading: false });
-            }
-        },
+const repository = new DomiciliationRepository();
 
-        fetchTypeDomiciliations: async () => {
-            try {
-                set({ loading: true, error: null });
-                const types = await repository.getTypeDomiciliations();
-                set({ typeDomiciliations: types });
-            } catch (error) {
-                set({ error: "Erreur lors du chargement des types de domiciliation" });
-            } finally {
-                set({ loading: false });
-            }
-        },
+// État initial d'une domiciliation
+const emptyDomiciliation: DomiciliationLine = {
+  domCode: '',
+  typdomCode: '',
+  typdomLib: '',
+  domLib: '',
+  bqagCode: '',
+  bqagLib: '',
+  bqLib: ''
+};
 
-        fetchBanqueAgences: async () => {
-            try {
-                set({ loading: true, error: null });
-                const repository = new DomiciliationRepository();
-                const agences = await repository.getBanqueAgences();
-                console.log('Agences récupérées:', agences); // Debug
-                set({ banqueAgences: agences });
-            } catch (error) {
-                console.error('Erreur lors du chargement des agences:', error);
-                set({ error: "Erreur lors du chargement des agences bancaires" });
-            } finally {
-                set({ loading: false });
-            }
-        },
+// Store Zustand
+export const useDomiciliationStore = create<DomiciliationStore>((set, get) => ({
+  typeDomiciliations: [],
+  banqueAgences: [],
+  loading: false,
+  error: null,
+  
+  // État initial avec une ligne vide
+  domiciliations: [{ ...emptyDomiciliation }],
+  
+  // Fonctions existantes
+  fetchTypeDomiciliations: async () => {
+    try {
+      set({ loading: true, error: null });
+      const types = await repository.getTypeDomiciliations();
+      console.log('Types de domiciliation chargés:', types.length);
+      set({ typeDomiciliations: types, loading: false });
+    } catch (error: any) {
+      console.error('Erreur chargement types domiciliation:', error);
+      set({ error: 'Erreur lors du chargement des types de domiciliation', loading: false });
+    }
+  },
 
-        saveDomiciliation: async (data: DomiciliationDTO) => {
-            try {
-                set({ loading: true, error: null });
-                await repository.createDomiciliation(data);
-                // Rafraîchir la liste après création
-                const domiciliations = await repository.getDomiciliationsByDebiteur(data.debCode);
-                set({ currentDomiciliations: domiciliations });
-            } catch (error) {
-                set({ error: "Erreur lors de la sauvegarde de la domiciliation" });
-                throw error;
-            } finally {
-                set({ loading: false });
-            }
-        },
-
-        updateDomiciliation: async (
-            debCode: number,
-            domCode: string, 
-            data: { 
-                typdomCode: string;
-                typdomLib?: string;
-            }
-        ) => {
-            try {
-                set({ loading: true, error: null });
-                await repository.updateDomiciliation(debCode, domCode, data);
-                // Rafraîchir la liste après modification
-                const domiciliations = await repository.getDomiciliationsByDebiteur(debCode);
-                set({ currentDomiciliations: domiciliations });
-            } catch (error) {
-                set({ error: "Erreur lors de la modification de la domiciliation" });
-                throw error;
-            } finally {
-                set({ loading: false });
-            }
-        },
-
-        deleteDomiciliation: async (domCode: string) => {
-            try {
-                set({ loading: true, error: null });
-                await repository.deleteDomiciliation(domCode);
-                // Filtrer la domiciliation supprimée de l'état
-                set((state) => ({
-                    currentDomiciliations: state.currentDomiciliations.filter(
-                        dom => dom.domCode !== domCode
-                    )
-                }));
-            } catch (error) {
-                set({ error: "Erreur lors de la suppression de la domiciliation" });
-                throw error;
-            } finally {
-                set({ loading: false });
-            }
-        },
-
-
-      
-
-        resetStore: () => {
-            set({
-                currentDomiciliations: [],
-                typeDomiciliations: [],
-                banqueAgences: [],
-                error: null
-            });
+  // Ajouter dans l'implémentation du store
+fetchDomiciliationsByDebCode: async (debCode) => {
+  try {
+    set({ loading: true, error: null });
+    const domData = await repository.getDomiciliationsByDebCode(debCode);
+    
+    if (domData && domData.length > 0) {
+      // Transformer les données brutes en DomiciliationLine
+      const domLines: DomiciliationLine[] = await Promise.all(domData.map(async (dom: any) => {
+        // Récupérer les informations du type de domiciliation
+        let typdomLib = '';
+        const types = get().typeDomiciliations;
+        const foundType = types.find(t => t.typdomCode === dom.typdomCode);
+        if (foundType) typdomLib = foundType.typdomLib;
+        
+        // Récupérer les informations de la banque
+        let bqagLib = '';
+        let bqLib = '';
+        const banques = get().banqueAgences;
+        const foundBanque = banques.find(b => b.bqagCode === dom.bqagCode);
+        if (foundBanque) {
+          bqagLib = foundBanque.bqagLib;
+          bqLib = foundBanque.bqCode?.bqLib || '';
         }
-    };
-});
+        
+        return {
+          domCode: dom.domCode,
+          typdomCode: dom.typdomCode,
+          typdomLib,
+          domLib: dom.domLib,
+          bqagCode: dom.bqagCode,
+          bqagLib,
+          bqLib
+        };
+      }));
+      
+      console.log('Domiciliation transformées pour le store:', domLines);
+      set({ domiciliations: domLines, loading: false });
+    } else {
+      // Aucune domiciliation trouvée, initialiser avec une ligne vide
+      set({
+        domiciliations: [{
+          domCode: '',
+          typdomCode: '',
+          typdomLib: '',
+          domLib: '',
+          bqagCode: '',
+          bqagLib: '',
+          bqLib: ''
+        }],
+        loading: false
+      });
+    }
+  } catch (error) {
+    console.error('Erreur lors du chargement des domiciliations:', error);
+    set({
+      error: 'Impossible de charger les domiciliations',
+      loading: false
+    });
+  }
+},
+  
+  fetchBanqueAgences: async () => {
+    try {
+      set({ loading: true, error: null });
+      const banques = await repository.getBanqueAgences();
+      console.log('Banques chargées:', banques.length);
+      set({ banqueAgences: banques, loading: false });
+    } catch (error: any) {
+      console.error('Erreur chargement banques:', error);
+      set({ error: 'Erreur lors du chargement des banques', loading: false });
+    }
+  },
+
+
+
+
+
+
+
+  
+  saveDomiciliation: async (data: DomiciliationDTO) => {
+    console.log('💾 Store: Tentative de sauvegarde domiciliation:', data);
+    try {
+      set({ loading: true, error: null });
+      const result = await repository.saveDomiciliation(data);
+      console.log('✅ Store: Domiciliation sauvegardée avec succès:', result);
+      set({ loading: false });
+      return result;
+    } catch (error: any) {
+      console.error('❌ Store: Erreur sauvegarde domiciliation:', error);
+      set({ 
+        error: error.response?.data?.message || 'Erreur lors de la sauvegarde de la domiciliation', 
+        loading: false 
+      });
+      throw error;
+    }
+  },
+  
+  // NOUVELLES fonctions pour manipuler l'état des domiciliations
+  updateDomiciliation: (index, field, value) => {
+    set(state => {
+      const domiciliations = [...state.domiciliations];
+      domiciliations[index] = { ...domiciliations[index], [field]: value };
+      console.log(`Store: Modification domiciliation[${index}].${field} = ${value}`);
+      return { domiciliations };
+    });
+  },
+  
+  updateDomiciliationFull: (index, updates) => {
+    set(state => {
+      const domiciliations = [...state.domiciliations];
+      domiciliations[index] = { ...domiciliations[index], ...updates };
+      console.log(`Store: Mise à jour complète domiciliation[${index}]`, updates);
+      return { domiciliations };
+    });
+  },
+  
+  setDomiciliations: (domiciliations) => {
+    console.log('Store: Mise à jour complète des domiciliations', domiciliations);
+    set({ domiciliations });
+  },
+  
+  addDomiciliationLine: () => {
+    set(state => {
+      // Vérifier s'il n'existe pas déjà une ligne vide
+      const hasEmptyLine = state.domiciliations.some(dom => 
+        !dom.domCode && !dom.typdomCode && !dom.domLib && !dom.bqagCode
+      );
+      
+      if (hasEmptyLine) {
+        console.log('Store: Une ligne vide existe déjà, pas besoin d\'en ajouter une autre');
+        return state;
+      }
+      
+      console.log('Store: Ajout d\'une nouvelle ligne de domiciliation');
+      return { 
+        domiciliations: [...state.domiciliations, { ...emptyDomiciliation }] 
+      };
+    });
+  },
+  
+  removeDomiciliationLine: (index) => {
+    set(state => {
+      if (state.domiciliations.length <= 1) {
+        console.log('Store: Impossible de supprimer la dernière ligne de domiciliation');
+        return state;
+      }
+      
+      const domiciliations = state.domiciliations.filter((_, i) => i !== index);
+      console.log(`Store: Suppression domiciliation[${index}]`);
+      return { domiciliations };
+    });
+  },
+  
+  resetDomiciliations: () => {
+    console.log('Store: Réinitialisation des domiciliations');
+    set({ domiciliations: [{ ...emptyDomiciliation }] });
+  }
+}));

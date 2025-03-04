@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { 
     Domiciliation,
     TypeDomiciliation,
@@ -56,6 +56,33 @@ export class DomiciliationRepository {
         }
     }
 
+    // Dans domiciliation.repository.ts
+    async saveDomiciliation(domiciliation: DomiciliationDTO): Promise<any> {
+        // Assurez-vous que debCode est un nombre
+        const debCode = Number(domiciliation.debCode);
+        
+        // Créez un nouvel objet sans le debCode (puisqu'il est dans l'URL)
+        const { debCode: _, ...domiciliationData } = domiciliation;
+      
+        console.log(`Envoi requête: POST ${this.BASE_URL}/debiteurs/${debCode}/domiciliations`);
+        console.log('Données envoyées:', domiciliationData);
+        
+        try {
+          const response = await axios.post(
+            `${this.BASE_URL}/debiteurs/${debCode}/domiciliations`,
+            domiciliationData
+          );
+          console.log('Réponse API:', response.data);
+          return response.data;
+        } catch (error) {
+          const axiosError = error as AxiosError;
+          console.error('Erreur API domiciliation:', axiosError.response?.data || axiosError.message);
+          console.error('Status code:', axiosError.response?.status);
+          console.error('Headers:', axiosError.response?.headers);
+          throw error;
+        }
+      }
+
    // Modification d'une domiciliation (uniquement typdomCode)
 async updateDomiciliation(
     debCode: number,
@@ -96,4 +123,17 @@ async updateDomiciliation(
             throw error;
         }
     }
+
+
+    async getDomiciliationsByDebCode(debCode: number): Promise<any[]> {
+        try {
+          // Appel à l'API pour récupérer les domiciliations d'un débiteur
+          const response = await axios.get(`/api/v1/debiteurs/${debCode}/domiciliations`);
+          console.log('Domiciliations récupérées du backend:', response.data);
+          return response.data;
+        } catch (error) {
+          console.error('Erreur chargement domiciliations:', error);
+          throw error;
+        }
+      }
 }
