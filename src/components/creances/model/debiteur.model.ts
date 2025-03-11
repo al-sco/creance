@@ -204,9 +204,15 @@ export interface DebiteurResponse {
 
 
 // Ajouter cette interface
+// Dans debiteur.model.ts
 export interface DomiciliationUpdateDTO {
-  typdomCode: string;    // Champ obligatoire
-  typdomLib?: string;    // Champ optionnel
+  bqagCode?: string;     // Code de l'agence bancaire
+  typdomCode: string;    // Code du type de domiciliation (SEUL CHAMP À MODIFIER)
+  domLib?: string;       // Libellé de la domiciliation
+  ancAg?: string;        // Ancienne agence
+  villeCode?: string;    // Code de la ville
+  numBenef?: number;     // Numéro bénéficiaire
+  garphysCode?: string;  // Code garantie physique
 }
 
 // Interface pour le type de domiciliation

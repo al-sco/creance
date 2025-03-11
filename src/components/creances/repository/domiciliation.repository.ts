@@ -3,22 +3,14 @@ import {
     Domiciliation,
     TypeDomiciliation,
     BanqueAgence,
-    DomiciliationDTO
+    DomiciliationDTO,
+    DomiciliationUpdateDTO
 } from '../model/debiteur.model';
 
 export class DomiciliationRepository {
     private readonly BASE_URL = 'http://localhost:8281/api/v1';
 
-    // Récupération des domiciliations d'un débiteur
-    async getDomiciliationsByDebiteur(debCode: number): Promise<Domiciliation[]> {
-        try {
-            const response = await axios.get(`${this.BASE_URL}/debiteurs/${debCode}/domiciliations`);
-            return response.data;
-        } catch (error) {
-            console.error('Erreur lors de la récupération des domiciliations:', error);
-            throw error;
-        }
-    }
+  
 
     // Récupération des types de domiciliation
     async getTypeDomiciliations(): Promise<TypeDomiciliation[]> {
@@ -83,26 +75,30 @@ export class DomiciliationRepository {
         }
       }
 
-   // Modification d'une domiciliation (uniquement typdomCode)
+// Dans domiciliation.repository.ts
 async updateDomiciliation(
     debCode: number,
-    domCode: string, 
-    data: { 
-        typdomCode: string;
-        typdomLib?: string;
-    }
-): Promise<Domiciliation> {
+    domCode: string,
+    data: DomiciliationUpdateDTO
+  ): Promise<any> {
     try {
-        const response = await axios.put(
-            `${this.BASE_URL}/debiteurs/${debCode}/domiciliations/${domCode}`,
-            data
-        );
-        return response.data;
+      // URL CORRECTE selon la spécification
+      const url = `${this.BASE_URL}/debiteurs/${debCode}/domiciliations/${domCode}`;
+      console.log(`🔄 Mise à jour domiciliation: ${url}`, data);
+      
+      const response = await axios.put(url, data);
+      console.log('✅ Domiciliation mise à jour avec succès:', response.data);
+      return response.data;
     } catch (error) {
-        console.error('Erreur lors de la modification:', error);
-        throw error;
+      console.error('❌ Erreur lors de la modification:', error);
+      // Afficher des détails sur l'erreur pour faciliter le débogage
+      if (axios.isAxiosError(error) && error.response) {
+        console.error('Status:', error.response.status);
+        console.error('Message serveur:', error.response.data);
+      }
+      throw error;
     }
-}
+  }
     // Suppression d'une domiciliation
     async deleteDomiciliation(domCode: string): Promise<void> {
         try {
@@ -125,15 +121,39 @@ async updateDomiciliation(
     }
 
 
-    async getDomiciliationsByDebCode(debCode: number): Promise<any[]> {
-        try {
-          // Appel à l'API pour récupérer les domiciliations d'un débiteur
-          const response = await axios.get(`/api/v1/debiteurs/${debCode}/domiciliations`);
-          console.log('Domiciliations récupérées du backend:', response.data);
-          return response.data;
-        } catch (error) {
-          console.error('Erreur chargement domiciliations:', error);
-          throw error;
+   // Dans domiciliation.repository.ts
+async getDomiciliationsByDebCode(debCode: number): Promise<any[]> {
+    try {
+      // URL CORRECTE selon la spécification
+      const url = `${this.BASE_URL}/debiteurs/${debCode}/domiciliations`;
+      console.log(`🔍 Récupération des domiciliations: ${url}`);
+      
+      const response = await axios.get(url);
+      
+      // Vérifier que la réponse est bien un tableau
+      if (Array.isArray(response.data)) {
+        console.log(`✅ ${response.data.length} domiciliations récupérées`);
+        return response.data;
+      } else {
+        console.error('❌ Format de réponse incorrect:', typeof response.data);
+        // Si API renvoie un objet avec une propriété contenant le tableau
+        if (response.data && typeof response.data === 'object') {
+          // Chercher une propriété qui pourrait contenir un tableau
+          for (const key in response.data) {
+            if (Array.isArray(response.data[key])) {
+              return response.data[key];
+            }
+          }
         }
+        return []; // Renvoyer un tableau vide si format non reconnu
       }
+    } catch (error: any) {
+      console.error('❌ Erreur chargement domiciliations:', error);
+      if (error.response) {
+        console.error('Status:', error.response.status);
+        console.error('Message:', error.response.data);
+      }
+      return []; // Renvoyer un tableau vide en cas d'erreur
+    }
+  }
 }

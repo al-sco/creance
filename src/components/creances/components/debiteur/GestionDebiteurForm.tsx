@@ -321,7 +321,19 @@ if (result.typdebCode === 'M') {
 
 
 
-    
+    if (result && result.debCode) {
+      // Après avoir chargé les données du débiteur et défini le mode édition
+      try {
+        console.log('Chargement des domiciliations pour le débiteur:', result.debCode);
+        // Si notre ref est disponible et a la méthode load
+        if (domiciliationRef.current && typeof domiciliationRef.current.loadDomiciliationsForDebiteur === 'function') {
+          await domiciliationRef.current.loadDomiciliationsForDebiteur(result.debCode);
+          console.log('Domiciliations chargées avec succès');
+        }
+      } catch (error) {
+        console.error('Erreur chargement domiciliations:', error);
+      }
+    }
 
 
 

@@ -33,6 +33,7 @@ export const DomiciliationSection = forwardRef((props: DomiciliationSectionProps
         updateDomiciliation,
         resetDomiciliations,
         typeDomiciliations,
+        updateDomiciliationType,
         banqueAgences,
         loading,
         error,
@@ -370,28 +371,53 @@ export const DomiciliationSection = forwardRef((props: DomiciliationSectionProps
         },
     }));
 
-    // MODIFICATION: handleSelectType synchronise avec le store
-    const handleSelectType = (selection: TypeDomiciliation) => {
-        console.log('Selection complète:', selection);
-    
-        const index = domiciliations.findIndex(d => d.domCode === currentDomCode);
-        if (index !== -1) {
-            const updatedDomiciliations = [...domiciliations];
-            updatedDomiciliations[index] = {
-                ...updatedDomiciliations[index],
-                typdomCode: selection.typdomCode,
-                typdomLib: selection.typdomLib
-            };
-            
-            // Mettre à jour l'état local ET le store
-            setDomiciliations(updatedDomiciliations);
-            storeSetDomiciliations(updatedDomiciliations);
+   // MODIFICATION: handleSelectType synchronise avec le store
+   const handleSelectType = async (selection: TypeDomiciliation) => {
+    console.log('Type sélectionné:', selection);
+
+    const index = domiciliations.findIndex(d => d.domCode === currentDomCode);
+    if (index !== -1) {
+        try {
+            // Si on est en mode édition, utiliser l'API de mise à jour
+            if (props.isEditMode && props.debCode) {
+                await updateDomiciliationType( // ✅ Utiliser le bon nom ici
+                    props.debCode,
+                    currentDomCode as string,
+                    selection.typdomCode
+                );
+                
+                toast.current?.show({
+                    severity: 'success',
+                    summary: 'Succès',
+                    detail: 'Type de domiciliation mis à jour'
+                });
+            } else {
+                // En mode création, mettre à jour localement
+                const updatedDomiciliations = [...domiciliations];
+                updatedDomiciliations[index] = {
+                    ...updatedDomiciliations[index],
+                    typdomCode: selection.typdomCode,
+                    typdomLib: selection.typdomLib
+                };
+                
+                // Mettre à jour l'état local ET le store
+                setDomiciliations(updatedDomiciliations);
+                storeSetDomiciliations(updatedDomiciliations);
+            }
+        } catch (error: any) {
+            console.error('Erreur mise à jour type domiciliation:', error);
+            toast.current?.show({
+                severity: 'error',
+                summary: 'Erreur',
+                detail: error.response?.data?.message || 'Erreur lors de la mise à jour'
+            });
         }
-    
-        setSelectedTypeDomiciliation(selection);
-        setTypeDomFilter('');
-        setShowTypeDomDialog(false);
-    };
+    }
+
+    setSelectedTypeDomiciliation(selection);
+    setTypeDomFilter('');
+    setShowTypeDomDialog(false);
+};
 
     // MODIFICATION: handleSelectBanque synchronise avec le store
     const handleSelectBanque = (selection: BanqueAgence) => {
@@ -691,40 +717,6 @@ export const DomiciliationSection = forwardRef((props: DomiciliationSectionProps
                 </DataTable>
             </Dialog>
 
-            <div style={{ marginTop: '20px', padding: '10px', border: '1px dashed #ccc' }}>
-                <h4>Diagnostic Domiciliations</h4>
-                <Button 
-                    label="Vérifier état" 
-                    className="p-button-sm p-button-help"
-                    onClick={() => {
-                        console.group('📊 DIAGNOSTIC DOMICILIATIONS');
-                        console.log('Nombre total:', domiciliations.length);
-                        
-                        console.log('État complet des domiciliations:', domiciliations);
-                        
-                        // Analyse des domiciliations
-                        domiciliations.forEach((dom, index) => {
-                            console.log(`Domiciliation #${index}:`, {
-                                domCode: dom.domCode || '❌ MANQUANT',
-                                typdomCode: dom.typdomCode || '❌ MANQUANT',
-                                domLib: dom.domLib || '❌ MANQUANT',
-                                bqagCode: dom.bqagCode || '❌ MANQUANT',
-                                estComplete: !!(dom.domCode && dom.typdomCode && dom.domLib && dom.bqagCode)
-                            });
-                        });
-                        
-                        // Vérification de la référence
-                        console.log('Props debCode:', props.debCode);
-                        console.groupEnd();
-                        
-                        toast.current?.show({
-                            severity: 'info',
-                            summary: 'Diagnostic',
-                            detail: `${domiciliations.length} domiciliation(s) - Voir console pour détails`
-                        });
-                    }}
-                />
-            </div>
         </div>
     );
 });

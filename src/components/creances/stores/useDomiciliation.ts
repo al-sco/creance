@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { DomiciliationRepository } from '../repository/domiciliation.repository';
-import { BanqueAgence, DomiciliationDTO, TypeDomiciliation } from '../model/debiteur.model';
+import { BanqueAgence, DomiciliationDTO, DomiciliationUpdateDTO, TypeDomiciliation } from '../model/debiteur.model';
 
 // Interface pour les données de domiciliation (reprise du composant)
 export interface DomiciliationLine {
@@ -37,6 +37,7 @@ interface DomiciliationStore {
   addDomiciliationLine: () => void;
   removeDomiciliationLine: (index: number) => void;
   resetDomiciliations: () => void;
+  updateDomiciliationType: (debCode: number, domCode: string, typdomCode: string) => Promise<void>;
   
 }
 
@@ -234,5 +235,48 @@ fetchDomiciliationsByDebCode: async (debCode) => {
   resetDomiciliations: () => {
     console.log('Store: Réinitialisation des domiciliations');
     set({ domiciliations: [{ ...emptyDomiciliation }] });
+  },
+
+  updateDomiciliationType: async (debCode, domCode, typdomCode) => {
+    try {
+      set({ loading: true, error: null });
+      
+      // Trouver le type de domiciliation correspondant pour obtenir le libellé
+      const types = get().typeDomiciliations;
+      const typdomLib = types.find(t => t.typdomCode === typdomCode)?.typdomLib || '';
+      
+      // Préparer les données pour la mise à jour
+      const updateDTO: DomiciliationUpdateDTO = {
+        typdomCode: typdomCode
+      };
+      
+      // Appeler le repository pour mettre à jour en base de données
+      await repository.updateDomiciliation(debCode, domCode, updateDTO);
+      
+      // Mettre à jour localement dans le store
+      set(state => {
+        const domiciliations = [...state.domiciliations];
+        const index = domiciliations.findIndex(d => d.domCode === domCode);
+        
+        if (index !== -1) {
+          domiciliations[index] = {
+            ...domiciliations[index],
+            typdomCode,
+            typdomLib
+          };
+        }
+        
+        console.log('🔄 Store: Domiciliation mise à jour localement:', domiciliations[index]);
+        return { domiciliations, loading: false };
+      });
+      
+    } catch (error: any) {
+      console.error('❌ Erreur mise à jour type domiciliation:', error);
+      set({ 
+        error: error.response?.data?.message || 'Erreur lors de la modification de la domiciliation', 
+        loading: false 
+      });
+      throw error;
+    }
   }
 }));
