@@ -1,0 +1,302 @@
+Documentation de l'API Créances pour l'équipe Frontend
+1. Vue d'ensemble
+L'API Créances permet la gestion complète du cycle de vie des créances avec enrichissement automatique des données référentielles. Cette documentation détaille l'utilisation des endpoints, les formats de requête/réponse, et les règles métier associées.
+
+2. Structure des données
+Entité principale: Créance
+La créance comporte de nombreux attributs répartis en plusieurs catégories:
+
+Identifiants et références
+Champ	Type	Description	Obligatoire
+creanCode	String	Identifiant unique généré par séquence S_AC_ACTE	Auto-généré
+debCode	Long	Code du débiteur	Oui
+grpCreanCode	String	Code du groupe de créance	Oui
+objCreanCode	String	Code de l'objet de créance	Oui
+ordoCode	Integer	Code de l'ordonnateur	Non
+periodCode	String	Code de la périodicité	Oui
+typeStructOrgcode	String	Code du type de structure organisationnelle	Non.
+
+Montants financiers
+Champ	Type	Description	Obligatoire
+creanCapitInit	BigDecimal	Capital initial	Non
+creanMontDu	BigDecimal	Montant dû	Non
+creanDejRemb	BigDecimal	Montant déjà remboursé	Non
+creanPenalite	BigDecimal	Pénalités	Non
+creanEncours	BigDecimal	Encours	Non
+creanMontImpaye	BigDecimal	Montant impayé	Non
+creanMontIc	BigDecimal	Montant IC	Non
+creanMontIr	BigDecimal	Montant IR	Non
+creanMontAss	BigDecimal	Montant assurance	Non
+creanMontDebloq	BigDecimal	Montant débloqué	Non
+creanFrais	BigDecimal	Frais	Non
+creanCommBanq	BigDecimal	Commission bancaire	Non
+creanCommStecaut	BigDecimal	Commission Stecaut	Non.
+
+Dates et périodes:
+
+Champ	Type	Description	Obligatoire
+creanDatoctroi	LocalDate	Date d'octroi	Non
+creanDatecrea	LocalDate	Date de création	Non
+creanDatrec	LocalDate	Date de recouvrement	Non
+creanDateft	LocalDate	Date finale théorique	Non
+creanDatech	LocalDate	Date d'échéance	Non
+Paramètres et statut
+Champ	Type	Description	Obligatoire
+creanTauxic	Long	Taux d'intérêt créditeur	Non
+creanTauxir	Long	Taux d'intérêt réel	Non
+creanDuree	Long	Durée	Non
+creanObjet	String	Objet de la créance (texte libre)	Non
+creanNbech	String	Nombre d'échéances	Non
+creanStatrecouv	String	Statut de recouvrement	Non
+creanClasse	String	Classe	Non
+Données d'enrichissement automatique
+Ces données sont récupérées automatiquement par le backend:
+Champ dans CreanceVM	Source	Description
+debNomComplet	AcDebiteur	Nom complet du débiteur
+grpCreanLib	AcGroupeCreance	Libellé du groupe de créance
+entiteLib	AcEntite	Libellé de l'entité (via groupe)
+objCreanLib	AcObjetCreance	Libellé de l'objet de créance
+ordoNom	AcOrdonnateur	Nom de l'ordonnateur
+periodLib	AcPeriodicite	Libellé de la périodicité
+typeStructOrglib	AcTypeStructOrga	Libellé du type de structure
+3. Endpoints API
+Gestion des créances
+Méthode	URL	Description
+POST	/api/v1/creances	Créer une nouvelle créance
+GET	/api/v1/creances/{creanCode}	Récupérer une créance
+GET	/api/v1/creances	Lister toutes les créances
+PUT	/api/v1/creances/{creanCode}	Modifier une créance
+Référentiels:
+Méthode	URL	Description
+GET	/api/v1/referentiels/debiteurs/{debCode}	Détails d'un débiteur
+GET	/api/v1/referentiels/debiteurs	Liste des débiteurs
+GET	/api/v1/referentiels/groupes-creance/{grpCreanCode}	Détails d'un groupe
+GET	/api/v1/referentiels/groupes-creance	Liste des groupes
+GET	/api/v1/referentiels/ordonnateurs/{ordoCode}	Détails d'un ordonnateur
+GET	/api/v1/referentiels/ordonnateurs	Liste des ordonnateurs
+GET	/api/v1/referentiels/objets-creance/{objCreanCode}	Détails d'un objet
+GET	/api/v1/referentiels/objets-creance	Liste des objets
+GET	/api/v1/referentiels/periodicites/{periodCode}	Détails d'une périodicité
+GET	/api/v1/referentiels/periodicites	Liste des périodicités
+GET	/api/v1/referentiels/types-struct-orga/{typeStructOrgcode}	Détails d'un type de structure
+GET	/api/v1/referentiels/types-struct-orga	Liste des types de structures
+4. Création d'une créance
+Requête:
+POST /api/v1/creances
+Content-Type: application/json
+
+{
+  "debCode": 1005,
+  "grpCreanCode": "AM",
+  "objCreanCode": "001",
+  "periodCode": "MEN",
+  "creanCapitInit": 10000000.00,
+  "creanMontDu": 10000000.00,
+  "creanObjet": "Avance pour construction de bâtiment administratif",
+  "creanTauxic": 5,
+  "creanDuree": 36,
+  "creanDatoctroi": "2025-01-15",
+  "creanMontDebloq": 10000000.00,
+  "creanNbech": "36",
+  "ordoCode": 12,
+  "typeStructOrgcode": "ADM"
+}
+Réponse:
+{
+  "creanCode": "CR00023",
+  "debCode": 1005,
+  "debNomComplet": "Mairie de Dakar",
+  "grpCreanCode": "AM",
+  "grpCreanLib": "Avances sur Marchés",
+  "entiteLib": "Direction des Recettes",
+  "objCreanCode": "001",
+  "objCreanLib": "Construction",
+  "ordoCode": 12,
+  "ordoNom": "Directeur du Trésor",
+  "periodCode": "MEN",
+  "periodLib": "Mensuel",
+  "typeStructOrgcode": "ADM",
+  "typeStructOrglib": "Administration",
+  "creanCapitInit": 10000000.00,
+  "creanMontDu": 10000000.00,
+  "creanObjet": "Avance pour construction de bâtiment administratif",
+  "creanTauxic": 5,
+  "creanDuree": 36,
+  "creanDatoctroi": "2025-01-15",
+  "creanDatecrea": "2025-03-24",
+  "creanMontDebloq": 10000000.00,
+  "creanNbech": "36"
+}
+
+Règles de validation
+debCode: doit correspondre à un débiteur existant (obligatoire)
+grpCreanCode: doit correspondre à un groupe de créance existant (obligatoire)
+objCreanCode: doit correspondre à un objet de créance existant (obligatoire)
+periodCode: doit correspondre à une périodicité existante (obligatoire)
+ordoCode: si fourni, doit correspondre à un ordonnateur existant
+typeStructOrgcode: si fourni, doit correspondre à un type de structure existant
+5. Consultation d'une créance
+Requête:
+GET /api/v1/creances/CR00023
+
+Réponse
+Même format que la réponse de création, avec toutes les données enrichies (libellés des référentiels).
+
+6. Modification d'une créance
+Requête:
+PUT /api/v1/creances/CR00023
+Content-Type: application/json.
+
+{
+  "grpCreanCode": "AM",
+  "objCreanCode": "001",
+  "periodCode": "MEN",
+  "creanCapitInit": 12000000.00,
+  "creanMontDu": 12000000.00,
+  "creanObjet": "Avance pour construction et équipement de bâtiment administratif",
+  "creanTauxic": 5,
+  "creanDuree": 48,
+  "creanDatoctroi": "2025-02-01",
+  "creanMontDebloq": 12000000.00,
+  "creanNbech": "48",
+  "ordoCode": 15,
+  "typeStructOrgcode": "ADM"
+}
+
+Réponse
+Même format que la réponse de création, avec les nouvelles valeurs et données enrichies.
+
+Limitations
+Le debCode ne peut pas être modifié
+Le creanCode ne peut pas être modifié
+7. Utilisation des référentiels
+Recherche d'un débiteur:
+GET /api/v1/referentiels/debiteurs/1005
+
+Réponse:
+
+{
+  "debCode": 1005,
+  "nomComplet": "Mairie de Dakar",
+  "adresse": "Place de l'Indépendance, Dakar"
+}
+
+Liste des groupes de créance avec leurs entités
+GET /api/v1/referentiels/groupes-creance
+Réponse:
+[
+  {
+    "grpCreanCode": "AM",
+    "grpCreanLib": "Avances sur Marchés",
+    "entiteCode": "DIR",
+    "entiteLib": "Direction des Recettes"
+  },
+  {
+    "grpCreanCode": "PO",
+    "grpCreanLib": "Prêts Ordinaires",
+    "entiteCode": "DT",
+    "entiteLib": "Direction du Trésor"
+  }
+]
+
+Recherche d'un objet de créance
+GET /api/v1/referentiels/objets-creance/001
+
+Réponse:
+
+{
+  "objCreanCode": "001",
+  "objCreanLib": "Construction"
+}
+
+8. Stratégie d'implémentation côté frontend
+Formulaire de création
+Champs obligatoires avec validation
+
+Débiteur (sélection avec recherche)
+Groupe de créance (sélection avec affichage de l'entité)
+Objet de créance (sélection)
+Périodicité (sélection)
+Champs optionnels courants
+
+Montants financiers (capital initial, montant débloqué...)
+Paramètres (taux, durée...)
+Dates (octroi...)
+Référentiels enrichis
+
+Débiteur: utiliser /api/v1/referentiels/debiteurs pour alimenter un select
+Ordonnateur: utiliser /api/v1/referentiels/ordonnateurs
+Etc.
+Affichage détaillé
+Récupération des données enrichies
+
+Appeler GET /api/v1/creances/{creanCode}
+Afficher à la fois les codes et libellés des référentiels
+Sections suggérées
+
+Informations générales (code, débiteur, groupe...)
+Paramètres financiers (montants, taux...)
+
+Informations temporelles (dates, durée...)
+Données supplémentaires
+Formulaire de modification
+Pré-remplissage
+
+Récupérer les données avec GET /api/v1/creances/{creanCode}
+Remplir le formulaire avec ces valeurs
+Champs non modifiables
+
+Désactiver les champs debCode et creanCode
+Soumission des modifications
+
+Envoyer uniquement les champs modifiés
+Utiliser PUT /api/v1/creances/{creanCode}
+9. Gestion des erreurs
+Validation des référentiels
+Si un code référentiel n'existe pas, l'API renvoie une erreur 400 Bad Request:{
+  "message": "Erreurs de validation",
+  "erreurs": [
+    "Débiteur non trouvé: 9999",
+    "Groupe de créance non trouvé: XX"
+  ]
+}
+
+Erreur d'entité non trouvée
+Si une créance n'existe pas, l'API renvoie une erreur 404 Not Found:
+{
+  "message": "Entité non trouvée",
+  "detail": "Créance non trouvée avec le code: CR99999"
+}
+
+10. Exemples complets
+Workflow de création
+Charger les référentiels:
+
+GET /api/v1/referentiels/debiteurs
+GET /api/v1/referentiels/groupes-creance
+GET /api/v1/referentiels/objets-creance
+GET /api/v1/referentiels/periodicites
+Créer la créance:
+
+POST /api/v1/creances avec les données saisies
+Workflow de modification
+Charger la créance:
+
+GET /api/v1/creances/CR00023
+Modifier et envoyer:
+
+PUT /api/v1/creances/CR00023 avec les modifications
+11. Format des dates
+Toutes les dates doivent être formatées selon la norme ISO 8601:
+
+Format: YYYY-MM-DD
+Exemple: 2025-03-24
+12. Protection CSRF
+Les requêtes POST et PUT nécessitent un token CSRF. Assurez-vous d'inclure le header X-CSRF-TOKEN avec la valeur récupérée préalablement via l'API.
+
+
+ok alors on peut commencer a mettre cela en place mais allons etape par
+ etape fichiers par fichiers et code par code on fini 1 fichiers et lorsque 
+ je valide alors on peut passé a un autre fichiers, dit moi si on doit créé 
+ d'autre fichiers pour certaine spécificité. essaie d'utilisé des technique 
+ et du code simple et facile a mettre en place et bien fonctionnel

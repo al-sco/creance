@@ -25,7 +25,7 @@ export function GestionCreanceForm() {
             <label className="blue-label">Grpe Créance</label>
             <div className="input-group">
               <InputText placeholder="Code" className="code" />
-              <Dropdown options={[]} placeholder="Nom" className="libelle" />
+              <InputText placeholder="Nom" className="libelle" />
             </div>
           </div>
 
@@ -34,7 +34,7 @@ export function GestionCreanceForm() {
             <label className="blue-label">Type d'Objet</label>
             <div className="input-group">
               <InputText placeholder="Code" className="code" />
-              <Dropdown options={[]} placeholder="Nom" className="libelle" />
+              <InputText placeholder="Nom" className="libelle" />
             </div>
           </div>
 
