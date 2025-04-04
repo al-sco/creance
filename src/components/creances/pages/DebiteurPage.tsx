@@ -4,6 +4,8 @@ export function DebiteurPage() {
   return (
     <div className="p-4">
       <GestionDebiteurForm />
+      
+
     </div>
   );
 }

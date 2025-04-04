@@ -70,6 +70,7 @@ import { ecranFraisPaiementData, especePaiementData, factureEspPaiementData, fra
 import { GestionAmiable } from "../../../../components/gestion-amiable";
 import { GestionCreanceForm } from "../../../../components/creances/components/creance/GestionCreanceForm";
 import { GestionDebiteurForm } from "../../../../components/creances/components/debiteur/GestionDebiteurForm";
+
 export type SubMenuType = {
   name: string;
   nameHeader?: string

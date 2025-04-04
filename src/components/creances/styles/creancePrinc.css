@@ -1,0 +1,292 @@
+.debiteur .libelledeb{
+    background-color: rgb(216, 213, 213);
+}
+
+.debiteur .codedeb{
+    margin-right: 1%;
+    padding: 1%;
+    max-width: 100px;
+    padding: 4px;
+}
+
+.debiteur{
+    display: flex;
+    gap: 0.5rem;
+    margin-right: 7%;
+    
+}
+
+/* Bouton de vider */
+.debiteur .videChamp{
+    background-color: rgb(221, 10, 10);
+    border-radius: 10%; /* Rend le bouton parfaitement rond */
+    width: 2rem;       /* Largeur fixe */
+    height: 2rem;      /* Hauteur fixe (identique à la largeur pour un cercle) */
+    padding: 0;        /* Supprime le padding interne */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none; 
+}
+    .debiteur .videChamp:hover {
+        background-color: #ff3333; /* Rouge plus clair au survol */
+        box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+    }
+
+
+.debiteur .groupcode{
+    pointer-events: none;
+    background-color: rgb(224, 220, 220);
+    width: 20%;
+    cursor: not-allowed;
+    padding: 4px;
+
+}
+.debiteur .grouplibe{
+    width: 50%;
+    background-color: rgb(216, 213, 213);
+
+}
+
+.capital{
+    margin-right: 10%;
+}
+
+.inputCapital .p-inputnumber-input {
+    width: 150px;
+    height: 35px;
+    font-size: 14px; /* Réduire la taille de police */
+    padding: 5px 10px;
+    
+}
+
+.form-group{
+    margin-top: 1%;
+    margin-bottom: -2%;
+}
+
+/* Styles pour le sélecteur Stat. Recouv */
+.statRecouv-select {
+    width: 190px;          /* Largeur réduite pour chaque bouton */
+    height: 30px;         /* Hauteur réduite */
+    padding: 0.1rem;      /* Padding interne minimal */
+    font-size: 1rem; 
+    display: inline-flex;  /* Affichage en ligne plutôt qu'en bloc */
+  }
+  
+  .statRecouv-select .p-selectbutton {
+    display: flex;
+    width: auto;
+  }
+  
+ .creanceSimpl{
+   
+    background-color:#d6d6d6;
+ }
+
+ .creanceForm {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-right: 30%;
+  }
+  
+  .creanceForm label {
+    width: 140px;
+    text-align: right;
+    font-weight: 600;
+    color: #2d3748;
+  }
+
+  .premierColonne{
+    margin-top: 5%;
+  }
+
+  .NbEch{
+    display: flex;
+    align-items: center;
+}
+  .coloneEch{
+    margin-right: 1rem;
+    margin-left: 0.5rem;
+  }
+
+  .NbEchlabel{
+    width: 100px;
+    text-align: right;
+    font-weight: 400;
+    color: #0d0e0f;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  /* Variables CSS pour l'espacement des colonnes */
+:root {
+    --column-gap: 2rem; /* Valeur par défaut */
+  }
+  
+  /* Modifier le sélecteur three-column-layout existant */
+  .three-column-layout {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--column-gap) !important; /* Utiliser la variable CSS */
+    padding: 1rem 0;
+    transition: gap 0.3s ease; /* Animation fluide lors du changement */
+  }
+  
+  /* Styles pour les contrôles d'espacement */
+  .spacing-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    background-color: #f8f9fa;
+    padding: 0.5rem;
+    border-radius: 4px;
+    width: fit-content;
+  }
+  
+  .spacing-controls .spacing-label {
+    font-size: 0.85rem;
+    color: #4b5563;
+    margin-right: 0.5rem;
+  }
+  
+  .spacing-controls .p-button {
+    width: 2.5rem;
+    height: 2.5rem;
+    padding: 0;
+  }
+
+
+
+
+
+
+
+  /* Styles pour l'alignement des champs de dates et montants */
+.date-amount-container {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.2rem;
+  
+}
+
+.date-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.amount-column{
+  margin-right: 100%;
+  gap: 1;
+}
+
+.amount-field{
+  margin-right: 10%;
+}
+
+.Sold{
+  margin-right: 40%;
+}
+
+.formatCommi{
+  font-size: 0.9rem;
+  align-items: center;
+}
+
+
+
+/* Alignement vertical des paires */
+ .form-group, 
+ .form-group {
+  min-height: 0px;
+  margin-right: -3rem;
+}
+
+.date-column{
+  margin-right: 1rem;
+}
+
+ 
+
+
+/* Styles pour les champs de date natifs */
+.date-field {
+  padding: 6px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  width: 60%;
+  height: 35px;
+  font-size: 14px;
+  margin-right: 10%;
+}
+
+.date-field:focus {
+  outline: none;
+  border-color: #2196F3;
+  box-shadow: 0 0 0 0.2rem rgba(33, 150, 243, 0.25);
+}
+
+.formCollePerso{
+  margin-right: 15%;
+}
+
+.form-grid-four-columns {
+  display: grid;
+  grid-template-columns: 2fr 2fr 2fr 2fr; /* Ajustez les proportions des colonnes */
+  gap: 0.0.1rem; /* Espacement entre les colonnes */
+  padding: 1rem 0;
+  max-width: 12000px; /* Largeur maximale pour éviter le débordement */
+  margin: 0 auto; /* Centrer le formulaire */
+}
+
+.form-group {
+  margin-bottom: -0.5rem; /* Augmentez cette valeur si nécessaire */
+}
+
+
+
+.debiteurForm{
+  display: flex;
+}
+
+.int-conv-container {
+  color: #0d0e0f;
+  display: flex;
+  padding: auto;
+}
+
+.input-taux {
+  width: 15%; 
+  margin: 0.5rem;
+
+  background-color: #f0f8ff; /* Couleur de fond */
+  border: 1px solid #ccc;  /* Bordure */
+  border-radius: 4px; /* Coins arrondis */
+}
+
+.input-montant {
+  margin: 1%;
+  margin-top: 1%;
+  background-color: #f0f8ff; /* Couleur de fond */
+  border: 1px solid #ccc; 
+  margin-bottom: 1%;
+  margin: 0.5rem;
+  width: 50%; /* Largeur pour le champ de montant */
+}

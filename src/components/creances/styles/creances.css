@@ -1,4 +1,8 @@
 /* ================ Styles Généraux ================ */
+/* Variables CSS pour l'espacement */
+:root {
+  --column-gap: 5rem; /* Valeur par défaut */
+}
 .creance-container {
   padding: 1rem;
   min-height: 100vh;
@@ -65,6 +69,32 @@
   display: flex;
   gap: 0.5rem;
   flex: 1;
+}
+
+/* Styles pour une grille à 4 colonnes */
+.form-grid-four-columns {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 colonnes de largeur égale */
+  gap: var(--column-gap); /* Utilise la variable CSS si disponible */
+  padding: 1rem 0;
+  align-items: start; /* Alignement vertical des champs */
+}
+
+/* Réduction de la taille des champs pour tenir dans 4 colonnes */
+.form-grid-four-columns .form-group {
+}
+
+.form-grid-four-columns .blue-label {
+  font-size: 0.85rem;
+  margin-bottom: 0.2rem;
+}
+
+.form-grid-four-columns .p-inputtext,
+.form-grid-four-columns .p-inputnumber,
+.form-grid-four-columns .p-dropdown,
+.form-grid-four-columns .p-calendar,
+.form-grid-four-columns .p-selectbutton {
+  font-size: 0.85rem;
 }
 
 /* ================ Éléments de Formulaire ================ */
@@ -343,6 +373,12 @@
   display: flex;
   gap: 0.5rem;
   align-items: center;
+}
+
+.input-group .videChamp{
+  color: #dc2626;
+  background-color: red;
+  
 }
 
 .input-group .p-inputtext {

@@ -563,6 +563,19 @@ useEffect(() => {
               />
             </div>
           </div>
+
+          {/* Numéro de pièce d'identité */}
+<div className="form-row">
+  <div className="form-group">
+    <label>Numéro pièce ident. :</label>
+    <InputText
+      name="debNumpident"
+      value={currentPhysique?.debNumpident || ''}
+      onChange={handleInputChange}
+      className="ps-input lieu"
+    />
+  </div>
+</div>
   
           {/* Date établis. */}
           <div className="form-row">
